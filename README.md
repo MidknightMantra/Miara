@@ -1,5 +1,5 @@
 <p align="center">
- <img width="180px" src="https://i.postimg.cc/1z1zYvWm/tobias-rademacher-wn-F27F85ZKw-unsplash.jpg" align="center"/>
+ <img width="180px" src="https://i.postimg.cc/dV6ryW8s/20251024-002247.jpg" align="center"/>
  <h2 align="center">MIARA</h2>
  <p align="center">An automated bot for the WhatsApp platform, built especially with Node.js, that allows performing multiple functions and customizations on the platform.
 </p>
