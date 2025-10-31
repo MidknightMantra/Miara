@@ -27,50 +27,49 @@
 </p>
 
 <p align="center">
-<a href="https://api.whatsapp.com/send?phone=254758925674&text=.menu" target="_blank" 
-   style="display:inline-flex; align-items:center; gap:8px; background-color:#25D366; 
-          color:white; padding:10px 16px; border-radius:6px; text-decoration:none; 
-          font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-       alt="WhatsApp Logo" width="20" height="20" 
-       style="background:white; border-radius:50%; padding:2px;">
-  <span>WhatsApp Demo</span>
-</a>
-  ·
- <a href="https://github.com/MidknightMantra/Miara/issues/new?assignees=&labels=Bug" target="_blank"
-   style="display:inline-flex; align-items:center; gap:8px; background-color:#24292e;
-          color:white; padding:10px 16px; border-radius:6px; text-decoration:none;
-          font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
-  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
-       alt="GitHub Logo" width="20" height="20" style="border-radius:50%; background:white;">
-  <span>Report a Bug</span>
-</a>
 
-  ·
+  <!-- WhatsApp Demo Button -->
+  <a href="https://api.whatsapp.com/send?phone=254758925674&text=.menu" target="_blank" 
+     style="display:inline-flex; align-items:center; gap:8px; background-color:#25D366; 
+            color:white; padding:10px 16px; border-radius:6px; text-decoration:none; 
+            font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+         alt="WhatsApp Logo" width="20" height="20" 
+         style="background:white; border-radius:50%; padding:2px;">
+    <span>WhatsApp Demo</span>
+  </a>
+
+  &nbsp;·&nbsp;
+
+  <!-- Report a Bug Button -->
+  <a href="https://github.com/MidknightMantra/Miara/issues/new?assignees=&labels=Bug" target="_blank"
+     style="display:inline-flex; align-items:center; gap:8px; background-color:#24292e;
+            color:white; padding:10px 16px; border-radius:6px; text-decoration:none;
+            font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+         alt="GitHub Logo" width="20" height="20" style="border-radius:50%; background:white;">
+    <span>Report a Bug</span>
+  </a>
+
+  &nbsp;·&nbsp;
+
+  <!-- Request a Feature Button -->
   <a href="https://github.com/MidknightMantra/Miara/issues/new?assignees=&labels=Enhancement" target="_blank"
-   style="display:inline-flex; align-items:center; gap:8px; background-color:#2ea44f;
-          color:white; padding:10px 16px; border-radius:6px; text-decoration:none;
-          font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
-  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
-       alt="GitHub Logo" width="20" height="20" style="border-radius:50%; background:white;">
-  <span>Request a Feature</span>
-</a>
+     style="display:inline-flex; align-items:center; gap:8px; background-color:#2ea44f;
+            color:white; padding:10px 16px; border-radius:6px; text-decoration:none;
+            font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+         alt="GitHub Logo" width="20" height="20" style="border-radius:50%; background:white;">
+    <span>Request a Feature</span>
+  </a>
+
 </p>
 
-<!-- <p align="center">
-  <a href="/src/docs/README_en.md">English</a>
-  ·
-  <a href="/src/docs/README_pt-br.md">Português</a>
-</p> -->
-
-<script src="https://liberapay.com/MidknightMantra/widgets/button.js"></script>
 <noscript><a href="https://liberapay.com/MidknightMantra/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
 
 ## 🧩 Deployment, Support, and Community
 
 - [Deployment Options](#deployment-options)
-  - [Deploy on Cafirexos](#deploy-on-cafirexos)
-  - [Deploy on BoxMineWorld](#deploy-on-boxmineworld)
   - [Deploy on Others](#deploy-on-others)
 - [Support and Community](#support-and-community)
   - [Help Communities](#help-communities)
