@@ -69,15 +69,6 @@
 
 ## 🧩 Deployment, Support, and Community
 
-- [Deployment Options](#deployment-options)
-  - [Deploy on Others](#deploy-on-others)
-- [Support and Community](#support-and-community)
-  - [Help Communities](#help-communities)
-  - [Contributors](#contributors)
-  - [Acknowledgments](#acknowledgments)
-  - [Lead Developer](#lead-developer)
-
-
 > ◇ **Note:** We are aware that there are different places that are **not official** or **have no affiliation or involvement** with our project.  
 > To ensure the **security** of our **users**, we are sharing the **official platforms** where you can **use our bot**, **receive assistance**, and access other **useful or functional** project resources.
 
