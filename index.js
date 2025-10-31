@@ -1,7 +1,5 @@
 // ===============================
-// Mystic Bot - English Version
-// Created by Bruno Sobrino
-// Rewritten in plain English
+// Miara by MidknightMantra
 // ===============================
 
 import { join, dirname } from 'path';
@@ -72,13 +70,13 @@ async function startBot(file) {
   isRunning = true;
 
   // Fancy startup banner
-  say('The Mystic\nBot', {
+  say('Miara', {
     font: 'chrome',
     align: 'center',
     gradient: ['red', 'magenta'],
   });
 
-  say('Bot created by Bruno Sobrino', {
+  say('Bot created by Midknight Mantra', {
     font: 'console',
     align: 'center',
     gradient: ['red', 'magenta'],
@@ -103,7 +101,7 @@ async function startBot(file) {
   if (option === '2') {
     const phone = await ask(
       chalk.yellowBright.bold('\n—◉ Enter your WhatsApp number:\n') +
-      chalk.white.bold('Example: +5219992095479\n—> ')
+      chalk.white.bold('Example: +254758925674\n—> ')
     );
 
     const formattedPhone = formatPhoneNumber(phone);
@@ -112,7 +110,7 @@ async function startBot(file) {
       console.log(
         chalk.bgRed(chalk.white.bold('[ ERROR ] Invalid number format.')) +
         '\nMake sure your number starts with the country code.\n' +
-        'Example: +5219992095479\n'
+        'Example: +254758925674\n'
       );
       process.exit(0);
     }

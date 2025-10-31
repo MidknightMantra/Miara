@@ -1,5 +1,5 @@
 // =====================================
-// The Mystic Bot - Core Engine (English Version)
+// Miara
 // =====================================
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'; // Enforce TLS verification
@@ -646,9 +646,9 @@ const connectionOptions = {
   mobile: methodMobile,
   browser:
     option === '1'
-      ? ['TheMystic-Bot-MD', 'Safari', '2.0.0']
+      ? ['Miara', 'Safari', '2.0.0']
       : methodQRCode
-      ? ['TheMystic-Bot-MD', 'Safari', '2.0.0']
+      ? ['Miara', 'Safari', '2.0.0']
       : ['Ubuntu', 'Chrome', '20.0.04'],
   auth: {
     creds: state.creds,
@@ -708,7 +708,7 @@ if (!fs.existsSync(`./${global.authFile}/creds.json`)) {
           console.log(
             chalk.bgBlack(
               chalk.bold.redBright(
-                'Please start your number with your country code.\nExample: +5219992095479\n'
+                'Please start your number with your country code.\nExample: +254758925674\n'
               )
             )
           );
@@ -720,7 +720,7 @@ if (!fs.existsSync(`./${global.authFile}/creds.json`)) {
           userNumber = await ask(
             chalk.bgBlack(
               chalk.bold.yellowBright(
-                'Please enter your WhatsApp number.\nExample: +5219992095479\n'
+                'Please enter your WhatsApp number.\nExample: +254758925674\n'
               )
             )
           );
@@ -733,7 +733,7 @@ if (!fs.existsSync(`./${global.authFile}/creds.json`)) {
           console.log(
             chalk.bgBlack(
               chalk.bold.redBright(
-                'Invalid number format.\nExample: +5219992095479.\n'
+                'Invalid number format.\nExample: +254758925674.\n'
               )
             )
           );
@@ -815,7 +815,7 @@ fs.watch(watchDir, (eventType, filename) => {
 
 /** Remove “pre-key” session files */
 function purgeSession() {
-  const directory = './MysticSession';
+  const directory = './MiaraSession';
   const files = readdirSync(directory).filter((f) => f.startsWith('pre-key-'));
   files.forEach((file) => unlinkSync(`${directory}/${file}`));
 }

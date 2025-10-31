@@ -27,7 +27,7 @@ jobs:
               issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "gracias por tu contribución!"
+              body: "thank you for your contribution!"
             });
 
       - name: Fail if there are conflicts
