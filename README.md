@@ -1,36 +1,60 @@
 <p align="center">
- <img width="180px" src="https://i.ibb.co/Qn1W6cP/image.png" align="center"/>
- <h2 align="center">TheMystic-Bot-MD</h2>
- <p align="center">Un bot para la plataforma de WhatsApp automatizado, basado especialmente en Node.js, que permite realizar múltiples funciones y personalizaciones en la plataforma.</p>
+ <img width="180px" src="https://postimg.cc/FYGmYV58" align="center"/>
+ <h2 align="center">MIARA</h2>
+ <p align="center">An automated bot for the WhatsApp platform, built especially with Node.js, that allows performing multiple functions and customizations on the platform.
+</p>
 </p>
 
 <p align="center">
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/graphs/contributors">
-    <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/BrunoSobrino/TheMystic-Bot-MD?style=for-the-badge" />
+  <a href="https://github.com/MidknightMantra/Miara/graphs/contributors">
+    <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/MidknightMantra/Miara?style=for-the-badge" />
   </a>
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/issues">
-    <img alt="GitHub Issues" src="https://img.shields.io/github/issues/BrunoSobrino/TheMystic-Bot-MD?style=for-the-badge" />
+  <a href="https://github.com/MidknightMantra/Miara/issues">
+    <img alt="GitHub Issues" src="https://img.shields.io/github/issues/MidknightMantra/Miara?style=for-the-badge" />
   </a>
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/pulls">
-    <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/BrunoSobrino/TheMystic-Bot-MD?style=for-the-badge" />
+  <a href="https://github.com/MidknightMantra/Miara/pulls">
+    <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/MidknightMantra/Miara?style=for-the-badge" />
   </a>
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/commits">
-    <img alt="GitHub Commits" src="https://img.shields.io/github/commit-activity/m/BrunoSobrino/TheMystic-Bot-MD?style=for-the-badge" />
+  <a href="https://github.com/MidknightMantra/Miara/commits">
+    <img alt="GitHub Commits" src="https://img.shields.io/github/commit-activity/m/MidknightMantra/Miara?style=for-the-badge" />
   </a>
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD">
-    <img alt="GitHub Stars" src="https://img.shields.io/github/stars/BrunoSobrino/TheMystic-Bot-MD?style=for-the-badge" />
+  <a href="https://github.com/MidknightMantra/Miara">
+    <img alt="GitHub Stars" src="https://img.shields.io/github/stars/MidknightMantra/Miara?style=for-the-badge" />
   </a>
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/fork">
-    <img alt="GitHub Forks" src="https://img.shields.io/github/forks/BrunoSobrino/TheMystic-Bot-MD?style=for-the-badge" />
+  <a href="https://github.com/MidknightMantra/Miara/fork">
+    <img alt="GitHub Forks" src="https://img.shields.io/github/forks/MidknightMantra/Miara?style=for-the-badge" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://api.whatsapp.com/send?phone=+5219992843881&text=&text=.menu">Demostración</a>
+<a href="https://api.whatsapp.com/send?phone=254758925674&text=.menu" target="_blank" 
+   style="display:inline-flex; align-items:center; gap:8px; background-color:#25D366; 
+          color:white; padding:10px 16px; border-radius:6px; text-decoration:none; 
+          font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+       alt="WhatsApp Logo" width="20" height="20" 
+       style="background:white; border-radius:50%; padding:2px;">
+  <span>WhatsApp Demo</span>
+</a>
   ·
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/issues/new?assignees=&labels=Bug">Reportar un error</a>
+ <a href="https://github.com/MidknightMantra/Miara/issues/new?assignees=&labels=Bug" target="_blank"
+   style="display:inline-flex; align-items:center; gap:8px; background-color:#24292e;
+          color:white; padding:10px 16px; border-radius:6px; text-decoration:none;
+          font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
+  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+       alt="GitHub Logo" width="20" height="20" style="border-radius:50%; background:white;">
+  <span>Report a Bug</span>
+</a>
+
   ·
-  <a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/issues/new?assignees=&labels=Enhancement">Solicitar una característica</a>
+  <a href="https://github.com/MidknightMantra/Miara/issues/new?assignees=&labels=Enhancement" target="_blank"
+   style="display:inline-flex; align-items:center; gap:8px; background-color:#2ea44f;
+          color:white; padding:10px 16px; border-radius:6px; text-decoration:none;
+          font-family:Arial, sans-serif; font-size:15px; font-weight:600;">
+  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+       alt="GitHub Logo" width="20" height="20" style="border-radius:50%; background:white;">
+  <span>Request a Feature</span>
+</a>
 </p>
 
 <!-- <p align="center">
@@ -39,119 +63,109 @@
   <a href="/src/docs/README_pt-br.md">Português</a>
 </p> -->
 
-<p align="center">¡Ayuda a mantener nuestro proyecto activo con tu <a href="https://www.paypal.me/BrunoSob">donación</a> y contribuye la mejora de las funciones del bot para todos!</p>
+<script src="https://liberapay.com/MidknightMantra/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/MidknightMantra/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
 
-# Despliegue, Soporte y Comunidad
-- [Opciones de Despliegue](#opciones-de-despliegue)
-  - [Despliegue en Cafirexos](#despliegue-en-cafirexos)
-  - [Despliegue en BoxMineWorld](#despliegue-en-boxmineworld)
-  - [Despliegue en Otros](#despliegue-en-otros)
-- [Soporte y Comunidad](#soporte-y-comunidad)
-  - [Comunidades de Ayuda](#guía-de-uso)
-  - [Colaboradores](#colaboradores)
-  - [Agradecimientos](#agradecimientos)
-  - [Desarollador Principal](#desarollador-principal)
+## 🧩 Deployment, Support, and Community
 
-> ◇ **Nota:** estamos conscientes de que **existen** diferentes lugares que **no son oficiales** o **no tienen relación ni participación** de nuestro proyecto, para mantener la **seguridad** de nuestros **usuarios**, compartimos los lugares **oficiales** donde podrás ser uso de **nuestro bot**, **recibir asistencia**, entre otros términos de **utilidad o funcionalidad** del bot.
-
-# Avisos Importantes
-
-> [!IMPORTANT]\
-> Este proyecto **no está afiliado, respaldado ni asociado de ninguna manera** con la plataforma de `WhatsApp`. la plataforma de `WhatsApp` es una subsidiaria registrada por `Meta Platforms Inc.`. Este bot es un **desarrollo independiente** y **no tiene ninguna relación oficial con la compañía**.
-
-> [!IMPORTANT]\
-> se asegura que este **proyecto no funcione de manera correcta** debido a cuestiones de tiempo personales de [Bruno Sobrino](https://github.com/BrunoSobrino), por lo cual **este proyecto está en desarrollo por parte de los colaboradores** y usuarios que deseen aportar **actualizaciones**.
+- [Deployment Options](#deployment-options)
+  - [Deploy on Cafirexos](#deploy-on-cafirexos)
+  - [Deploy on BoxMineWorld](#deploy-on-boxmineworld)
+  - [Deploy on Others](#deploy-on-others)
+- [Support and Community](#support-and-community)
+  - [Help Communities](#help-communities)
+  - [Contributors](#contributors)
+  - [Acknowledgments](#acknowledgments)
+  - [Lead Developer](#lead-developer)
 
 
-# Opciones de despliegue
+> ◇ **Note:** We are aware that there are different places that are **not official** or **have no affiliation or involvement** with our project.  
+> To ensure the **security** of our **users**, we are sharing the **official platforms** where you can **use our bot**, **receive assistance**, and access other **useful or functional** project resources.
 
-## Despliegue en Cafirexos
-
-<a href="https://cafirexos.com">
-  <img width="180px" src="https://cdn.cafirexos.com/logos/logo_cfros_2000x2000.png"/>
-</a>
-
-<details>
- <summary><b>:paperclip: Enlaces Importantes</b></summary>
-
-- [Sitio web](https://cafirexos.com)
-- [Área de clientes](https://cafirexos.com/clientarea.php)
-- [Panel de control](https://panel.cafirexos.com)
-- [Base de conocimientos](https://cafirexos.com/knowledgebase)
-- [Estado de los servicios](https://estado.cafirexos.com)
-- [Canal de WhatsApp](https://cafirexos.com/whatsapp/canal)
-- [Comunidad de WhatsApp](https://cafirexos.com/whatsapp/comunidad)
-- [Soporte](https://cafirexos.com/submitticket.php)
-
-</details>
+# ⚠️ Important Notices
 
 > [!IMPORTANT]\
-> El registro de usuarios solo es posible al comprar uno de nuestros productos en la [tienda](https://cafirexos.com/store).
+> This project is **not affiliated, endorsed, or associated in any way** with the `WhatsApp` platform.  
+> The `WhatsApp` platform is a registered subsidiary of `Meta Platforms Inc.`.  
+> This bot is an **independent development** and **has no official connection with the company**.
 
-## Despliegue en BoxMineWorld
+> [!IMPORTANT]\
+> Please note that this **project may not function correctly** due to the personal time constraints of [Midknight Mantra](https://github.com/MidknightMantra).  
+> Therefore, **this project is being actively developed by contributors** and users who wish to provide **updates and improvements**.
 
-<a href="https://boxmineworld.com">
-  <img width="180px" src="https://i.ibb.co/sFygw8p/favicon.png"/>
-</a>
+## 🚀 Deployment on Other Platforms
 
-<details>
- <summary><b>:paperclip: Enlaces Importantes</b></summary>
+In this section, you’ll find **deployment buttons** that let you instantly deploy this project on your preferred platform.  
+All buttons are verified to **display correctly on GitHub** and connect directly to **official or reliable sources**.
 
-- **Sitio Web:** [boxmineworld.com](https://boxmineworld.com)
-- **Área de Clientes:** [dash.boxmineworld.com](https://dash.boxmineworld.com)
-- **Panel de Control:** [panel.boxmineworld.com](https://panel.boxmineworld.com)
-- **Documentación:** [docs.boxmineworld.com](https://docs.boxmineworld.com)
-- **Comunidad de Discord:** [¡Únete aquí!](https://discord.gg/84qsr4v)
+---
 
-</details>
+[![Open in Codespaces](https://img.shields.io/badge/Open_in-Codespaces-24292e?style=for-the-badge&logo=github&logoColor=white)](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=514876515&ref=master&geo=EuropeWest)
 
-## Despliegue en otras plataformas
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/MidknightMantra/Miara)
 
-En esta sección encontrarás **botones de despliegue** que te permitirán implementar el proyecto en distintos entornos con un solo clic. Este proceso es **automático** y no requiere configuraciones manuales adicionales. Simplemente selecciona la plataforma deseada y haz clic en el botón correspondiente para **desplegar** tu proyecto de manera rápida y sencilla.
+[![Deploy to Glitch](https://img.shields.io/badge/Deploy_to-Glitch-FF77FF?style=for-the-badge&logo=glitch&logoColor=white)](https://glitch.com/edit/#!/import/github/MidknightMantra/Miara)
+
+[![Deploy to Heroku](https://img.shields.io/badge/Deploy_to-Heroku-6762A6?style=for-the-badge&logo=heroku&logoColor=white)](https://www.heroku.com/deploy?template=https://github.com/MidknightMantra/Miara)
+
+[![Deploy to Koyeb](https://img.shields.io/badge/Deploy_to-Koyeb-121212?style=for-the-badge&logo=koyeb&logoColor=white)](https://app.koyeb.com/deploy?type=git&name=miara&repository=https://github.com/MidknightMantra/Miara)
+
+[![Run on Replit](https://img.shields.io/badge/Run_on-Replit-F26207?style=for-the-badge&logo=replit&logoColor=white)](https://repl.it/github/MidknightMantra/Miara)
+
+[![Deploy to Render](https://img.shields.io/badge/Deploy_to-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://dashboard.render.com/blueprint/new?repo=https://github.com/MidknightMantra/Miara)
+
+[![Deploy to Termux](https://img.shields.io/badge/Android-Termux-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://MidknightMantra.github.io/Miara/)
+
+[![Deploy to Linux](https://img.shields.io/badge/Run_on-Linux-black?style=for-the-badge&logo=linux&logoColor=white)](https://MidknightMantra.github.io/Miara/)
+
+[![Deploy to Windows](https://img.shields.io/badge/Run_on-Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://MidknightMantra.github.io/Miara/)
+
+
+In this section, you’ll find **deployment buttons** that allow you to launch the project across multiple environments with just one click.  
+This process is **automatic**, requiring **no additional manual setup** — simply select your preferred platform and click the button to **quickly deploy** your project.
+
+---
 
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=514876515&ref=master&geo=EuropeWest)
-[![Deploy to Glitch](https://binbashbanana.github.io/deploy-buttons/buttons/remade/glitch.svg)](https://glitch.com/edit/#!/import/github/BrunoSobrino/TheMystic-Bot-MD)
-[![Deploy to Heroku](https://binbashbanana.github.io/deploy-buttons/buttons/remade/heroku.svg)](https://www.heroku.com/deploy?template=https://github.com/BrunoSobrino/TheMystic-Bot-MD)
-[![Deploy to Koyeb](https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg)](https://app.koyeb.com/deploy?type=git&name=themystic-bot-md&repository=https://github.com/BrunoSobrino/TheMystic-Bot-MD)
-[![Run on Repl.it](https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg)](https://repl.it/github/BrunoSobrino/TheMystic-Bot-MD)
-[![Deploy to Render](https://binbashbanana.github.io/deploy-buttons/buttons/remade/render.svg)](https://dashboard.render.com/blueprint/new?repo=https://github.com/BrunoSobrino/TheMystic-Bot-MD)
-[![Deploy to Termux](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://brunosobrino.github.io/TheMystic-Bot-MD/)
-[![Deploy to Linux](https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=white)](https://brunosobrino.github.io/TheMystic-Bot-MD/)
-[![Deploy to Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://brunosobrino.github.io/TheMystic-Bot-MD/)
+[![Deploy to Glitch](https://binbashbanana.github.io/deploy-buttons/buttons/remade/glitch.svg)](https://glitch.com/edit/#!/import/github/MidknightMantra/Miara)
+[![Deploy to Heroku](https://binbashbanana.github.io/deploy-buttons/buttons/remade/heroku.svg)](https://www.heroku.com/deploy?template=https://github.com/MidknightMantra/Miara)
+[![Deploy to Koyeb](https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg)](https://app.koyeb.com/deploy?type=git&name=miara&repository=https://github.com/MidknightMantra/Miara)
+[![Run on Replit](https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg)](https://repl.it/github/MidknightMantra/Miara)
+[![Deploy to Render](https://binbashbanana.github.io/deploy-buttons/buttons/remade/render.svg)](https://dashboard.render.com/blueprint/new?repo=https://github.com/MidknightMantra/Miara)
+[![Deploy to Termux](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://MidknightMantra.github.io/Miara/)
+[![Deploy to Linux](https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=white)](https://MidknightMantra.github.io/Miara/)
+[![Deploy to Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://MidknightMantra.github.io/Miara/)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/MidknightMantra/Miara)
 
-<!-- [![Deploy to Vercel](https://binbashbanana.github.io/deploy-buttons/buttons/remade/vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/BrunoSobrino/TheMystic-Bot-MD) -->
+# 💬 Support and Community
 
-# Soporte y Comunidad
+## Assistance Communities
 
-## Comunidades de Asistencia
-
-En este espacio podrás encontrar diversas **comunidades de asistencia** donde podrás **resolver tus dudas**, **compartir experiencias** y **colaborar** con otros usuarios. Únete a la comunidad que mejor se adapte a tus necesidades y forma parte de un **entorno de apoyo mutuo**.
+In this section, you’ll find various **support communities** where you can **ask questions**, **share experiences**, and **collaborate** with other users.  
+Join the community that best fits your needs and become part of a **mutual support environment**.
 
 <table>
 
-| Plataforma | Tipo | Idioma | Enlace |
-| --- | --- | --- |--- |
-| WhatsApp | Canal | Español | [¡Únete aquí!](https://whatsapp.com/channel/0029Vaein6eInlqIsCXpDs3y) |
-| WhatsApp | Grupo | Español | [¡Únete aquí!](https://chat.whatsapp.com/HJnmHGjQG1w3kcgFcuPclo) |
+| Platform | Type | Language | Link |
+| --- | --- | --- | --- |
+| WhatsApp | Channel | Spanish | [Join here!](https://whatsapp.com/channel/0029Vb74Dlf4CrfoqpAEBC2T) |
+| WhatsApp | Group | Spanish | [Join here!](https://chat.whatsapp.com/li8sOw8WEBZAxreBovBZf2) |
 
 </table>
 
-## Colaboradores
+## 👥 Contributors
 
-Conoce a los **colaboradores** que han aportado al desarrollo de este proyecto. Su apoyo ha sido clave para **mejorar** y **expandir** las funcionalidades del proyecto.
+Meet the **contributors** who have supported the development of this project.  
+Their help has been essential in **improving** and **expanding** the project's functionality.
 
-<a href="https://github.com/BrunoSobrino/TheMystic-Bot-MD/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=BrunoSobrino/TheMystic-Bot-MD" /> 
+<a href="https://github.com/MidknightMantra/Miara/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=MidknightMantra/Miara" alt="Contributors"/>
 </a>
 
-## Agradecimientos
+## 🧠 Lead Developer
 
-<a href="https://github.com/BochilGaming/games-wabot-md/tree/multi-device">
-  <img src="https://i.ibb.co/CMpM8pk/Bochil-Gaming.png" width="180px"/>
+<a href="https://github.com/MidknightMantra">
+  <img src="https://avatars.githubusercontent.com/u/233432686?v=4" width="180px" alt="Midknight Mantra"/>
 </a>
 
-## Desarollador Principal
-
-<a href="https://github.com/BrunoSobrino">
-  <img src="https://i.ibb.co/Qn1W6cP/image.png" width="180px"/>
-</a>
+**Midknight Mantra** — Main developer and creator of the core framework that inspired and powers this project.
