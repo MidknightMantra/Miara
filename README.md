@@ -1,90 +1,128 @@
-# miara-MD (V3)
+<div align="center">
+
+# 🌙 Miara - WhatsApp Bot
+
+[![Version](https://img.shields.io/badge/version-1.7.4-blue.svg)](https://github.com/MidknightMantra/Miara)
+[![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg)](https://nodejs.org)
+[![Maintained](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/MidknightMantra/Miara/graphs/commit-activity)
+
 <p align="center">
-<a href="https://github.com/MidknightMantra"><img title="Author" src="https://i.ibb.co/W5grzHJ/pk.jpg?style=for-the-badge&logo=github"></a>
-
-
-  <p align="center">
-<a href="https://github.com/MidknightMantra/followers"><img title="Followers" src="https://img.shields.io/github/followers/MidknightMantra?color=blue&style=flat-square"></a>
-<a href="https://github.com/MidknightMantra/Miara-3/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/MidknightMantra/Miara-3?color=blue&style=flat-square"></a>
-<a href="https://github.com/MidknightMantra/Miara-3/network/members"><img title="Forks" src="https://img.shields.io/github/forks/MidknightMantra/Miara-3?color=blue&style=flat-square"></a>
-<a href="https://github.com/MidknightMantra/Miara-3/"><img title="Size" src="https://img.shields.io/github/repo-size/MidknightMantra/Miara-3?style=flat-square&color=green"></a>
-<a href="https://github.com/MidknightMantra/Miara-3/graphs/commit-activity"><img height="20" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"></a>&nbsp;&nbsp;
+  <a href="https://github.com/MidknightMantra"><img title="Author" src="https://img.shields.io/badge/Author-MidknightMantra-purple.svg?style=for-the-badge&logo=github"></a>
 </p>
-<p align='center'>
-</p>
-   
+
 <p align="center">
+  <a href="https://github.com/MidknightMantra/followers"><img title="Followers" src="https://img.shields.io/github/followers/MidknightMantra?color=blue&style=flat-square"></a>
+  <a href="https://github.com/MidknightMantra/Miara/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/MidknightMantra/Miara?color=blue&style=flat-square"></a>
+  <a href="https://github.com/MidknightMantra/Miara/network/members"><img title="Forks" src="https://img.shields.io/github/forks/MidknightMantra/Miara?color=blue&style=flat-square"></a>
+  <a href="https://github.com/MidknightMantra/Miara/"><img title="Size" src="https://img.shields.io/github/repo-size/MidknightMantra/Miara?style=flat-square&color=green"></a>
+</p>
 
-  <a aria-label="Join our chats" href="https://t.me/miaraBotInc" target="_blank">
-    <img alt="telegram" src="https://img.shields.io/badge/Join Group-25D366?style=for-the-badge&logo=telegram&logoColor=white" />
+<p align="center">
+  <a href="https://t.me/miaraBotInc" target="_blank">
+    <img alt="telegram" src="https://img.shields.io/badge/Join_Group-25D366?style=for-the-badge&logo=telegram&logoColor=white" />
   </a>
- 
+  <a href="https://youtube.com/@MidknightMantra" target="_blank">
+    <img alt="youtube" src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" />
+  </a>
+</p>
+
+---
+
+### 🎯 About Miara
+
+Meet **Miara**, your all-in-one WhatsApp companion! A powerful multi-device WhatsApp bot built with Node.js and Baileys, designed to enhance your messaging experience with advanced features, automation, and endless possibilities. Express yourself with unique flair and bring excitement to every conversation! ✨🤖
+
+### ✨ Key Features
+
+- 🔄 **Multi-Device Support** - Works seamlessly across devices
+- 🎨 **Customizable Themes** - Personalize your bot's appearance
+- 🤖 **AI Integration** - ChatGPT, DALLE, and more AI features
+- 📥 **Media Downloader** - Download from YouTube, Instagram, TikTok, etc.
+- 🎮 **Fun Commands** - Games, stickers, memes, and entertainment
+- 👥 **Group Management** - Advanced admin tools and moderation
+- 🔒 **Security Features** - Antilink, welcome messages, auto-moderation
+- 🌐 **Plugin System** - Easily extensible with custom plugins
+- 📊 **Database Support** - MongoDB and PostgreSQL compatible
+
+---
+
+## 📋 Prerequisites
+
+Before deploying Miara, ensure you have:
+
+1. **Session ID** - Get it via [Pairing Code or QR Scan](https://miara-md-vtsf.onrender.com/)
+2. **MongoDB URI** - Get free MongoDB from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) | [Tutorial](https://youtu.be/4YEUtGlqkl4)
+3. **Fork this repository** - Click the [`FORK`](https://github.com/MidknightMantra/Miara/fork) button above ⭐
 
 ---
 
 
- <p align="center"><img src="https://profile-counter.glitch.me/{miaraMD-3}/count.svg" alt="MidknightMantra :: Visitor's Count" old_src="https://profile-counter.glitch.me/{MidknightMantra}/count.svg" /></p>
-
-
-  <p align="center"> Meet miara-X, Your All-in-One WhatsApp Excitement Buddy! Enjoy a thrilling messaging experience like never before. miara_x whatsapp bot brings a world of excitement and joy to your chats. Express yourself with unique flair and add a touch of excitement to every conversation. ✨🤖 </p
-  
-  <a href="https://github.com/MidknightMantra/miaray-whatsapp-bot/fork"><img title="miaraY-XMD" src="https://img.shields.io/badge/FORK-miaraY XMD-h?color=blue&style=for-the-badge&logo=stackshare"></a>
-
-
  
 
  
-## Deployment Methods
+## 🚀 Quick Deploy
+
+<table>
+<tr>
+<td align="center">
+<h3>☁️ Cloud Platforms</h3>
+</td>
+</tr>
+
+<tr>
+<td>
+
+### Heroku
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=new)
+
+### Koyeb
+<a href='https://app.koyeb.com/auth/signin' target="_blank"><img alt='Deploy on Koyeb' src='https://img.shields.io/badge/Deploy-Koyeb-4285F4?style=for-the-badge&logo=koyeb&logoColor=white'/></a>
+
+### Render
+<a href='https://dashboard.render.com' target="_blank"><img alt='Deploy on Render' src='https://img.shields.io/badge/Deploy-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white'/></a>
+
+### Railway
+<a href='https://railway.app/new' target="_blank"><img alt='Deploy on Railway' src='https://img.shields.io/badge/Deploy-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white'/></a>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<h3>💻 Developer Platforms</h3>
+</td>
+</tr>
+
+<tr>
+<td>
+
+### Replit
+<a href='https://repl.it/github/MidknightMantra/Miara' target="_blank"><img alt='Run on Replit' src='https://img.shields.io/badge/Run-Replit-F26207?style=for-the-badge&logo=replit&logoColor=white'/></a>
+
+### GitHub Codespaces
+<a href='https://github.com/codespaces/new' target="_blank"><img alt='Open in Codespaces' src='https://img.shields.io/badge/Open-Codespaces-181717?style=for-the-badge&logo=github&logoColor=white'/></a>
+
+### Glitch
+<a href='https://glitch.com/signup' target="_blank"><img alt='Remix on Glitch' src='https://img.shields.io/badge/Remix-Glitch-3333FF?style=for-the-badge&logo=glitch&logoColor=white'/></a>
+
+</td>
+</tr>
+</table>
+
 ---
 
-1. ***Get [`SESSION ID`](https://miara-md-vtsf.onrender.com/)  by Pair Code Or scanning QR code. `Whatapp>Three dots>Linked Devices`***
 
-2.  ***Get a Mongodb uri from [`Mongodb`] | [`Tutorial`](https://youtu.be/4YEUtGlqkl4).***
-3.  ***`Star ⭐` repository & Click [`FORK`](https://github.com/MidknightMantra/Miara-3/fork)***
-   
-4.  #### DEPLOY IN HEROKU 
+## 🖥️ Self-Hosting (VPS/PC)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=new)
+### System Requirements
+- Node.js v20.0.0 or higher
+- Git
+- FFmpeg
+- ImageMagick
+- 1GB RAM minimum (2GB recommended)
 
---------
-5.  #### DEPLOY IN REPLIT
-
-   <a href='https://repl.it/github/MidknightMantra/miaray-whatsapp-bot' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/-REPLIT-orange?style=for-the-badge&logo=replit&logoColor=white'/></a>
-
---------
-6.  #### DEPLOY IN KOYEB
-
-<a href='https://app.koyeb.com/auth/signin' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/-KOYEB-blue?style=for-the-badge&logo=koyeb&logoColor=white'/></a>
-
---------
-7.  #### DEPLOY IN GLITCH
-
-<a href='https://glitch.com/signup' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/GLITCH-h?color=pink&style=for-the-badge&logo=glitch'/></a></p>
-
---------
-
-8.  #### DEPLOY TO CODESPACE
-
-<a href='https://github.com/codespaces/new' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/CODESPACE-h?color=navy&style=for-the-badge&logo=visualstudiocode'/></a></p>
-
---------
-
-9. #### DEPLOY TO RENDER
-
-<a href='https://dashboard.render.com' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/RENDER-h?color=maroon&style=for-the-badge&logo=render'/></a></p>
-
---------
-10. #### DEPLOY TO RAILWAY
-
-<a href='https://railway.app/new' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/RAILWAY-h?color=black&style=for-the-badge&logo=railway'/></a></p>
-
---------
-
-
----
-
-11. ## Deploy on VPS or PC
-- You need to Install git,ffmpeg,curl,nodejs,yarn with pm2 
+### Installation Steps 
    1. Install git ffmpeg curl 
       ``` 
        sudo apt -y update &&  sudo apt -y upgrade 
@@ -108,48 +146,54 @@
       sudo yarn global add pm2
       ```
   
-   5. Clone Repo and install required packages
-      ```
-      git clone https://github.com/MidknightMantra/miaray-whatsapp-bot
-      cd miaray-whatsapp-bot
+   5. Clone repository and install dependencies
+      ```bash
+      git clone https://github.com/MidknightMantra/Miara
+      cd Miara
       npm install
       ```
 
-   6. Create an env file for ENV. 
-      ```
+   6. Configure environment variables
+      ```bash
       touch config.env
       nano config.env
       ```
-      copy paste lines below.
-
+      Add your configuration:
+      ```env
+      OWNER_NUMBER="your_number_with_country_code"
+      SESSION_ID="your_session_id_here"
+      MONGODB_URI="your_mongodb_uri"
+      PREFIX="."
+      MODE="public"
+      THEME="MIARA"
       ```
-      OWNER_NUMBER="923184474176"
-      SESSION_ID = "SESSION_85_23_59_01_kjgfgfclhj"
-      THUMB_IMAGE = "https://telegra.ph/file/d5b1c3544fedc23e11a06.jpg"
-      OWNER_NAME = "miara"
-      PREFIX = .
-      WARN_COUNT = 3
-      DISABLE_PM = "false"
-      THEME= "miara"
-      MODE = "public"
-      ANTILINK_VALUES = "https://,chat.whatsapp.com"
+      Press `Ctrl+S` to save, `Ctrl+X` to exit
+
+   7. Run the bot
+      ```bash
+      # Start with Node.js
+      npm start
       
+      # Or start with PM2 (recommended for production)
+      npm run pm2
+      
+      # View logs
+      npm run logs
+      
+      # Stop bot
+      npm stop
       ```
-      ctrl + s and ctrl + x, To save and exit
-
-   7. start and stop bot
- 
-      To start bot ``` npm start ```,
-      To stop bot ``` npm stop ```
 
 ### TUTORIAL FOR TERMUX/UBUNTU
 <a href="https://youtube.com/miaratechinfo"><img src="https://img.shields.io/badge/YouTube-ff0000?style=for-the-badge&logo=youtube&logoColor=ff000000&link=https://youtube.com/miaratechinfo" /><br>
 
---------
+---
 
-12.   ## TERMUX/UBUNTU
-_First Of All Fork The Repo Then You'll Be Able To Do All The Remaining Steps.Add environment variables in config.env and config.js then run
-following commands_
+## 📱 Termux/Ubuntu Deployment
+
+> **Note:** Fork the repository first, then configure environment variables in `config.env` before proceeding.
+
+### Setup Commands
 ```
 apt update && apt -y upgrade
 ```
@@ -183,32 +227,74 @@ sudo apt -y update && sudo apt -y install yarn
 ```
 sudo yarn global add pm2
 ```
-_Before Cloning It,Make Sure Get Session ID Via Pairing Or Scanning.Add Session ID And Owner Number In config.env And config.js.This Process Can Be Done In Fork Only.After That Clone The Fork And Execute Remaining Commands._
+### Clone and Run
 
-```
-git clone https://github.com/MidknightMantra/Miara-3
-```
-```
-cd Miara-3
-```
-```
+```bash
+# Clone your fork
+git clone https://github.com/MidknightMantra/Miara
+cd Miara
+
+# Install dependencies
 npm install
-```
-```
+
+# Start the bot
 npm start
 ```
-  
- ---
- 
-<h2 align="center">  NOTICE </h2>
----
-- *Miara is not made by `WhatsApp Inc.` Sometimes or misusing the bot might `ban` your `WhatsApp account!`*
-- *In that case, I'm not responsible for banning your account.*
-- *Use Miara at your own risk by keeping this warning in mind.*
- 
 
-- Star ⭐ repo if you like this bot.
---------
+---
+
+## 📖 Documentation
+
+- 🔧 [Configuration Guide](https://github.com/MidknightMantra/Miara/wiki/Configuration)
+- 🎯 [Commands List](https://github.com/MidknightMantra/Miara/wiki/Commands)
+- 🔌 [Plugin Development](https://github.com/MidknightMantra/Miara/wiki/Plugins)
+- ❓ [FAQ](https://github.com/MidknightMantra/Miara/wiki/FAQ)
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to:
+- 🐛 Report bugs
+- 💡 Suggest new features
+- 🔧 Submit pull requests
+- ⭐ Star the repository
+
+---
+
+## 📜 License
+
+This project is licensed under the [Apache-2.0 License](LICENSE).
+
+---
+
+## ⚠️ Disclaimer
+
+- **Miara** is not affiliated with WhatsApp Inc.
+- Use this bot responsibly and at your own risk
+- Misuse or spamming may result in your WhatsApp account being banned
+- The developers are not responsible for any consequences of using this bot
+- Follow WhatsApp's Terms of Service
+
+---
+
+<div align="center">
+
+### 💖 Support the Project
+
+If you find Miara useful, please consider:
+- ⭐ Starring this repository
+- 🔄 Sharing with others
+- 💬 Joining our [Telegram Group](https://t.me/miaraBotInc)
+- 📺 Subscribing to [YouTube Channel](https://youtube.com/@MidknightMantra)
+
+---
+
+**Made with ❤️ by [MidknightMantra](https://github.com/MidknightMantra)**
+
+© 2024 Miara WhatsApp Bot. All rights reserved.
+
+</div>
 
 
 

@@ -9,19 +9,73 @@
 #    * @project_name : Miara
 #    * @author : @MidknightMantra
 #    * @youtube : https://www.youtube.com/@MidknightMantra
+#    * @github : https://github.com/MidknightMantra
 #    * @description : Miara, A Multi-functional whatsapp bot md.
 #    * @version 1.7.4
+#    * @license : Apache-2.0
 
 
- 
+# Use Node.js LTS with Alpine for smaller image size
+FROM node:20-alpine
 
-FROM quay.io/midknightmantra/miara-v2
-RUN git clone https://github.com/MidknightMantra/Miara /root/miara
-RUN rm -rf /root/miara/.git
-WORKDIR /root/miara
-RUN npm install || yarn install
+# Set environment variables
+ENV NODE_ENV=production \
+    NPM_CONFIG_LOGLEVEL=warn \
+    PORT=8000
+
+# Install system dependencies
+RUN apk add --no-cache \
+    git \
+    python3 \
+    make \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont
+
+# Set Puppeteer to skip downloading Chromium (use system chromium)
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+# Create app directory
+WORKDIR /app
+
+# Clone repository
+RUN git clone https://github.com/MidknightMantra/Miara.git . && \
+    rm -rf .git
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies with clean cache
+RUN npm ci --only=production --ignore-scripts && \
+    npm cache clean --force
+
+# Copy application files
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p temp plugins lib
+
+# Set proper permissions
+RUN chmod -R 755 /app
+
+# Expose port
 EXPOSE 8000
-CMD ["npm","start" ] 
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:8000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+
+# Start the bot
+CMD ["npm", "start"] 
 
 
 
