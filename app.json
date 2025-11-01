@@ -1,8 +1,0 @@
-{
-    "name": "Miara",
-    "description": "An automated chatbot for WhatsApp built with Node.js that enables multiple features and customizations on the platform.",
-    "repository": "https://github.com/MidknightMantra/Miara",
-    "logo": "https://i.postimg.cc/dV6ryW8s/20251024-002247.jpg",
-    "keywords": ["whatsapp-bot", "chatbot", "miara", "whatsapp-automation", "nodejs"],
-    "version": "1.0.0"
-  }
