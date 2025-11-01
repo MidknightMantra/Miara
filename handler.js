@@ -461,7 +461,7 @@ export async function handler(chatUpdate) {
           wolflastfeed: 0,
           wood: 0,
           wortel: 0,
-          language: 'es',
+          language: 'en',
           gameglx: {},
         }
       for (const dicks in dick) {
@@ -624,7 +624,7 @@ export async function handler(chatUpdate) {
           simi: false,
           game: true,
           expired: 0,
-          language: 'es',
+          language: 'en',
           setPrimaryBot: '',
         }
         for (const chatss in chats) {

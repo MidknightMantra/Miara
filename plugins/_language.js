@@ -21,21 +21,18 @@ try {
 }
 
  if (command === 'lang') {
- // ----- Opciones de lenguaje
- if (sigla === 'es') {
- global.db.data.users[m.sender].language = 'es'
- m.reply(`*[ ✅ ] The Mystic - Bot*\n\n*—◉* *_Idioma definido a Español 🇪🇸_*`)
- } else if (sigla === 'en') {
+ // ----- Language options (English only)
+ if (sigla === 'en' || !sigla) {
  global.db.data.users[m.sender].language = 'en'
- m.reply(`*[ ✅ ] The Mystic - Bot*\n\n*—◉* *_Idioma definido a Inglês 🇬🇧_*`)
+ m.reply(`*[ ✅ ] Miara Bot*\n\n*—◉* *_Language set to English 🇬🇧_*`)
  } else {
- m.reply(`${translator.texto1[2]}\n${translator.texto1[3]} *( ${data.db.data.users[m.sender].language} )*\n${translator.texto1[0]}\n*${usedPrefix}lang* es\n\n${translator.texto1[1]}`)
+ m.reply(`*[ ℹ️ ] Only English is supported*\n\nUse: *${usedPrefix}lang en*`)
  }
 }
 
  // - DEFINIDO TRADUÇÕES PARA GRUPOS NO BOT THE MYSTIC 
  if (command === 'langgroup') {
- // ----- Condiciones para grupos
+ // ----- Group conditions
  if (m.isGroup === false) {
  return m.reply(translator.texto3)
  }
@@ -43,23 +40,20 @@ try {
  return m.reply(translator.texto4)
 }
 
- // ----- Opciones de lenguaje
- if (sigla === 'es') {
- global.db.data.chats[m.chat].language = 'es';
- m.reply(`*[ ✅ ] Configuración del grupo*\n\n*—◉* *_Idioma definido a Español 🇪🇸_*`)
- } else if (sigla === 'en') {
+ // ----- Language options (English only)
+ if (sigla === 'en' || !sigla) {
  global.db.data.chats[m.chat].language = 'en';
- m.reply(`*[ ✅ ] Configuración del grupo*\n\n*—◉* *_Idioma definido a Inglês 🇬🇧_*`)
+ m.reply(`*[ ✅ ] Group Configuration*\n\n*—◉* *_Language set to English 🇬🇧_*`)
  } else {
- m.reply(`${translator.texto2[0]}\n*${usedPrefix}langgroup* es\n\n${translator.texto2[1]}`)
+ m.reply(`*[ ℹ️ ] Only English is supported*\n\nUse: *${usedPrefix}langgroup en*`)
  }
 }
  // Fim 
  } catch (error) {
  console.log(error);
- global.db.data.users[m.sender].language = 'es'
- global.db.data.chats[m.chat].language = 'es'
- m.reply(`*[ERROR]* -  _Por defecto el language estaba configurado en español._\n\`\`\`contacta a los creadores del bot\`\`\``)
+ global.db.data.users[m.sender].language = 'en'
+ global.db.data.chats[m.chat].language = 'en'
+ m.reply(`*[ERROR]* - _Language has been set to English by default._\n\`\`\`Please contact the bot creator if this issue persists\`\`\``)
  }
 };
 

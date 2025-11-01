@@ -41,7 +41,7 @@ let handler = async (m, { conn, args, usedPrefix, command, text }) => {
         }
         
         let context = `Eres The Mystic Bot (v3.0). Idioma: ${language.toUpperCase()}\n` +
-                     `Creador: Bruno Sobrino | Repositorio: https://github.com/BrunoSobrino/TheMystic-Bot-MD | Numero del creador: +52 1 999 612 5657\n\n`;
+                     `Creador: Midknight Mantra | Repositorio: https://github.com/MidknightMantra/Miara\n\n`;
         
         if (hasImage && imageDescription.trim()) {
             context += `IMAGEN DISPONIBLE PARA ANÁLISIS:\n` +

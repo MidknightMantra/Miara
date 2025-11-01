@@ -3826,20 +3826,7 @@
             "bk9imgtext": "Reply to an image and write your question\n\nExample: .bk9img who is this (don’t forget to respond to an image)",
             "bk9LText_T": "If you want it without customization,:\n.bk9short and put a link\nExample:\n.bk9short https://bk9.site/\nIf you want it to be customized :\n.Short, put a link + the word\nExample:\n.bk9short https://bk9.site/ + Suii",
             "bk9LTaked_T": "This customization has been taken, try another one."
-        },
-        "status_viewer": {
-            "texto1": "📱 *Status Viewer*",
-            "texto2": "No statuses available",
-            "texto3": "Status downloaded successfully",
-            "texto4": "Select a status to view",
-            "texto5": "Invalid status number",
-            "texto6": "Status from",
-            "texto7": "Reacted successfully",
-            "texto8": "Error viewing status",
-            "texto9": "Error downloading status",
-            "texto10": "Usage: .getstatus <number>",
-            "texto11": "Usage: .reactstatus <number> <emoji>",
-            "texto12": "Usage: .downloadstatus <number>"
         }
+
         }
 }

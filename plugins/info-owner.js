@@ -8,7 +8,7 @@ const handler = async (m, {conn, usedPrefix}) => {
  const document = doc[Math.floor(Math.random() * doc.length)];
  const text = `${translator.texto1[0]}\n\n${translator.texto1[1]}\n\n${translator.texto1[2]}\n\n${translator.texto1[3]}\n\n${translator.texto1[4]}\n\n${translator.texto1[5]}\n\n${translator.texto1[6]}\n\n${translator.texto1[7]}\n\n${translator.texto1[8]}\n\n${translator.texto1[9]}\n\n${translator.texto1[10]}\n\n${translator.texto1[11]}\n\n${translator.texto1[12]}\n\n${translator.texto1[13]}`.trim();
  const buttonMessage = {
-    'document': {url: `https://github.com/BrunoSobrino/TheMystic-Bot-MD`},
+    'document': {url: `https://github.com/MidknightMantra/Miara`},
     'mimetype': `application/${document}`,
     'fileName': `${translator.texto2[0]}`,
     'fileLength': 99999999999999,
@@ -17,7 +17,7 @@ const handler = async (m, {conn, usedPrefix}) => {
       'forwardingScore': 200,
       'isForwarded': true,
       'externalAdReply': {
-        'mediaUrl': 'https://github.com/BrunoSobrino/TheMystic-Bot-MD',
+        'mediaUrl': 'https://github.com/MidknightMantra/Miara',
         'mediaType': 2,
         'previewType': 'pdf',
         'title': translator.texto2[1],

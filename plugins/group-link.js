@@ -53,8 +53,8 @@ const handler = async (m, {conn, args}) => {
            contextInfo: {externalAdReply: {mediaUrl: null, mediaType: 1, description: null,
            title: translator.texto1[0],
            body: '𝚃𝚑𝚎 𝙼𝚢𝚜𝚝𝚒𝚌 - 𝙱𝚘𝚝',
-           previewType: 0, thumbnail: fs.readFileSync('./src/assets/images/menu/languages/es/menu.png'),
-           sourceUrl: `https://github.com/BrunoSobrino/TheMystic-Bot-MD`}
+           previewType: 0, thumbnail: fs.readFileSync('./src/assets/images/menu/languages/en/menu.png'),
+           sourceUrl: `https://github.com/MidknightMantra/Miara`}
            }
         }
       );  

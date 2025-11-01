@@ -36,7 +36,7 @@ ${translator.texto1[15]}
 ${translator.texto1[16]}
 `.trim();
   const buttonMessage= {
-    'document': {url: `https://github.com/BrunoSobrino/TheMystic-Bot-MD`},
+    'document': {url: `https://github.com/MidknightMantra/Miara`},
     'mimetype': `application/${document}`,
     'fileName': `「  𝑯𝒆𝒍𝒍𝒐 𝑾𝒐𝒓𝒍𝒅 」`,
     'fileLength': 99999999999999,
@@ -45,7 +45,7 @@ ${translator.texto1[16]}
       'forwardingScore': 200,
       'isForwarded': true,
       'externalAdReply': {
-        'mediaUrl': 'https://github.com/BrunoSobrino/TheMystic-Bot-MD',
+        'mediaUrl': 'https://github.com/MidknightMantra/Miara',
         'mediaType': 2,
         'previewType': 'pdf',
         'title': translator.texto2,

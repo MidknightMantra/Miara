@@ -38,7 +38,7 @@ const handler = async (m, { conn }) => {
     const { title, subtitle, artists, genres, images } = recognise.track;
     const apiTitle = `${title} - ${subtitle || ''}`.trim();
 
-    let ytUrl = 'https://github.com/BrunoSobrino';
+    let ytUrl = 'https://github.com/MidknightMantra/Miara';
     try {
       const searchResult = await ytSearch(apiTitle);
       if (searchResult && searchResult.videos.length > 0) {
@@ -61,7 +61,7 @@ const handler = async (m, { conn }) => {
 
     await fs.unlinkSync(tempPath);
 
-    if (ytUrl !== 'https://github.com/BrunoSobrino') {
+    if (ytUrl !== 'https://github.com/MidknightMantra/Miara') {
       try {
         const downloadResult = await yt.download(ytUrl);
         

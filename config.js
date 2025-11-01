@@ -29,12 +29,17 @@ global.wm = 'Miara';
 global.titulowm = 'Miara';
 global.titulowm2 = `Miara`;
 global.igfg = 'Miara';
-global.wait = '*_[ ⏳ ] Loading..._*';
-global.imagen1 = fs.readFileSync('./src/assets/images/menu/languages/es/menu.png');
-global.imagen2 = fs.readFileSync('./src/assets/images/menu/languages/pt/menu.png');
-global.imagen3 = fs.readFileSync('./src/assets/images/menu/languages/fr/menu.png');
+// Loading messages (modern theme)
+global.wait = '⚡ *Processing your request...*';
+global.waitt = '⏳ *Please wait...*';
+global.waittt = '🚀 *Loading...*';
+global.waitttt = '✨ *Almost there...*';
+
+global.imagen1 = fs.readFileSync('./src/assets/images/menu/languages/en/menu.png');
+global.imagen2 = fs.readFileSync('./src/assets/images/menu/languages/en/menu.png');
+global.imagen3 = fs.readFileSync('./src/assets/images/menu/languages/en/menu.png');
 global.imagen4 = fs.readFileSync('./src/assets/images/menu/languages/en/menu.png');
-global.imagen5 = fs.readFileSync('./src/assets/images/menu/languages/ru/menu.png');
+global.imagen5 = fs.readFileSync('./src/assets/images/menu/languages/en/menu.png');
 
 global.mods = [];
 
@@ -45,16 +50,29 @@ global.date = d.toLocaleDateString('en', { day: 'numeric', month: 'numeric', yea
 global.month = d.toLocaleDateString('en', { month: 'long' });
 global.year = d.toLocaleDateString('en', { year: 'numeric' });
 global.time = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-global.wm2 = `${day} ${date}\nMiara`;
-global.gt = 'Miara';
+global.wm2 = `✨ ${day} ${date} • Miara`;
+global.gt = '『 ✦ MIARA ✦ 』';
 global.miaraBot = 'Miara';
 global.channel = 'https://whatsapp.com/channel/0029Vb74Dlf4CrfoqpAEBC2T';
 global.md = 'https://github.com/MidknightMantra/Miara';
 global.miaraBotRepo = 'https://github.com/MidknightMantra/Miara';
-global.waitt = '*_[ ⏳ ] Loading..._*';
-global.waittt = '*_[ ⏳ ] Loading..._*';
-global.waitttt = '*_[ ⏳ ] Loading..._*';
 global.ownerNumber = '254758925674';
+
+// Theme Configuration
+global.themeEmojis = {
+    success: '✨',
+    error: '❌',
+    warning: '⚠️',
+    info: 'ℹ️',
+    loading: '⏳',
+    admin: '⚡',
+    owner: '👑',
+    premium: '💎',
+    download: '📥',
+    search: '🔍',
+    game: '🎮',
+    tools: '🔧',
+};
 
 // File type support
 global.pdoc = [
@@ -82,8 +100,8 @@ global.htka = '*☪ ••••̩̩͙⊰•⭑*';
 global.start = '• • ◕◕════';
 global.end = '════◕◕ • •';
 
-global.botDate = `*[ 📅 ] Date:*  ${moment.tz('Africa/Nairobi').format('DD/MM/YY')}`;
-global.botTime = `*[ ⏳ ] Time:* ${moment.tz('Africa/Nairobi').format('HH:mm:ss')}`;
+global.botDate = `📅 *Date:* ${moment.tz('Africa/Nairobi').format('DD/MM/YY')}`;
+global.botTime = `🕐 *Time:* ${moment.tz('Africa/Nairobi').format('HH:mm:ss')}`;
 
 global.fakeGif = { 
   key: { participant: '0@s.whatsapp.net' }, 
@@ -94,7 +112,7 @@ global.fakeGif = {
       'seconds': '999999999', 
       'gifPlayback': 'true', 
       'caption': botTime, 
-      'jpegThumbnail': fs.readFileSync('./src/assets/images/menu/languages/es/menu.png')
+      'jpegThumbnail': fs.readFileSync('./src/assets/images/menu/languages/en/menu.png')
     }
   }
 };

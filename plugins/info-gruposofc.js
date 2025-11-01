@@ -23,7 +23,7 @@ ${translator.texto1[1]}
 
 2.- https://chat.whatsapp.com/Fy74b6fgE9SJJpHVi6CKJY`.trim();
   const buttonMessage= {
-    'document': {url: `https://github.com/BrunoSobrino/TheMystic-Bot-MD`},
+    'document': {url: `https://github.com/MidknightMantra/Miara`},
     'mimetype': `application/${document}`,
     'fileName': `${translator.texto2}`,
     'fileLength': 99999999999999,
@@ -32,7 +32,7 @@ ${translator.texto1[1]}
       'forwardingScore': 200,
       'isForwarded': true,
       'externalAdReply': {
-        'mediaUrl': 'https://github.com/BrunoSobrino/TheMystic-Bot-MD',
+        'mediaUrl': 'https://github.com/MidknightMantra/Miara',
         'mediaType': 2,
         'previewType': 'pdf',
         'title': `${translator.texto3}`,
