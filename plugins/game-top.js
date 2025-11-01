@@ -4,11 +4,11 @@ import path from 'path';
 const user = (a) => '@' + a.split('@s.whatsapp.net')[0];
 function handler(m, { groupMetadata, command, conn, text, usedPrefix }) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.fun_top
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.fun_top
 
-  if (!text) throw `${tradutor.texto1}`;
+  if (!text) throw `${translator.texto1}`;
   const ps = groupMetadata.participants.map((v) => v.jid);
   const a = ps.getRandom();
   const b = ps.getRandom();

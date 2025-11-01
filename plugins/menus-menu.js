@@ -2,9 +2,9 @@ import { promises as fs } from 'fs';
 import { join } from 'path';
 
 const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
-        const idioma = global.db.data.users[m.sender]?.language || global.defaultLenguaje || 'es';
-        const _translate = JSON.parse(await fs.readFile(`./src/languages/${idioma}/${m.plugin}.json`));
-        const tradutor = _translate.plugins.menu;
+        const language = global.db.data.users[m.sender]?.language || global.defaultLanguage || 'es';
+        const _translate = JSON.parse(await fs.readFile(`./src/languages/${language}/${m.plugin}.json`));
+        const translator = _translate.plugins.menu;
 
     try {
         const username = '@' + m.sender.split('@s.whatsapp.net')[0];
@@ -21,7 +21,7 @@ const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
             'ar': 'ar-SA'
         };
         
-        const locale = localeMap[idioma.toLowerCase()] || 'es-ES';
+        const locale = localeMap[language.toLowerCase()] || 'es-ES';
         
         let week, date;
         try {
@@ -37,7 +37,7 @@ const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
         const rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length;
         const rtotal = Object.keys(global.db.data.users).length || '0';
 
-        const tags = tradutor.tags || {};
+        const tags = translator.tags || {};
         
         const extrasCommands = {
             'info': [
@@ -78,7 +78,7 @@ const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
                 `${usedPrefix}doxear <nombre / @tag>`
             ],
             'group': [
-                `${usedPrefix}grouptime <tiempo>`,
+                `${usedPrefix}grouptime <time>`,
                 `${usedPrefix}enable welcome`,
                 `${usedPrefix}disable welcome`,
                 `${usedPrefix}enable modohorny`,
@@ -253,7 +253,7 @@ const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
         let joincount = user.joincount ? user.joincount : 0;
 
         const defaultMenu = {
-            before: (tradutor.menu_header || '')
+            before: (translator.menu_header || '')
                 .replace('@username', username)
                 .replace('@author', global.author || 'Desconocido')
                 .replace('@owner', global.owner?.[0]?.[0] || '000000000000')
@@ -263,7 +263,7 @@ const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
                 .replace('@rtotal', rtotal)
                 .replace('@rtotalreg', rtotalreg),
             
-            user_info: '\n' + (tradutor.user_info || '')
+            user_info: '\n' + (translator.user_info || '')
                 .replace('@level', level)
                 .replace('@exp', exp)
                 .replace('@role', role || 'Nuevo')
@@ -271,12 +271,12 @@ const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
                 .replace('@money', money)
                 .replace('@joincount', joincount)
                 .replace('@premium', user.premiumTime > 0 ? 
-                    (tradutor.premium?.yes || '✅') : 
-                    (isPrems ? (tradutor.premium?.yes || '✅') : (tradutor.premium?.no || '❌'))),
+                    (translator.premium?.yes || '✅') : 
+                    (isPrems ? (translator.premium?.yes || '✅') : (translator.premium?.no || '❌'))),
             
-            header: (tradutor.section_header).replace('@category', '%category'),
-            body: (tradutor.command_item).replace('@cmd', '%cmd').replace('@islimit', '%islimit'),
-            footer: tradutor.section_footer,
+            header: (translator.section_header).replace('@category', '%category'),
+            body: (translator.command_item).replace('@cmd', '%cmd').replace('@islimit', '%islimit'),
+            footer: translator.section_footer,
             after: ''
         };
 
@@ -357,11 +357,11 @@ const handler = async (m, { conn, usedPrefix, __dirname, isPrems }) => {
         let pp;
         const imageMap = {'es': global.imagen1, 'en': global.imagen4, 'ar': global.imagen5 };
         
-        pp = imageMap[idioma.toLowerCase()] || global.imagen1;
+        pp = imageMap[language.toLowerCase()] || global.imagen1;
 
         await conn.sendMessage(m.chat, { image: pp , caption: text.trim(), mentions: [m.sender] }, { quoted: m });
     } catch (e) {
-        await m.reply(`${tradutor?.error_message} ${e.message}`);
+        await m.reply(`${translator?.error_message} ${e.message}`);
     }
 };
 

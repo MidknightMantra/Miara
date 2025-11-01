@@ -10,11 +10,11 @@ import cheerio from 'cheerio';
 
 let handler = async (m, { conn, text: tiktok, args, command, usedPrefix }) => {
     const datas = global
-    const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-    const tradutor = _translate.plugins.downloader_tiktok_img
+    const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+    const translator = _translate.plugins.downloader_tiktok_img
 
-    if (!tiktok) throw tradutor.texto1;
+    if (!tiktok) throw translator.texto1;
     let imagesSent
     if (imagesSent) return;
     imagesSent = true
@@ -27,7 +27,7 @@ let handler = async (m, { conn, text: tiktok, args, command, usedPrefix }) => {
         imagesSent = false
     } catch {
         imagesSent = false
-        throw tradutor.texto2
+        throw translator.texto2
     }
 };
 handler.command = /^(ttimg|tiktokimg)$/i;
@@ -44,11 +44,11 @@ async function ttimg(link) {
             imgSrc.push($(element).attr('src'));
         });
         if (imgSrc.length === 0) {
-            return { data: tradutor.texto3 };
+            return { data: translator.texto3 };
         }
         return { data: imgSrc };
     } catch (error) {
         console.lo(error);
-        return { data: tradutor.texto4 };
+        return { data: translator.texto4 };
     };
 };

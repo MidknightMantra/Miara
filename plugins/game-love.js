@@ -1,19 +1,19 @@
 const handler = async (m, { conn, command, text }) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.fun_love
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.fun_love
 
   const lovePercentage = Math.floor(Math.random() * 100);
   const isHighLove = lovePercentage >= 50;
-  const loveMessages = tradutor.texto1;
-  const notSoHighLoveMessages = tradutor.texto2;
-  const loveDescription = isHighLove ? tradutor.texto3[0] : tradutor.texto3[1];
+  const loveMessages = translator.texto1;
+  const notSoHighLoveMessages = translator.texto2;
+  const loveDescription = isHighLove ? translator.texto3[0] : translator.texto3[1];
   const getRandomMessage = (messages) => messages[Math.floor(Math.random() * messages.length)];
   const loveMessage = isHighLove ? getRandomMessage(loveMessages) : getRandomMessage(notSoHighLoveMessages);
   const response =
     `━━━━━━━⬣ *LOVE* ⬣━━━━━━━\n` +
-    `${tradutor.texto4[0]}, ${text} ${tradutor.texto4[1]} @${m.sender.split('@')[0]} ${loveDescription} ${tradutor.texto4[2]} ${lovePercentage}% ${tradutor.texto4[3]}\n\n` +
+    `${translator.texto4[0]}, ${text} ${translator.texto4[1]} @${m.sender.split('@')[0]} ${loveDescription} ${translator.texto4[2]} ${lovePercentage}% ${translator.texto4[3]}\n\n` +
     `*❥ ${loveMessage}*\n` +
     `━━━━━━━⬣ *LOVE* ⬣━━━━━━━`    
   
@@ -25,7 +25,7 @@ var hawemod = [
 "《 ██████████▒▒》80%",
 "《 ████████████》100%"
 ]
-   let { key } = await conn.sendMessage(m.chat, {text: tradutor.texto5, mentions: conn.parseMention(response)}, {quoted: m})
+   let { key } = await conn.sendMessage(m.chat, {text: translator.texto5, mentions: conn.parseMention(response)}, {quoted: m})
  for (let i = 0; i < hawemod.length; i++) {
    await new Promise(resolve => setTimeout(resolve, 1000)); 
    await conn.sendMessage(m.chat, {text: hawemod[i], edit: key, mentions: conn.parseMention(response)}, {quoted: m}); 

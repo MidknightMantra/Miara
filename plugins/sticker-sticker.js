@@ -7,9 +7,9 @@ import {webp2png} from '../src/libraries/webp2mp4.js';
 
 const handler = async (m, {conn, args, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.sticker_sticker
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.sticker_sticker
 
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
   let stiker = false;
@@ -22,7 +22,7 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
     }
     if (/webp|image|video/g.test(mime)) {
       const img = await q.download?.();
-      if (!img) throw `${tradutor.texto1} ${usedPrefix + command}*`;
+      if (!img) throw `${translator.texto1} ${usedPrefix + command}*`;
       let out;
       try {
         stiker = await sticker(img, false, global.packname, global.author, ["✨"], metadata);
@@ -39,14 +39,14 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
       }
     } else if (args[0]) {
       if (isUrl(args[0])) stiker = await sticker(false, args[0], global.packname, global.author, ["✨"], metadata);
-      else return m.reply(`${tradutor.texto2} ${usedPrefix}s https://telegra.ph/file/0dc687c61410765e98de2.jpg*`);
+      else return m.reply(`${translator.texto2} ${usedPrefix}s https://telegra.ph/file/0dc687c61410765e98de2.jpg*`);
     }
   } catch (e) {
     console.error(e);
     if (!stiker) stiker = e;
   } finally {
     if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '', m);
-   else return m.reply(`${tradutor.texto3}` + ` ${usedPrefix + command}*`);
+   else return m.reply(`${translator.texto3}` + ` ${usedPrefix + command}*`);
   }
 };
 handler.help = ['sfull'];

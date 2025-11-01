@@ -1,7 +1,7 @@
 const handler = async (m, { conn, args, participants }) => {
- const idioma = global.db.data.users[m.sender]?.language || global.defaultLenguaje;
- const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
- const tradutor = _translate.plugins.rpg_leaderboard;
+ const language = global.db.data.users[m.sender]?.language || global.defaultLanguage;
+ const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+ const translator = _translate.plugins.rpg_leaderboard;
 
  const users = Object.entries(global.db.data.users)
    .map(([key, value]) => ({
@@ -22,7 +22,7 @@ const handler = async (m, { conn, args, participants }) => {
 
  const len = Math.min(args[0] && !isNaN(args[0]) ? Math.max(parseInt(args[0]), 10) : 10, 100);
 
- const adventurePhrases = tradutor.texto1;
+ const adventurePhrases = translator.texto1;
  const randomPhrase = adventurePhrases[Math.floor(Math.random() * adventurePhrases.length)];
 
  const getText = (list, prop, unit) =>
@@ -33,18 +33,18 @@ const handler = async (m, { conn, args, participants }) => {
      })
      .join('\n\n');
 
- const body = `${tradutor.texto2[0]}\n□ ⚔️ ${randomPhrase} ⚔️\n\n` +
-   `${tradutor.texto2[1]} ${len} ${tradutor.texto2[7]}\n` +
-   `${tradutor.texto2[2]} ${sortedExp.findIndex(u => u.jid === m.sender) + 1} ${tradutor.texto2[3]} ${users.length}\n\n` +
-   `${getText(sortedExp, 'exp', tradutor.texto2[4])}\n\n` +
+ const body = `${translator.texto2[0]}\n□ ⚔️ ${randomPhrase} ⚔️\n\n` +
+   `${translator.texto2[1]} ${len} ${translator.texto2[7]}\n` +
+   `${translator.texto2[2]} ${sortedExp.findIndex(u => u.jid === m.sender) + 1} ${translator.texto2[3]} ${users.length}\n\n` +
+   `${getText(sortedExp, 'exp', translator.texto2[4])}\n\n` +
 
-   `${tradutor.texto2[1]} ${len} ${tradutor.texto2[8]}\n` +
-   `${tradutor.texto2[2]} ${sortedLim.findIndex(u => u.jid === m.sender) + 1} ${tradutor.texto2[3]} ${users.length}\n\n` +
-   `${getText(sortedLim, 'limit', tradutor.texto2[5])}\n\n` +
+   `${translator.texto2[1]} ${len} ${translator.texto2[8]}\n` +
+   `${translator.texto2[2]} ${sortedLim.findIndex(u => u.jid === m.sender) + 1} ${translator.texto2[3]} ${users.length}\n\n` +
+   `${getText(sortedLim, 'limit', translator.texto2[5])}\n\n` +
 
-   `${tradutor.texto2[1]} ${len} ${tradutor.texto2[9]}\n` +
-   `${tradutor.texto2[2]} ${sortedLevel.findIndex(u => u.jid === m.sender) + 1} ${tradutor.texto2[3]} ${users.length}\n\n` +
-   `${getText(sortedLevel, 'level', tradutor.texto2[6])}`.trim();
+   `${translator.texto2[1]} ${len} ${translator.texto2[9]}\n` +
+   `${translator.texto2[2]} ${sortedLevel.findIndex(u => u.jid === m.sender) + 1} ${translator.texto2[3]} ${users.length}\n\n` +
+   `${getText(sortedLevel, 'level', translator.texto2[6])}`.trim();
 
  await conn.sendMessage(m.chat, { text: body, mentions: conn.parseMention(body) }, { quoted: m });
 };

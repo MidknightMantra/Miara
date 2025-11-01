@@ -7,11 +7,11 @@ const owner = 'BrunoSobrino';
 const repo = 'TheMystic-Bot-MD';
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.owner_actualizacion
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.owner_actualizacion
 
- conn.sendMessage(m.chat, {text: tradutor.texto1}, {quoted: m});  
+ conn.sendMessage(m.chat, {text: translator.texto1}, {quoted: m});  
 try {
   async function checkRepoUpdates() {
     try {
@@ -22,11 +22,11 @@ try {
         previousCommitSHA = sha;
         previousUpdatedAt = message;
         previousCommitUser = login
-        conn.sendMessage(m.chat, {text: `${tradutor.texto2[0]} ${html_url}\n${tradutor.texto2[1]} ${message}\n${tradutor.texto2[2]} ${login}`}, {quoted: m});
+        conn.sendMessage(m.chat, {text: `${translator.texto2[0]} ${html_url}\n${translator.texto2[1]} ${message}\n${translator.texto2[2]} ${login}`}, {quoted: m});
       }
     } catch (error) {
       console.error(error)
-      m.reply(tradutor.texto3);
+      m.reply(translator.texto3);
     }
   }
   setInterval(checkRepoUpdates, 6000);

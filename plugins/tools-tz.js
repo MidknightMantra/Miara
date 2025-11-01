@@ -49,5 +49,5 @@ ${String.fromCharCode(8206).repeat(850)}
 ▢ TZ del servidor:\n • ${Intl.DateTimeFormat().resolvedOptions().timeZone}\n • ${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM HH:mm')}`}, {quoted: m});
 };
 
-handler.command = /^(tz|hora|fecha|horario)$/i;
+handler.command = /^(tz|hora|date|horario)$/i;
 export default handler;

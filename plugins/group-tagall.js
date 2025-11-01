@@ -1,8 +1,8 @@
 const handler = async (m, {isOwner, isAdmin, conn, text, participants, args, command, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.gc_tagall
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.gc_tagall
 
   console.log(participants)
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
@@ -11,8 +11,8 @@ const handler = async (m, {isOwner, isAdmin, conn, text, participants, args, com
     throw false;
   }
   const pesan = args.join` `;
-  const oi = `${tradutor.texto1[0]} ${pesan}`;
-  let teks = `${tradutor.texto1[1]}  ${oi}\n\n${tradutor.texto1[2]}\n`;
+  const oi = `${translator.texto1[0]} ${pesan}`;
+  let teks = `${translator.texto1[1]}  ${oi}\n\n${translator.texto1[2]}\n`;
   for (const mem of participants) {
     teks += `┣➥ @${mem.jid.split('@')[0]}\n`;
   }

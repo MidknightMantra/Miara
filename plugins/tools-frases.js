@@ -3,23 +3,23 @@ import fetch from 'node-fetch';
 
 const handler = async (m, { conn, command }) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.frase_frases
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.frase_frases
 
-  global.frasesromanticas = tradutor.texto3;
+  global.frasesromanticas = translator.texto3;
 
-  global.consejos = tradutor.texto4;
+  global.consejos = translator.texto4;
 
   if (command === 'consejo') {
     const consejo = consejos[Math.floor(Math.random() * consejos.length)];
-    const mensaje = `╭─◆────◈⚘◈─────◆─╮\n\n⠀⠀🌟 ${tradutor.texto1} 🌟\n\n❥ ${consejo}\n\n╰─◆────◈⚘◈─────◆─╯`;
+    const mensaje = `╭─◆────◈⚘◈─────◆─╮\n\n⠀⠀🌟 ${translator.texto1} 🌟\n\n❥ ${consejo}\n\n╰─◆────◈⚘◈─────◆─╯`;
     await m.reply(mensaje);
   }
 
   if (command === 'fraseromantica') {
     const frase_romantica = frasesromanticas[Math.floor(Math.random() * frasesromanticas.length)];
-    const mensaje = `╭─◆────◈⚘◈─────◆─╮\n\n⠀⠀💖 ${tradutor.texto2} 💖\n\n❥ ${frase_romantica}\n\n╰─◆────◈⚘◈─────◆─╯`;
+    const mensaje = `╭─◆────◈⚘◈─────◆─╮\n\n⠀⠀💖 ${translator.texto2} 💖\n\n❥ ${frase_romantica}\n\n╰─◆────◈⚘◈─────◆─╯`;
     await m.reply(mensaje);
   }
 

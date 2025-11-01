@@ -2,11 +2,11 @@ import {addExif} from '../src/libraries/sticker.js';
 
 const handler = async (m, {conn, text}) => {
   const datas = global;
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
-  const tradutor = _translate.plugins.sticker_wm;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+  const translator = _translate.plugins.sticker_wm;
 
-  if (!m.quoted) throw tradutor.texto1;
+  if (!m.quoted) throw translator.texto1;
   
   let stiker = false;
   try {
@@ -15,11 +15,11 @@ const handler = async (m, {conn, text}) => {
     
     const isSticker = m.quoted.mtype === 'stickerMessage' || (m.quoted.mimetype && m.quoted.mimetype === 'image/webp') || m.quoted.mediaType === 'sticker' || (m.quoted.message && m.quoted.message.stickerMessage) || m.quoted.key?.remoteJid?.endsWith('@s.whatsapp.net');
     
-    if (!isSticker) throw tradutor.texto2;
-    if (!m.quoted.download) throw tradutor.texto3;
+    if (!isSticker) throw translator.texto2;
+    if (!m.quoted.download) throw translator.texto3;
     const img = await m.quoted.download();
-    if (!img) throw tradutor.texto3;
-    if (!Buffer.isBuffer(img) || img.length === 0) throw tradutor.texto3;
+    if (!img) throw translator.texto3;
+    if (!Buffer.isBuffer(img) || img.length === 0) throw translator.texto3;
 
     try {
       const categories = [''];
@@ -48,7 +48,7 @@ const handler = async (m, {conn, text}) => {
     if (stiker) {
       conn.sendFile(m.chat, stiker, 'wm.webp', '', m, false, {asSticker: true});
     } else {
-      throw tradutor.texto3;
+      throw translator.texto3;
     }
   }
 };

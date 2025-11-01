@@ -4,9 +4,9 @@ import {sticker} from '../src/libraries/sticker.js';
 
 const handler = async (m, {conn, text}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.sticker_scircle
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.sticker_scircle
 
   try {
     const q = m.quoted ? m.quoted : m;
@@ -17,7 +17,7 @@ const handler = async (m, {conn, text}) => {
     const stiker = await sticker(null, scircle, global.packname, global.author);
     conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, {asSticker: true});
   } catch (e) {
-    m.reply(tradutor.texto1);
+    m.reply(translator.texto1);
   }
 };
 handler.help = ['scircle <img>'];

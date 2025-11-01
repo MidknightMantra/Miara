@@ -3,9 +3,9 @@ import {sticker} from '../src/libraries/sticker.js';
 const handler = (m) => m;
 
 handler.all = async function(m) {
-  const idioma = global.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins._autosticker
+  const language = global.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins._autosticker
 
   const chat = db.data.chats[m.chat];
   const user = db.data.users[m.sender];
@@ -20,7 +20,7 @@ handler.all = async function(m) {
       if (!img) return;
       stiker = await sticker(img, false, packname, author);
     } else if (/video/g.test(mime)) {
-      if (/video/g.test(mime)) if ((q.msg || q).seconds > 8) return; //await m.reply(tradutor.texto1);
+      if (/video/g.test(mime)) if ((q.msg || q).seconds > 8) return; //await m.reply(translator.texto1);
       const img = await q.download();
       if (!img) return;
       stiker = await sticker(img, false, packname, author);

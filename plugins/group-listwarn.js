@@ -1,16 +1,16 @@
 const handler = async (m, {conn, isOwner}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.gc_listwarn
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.gc_listwarn
 
   const adv = Object.entries(global.db.data.users).filter((user) => user[1].warn);
   const warns = global.db.data.users.warn;
   const user = global.db.data.users;
   const imagewarn = './src/assets/images/menu/main/warn.jpg';
-  const caption = `${tradutor.texto1}\n 
+  const caption = `${translator.texto1}\n 
 *╔═══════════════════·•*
-║ ${tradutor.texto2[0]} ${adv.length} ${tradutor.texto2[1]} ${adv ? '\n' + adv.map(([jid, user], i) => {
+║ ${translator.texto2[0]} ${adv.length} ${translator.texto2[1]} ${adv ? '\n' + adv.map(([jid, user], i) => {
 i++
 return `
 ║

@@ -2,12 +2,12 @@ const {generateWAMessageFromContent, prepareWAMessageMedia, proto} = (await impo
 import fetch from 'node-fetch';
 const {getBinaryNodeChild, getBinaryNodeChildren} = (await import("baileys")).default;
 const handler = async (m, {conn, text, participants, args}) => {
-  const idioma = global.db.data.users[m.sender].language || global.defaultLenguaje 
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.gc_add
+  const language = global.db.data.users[m.sender].language || global.defaultLanguage 
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.gc_add
 
-  if (!global.db.data.settings[conn.user.jid].restrict) throw tradutor.texto1;
-  if (!args[0]) throw tradutor.texto2;
+  if (!global.db.data.settings[conn.user.jid].restrict) throw translator.texto1;
+  if (!args[0]) throw translator.texto2;
   try {
     const _participants = participants.map((user) => user.id);
     const users = (await Promise.all(
@@ -25,15 +25,15 @@ const handler = async (m, {conn, text, participants, args}) => {
       const content = getBinaryNodeChild(user, 'add_request');
       const invite_code = content.attrs.code;
       const invite_code_exp = content.attrs.expiration;
-      const teks = `${tradutor.texto3[0]} @${jid.split('@')[0]}, ${tradutor.texto3[1]}`;
+      const teks = `${translator.texto3[0]} @${jid.split('@')[0]}, ${translator.texto3[1]}`;
       m.reply(teks, null, {mentions: conn.parseMention(teks)});
-      const captionn = tradutor.texto4;
+      const captionn = translator.texto4;
       const messaa = await prepareWAMessageMedia({image: jpegThumbnail}, {upload: conn.waUploadToServer});
       const groupInvite = generateWAMessageFromContent(m.chat, proto.Message.fromObject({groupInviteMessage: {groupJid: m.chat, inviteCode: invite_code, inviteExpiration: invite_code_exp, groupName: await conn.getName(m.chat), caption: captionn, jpegThumbnail: jpegThumbnail}}), {userJid: jid});
       await conn.relayMessage(jid, groupInvite.message, {messageId: groupInvite.key.id});
     }
   } catch {
-    throw tradutor.texto5;
+    throw translator.texto5;
   }
 };
 handler.help = ['add'].map((v) => v + ' número');

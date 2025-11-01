@@ -4,12 +4,12 @@ import fs from 'fs';
 let handler = async (m, { conn, args, usedPrefix, command, text }) => {
     
         const datas = global;
-        const idioma = datas.db.data.users[m.sender]?.language || global.defaultLenguaje;
-        const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
-        const tradutor = _translate.plugins.herramientas_chatgpt;
+        const language = datas.db.data.users[m.sender]?.language || global.defaultLanguage;
+        const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+        const translator = _translate.plugins.herramientas_chatgpt;
     
     try {
-        if (!text) return m.reply(tradutor.texto1[0]);
+        if (!text) return m.reply(translator.texto1[0]);
         
         let mediax = null;
         let userID = m.sender;
@@ -40,7 +40,7 @@ let handler = async (m, { conn, args, usedPrefix, command, text }) => {
             }
         }
         
-        let context = `Eres The Mystic Bot (v3.0). Idioma: ${idioma.toUpperCase()}\n` +
+        let context = `Eres The Mystic Bot (v3.0). Idioma: ${language.toUpperCase()}\n` +
                      `Creador: Bruno Sobrino | Repositorio: https://github.com/BrunoSobrino/TheMystic-Bot-MD | Numero del creador: +52 1 999 612 5657\n\n`;
         
         if (hasImage && imageDescription.trim()) {
@@ -82,7 +82,7 @@ let handler = async (m, { conn, args, usedPrefix, command, text }) => {
         
     } catch (error) {
         console.error('Error completo:', error);
-        m.reply(tradutor?.texto4);
+        m.reply(translator?.texto4);
     }
 };
 

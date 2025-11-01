@@ -2,9 +2,9 @@ import fetch from 'node-fetch';
 
 const handler = async (m, { conn, isOwner, usedPrefix, command, text }) => {
  const datas = global
- const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
- const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
- const tradutor = _translate.plugins.herramientas_dropmail
+ const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+ const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+ const translator = _translate.plugins.herramientas_dropmail
   
  conn.dropmail = conn.dropmail ? conn.dropmail : {};
  const id = 'dropmail';
@@ -15,14 +15,14 @@ const handler = async (m, { conn, isOwner, usedPrefix, command, text }) => {
  ];
 
  const [feature, inputs, inputs_, inputs__, inputs___] = text.split(' ');
- if (!lister.includes(feature)) return m.reply(tradutor.texto1[0] + usedPrefix + command + tradutor.texto1[1] + lister.map((v, index) => '  ○ ' + v).join('\n'));
+ if (!lister.includes(feature)) return m.reply(translator.texto1[0] + usedPrefix + command + translator.texto1[1] + lister.map((v, index) => '  ○ ' + v).join('\n'));
  if (lister.includes(feature)) {
  if (feature == 'create') {
  try {
  const eml = await random_mail();
  const timeDiff = new Date(eml[2]) - new Date();
  conn.dropmail[id] = [
- await m.reply(tradutor.texto2[0] + eml[0] + '\n\n' + tradutor.texto2[1]  + eml[1] + tradutor.texto2[2]  + msToTime(timeDiff) + tradutor.texto2[3]  + usedPrefix + command + tradutor.texto2[4] ),
+ await m.reply(translator.texto2[0] + eml[0] + '\n\n' + translator.texto2[1]  + eml[1] + translator.texto2[2]  + msToTime(timeDiff) + translator.texto2[3]  + usedPrefix + command + translator.texto2[4] ),
   eml[0],
   eml[1],
   eml[2],
@@ -33,22 +33,22 @@ const handler = async (m, { conn, isOwner, usedPrefix, command, text }) => {
 }
 
  if (feature == 'message') {
- if (!conn.dropmail[id]) return m.reply(tradutor.texto3[0] + usedPrefix + command + tradutor.texto3[1]);
+ if (!conn.dropmail[id]) return m.reply(translator.texto3[0] + usedPrefix + command + translator.texto3[1]);
  try {
  const eml = await get_mails(conn.dropmail[id][2]);
  const teks = eml[0].map((v, index) => {
- return `*${tradutor.texto4[0]} [ ${index + 1} ]*\n${tradutor.texto4[0]} ${v.fromAddr}\n${tradutor.texto4[0]} ${v.toAddr}\n\n${tradutor.texto4[0]} ${v.text}\n${tradutor.texto4[0]} "${formatSize(v.rawSize)}\n${tradutor.texto4[0]} ${v.headerSubject}\n${tradutor.texto4[0]} ${v.downloadUrl}`.trim();
+ return `*${translator.texto4[0]} [ ${index + 1} ]*\n${translator.texto4[0]} ${v.fromAddr}\n${translator.texto4[0]} ${v.toAddr}\n\n${translator.texto4[0]} ${v.text}\n${translator.texto4[0]} "${formatSize(v.rawSize)}\n${translator.texto4[0]} ${v.headerSubject}\n${translator.texto4[0]} ${v.downloadUrl}`.trim();
  }).filter((v) => v).join('\n\n________________________\n\n');
- await m.reply(teks || tradutor.texto5[0] + usedPrefix + command + tradutor.texto5[1]);
+ await m.reply(teks || translator.texto5[0] + usedPrefix + command + translator.texto5[1]);
  } catch (e) {
  await m.reply(eror);
  }
 }
  if (feature == 'delete') {
- if (!conn.dropmail[id]) return m.reply(tradutor.texto6);
+ if (!conn.dropmail[id]) return m.reply(translator.texto6);
  try {
   delete conn.dropmail[id];
-  await m.reply(tradutor.texto7);
+  await m.reply(translator.texto7);
  } catch (e) {
   await m.reply(eror);
    }

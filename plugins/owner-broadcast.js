@@ -5,17 +5,17 @@ import {randomBytes} from 'crypto';
 
 const handler = async (m, {conn, command, participants, usedPrefix, text}) => {
   const datas = global
-    const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-    const tradutor = _translate.plugins.owner_broadcast
+    const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+    const translator = _translate.plugins.owner_broadcast
 
-  if (!text) return tradutor.texto1;
+  if (!text) return translator.texto1;
   const fkontak = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${conn.user.jid.split('@')[0]}:${conn.user.jid.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
   const cc4 = text ? m : m.quoted ? await m.getQuotedObj() : false || m;
   const teks4 = text ? text : cc4.text;
   const groups2 = Object.keys(await conn.groupFetchAllParticipating());
   const chats2 = Object.keys(global.db.data.users).filter((user) => user.endsWith('@s.whatsapp.net'));
-  await conn.reply(m.chat, tradutor.texto2, m);
+  await conn.reply(m.chat, translator.texto2, m);
   const start2 = new Date().getTime();
   const usersTag2 = participants.map((u) => conn.decodeJid(u.id));
   let totalPri2 = 0;
@@ -23,12 +23,12 @@ const handler = async (m, {conn, command, participants, usedPrefix, text}) => {
     const group = groups2[i];
     const delay = i * 4000; // 4 seg
     setTimeout(async () => {
-      await conn.reply(group, tradutor.texto3[0] + teks4, {mentions: usersTag2}, {quoted: fkontak});
+      await conn.reply(group, translator.texto3[0] + teks4, {mentions: usersTag2}, {quoted: fkontak});
     }, delay);
   }
   for (const user of chats2) {
     await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 segundos
-    await conn.reply(user, tradutor.texto3[1] + teks4, fkontak, null);
+    await conn.reply(user, translator.texto3[1] + teks4, fkontak, null);
     totalPri2++;
     if (totalPri2 >= 500000) {
       break;
@@ -46,10 +46,10 @@ const handler = async (m, {conn, command, participants, usedPrefix, text}) => {
   } else {
     time2 = `${time2} segundos`;
   }
-  await m.reply(`${tradutor.texto4[0]}
-\`\`\`${tradutor.texto4[1]} ${totalPrivate2}\`\`\`
-\`\`\`${tradutor.texto4[2]}   ${totalGroups2}\`\`\`
-\`\`\`${tradutor.texto4[3]}   ${total2}\`\`\`\n\n${tradutor.texto4[4]} ${time2}*\n${totalPri2 >= 500000 ? tradutor.texto4[5] : ''}`);
+  await m.reply(`${translator.texto4[0]}
+\`\`\`${translator.texto4[1]} ${totalPrivate2}\`\`\`
+\`\`\`${translator.texto4[2]}   ${totalGroups2}\`\`\`
+\`\`\`${translator.texto4[3]}   ${total2}\`\`\`\n\n${translator.texto4[4]} ${time2}*\n${totalPri2 >= 500000 ? translator.texto4[5] : ''}`);
 };
 handler.help = ['broadcast', 'bc'].map((v) => v + ' <teks>');
 handler.tags = ['owner'];

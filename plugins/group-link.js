@@ -3,9 +3,9 @@ import { prepareWAMessageMedia, generateWAMessageFromContent, getDevice } from "
 
 const handler = async (m, {conn, args}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.gc_link
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.gc_link
 
   let ppgc;
   try {
@@ -51,7 +51,7 @@ const handler = async (m, {conn, args}) => {
     } else {
         conn.reply(m.chat, 'https://chat.whatsapp.com/' + await conn.groupInviteCode(group), m, {
            contextInfo: {externalAdReply: {mediaUrl: null, mediaType: 1, description: null,
-           title: tradutor.texto1[0],
+           title: translator.texto1[0],
            body: '𝚃𝚑𝚎 𝙼𝚢𝚜𝚝𝚒𝚌 - 𝙱𝚘𝚝',
            previewType: 0, thumbnail: fs.readFileSync('./src/assets/images/menu/languages/es/menu.png'),
            sourceUrl: `https://github.com/BrunoSobrino/TheMystic-Bot-MD`}

@@ -4,9 +4,9 @@ import path from 'path';
 const user = (a) => '@' + a.split('@')[0];
 function handler(m, {groupMetadata, command, conn, participants}) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.fun_tops
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.fun_tops
 
   const ps = groupMetadata.participants.map((v) => v.id);
   const a = ps.getRandom();
@@ -22,7 +22,7 @@ function handler(m, {groupMetadata, command, conn, participants}) {
 
   if (command == 'topgays') {
     const vn = './src/assets/audio/01J673A5RN30C5EYPMKE5MR9XQ.mp3';
-    const top = `${tradutor.texto1}
+    const top = `${translator.texto1}
     
 *_1.- ${user(a)}_*
 *_2.- ${user(b)}_*
@@ -41,7 +41,7 @@ function handler(m, {groupMetadata, command, conn, participants}) {
 
   if (command == 'topotakus') {
     const vn = './src/assets/audio/01J67441AFAPG1YRQXDQ0VDTZB.mp3';
-    const top = `${tradutor.texto2}
+    const top = `${translator.texto2}
     
 *_1.- ${user(a)}_*
 *_2.- ${user(b)}_*

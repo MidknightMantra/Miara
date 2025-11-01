@@ -7,9 +7,9 @@ const execAsync = promisify(exec);
 
 const handler = async (m, {conn, args, __dirname, usedPrefix, command}) => {
   const datas = global;
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
-  const _translate = JSON.parse(readFileSync(`./src/languages/${idioma}.json`));
-  const tradutor = _translate.plugins.audio_efectos;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+  const _translate = JSON.parse(readFileSync(`./src/languages/${language}.json`));
+  const translator = _translate.plugins.audio_efectos;
   try {
     const q = m.quoted ? m.quoted : m;
     const mime = ((m.quoted ? m.quoted : m.msg).mimetype || '');
@@ -69,7 +69,7 @@ const handler = async (m, {conn, args, __dirname, usedPrefix, command}) => {
         }
       }
     } else {
-      throw `${tradutor.texto1} ${usedPrefix + command}*`;
+      throw `${translator.texto1} ${usedPrefix + command}*`;
     }
   } catch (e) {
     console.error('Error general:', e);

@@ -5,9 +5,9 @@ const defaultLang = 'es';
 
 const handler = async (m, {conn, args, usedPrefix, command}) => {
  const datas = global
- const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
- const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
- const tradutor = _translate.plugins.convertidor_tts
+ const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+ const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+ const translator = _translate.plugins.convertidor_tts
 
  let lang = args[0];
  let text = args.slice(1).join(' ');
@@ -22,7 +22,7 @@ const handler = async (m, {conn, args, usedPrefix, command}) => {
  } catch (e) {
  m.reply(e + '');
    text = args.join(' ');
- if (!text) throw `*${tradutor.texto1[0]} ${usedPrefix + command} ${tradutor.texto1[1]}*`;
+ if (!text) throw `*${translator.texto1[0]} ${usedPrefix + command} ${translator.texto1[1]}*`;
  res = await tts(text, defaultLang);
  } finally {
  if (res) {

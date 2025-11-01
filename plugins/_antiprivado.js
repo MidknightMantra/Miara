@@ -2,9 +2,9 @@
 
 export async function before(m, {conn, isAdmin, isBotAdmin, isOwner, isROwner}) {
     const datas = global
-    const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje || 'es'
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-    const tradutor = _translate.plugins._antiprivado
+    const language = datas.db.data.users[m.sender].language || global.defaultLanguage || 'es'
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+    const translator = _translate.plugins._antiprivado
 
   if (m.isBaileys && m.fromMe) return !0;
   if (m.isGroup) return !1;
@@ -13,7 +13,7 @@ export async function before(m, {conn, isAdmin, isBotAdmin, isOwner, isROwner}) 
   const chat = global.db.data.chats[m.chat];
   const bot = global.db.data.settings[this.user.jid] || {};
   if (bot.antiPrivate && !isOwner && !isROwner) {
-    await m.reply(tradutor.texto1, false, {mentions: [m.sender]});
+    await m.reply(translator.texto1, false, {mentions: [m.sender]});
     await this.updateBlockStatus(m.chat, 'block');
   }
   return !1;

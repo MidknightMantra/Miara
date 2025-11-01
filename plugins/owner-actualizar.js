@@ -2,15 +2,15 @@ import { execSync } from 'child_process';
 
 const handler = async (m, { conn, text }) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.propietario_actualizar
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.propietario_actualizar
 
   try {
           const stdout = execSync('git pull' + (m.fromMe && text ? ' ' + text : ''));
           let messager = stdout.toString()
-          if (messager.includes('Already up to date.')) messager = tradutor.texto1
-          if (messager.includes('Updating')) messager = tradutor.texto2 + stdout.toString()
+          if (messager.includes('Already up to date.')) messager = translator.texto1
+          if (messager.includes('Updating')) messager = translator.texto2 + stdout.toString()
           conn.reply(m.chat, messager, m);
   } catch {      
  try {    
@@ -28,13 +28,13 @@ const handler = async (m, { conn, text }) => {
           })
           .filter(Boolean);
         if (conflictedFiles.length > 0) {
-          const errorMessage = `${tradutor.texto3} \n\n${conflictedFiles.join('\n')}.*`;
+          const errorMessage = `${translator.texto3} \n\n${conflictedFiles.join('\n')}.*`;
           await conn.reply(m.chat, errorMessage, m);  
         }
       }
   } catch (error) {
     console.error(error);
-    let errorMessage2 = tradutor.texto4;
+    let errorMessage2 = translator.texto4;
     if (error.message) {
       errorMessage2 += '\n*- Mensaje de error:* ' + error.message;
     }

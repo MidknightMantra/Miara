@@ -2,18 +2,18 @@
 
 const handler = async (m, {conn, usedPrefix, text, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.cmd_del
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.cmd_del
 
 
   let hash = text;
   if (m.quoted && m.quoted.fileSha256) hash = m.quoted.fileSha256.toString('hex');
-  if (!hash) throw `*${tradutor.texto1} ${usedPrefix}listcmd*`;
+  if (!hash) throw `*${translator.texto1} ${usedPrefix}listcmd*`;
   const sticker = global.db.data.sticker;
-  if (sticker[hash] && sticker[hash].locked) throw `*${tradutor.texto2}*`;
+  if (sticker[hash] && sticker[hash].locked) throw `*${translator.texto2}*`;
   delete sticker[hash];
-  m.reply(`*${tradutor.texto3}*`);
+  m.reply(`*${translator.texto3}*`);
 };
 handler.command = ['delcmd'];
 handler.rowner = true;

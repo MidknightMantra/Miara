@@ -320,7 +320,7 @@ class LidResolver {
             }
           }
           
-          // No encontrado, guardar resultado negativo por menos tiempo
+          // No encontrado, guardar resultado negativo por menos time
           const notFoundEntry = {
             jid: lidJid,
             lid: lidJid,

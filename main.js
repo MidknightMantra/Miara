@@ -2,7 +2,7 @@
 // Miara
 // =====================================
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'; // Enforce TLS verification
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
 import './config.js';
 import './api.js';
 
@@ -47,16 +47,11 @@ const { chain } = lodash;
 const PORT = process.env.PORT || process.env.SERVER_PORT || 3000;
 let stopped = 'close';
 
-// Initialize Baileys prototypes
 protoType();
 serialize();
-
-// Message retry caches
 const msgRetryCounterMap = new Map();
 const msgRetryCounterCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 const userDevicesCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
-
-// --- Global helper utilities ---
 global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') {
   return rmPrefix
     ? /file:\/\/\//.test(pathURL)
@@ -70,8 +65,6 @@ global.__dirname = function dirname(pathURL) {
 global.__require = function require(dir = import.meta.url) {
   return createRequire(dir);
 };
-
-// --- Global API shortcut ---
 global.API = (name, pathName = '/', query = {}, apiKeyParam) =>
   (name in global.APIs ? global.APIs[name] : name) +
   pathName +
@@ -92,7 +85,6 @@ global.API = (name, pathName = '/', query = {}, apiKeyParam) =>
       )
     : '');
 
-// --- Global variables ---
 global.timestamp = { start: new Date() };
 global.videoList = [];
 global.videoListXXX = [];

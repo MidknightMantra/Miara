@@ -5,19 +5,19 @@ import translate from '@vitalets/google-translate-api';
 
 export async function before(m) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.game_akinator_ans
-  const teks = tradutor.texto1;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.game_akinator_ans
+  const teks = translator.texto1;
 
 
   if (global.db.data.users[m.sender].banned) return;
   if (!m.quoted || !m.quoted.fromMe || !m.quoted.isBaileys || !m.text) return !0;
   const aki = global.db.data.users[m.sender].akinator;
   if (!aki.sesi || m.quoted.id != aki.soal.key.id) return;
-  if (!somematch(['0', '1', '2', '3', '4', '5'], m.text)) return this.sendMessage(m.chat, {text: `${tradutor.texto2} \n\n${teks}`}, {quoted: aki.soal});
+  if (!somematch(['0', '1', '2', '3', '4', '5'], m.text)) return this.sendMessage(m.chat, {text: `${translator.texto2} \n\n${teks}`}, {quoted: aki.soal});
   const {server, frontaddr, session, signature, question, progression, step} = aki;
-  if (step == '0' && m.text == '5') return m.reply(tradutor.texto3);
+  if (step == '0' && m.text == '5') return m.reply(translator.texto3);
   let res; let anu; let soal;
   try {
     if (m.text == '5') res = await fetch(`https://api.lolhuman.xyz/api/akinator/back?apikey=${lolkeysapi}&server=${server}&session=${session}&signature=${signature}&step=${step}`);
@@ -26,16 +26,16 @@ export async function before(m) {
     if (anu.status != '200') {
       aki.sesi = false;
       aki.soal = null;
-      return m.reply(tradutor.texto4);
+      return m.reply(translator.texto4);
     }
     anu = anu.result;
     if (anu.name) {
-      await this.sendMessage(m.chat, {image: {url: anu.image}, caption: `${tradutor.texto5} ${anu.name}*\n_${anu.description}_`, mentions: [m.sender]}, {quoted: m});
+      await this.sendMessage(m.chat, {image: {url: anu.image}, caption: `${translator.texto5} ${anu.name}*\n_${anu.description}_`, mentions: [m.sender]}, {quoted: m});
       aki.sesi = false;
       aki.soal = null;
     } else {
       const resultes = await translate(`${anu.question}`, {to: 'es', autoCorrect: true});
-      soal = await this.sendMessage(m.chat, {text: `${tradutor.texto6[0]} ${anu.step} (${anu.progression.toFixed(2)} %)*\n\n${tradutor.texto6[1]} @${m.sender.split('@')[0]}*\n${tradutor.texto6[2]} ${resultes.text}*\n\n${teks}`, mentions: [m.sender]}, {quoted: m});
+      soal = await this.sendMessage(m.chat, {text: `${translator.texto6[0]} ${anu.step} (${anu.progression.toFixed(2)} %)*\n\n${translator.texto6[1]} @${m.sender.split('@')[0]}*\n${translator.texto6[2]} ${resultes.text}*\n\n${teks}`, mentions: [m.sender]}, {quoted: m});
       aki.soal = soal;
       aki.step = anu.step;
       aki.progression = anu.progression;
@@ -43,7 +43,7 @@ export async function before(m) {
   } catch (e) {
     aki.sesi = false;
     aki.soal = null;
-    m.reply(tradutor.texto7);
+    m.reply(translator.texto7);
   }
   return !0;
 }

@@ -1,11 +1,11 @@
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   const datas = global;
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
-  const tradutor = _translate.plugins.downloader_imagen;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+  const translator = _translate.plugins.downloader_imagen;
 
   if (!text) {
-    return m.reply(`${tradutor.texto1} ${usedPrefix + command} Minecraft*`);
+    return m.reply(`${translator.texto1} ${usedPrefix + command} Minecraft*`);
   }
 
   const api = await axios.get(`${global.BASE_API_DELIRIUS}/search/gimage?query=${text}`);
@@ -18,7 +18,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   const random = Math.floor(Math.random() * filteredData.length);
   const image = filteredData[random];
 
-  conn.sendFile(m.chat, image.url, 'error.jpg', `${tradutor.texto2[0]} ${text}\n${tradutor.texto2[1]} ${image.origin.website.url}\n${tradutor.texto2[2]}`, m);
+  conn.sendFile(m.chat, image.url, 'error.jpg', `${translator.texto2[0]} ${text}\n${translator.texto2[1]} ${image.origin.website.url}\n${translator.texto2[2]}`, m);
 };
 
 handler.help = ['image'];

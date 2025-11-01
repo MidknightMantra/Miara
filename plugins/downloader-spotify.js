@@ -3,28 +3,28 @@ import fs from 'fs';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   const datas = global;
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
-  const tradutor = _translate.plugins.descargas_spotify;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+  const translator = _translate.plugins.descargas_spotify;
 
-  if (!text) return m.reply(`${tradutor.texto1} _${usedPrefix + command} Good Feeling - Flo Rida_`);
+  if (!text) return m.reply(`${translator.texto1} _${usedPrefix + command} Good Feeling - Flo Rida_`);
 
   try {
     let songInfo = await spotifyxv(text);
-    if (!songInfo.length) return m.reply(tradutor.texto2);
+    if (!songInfo.length) return m.reply(translator.texto2);
     let song = songInfo[0];
 
     const res = await axios.get(`${global.APIs.stellar}/dow/spotify?url=${song.url}&apikey=${global.APIKeys[global.APIs.stellar]}`, { responseType: 'json' });
     const data = res.data?.data;
 
-    if (!data?.download) return m.reply(tradutor.texto3);
+    if (!data?.download) return m.reply(translator.texto3);
 
-    let spotifyi = ` _${tradutor.texto2[0]}_\n\n`;
-    spotifyi += ` ${tradutor.texto2[1]} ${data.title}\n`;
-    spotifyi += ` ${tradutor.texto2[2]} ${data.artist}\n`; 
-    spotifyi += ` ${tradutor.texto2[3]} ${song.album}\n`;
-    spotifyi += ` ${tradutor.texto2[4]} ${data.duration}\n\n`;
-    spotifyi += `> ${tradutor.texto2[5]}`;
+    let spotifyi = ` _${translator.texto2[0]}_\n\n`;
+    spotifyi += ` ${translator.texto2[1]} ${data.title}\n`;
+    spotifyi += ` ${translator.texto2[2]} ${data.artist}\n`; 
+    spotifyi += ` ${translator.texto2[3]} ${song.album}\n`;
+    spotifyi += ` ${translator.texto2[4]} ${data.duration}\n\n`;
+    spotifyi += `> ${translator.texto2[5]}`;
 
     await conn.sendMessage(m.chat, {
       text: spotifyi.trim(),
@@ -51,7 +51,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     }, { quoted: m });
 
   } catch (e) {
-    m.reply(`${tradutor.texto3}`);
+    m.reply(`${translator.texto3}`);
   }
 };
 

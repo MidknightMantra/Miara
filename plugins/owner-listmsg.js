@@ -2,15 +2,15 @@
 
 const handler = (m) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.owner_listmsg
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.owner_listmsg
 
   const msgs = global.db.data.msgs;
   m.reply(`
-${tradutor.texto1[0]}
+${translator.texto1[0]}
 
-${tradutor.texto1[1]}
+${translator.texto1[1]}
 ${Object.keys(msgs).map((v) => '*👉🏻 ' + v).join('*\n*')}*
 `.trim());
 };

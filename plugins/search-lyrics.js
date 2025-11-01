@@ -6,14 +6,14 @@ import fs from "fs";
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   const datas = global;
-  const idioma =
-    datas.db.data.users[m.sender].language || global.defaultLenguaje;
+  const language =
+    datas.db.data.users[m.sender].language || global.defaultLanguage;
   const _translate = JSON.parse(
-    fs.readFileSync(`./src/languages/${idioma}.json`),
+    fs.readFileSync(`./src/languages/${language}.json`),
   );
-  const tradutor = _translate.plugins.buscador_lyrics;
+  const translator = _translate.plugins.buscador_lyrics;
   const teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : "";
-  if (!teks) throw `*${tradutor.texto1} ${usedPrefix + command} beret ojala*`;
+  if (!teks) throw `*${translator.texto1} ${usedPrefix + command} beret ojala*`;
   try {
     const result = await getTracks(teks);
     let lyrics;
@@ -50,7 +50,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       .replace("http://cdn-preview-", "https://cdns-preview-")
       .replace(".deezer.com", ".dzcdn.net");
 
-    const textoLetra = `${tradutor.texto2[0]} *${tituloL || ""}*\n${tradutor.texto2[1]}  *${artistaL || ""}*\n\n${tradutor.texto2[2]} \n${lyrics.lyrics || "Lyrics not found."}`;
+    const textoLetra = `${translator.texto2[0]} *${tituloL || ""}*\n${translator.texto2[1]}  *${artistaL || ""}*\n\n${translator.texto2[2]} \n${lyrics.lyrics || "Lyrics not found."}`;
     await conn.sendMessage(
       m.chat,
       { image: { url: img }, caption: textoLetra },
@@ -67,7 +67,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     );
   } catch (e) {
     console.log(`Error: ${e.message}`);
-    throw `*${tradutor.texto2[3]}*`;
+    throw `*${translator.texto2[3]}*`;
   }
 };
 handler.help = ["lirik", "letra"].map((v) => v + " <Apa>");

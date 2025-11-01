@@ -10,24 +10,24 @@ const { Spotify } = pkg2;
 
 const handler = async (m, { conn, text }) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.descargas_spotifypro
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.descargas_spotifypro
 
- if (!text) throw `${tradutor.texto1}`; 
+ if (!text) throw `${translator.texto1}`; 
  const isSpotifyUrl = text.match(/^(https:\/\/open\.spotify\.com\/(album|track|playlist)\/[a-zA-Z0-9]+)/i);
- if (!isSpotifyUrl && !text) throw `${tradutor.texto2}`;
+ if (!isSpotifyUrl && !text) throw `${translator.texto2}`;
   try {
      if (isSpotifyUrl) {
       if (isSpotifyUrl[2] === 'album') {
         const album = await downloadAlbum(isSpotifyUrl[0]);
         const img = await (await fetch(`${album.metadata.cover}`)).buffer()  
-        let spotifyi = `${tradutor.texto3[0]}\n\n`
-          spotifyi += `	${tradutor.texto3[1]} ${album.metadata.title}\n`
-          spotifyi += `	${tradutor.texto3[2]} ${album.metadata.artists}\n`
-          spotifyi += `	${tradutor.texto3[3]} ${album.metadata.releaseDate}\n`   
-          spotifyi += `	${tradutor.texto3[4]} ${album.trackList.length}\n\n`   
-          spotifyi += `${tradutor.texto3[5]}`
+        let spotifyi = `${translator.texto3[0]}\n\n`
+          spotifyi += `	${translator.texto3[1]} ${album.metadata.title}\n`
+          spotifyi += `	${translator.texto3[2]} ${album.metadata.artists}\n`
+          spotifyi += `	${translator.texto3[3]} ${album.metadata.releaseDate}\n`   
+          spotifyi += `	${translator.texto3[4]} ${album.trackList.length}\n\n`   
+          spotifyi += `${translator.texto3[5]}`
         await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": isSpotifyUrl[0], "sourceUrl": isSpotifyUrl[0]}}}, {quoted: m});
         for (let i = 0; i < album.trackList.length; i++) {
             await conn.sendMessage(m.chat, {audio: album.trackList[i].audioBuffer, fileName: `${album.trackList[i].metadata.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
@@ -37,13 +37,13 @@ const handler = async (m, { conn, text }) => {
         const track = await downloadTrack(isSpotifyUrl[0]);
         const dlspoty = track.audioBuffer;
         const img = await (await fetch(`${track.imageUrl}`)).buffer()  
-        let spotifyi = `${tradutor.texto4[0]}\n\n`
-          spotifyi += `	${tradutor.texto4[1]} ${track.title}\n`
-          spotifyi += `	${tradutor.texto4[2]} ${track.artists}\n`
-          spotifyi += `	${tradutor.texto4[3]} ${track.duration}\n`
-          spotifyi += `	${tradutor.texto4[4]} ${track.album.name}\n`                 
-          spotifyi += `	${tradutor.texto4[5]} ${track.album.releasedDate}\n\n`   
-          spotifyi += `${tradutor.texto4[6]}`
+        let spotifyi = `${translator.texto4[0]}\n\n`
+          spotifyi += `	${translator.texto4[1]} ${track.title}\n`
+          spotifyi += `	${translator.texto4[2]} ${track.artists}\n`
+          spotifyi += `	${translator.texto4[3]} ${track.duration}\n`
+          spotifyi += `	${translator.texto4[4]} ${track.album.name}\n`                 
+          spotifyi += `	${translator.texto4[5]} ${track.album.releasedDate}\n\n`   
+          spotifyi += `${translator.texto4[6]}`
         await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": track.url, "sourceUrl": track.url}}}, {quoted: m});
         await conn.sendMessage(m.chat, {audio: dlspoty, fileName: `${track.title}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
           
@@ -56,10 +56,10 @@ const handler = async (m, { conn, text }) => {
           const playlistInfoByID = await infos.getPlaylist(playlistId);
           const tracks = playlistInfoByID.tracks.items;
           const img = await (await fetch(`${playlistInfoByID.images[0].url}`)).buffer()  
-        let spotifyi = `${tradutor.texto5[0]}\n\n`
-          spotifyi += `	${tradutor.texto5[1]} ${playlistInfoByID.name}\n`
-          spotifyi += `	${tradutor.texto5[2]} ${tracks.length}\n\n`
-          spotifyi += `${tradutor.texto5[3]}`
+        let spotifyi = `${translator.texto5[0]}\n\n`
+          spotifyi += `	${translator.texto5[1]} ${playlistInfoByID.name}\n`
+          spotifyi += `	${translator.texto5[2]} ${tracks.length}\n\n`
+          spotifyi += `${translator.texto5[3]}`
         await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": playlistInfoByID.external_urls.spotify, "sourceUrl": playlistInfoByID.external_urls.spotify}}}, {quoted: m});
           let target = m.chat;
           if (m.isGroup && tracks.length > 20) {
@@ -74,19 +74,19 @@ for (let i = 0; i < tracks.length; i++) {
         const searchTrack = await downloadTrack(text);
         const dlspoty = searchTrack.audioBuffer;
         const img = await (await fetch(`${searchTrack.imageUrl}`)).buffer()  
-        let spotifyi = `${tradutor.texto6[0]}n\n`
-          spotifyi += `	${tradutor.texto6[1]} ${searchTrack.title}\n`
-          spotifyi += `	${tradutor.texto6[2]} ${searchTrack.artists}\n`
-          spotifyi += `	${tradutor.texto6[3]} ${searchTrack.duration}\n`
-          spotifyi += `	${tradutor.texto6[4]} ${searchTrack.album.name}\n`                 
-          spotifyi += `	${tradutor.texto6[5]} ${searchTrack.album.releasedDate}\n\n`   
-          spotifyi += `${tradutor.texto6[6]}`
+        let spotifyi = `${translator.texto6[0]}n\n`
+          spotifyi += `	${translator.texto6[1]} ${searchTrack.title}\n`
+          spotifyi += `	${translator.texto6[2]} ${searchTrack.artists}\n`
+          spotifyi += `	${translator.texto6[3]} ${searchTrack.duration}\n`
+          spotifyi += `	${translator.texto6[4]} ${searchTrack.album.name}\n`                 
+          spotifyi += `	${translator.texto6[5]} ${searchTrack.album.releasedDate}\n\n`   
+          spotifyi += `${translator.texto6[6]}`
         await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": searchTrack.url, "sourceUrl": searchTrack.url}}}, {quoted: m});
         await conn.sendMessage(m.chat, {audio: dlspoty, fileName: `${searchTrack.title}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
 }  
   } catch (error) {
     console.error(error);
-    throw tradutor.texto7;
+    throw translator.texto7;
   }
 };
 handler.command = /^(spotifydl|spotifypro)$/i;

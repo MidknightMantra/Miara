@@ -4,9 +4,9 @@ import fetch from 'node-fetch';
 const cooldown = 1500000; // 25 minutos
 const handler = async (m, {usedPrefix, conn}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.rpg_adventure
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.rpg_adventure
 
   try {
     const ct = [
@@ -268,13 +268,13 @@ const handler = async (m, {usedPrefix, conn}) => {
         `https://api.worldbank.org/v2/country/${ct.getRandom()}?format=json`,
     );
     const kt = await ke.json();
-    // let imgr = flaaa.getRandom()
+    // let imgr = flamingTextEffects.getRandom()
     const user = global.db.data.users[m.sender];
     const timers = cooldown - (new Date() - user.lastadventure);
     if (user.health < 80) {
       return conn.reply(
           m.chat,
-          `_${htki} ${tradutor.texto1[0]} ${htka}_\n\n${tradutor.texto1[1]}`,
+          `_${htki} ${translator.texto1[0]} ${htka}_\n\n${translator.texto1[1]}`,
           m,
       );
     }
@@ -288,15 +288,15 @@ const handler = async (m, {usedPrefix, conn}) => {
     const rewards = reward(user);
     let text = `${tardutor.texto2[3]}  *» ${kt[1][0].name}*
 
-${cmenut}
-${cmenub} ${tradutor.texto3[0]} ${kt[1][0].id}
-${cmenub} ${tradutor.texto3[1]} ${kt[1][0].capitalCity}
-${cmenub} ${tradutor.texto3[2]} ${kt[1][0].longitude}
-${cmenub} ${tradutor.texto3[3]} ${kt[1][0].latitude}
-${cmenuf}
+${menuTop}
+${menuBody} ${translator.texto3[0]} ${kt[1][0].id}
+${menuBody} ${translator.texto3[1]} ${kt[1][0].capitalCity}
+${menuBody} ${translator.texto3[2]} ${kt[1][0].longitude}
+${menuBody} ${translator.texto3[3]} ${kt[1][0].latitude}
+${menuFooter}
 
-${tradutor.texto3[4]}
-${cmenua}`;
+${translator.texto3[4]}
+${menuArt}`;
 
     for (const lost in rewards.lost) {
       if (user[lost]) {
@@ -305,7 +305,7 @@ ${cmenua}`;
         if (total) text += `\n${global.rpg.emoticon(lost)} ${total}`;
       }
     }
-    text += tradutor.texto4;
+    text += translator.texto4;
     for (const rewardItem in rewards.reward) {
       if (rewardItem in user) {
         const total = rewards.reward[rewardItem].getRandom();
@@ -313,12 +313,12 @@ ${cmenua}`;
         if (total) text += `\n» ${global.rpg.emoticon(rewardItem)} ${total}`;
       }
     }
-    conn.reply(m.chat, `${htki} ${tradutor.texto5[0]} ${htka}\n\n${text}`, m);
+    conn.reply(m.chat, `${htki} ${translator.texto5[0]} ${htka}\n\n${text}`, m);
     user.lastadventure = new Date() * 1;
   } catch {
     conn.reply(
         m.chat,
-        `${tradutor.texto5[1]}`,
+        `${translator.texto5[1]}`,
         m,
     );
   }

@@ -1,33 +1,33 @@
 
 const handler = async (m, {isPrems, conn}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.rpg_cofre
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.rpg_cofre
 
   const time = global.db.data.users[m.sender].lastcofre + 86400000; // 36000000 10 Horas //86400000 24 Horas
-  if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) throw `${tradutor.texto1[0]} *${msToTime(time - new Date())}* ${tradutor.texto1[1]}`;
+  if (new Date - global.db.data.users[m.sender].lastcofre < 86400000) throw `${translator.texto1[0]} *${msToTime(time - new Date())}* ${translator.texto1[1]}`;
 
   const img = 'https://img.freepik.com/vector-gratis/cofre-monedas-oro-piedras-preciosas-cristales-trofeo_107791-7769.jpg?w=2000';
-  const dia = Math.floor(Math.random() * 30);
+  const day = Math.floor(Math.random() * 30);
   const tok = Math.floor(Math.random() * 10);
   const mystic = Math.floor(Math.random() * 4000);
   const expp = Math.floor(Math.random() * 5000);
 
-  global.db.data.users[m.sender].limit += dia;
+  global.db.data.users[m.sender].limit += day;
   global.db.data.users[m.sender].money += mystic;
   global.db.data.users[m.sender].joincount += tok;
   global.db.data.users[m.sender].exp += expp;
 
   const texto = `
-${tradutor.texto2[0]}
-${tradutor.texto2[1]}
-${tradutor.texto2[2]}
-║➢ *${dia} ${tradutor.texto2[3]}
-║➢ *${tok} ${tradutor.texto2[4]}
-║➢ *${mystic} ${tradutor.texto2[5]}
-║➢ *${expp} ${tradutor.texto2[6]}
-${tradutor.texto2[7]}`;
+${translator.texto2[0]}
+${translator.texto2[1]}
+${translator.texto2[2]}
+║➢ *${day} ${translator.texto2[3]}
+║➢ *${tok} ${translator.texto2[4]}
+║➢ *${mystic} ${translator.texto2[5]}
+║➢ *${expp} ${translator.texto2[6]}
+${translator.texto2[7]}`;
 
   const fkontak = {
     'key': {

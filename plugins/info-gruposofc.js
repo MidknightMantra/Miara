@@ -1,14 +1,14 @@
 const handler = async (m, {conn, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.info_groupsofc
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.info_groupsofc
 
   const doc = ['pdf', 'zip', 'vnd.openxmlformats-officedocument.presentationml.presentation', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'vnd.openxmlformats-officedocument.wordprocessingml.document'];
   const document = doc[Math.floor(Math.random() * doc.length)];
-  const text = `${tradutor.texto1[0]}
+  const text = `${translator.texto1[0]}
 
-${tradutor.texto1[1]}
+${translator.texto1[1]}
 1.- https://chat.whatsapp.com/LjJbmdO0qSDEKgB60qivZj
 
 2.- https://chat.whatsapp.com/DbXBmsydWBE1ZN3EoY0hRs
@@ -25,7 +25,7 @@ ${tradutor.texto1[1]}
   const buttonMessage= {
     'document': {url: `https://github.com/BrunoSobrino/TheMystic-Bot-MD`},
     'mimetype': `application/${document}`,
-    'fileName': `${tradutor.texto2}`,
+    'fileName': `${translator.texto2}`,
     'fileLength': 99999999999999,
     'pageCount': 200,
     'contextInfo': {
@@ -35,7 +35,7 @@ ${tradutor.texto1[1]}
         'mediaUrl': 'https://github.com/BrunoSobrino/TheMystic-Bot-MD',
         'mediaType': 2,
         'previewType': 'pdf',
-        'title': `${tradutor.texto3}`,
+        'title': `${translator.texto3}`,
         'body': wm,
         'thumbnail': imagen1,
         'sourceUrl': 'https://www.youtube.com/channel/UCSTDMKjbm-EmEovkygX-lCA'}},

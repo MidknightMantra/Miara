@@ -1,8 +1,8 @@
 const handler = async (m, {conn, text, participants}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.gc_fantasmas
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.gc_fantasmas
 
   const member = participants.map((u) => u.id);
   if (!text) {
@@ -26,8 +26,8 @@ const handler = async (m, {conn, text, participants}) => {
       }
     }
   }
-  if (total == 0) return conn.reply(m.chat, tradutor.texto1, m);
-  m.reply(`${tradutor.texto2[0]} ${await conn.getName(m.chat)}\n${tradutor.texto2[1]} ${sum}\n\n${tradutor.texto2[2]}\n${sider.map((v) => '  👉🏻 @' + v.replace(/@.+/, '')).join('\n')}\n\n${tradutor.texto2[3]}`, null, {mentions: sider});
+  if (total == 0) return conn.reply(m.chat, translator.texto1, m);
+  m.reply(`${translator.texto2[0]} ${await conn.getName(m.chat)}\n${translator.texto2[1]} ${sum}\n\n${translator.texto2[2]}\n${sider.map((v) => '  👉🏻 @' + v.replace(/@.+/, '')).join('\n')}\n\n${translator.texto2[3]}`, null, {mentions: sider});
 };
 handler.help = ['fantasmas'];
 handler.tags = ['group'];

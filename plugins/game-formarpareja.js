@@ -1,16 +1,16 @@
 const toM = (a) => '@' + a.split('@')[0];
 function handler(m, {groupMetadata}) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.fun_formarpareja
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.fun_formarpareja
 
   const ps = groupMetadata.participants.map((v) => v.id);
   const a = ps.getRandom();
   let b;
   do b = ps.getRandom();
   while (b === a);
-  m.reply(`*${toM(a)}, ${tradutor.texto1[0]} ${toM(b)}, ${tradutor.texto1[1]}`, null, {
+  m.reply(`*${toM(a)}, ${translator.texto1[0]} ${toM(b)}, ${translator.texto1[1]}`, null, {
     mentions: [a, b],
   });
 }

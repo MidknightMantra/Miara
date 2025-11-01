@@ -1,8 +1,8 @@
 const handler = async (m, { conn }) => {
   const datas = global;
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
-  const tradutor = _translate.plugins.owner_banchat;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+  const translator = _translate.plugins.owner_banchat;
 
   const normalizeJid = (jid) => jid.split('@')[0];
   const thisBot = conn.user.jid;
@@ -31,7 +31,7 @@ const handler = async (m, { conn }) => {
   }
 
   global.db.data.chats[m.chat].isBanned = true;
-  m.reply(tradutor.texto1 || '✅ Chat baneado exitosamente.');
+  m.reply(translator.texto1 || '✅ Chat baneado exitosamente.');
 };
 
 handler.help = ['banchat', 'banchat @bot'];

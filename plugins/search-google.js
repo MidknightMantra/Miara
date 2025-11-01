@@ -6,16 +6,16 @@ import axios from 'axios';
 let handler = async (m, { conn, command, args, usedPrefix }) => {
 
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.buscador_google
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.buscador_google
 
   const fetch = (await import('node-fetch')).default;
   const text = args.join` `;
-  if (!text) return conn.reply(m.chat, `${tradutor.texto1}`, m);
+  if (!text) return conn.reply(m.chat, `${translator.texto1}`, m);
 const url = 'https://google.com/search?q=' + encodeURIComponent(text);
 google({'query': text}).then(res => {
-let teks = `*${tradutor.texto2} _${text}_*\n\n${url}\n\n`
+let teks = `*${translator.texto2} _${text}_*\n\n${url}\n\n`
 for (let g of res) {
 teks += `_*${g.title}*_\n_${g.link}_\n_${g.snippet}_\n\n`
 } 

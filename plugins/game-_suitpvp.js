@@ -3,9 +3,9 @@
 const handler = (m) => m;
 handler.before = async function(m) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.game__suitpvp
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.game__suitpvp
 
   this.suit = this.suit ? this.suit : {};
   if (db.data.users[m.sender].suit < 0) db.data.users[m.sender].suit = 0;
@@ -15,7 +15,7 @@ handler.before = async function(m) {
     let tie = false;
     if (m.sender == room.p2 && /^(acc(ept)?|terima|aceptar|gas|aceptare?|nao|gamau|rechazar|ga(k.)?bisa)/i.test(m.text) && m.isGroup && room.status == 'wait') {
       if (/^(tolak|gamau|rechazar|ga(k.)?bisa)/i.test(m.text)) {
-        const textno = `*[❗] @${room.p2.split`@`[0]} ${tradutor.texto1}`;
+        const textno = `*[❗] @${room.p2.split`@`[0]} ${translator.texto1}`;
         m.reply(textno, null, {mentions: this.parseMention(textno)});
         delete this.suit[room.id];
         return !0;
@@ -23,27 +23,27 @@ handler.before = async function(m) {
       room.status = 'play';
       room.asal = m.chat;
       clearTimeout(room.waktu);
-      const textplay = `${tradutor.texto2} @${room.p.split`@`[0]} 𝚈 @${room.p2.split`@`[0]}\n\n${tradutor.texto3} wa.me/${conn.user.jid.split`@`[0]}*`;
+      const textplay = `${translator.texto2} @${room.p.split`@`[0]} 𝚈 @${room.p2.split`@`[0]}\n\n${translator.texto3} wa.me/${conn.user.jid.split`@`[0]}*`;
       m.reply(textplay, m.chat, {mentions: this.parseMention(textplay)});
-      const comienzop = `${tradutor.texto4[0]}
-${tradutor.texto4[1]}
-${tradutor.texto4[2]}
-${tradutor.texto4[3]}\n${tradutor.texto4[4]}${room.poin}${tradutor.texto4[5]} ${room.poin_lose}${tradutor.texto4[6]}
-${tradutor.texto4[7]}`;
-      const comienzop2 = `${tradutor.texto5[0]}
-${tradutor.texto5[1]}
-${tradutor.texto5[2]}
-${tradutor.texto5[3]}\n${tradutor.texto5[4]}${room.poin}${tradutor.texto5[5]} ${room.poin_lose}${tradutor.texto5[6]}
-${tradutor.texto5[7]}`;
+      const comienzop = `${translator.texto4[0]}
+${translator.texto4[1]}
+${translator.texto4[2]}
+${translator.texto4[3]}\n${translator.texto4[4]}${room.poin}${translator.texto4[5]} ${room.poin_lose}${translator.texto4[6]}
+${translator.texto4[7]}`;
+      const comienzop2 = `${translator.texto5[0]}
+${translator.texto5[1]}
+${translator.texto5[2]}
+${translator.texto5[3]}\n${translator.texto5[4]}${room.poin}${translator.texto5[5]} ${room.poin_lose}${translator.texto5[6]}
+${translator.texto5[7]}`;
 
       if (!room.pilih) this.sendMessage(room.p, {text: comienzop}, {quoted: m});
       if (!room.pilih2) this.sendMessage(room.p2, {text: comienzop2}, {quoted: m});
       room.waktu_milih = setTimeout(() => {
-        const iniciativa = tradutor.texto6;
+        const iniciativa = translator.texto6;
         if (!room.pilih && !room.pilih2) this.sendMessage(m.chat, {text: iniciativa}, {quoted: m});
         else if (!room.pilih || !room.pilih2) {
           win = !room.pilih ? room.p2 : room.p;
-          const textnull = `*[❗] @${(room.pilih ? room.p2 : room.p).split`@`[0]} ${tradutor.texto7}`;
+          const textnull = `*[❗] @${(room.pilih ? room.p2 : room.p).split`@`[0]} ${translator.texto7}`;
           this.sendMessage(m.chat, {text: textnull}, {quoted: m}, {mentions: this.parseMention(textnull)});
           db.data.users[win == room.p ? room.p : room.p2].exp += room.poin;
           db.data.users[win == room.p ? room.p : room.p2].exp += room.poin_bot;

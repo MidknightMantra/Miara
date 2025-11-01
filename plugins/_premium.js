@@ -5,9 +5,9 @@ const handler = (m) => m;
 
 export async function all(m) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins._premium
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins._premium
 
   for (const user of Object.values(global.db.data.users)) {
     if (user.premiumTime != 0 && user.premium) {
@@ -16,7 +16,7 @@ export async function all(m) {
         user.premium = false;
         const JID = Object.keys(global.db.data.users).find((key) => global.db.data.users[key] === user);
         const usuarioJid = JID.split`@`[0];
-        const textoo = `*[❗] @${usuarioJid} ${tradutor.texto1}`;
+        const textoo = `*[❗] @${usuarioJid} ${translator.texto1}`;
         await this.sendMessage(JID, {text: textoo, mentions: [JID]}, {quoted: ''});
       }
     }

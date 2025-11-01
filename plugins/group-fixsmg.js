@@ -5,12 +5,12 @@ import path from 'path';
 
 const handler = async (m, { conn, usedPrefix }) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.fix_esperando_mensage
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.fix_esperando_mensage
 
   if (global.conn.user.jid !== conn.user.jid) {
-    return conn.sendMessage(m.chat, {text: tradutor.texto1}, {quoted: m});
+    return conn.sendMessage(m.chat, {text: translator.texto1}, {quoted: m});
   }
   const chatId = m.isGroup ? [m.chat, m.sender] : [m.sender];
   const sessionPath = './MysticSession/';
@@ -27,15 +27,15 @@ const handler = async (m, { conn, usedPrefix }) => {
       }
     }
     if (filesDeleted === 0) {
-      await conn.sendMessage(m.chat, {text: tradutor.texto2}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: translator.texto2}, {quoted: m});
     } else {
-      await conn.sendMessage(m.chat, {text: `${tradutor.texto3[0]} ${filesDeleted} ${tradutor.texto3[1]}`}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: `${translator.texto3[0]} ${filesDeleted} ${translator.texto3[1]}`}, {quoted: m});
     }
   } catch (err) {
-    console.error(tradutor.texto4, err);
-    await conn.sendMessage(m.chat, {text: tradutor.texto5}, {quoted: m});
+    console.error(translator.texto4, err);
+    await conn.sendMessage(m.chat, {text: translator.texto5}, {quoted: m});
   }
-  await conn.sendMessage(m.chat, {text: `${tradutor.texto6} \n${usedPrefix}s\n${usedPrefix}s\n${usedPrefix}s`}, {quoted: m});
+  await conn.sendMessage(m.chat, {text: `${translator.texto6} \n${usedPrefix}s\n${usedPrefix}s\n${usedPrefix}s`}, {quoted: m});
 };
 
 handler.help = ['ds'];

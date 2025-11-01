@@ -5,14 +5,14 @@ const timeout = 60000;
 const poin = Math.floor(Math.random() * (2000 - 500 + 1)) + 500;
 const handler = async (m, {conn, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.game_cancion
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.game_cancion
 
   conn.tebaklagu = conn.tebaklagu ? conn.tebaklagu : {};
   const id = m.chat;
   if (id in conn.tebaklagu) {
-    conn.reply(m.chat, tradutor.texto1, conn.tebaklagu[id][0]);
+    conn.reply(m.chat, translator.texto1, conn.tebaklagu[id][0]);
     throw false;
   }
   
@@ -34,7 +34,7 @@ const handler = async (m, {conn, usedPrefix}) => {
     await m.reply(caption),
     json, poin,
     setTimeout(() => {
-      if (conn.tebaklagu[id]) conn.reply(m.chat, `⏰ Se acabó el tiempo!\n\n🎵 La respuesta era: *${json.jawaban}*`, conn.tebaklagu[id][0]);
+      if (conn.tebaklagu[id]) conn.reply(m.chat, `⏰ Se acabó el time!\n\n🎵 La respuesta era: *${json.jawaban}*`, conn.tebaklagu[id][0]);
       delete conn.tebaklagu[id];
     }, timeout),
   ];

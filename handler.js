@@ -513,7 +513,7 @@ export async function handler(chatUpdate) {
             nome: null,
             username: null,
             id: null, // Id do Jogador
-            idioma: 'pt-br',
+            language: 'pt-br',
             casa: {
               id: null, // id do grupo ou seja do planeta casa
               planeta: null,
@@ -658,9 +658,9 @@ export async function handler(chatUpdate) {
       console.error(e);
     }
 
-    const idioma = global.db.data.users[m.sender]?.language || global.defaultLenguaje; // is null? np the operator ?? fix that (i hope)
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-    const tradutor = _translate.handler.handler
+    const language = global.db.data.users[m.sender]?.language || global.defaultLanguage;
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+    const translator = _translate.handler.handler
 
     if (opts['nyimak']) {
       return;
@@ -823,10 +823,10 @@ export async function handler(chatUpdate) {
 
             if (user.bannedMessageCount < 3) {
               const messageNumber = user.bannedMessageCount + 1;
-              const messageText = `${tradutor.texto1[0]}
-${tradutor.texto1[1]} ${messageNumber}/3
- ${user.bannedReason ? `${tradutor.texto1[2]} ${user.bannedReason}` : `${tradutor.texto1[3]}`}
- ${tradutor.texto1[4]}`.trim();
+              const messageText = `${translator.texto1[0]}
+${translator.texto1[1]} ${messageNumber}/3
+ ${user.bannedReason ? `${translator.texto1[2]} ${user.bannedReason}` : `${translator.texto1[3]}`}
+ ${translator.texto1[4]}`.trim();
               m.reply(messageText);
               user.bannedMessageCount++;
             } else if (user.bannedMessageCount === 3) {
@@ -907,11 +907,11 @@ ${tradutor.texto1[1]} ${messageNumber}/3
           m.exp += xp;
         }
         if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-          mconn.conn.reply(m.chat, `${tradutor.texto2} _${usedPrefix}buyall_`, m);
+          mconn.conn.reply(m.chat, `${translator.texto2} _${usedPrefix}buyall_`, m);
           continue;
         }
         if (plugin.level > _user.level) {
-          mconn.conn.reply(m.chat, `${tradutor.texto3[0]} ${plugin.level} ${tradutor.texto3[1]} ${_user.level}, ${tradutor.texto3[2]} ${usedPrefix}lvl ${tradutor.texto3[3]}`, m);
+          mconn.conn.reply(m.chat, `${translator.texto3[0]} ${plugin.level} ${translator.texto3[1]} ${_user.level}, ${translator.texto3[2]} ${usedPrefix}lvl ${translator.texto3[3]}`, m);
           continue;
         }
         const chatPrim = global.db.data.chats[m.chat] || {};
@@ -986,7 +986,7 @@ ${tradutor.texto1[1]} ${messageNumber}/3
             }
           }
           if (m.limit) {
-            m.reply(`${tradutor.texto4[0]} ` + +m.limit + ` ${tradutor.texto4[1]}`);
+            m.reply(`${translator.texto4[0]} ` + +m.limit + ` ${translator.texto4[1]}`);
           }
         }
         break;
@@ -1058,9 +1058,9 @@ ${tradutor.texto1[1]} ${messageNumber}/3
  * @param {import("baileys").BaileysEventMap<unknown>['group-participants.update']} groupsUpdate
  */
 export async function participantsUpdate({ id, participants, action }) {
-  const idioma = global?.db?.data?.chats[id]?.language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.handler.participantsUpdate
+  const language = global?.db?.data?.chats[id]?.language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.handler.participantsUpdate
 
   const m = mconn
   if (opts['self']) return;
@@ -1082,8 +1082,8 @@ export async function participantsUpdate({ id, participants, action }) {
            const userPrefix = antiArab.some((prefix) => user.startsWith(prefix));
            const botTt2 = groupMetadata?.participants?.find((u) => m?.conn?.decodeJid(u.id) == m?.conn?.user?.jid) || {};
            const isBotAdminNn = botTt2?.admin === 'admin' || false;
-           text = (action === 'add' ? (chat.sWelcome || tradutor.texto1 || conn.welcome || 'Welcome, @user!').replace('@subject', await m?.conn?.getName(id)).replace('@desc', groupMetadata?.desc?.toString() || '*WITHOUT DESCRIPTION*').replace('@user', '@' + user.split('@')[0]) :
-            (chat.sBye || tradutor.texto2 || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0]);
+           text = (action === 'add' ? (chat.sWelcome || translator.texto1 || conn.welcome || 'Welcome, @user!').replace('@subject', await m?.conn?.getName(id)).replace('@desc', groupMetadata?.desc?.toString() || '*WITHOUT DESCRIPTION*').replace('@user', '@' + user.split('@')[0]) :
+            (chat.sBye || translator.texto2 || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0]);
             if (userPrefix && chat.antiArab && botTt.restrict && isBotAdminNn && action === 'add') {
            const responseb = await m.conn.groupParticipantsUpdate(id, [user], 'remove');
             if (responseb[0].status === '404') return;
@@ -1101,12 +1101,12 @@ export async function participantsUpdate({ id, participants, action }) {
     case 'promote':
     case 'daradmin':
     case 'darpoder':
-      text = (chat.sPromote || tradutor.texto3 || conn?.spromote || '@user ```is now Admin```');
+      text = (chat.sPromote || translator.texto3 || conn?.spromote || '@user ```is now Admin```');
     case 'demote':
     case 'quitarpoder':
     case 'quitaradmin':
       if (!text) {
-        text = (chat?.sDemote || tradutor.texto4 || conn?.sdemote || '@user ```is no longer Admin```');
+        text = (chat?.sDemote || translator.texto4 || conn?.sdemote || '@user ```is no longer Admin```');
       }
       text = text.replace('@user', '@' + participants[0].split('@')[0]);
       if (chat.detect && !chat?.isBanned) {
@@ -1122,9 +1122,9 @@ export async function participantsUpdate({ id, participants, action }) {
  */
 
 export async function groupsUpdate(groupsUpdate) {
-  const idioma = global.db.data.chats[groupsUpdate[0].id]?.language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.handler.participantsUpdate
+  const language = global.db.data.chats[groupsUpdate[0].id]?.language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.handler.participantsUpdate
 
   if (opts['self']) {
     return;
@@ -1137,10 +1137,10 @@ export async function groupsUpdate(groupsUpdate) {
     const chats = global.db.data.chats[id]; 
     let text = '';
     if (!chats?.detect) continue;
-    if (groupUpdate?.desc) text = (chats?.sDesc || tradutor.texto5 || conn?.sDesc || '```Description has been changed to```\n@desc').replace('@desc', groupUpdate.desc);
-    if (groupUpdate?.subject) text = (chats?.sSubject || tradutor.texto6 || conn?.sSubject || '```Subject has been changed to```\n@subject').replace('@subject', groupUpdate.subject);
-    if (groupUpdate?.icon) text = (chats?.sIcon || tradutor.texto7 || conn?.sIcon || '```Icon has been changed to```').replace('@icon', groupUpdate.icon);
-    if (groupUpdate?.revoke) text = (chats?.sRevoke || tradutor.texto8 || conn?.sRevoke || '```Group link has been changed to```\n@revoke').replace('@revoke', groupUpdate.revoke);
+    if (groupUpdate?.desc) text = (chats?.sDesc || translator.texto5 || conn?.sDesc || '```Description has been changed to```\n@desc').replace('@desc', groupUpdate.desc);
+    if (groupUpdate?.subject) text = (chats?.sSubject || translator.texto6 || conn?.sSubject || '```Subject has been changed to```\n@subject').replace('@subject', groupUpdate.subject);
+    if (groupUpdate?.icon) text = (chats?.sIcon || translator.texto7 || conn?.sIcon || '```Icon has been changed to```').replace('@icon', groupUpdate.icon);
+    if (groupUpdate?.revoke) text = (chats?.sRevoke || translator.texto8 || conn?.sRevoke || '```Group link has been changed to```\n@revoke').replace('@revoke', groupUpdate.revoke);
     if (!text) continue;
     await mconn?.conn?.sendMessage(id, { text, mentions: mconn?.conn?.parseMention(text) });
   }
@@ -1152,7 +1152,7 @@ export async function callUpdate(callUpdate) {
   for (const nk of callUpdate) {
     if (nk.isGroup == false) {
       if (nk.status == 'offer') {
-        const callmsg = await mconn?.conn?.reply(nk.from, `Hola *@${nk.from.split('@')[0]}*, las ${nk.isVideo ? 'videollamadas' : 'llamadas'} are not allowed, you will be blocked.\n-\nIf you called by accident, contact my creator so they can unblock you!`, false, { mentions: [nk.from] });
+        const callmsg = await mconn?.conn?.reply(nk.from, `Hello *@${nk.from.split('@')[0]}*, ${nk.isVideo ? 'video calls' : 'calls'} are not allowed, you will be blocked.\n-\nIf you called by accident, contact my creator so they can unblock you!`, false, { mentions: [nk.from] });
         // let data = global.owner.filter(([id, isCreator]) => id && isCreator)
         // await this.sendContact(nk.from, data.map(([id, name]) => [id, name]), false, { quoted: callmsg })
         const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑;;;\nFN:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nORG:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nTITLE:\nitem1.TEL;waid=5219992095479:+521 999 209 5479\nitem1.X-ABLabel:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nX-WA-BIZ-DESCRIPTION:[❗] ᴄᴏɴᴛᴀᴄᴛᴀ ᴀ ᴇsᴛᴇ ɴᴜᴍ ᴘᴀʀᴀ ᴄᴏsᴀs ɪᴍᴘᴏʀᴛᴀɴᴛᴇs.\nX-WA-BIZ-NAME:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nEND:VCARD`;
@@ -1166,9 +1166,9 @@ export async function callUpdate(callUpdate) {
 export async function deleteUpdate(message) {
   const datas = global
   const id = message?.participant 
-  const idioma = datas.db.data.users[id]?.language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.handler.deleteUpdate
+  const language = datas.db.data.users[id]?.language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.handler.deleteUpdate
 
   let d = new Date(new Date + 3600000)
   let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -1181,12 +1181,12 @@ export async function deleteUpdate(message) {
     if (!chat?.antidelete) return
     if (!msg) return
     if (!msg?.isGroup) return
-    const antideleteMessage = `${tradutor.texto1[0]}
-${tradutor.texto1[1]} @${participant.split`@`[0]}
-${tradutor.texto1[2]} ${time}
-${tradutor.texto1[3]} ${date}\n
-${tradutor.texto1[4]}
-${tradutor.texto1[5]}`.trim();
+    const antideleteMessage = `${translator.texto1[0]}
+${translator.texto1[1]} @${participant.split`@`[0]}
+${translator.texto1[2]} ${time}
+${translator.texto1[3]} ${date}\n
+${translator.texto1[4]}
+${translator.texto1[5]}`.trim();
     await mconn.conn.sendMessage(msg.chat, { text: antideleteMessage, mentions: [participant] }, { quoted: msg })
     mconn.conn.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
   } catch (e) {
@@ -1196,24 +1196,24 @@ ${tradutor.texto1[5]}`.trim();
 
 global.dfail = (type, m, conn) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.handler.dfail
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.handler.dfail
 
   const msg = {
-    rowner: tradutor.texto1,
-    owner: tradutor.texto2,
-    mods: tradutor.texto3,
-    premium: tradutor.texto4,
-    group: tradutor.texto5,
-    private: tradutor.texto6,
-    admin: tradutor.texto7,
-    botAdmin: tradutor.texto8,
-    unreg: tradutor.texto9,
-    restrict: tradutor.texto10,
+    rowner: translator.texto1,
+    owner: translator.texto2,
+    mods: translator.texto3,
+    premium: translator.texto4,
+    group: translator.texto5,
+    private: translator.texto6,
+    admin: translator.texto7,
+    botAdmin: translator.texto8,
+    unreg: translator.texto9,
+    restrict: translator.texto10,
   }[type];
   const aa = { quoted: m, userJid: conn.user.jid };
-  const prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: tradutor.texto11[0], body: tradutor.texto11[1], thumbnail: imagen1, sourceUrl: tradutor.texto11[2] } } } }, aa);
+  const prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: translator.texto11[0], body: translator.texto11[1], thumbnail: imagen1, sourceUrl: translator.texto11[2] } } } }, aa);
 
   const chatPrim2 = global.db.data.chats[m.chat] || {};
   const normalizeJid2 = (jid) => jid?.replace(/[^0-9]/g, '');

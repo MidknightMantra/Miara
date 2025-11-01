@@ -3,16 +3,16 @@ import {createHash} from 'crypto';
 
 const handler = async function(m, {args}) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.rpg_unreg
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.rpg_unreg
 
-  if (!args[0]) throw tradutor.texto1;
+  if (!args[0]) throw translator.texto1;
   const user = global.db.data.users[m.sender];
   const sn = createHash('md5').update(m.sender).digest('hex');
-  if (args[0] !== sn) throw tradutor.texto2;
+  if (args[0] !== sn) throw translator.texto2;
   user.registered = false;
-  m.reply(tradutor.texto3);
+  m.reply(translator.texto3);
 };
 handler.help = ['unreg <numero de serie>'];
 handler.tags = ['xp'];

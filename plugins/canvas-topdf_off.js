@@ -6,7 +6,7 @@ const handler = async (m, { conn, usedPrefix, command, text }) => {
     const mime = (q.msg || q).mimetype || q.mediaType || '';
     if (/image/g.test(mime)) {
         const img = await q.download?.();
-        if (!img) throw `${tradutor.texto1} ${usedPrefix + command}*`;
+        if (!img) throw `${translator.texto1} ${usedPrefix + command}*`;
 
         let pdfId;
         let isNewPdf = false;

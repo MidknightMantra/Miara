@@ -4,16 +4,16 @@ import fetch from 'node-fetch';
 
 const handler = async (m, {conn, text, command, args, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.fun_simi
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.fun_simi
   
-  if (!text) throw `${tradutor.texto1} ${usedPrefix + command} Hola Bot*`;
+  if (!text) throw `${translator.texto1} ${usedPrefix + command} Hola Bot*`;
   try {
       const resSimi = await simitalk(text);
       conn.sendMessage(m.chat, { text: resSimi.resultado.simsimi }, { quoted: m });
   } catch {
-      throw tradutor.texto2;
+      throw translator.texto2;
   }
 };
 handler.help = ['simi', 'bot'].map((v) => v + ' <teks>');

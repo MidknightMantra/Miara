@@ -4,24 +4,24 @@
 
 const handler = async (m, {args, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.game_slot
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.game_slot
 
   const fa = `
-${tradutor.texto1} 
+${translator.texto1} 
 
-${tradutor.texto2} 
+${translator.texto2} 
 *${usedPrefix + command} 100*`.trim();
   if (!args[0]) throw fa;
   if (isNaN(args[0])) throw fa;
   const apuesta = parseInt(args[0]);
   const users = global.db.data.users[m.sender];
   const time = users.lastslot + 10000;
-  if (new Date - users.lastslot < 10000) throw `${tradutor.texto3[0]} ${msToTime(time - new Date())} ${tradutor.texto3[1]}`;
-  if (apuesta < 100) throw tradutor.texto4;
+  if (new Date - users.lastslot < 10000) throw `${translator.texto3[0]} ${msToTime(time - new Date())} ${translator.texto3[1]}`;
+  if (apuesta < 100) throw translator.texto4;
   if (users.exp < apuesta) {
-    throw tradutor.texto5;
+    throw translator.texto5;
   }
   const emojis = ['🐋', '🐉', '🕊️'];
   let a = Math.floor(Math.random() * emojis.length);
@@ -47,13 +47,13 @@ ${tradutor.texto2}
   }
   let end;
   if (a == b && b == c) {
-    end = `${tradutor.texto6} +${apuesta + apuesta} 𝚇𝙿*`;
+    end = `${translator.texto6} +${apuesta + apuesta} 𝚇𝙿*`;
     users.exp += apuesta;
   } else if (a == b || a == c || b == c) {
-    end = `${tradutor.texto7}`;
+    end = `${translator.texto7}`;
     users.exp += 10;
   } else {
-    end = `${tradutor.texto8} -${apuesta} 𝚇𝙿*`;
+    end = `${translator.texto8} -${apuesta} 𝚇𝙿*`;
     users.exp -= apuesta;
   }
   users.lastslot = new Date * 1;

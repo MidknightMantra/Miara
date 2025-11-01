@@ -3,9 +3,9 @@ import fetch from 'node-fetch';
 
 const handler = async (m, {isPrems, conn}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.rpg_daily
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.rpg_daily
 
   const fkontak = m //{'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
   const mystic = './src/assets/images/menu/languages/es/menu.png';
@@ -43,7 +43,7 @@ const handler = async (m, {isPrems, conn}) => {
   };
 
   const time = user.lastclaim + 7200000; // 2 Horas 7200000
-  if (new Date - user.lastclaim < 7200000) return await conn.reply(m.chat, `${tradutor.texto1[0]} *${msToTime(time - new Date())}* ${tradutor.texto1[1]}`, fkontak, m);
+  if (new Date - user.lastclaim < 7200000) return await conn.reply(m.chat, `${translator.texto1[0]} *${msToTime(time - new Date())}* ${translator.texto1[1]}`, fkontak, m);
   // await conn.sendButton(m.chat, `𝙔𝘼 𝙍𝙀𝘾𝙇𝘼𝙈𝘼𝙎𝙏𝙀 𝙏𝙐 𝙍𝙀𝙂𝘼𝙇𝙊 🎁\n𝙑𝙐𝙀𝙇𝙑𝙀 𝙀𝙉 *${msToTime(time - new Date())}* 𝙋𝘼𝙍𝘼 𝙑𝙊𝙇𝙑𝙀𝙍 𝘼 𝙍𝙀𝘾𝙇𝘼𝙈𝘼𝙍`, wm, null, [['𝗠 𝗘 𝗡 𝗨 ☘️', '/menu']], fkontak, m)
   let texto = '';
   for (const reward of Object.keys(recompensas)) {
@@ -51,11 +51,11 @@ const handler = async (m, {isPrems, conn}) => {
     user[reward] += recompensas[reward];
     texto += `*+${recompensas[reward]}* ${global.rpgshop.emoticon(reward)}\n┃ `;
   }
-  const text = `${tradutor.texto3[0]}
-${tradutor.texto3[1]}
-┃ *${premium ? tradutor.texto3[2] : tradutor.texto3[3]}*
+  const text = `${translator.texto3[0]}
+${translator.texto3[1]}
+┃ *${premium ? translator.texto3[2] : translator.texto3[3]}*
 ┃ ${texto}
-${tradutor.texto3[4]} ${premium ? '✅' : '❌'}\n${wm}`;
+${translator.texto3[4]} ${premium ? '✅' : '❌'}\n${wm}`;
   const img = './src/assets/images/menu/languages/es/menu.png';
   await conn.sendFile(m.chat, img, 'mystic.jpg', text, fkontak);
   // await conn.sendButton(m.chat, text, texto + `\n\n🎟️ 𝗣 𝗥 𝗘 𝗠 𝗜 𝗨 𝗠 ⇢ ${premium ? '✅' : '❌'}\n${wm}`, img, [['⛰️ 𝘼𝘽𝙍𝙄𝙍 𝘾𝙊𝙁𝙍𝙀 | 𝘾𝙊𝙁𝙁𝙀𝙍 ⛰️', '/cofre'], ['𝙑𝙤𝙡𝙫𝙚𝙧 𝙖𝙡 𝙈𝙚𝙣𝙪́ | 𝘽𝙖𝙘𝙠 𝙩𝙤 𝙈𝙚𝙣𝙪 ☘️', '/menu']], m, dos.getRandom())

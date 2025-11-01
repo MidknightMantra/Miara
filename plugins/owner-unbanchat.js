@@ -1,12 +1,12 @@
 
 const handler = async (m) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.owner_unbanchat
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.owner_unbanchat
 
   global.db.data.chats[m.chat].isBanned = false;
-  m.reply(tradutor.texto1);
+  m.reply(translator.texto1);
 };
 handler.help = ['unbanchat'];
 handler.tags = ['owner'];

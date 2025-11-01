@@ -3,18 +3,18 @@ import axios from "axios"
 import uploadImage from "../src/libraries/uploadImage.js"
 
 const handler = async (m, { conn, usedPrefix, command }) => {
-  const idioma = global.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.herramientas_hd
+  const language = global.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.herramientas_hd
 
   try {
     const q = m.quoted ? m.quoted : m
     const mime = (q.msg || q).mimetype || q.mediaType || ""
 
-    if (!mime) throw `${tradutor.texto1} ${usedPrefix + command}*`
-    if (!/image\/(jpe?g|png)/.test(mime)) throw `${tradutor.texto2[0]} (${mime}) ${tradutor.texto2[1]}`
+    if (!mime) throw `${translator.texto1} ${usedPrefix + command}*`
+    if (!/image\/(jpe?g|png)/.test(mime)) throw `${translator.texto2[0]} (${mime}) ${translator.texto2[1]}`
 
-    m.reply(tradutor.texto3)
+    m.reply(translator.texto3)
 
     const img = await q.download()
     const fileUrl = await uploadImage(img)
@@ -22,7 +22,7 @@ const handler = async (m, { conn, usedPrefix, command }) => {
 
     await conn.sendMessage(m.chat, { image: banner }, { quoted: m })
   } catch (e) {
-    throw tradutor.texto4 + e
+    throw translator.texto4 + e
   }
 }
 

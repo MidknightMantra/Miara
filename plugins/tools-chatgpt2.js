@@ -4,9 +4,9 @@ import fs from 'fs';
 let handler = async (m, { conn, text, command }) => {
 
     const datas = global;
-    const idioma = datas.db.data.users[m.sender]?.language || global.defaultLenguaje;
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
-    const tradutor = _translate.plugins.herramientas_chatgpt;  
+    const language = datas.db.data.users[m.sender]?.language || global.defaultLanguage;
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+    const translator = _translate.plugins.herramientas_chatgpt;  
   
   try {  
 
@@ -18,7 +18,7 @@ let handler = async (m, { conn, text, command }) => {
       return m.reply('🗑️ Memoria de conversación borrada exitosamente.\n\nYa no recordaré nuestras conversaciones anteriores.');
     }
       
-    if (!text) return m.reply(tradutor.texto1[0]);
+    if (!text) return m.reply(translator.texto1[0]);
 
     const model = await axios.get("https://raw.githubusercontent.com/Skidy89/chat-gpt-jailbreak/refs/heads/main/Text.txt");
     const context = `${model.data}`.trim();
@@ -27,7 +27,7 @@ let handler = async (m, { conn, text, command }) => {
     m.reply(result);
   } catch (error) {
     console.error('[❌ ERROR GENERAL]', error);
-    m.reply(tradutor?.texto4);
+    m.reply(translator?.texto4);
   }
 };
 

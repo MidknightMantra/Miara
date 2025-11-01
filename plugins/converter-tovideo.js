@@ -3,13 +3,13 @@ import {ffmpeg} from '../src/libraries/converter.js';
 
 const handler = async (m, {conn, usedPrefix, command}) => {
  const datas = global
- const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
- const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
- const tradutor = _translate.plugins.convertidor_tovideo
+ const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+ const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+ const translator = _translate.plugins.convertidor_tovideo
 
- if (!m.quoted) throw `*${tradutor.texto1} ${usedPrefix + command}*`;
+ if (!m.quoted) throw `*${translator.texto1} ${usedPrefix + command}*`;
  const mime = m.quoted.mimetype || '';
- if (!/webp/.test(mime)) throw `*${tradutor.texto2} ${usedPrefix + command}*`;
+ if (!/webp/.test(mime)) throw `*${translator.texto2} ${usedPrefix + command}*`;
  const media = await m.quoted.download();
  let out = Buffer.alloc(0);
  if (/webp/.test(mime)) {

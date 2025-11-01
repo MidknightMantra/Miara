@@ -2,9 +2,9 @@ import ws from 'ws';
 
 async function handler(m, { conn: _envio, usedPrefix }) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.mipilot_serbot_info
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.mipilot_serbot_info
 
   const users = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
   function convertirMsADiasHorasMinutosSegundos(ms) {
@@ -19,32 +19,32 @@ async function handler(m, { conn: _envio, usedPrefix }) {
 
   var resultado = "";
   if (días !== 0) {
-    resultado += días + tradutor.texto3[0];
+    resultado += días + translator.texto3[0];
   }
   if (horas !== 0) {
-    resultado += horas + tradutor.texto3[1];
+    resultado += horas + translator.texto3[1];
   }
   if (minutos !== 0) {
-    resultado += minutos + tradutor.texto3[2];
+    resultado += minutos + translator.texto3[2];
   }
   if (segundos !== 0) {
-    resultado += segundos + tradutor.texto3[3];
+    resultado += segundos + translator.texto3[3];
   }
 
   return resultado;
 }
 
-  const message = users.map((v, index) => `*${index + 1}.-* @${v.user.jid.replace(/[^0-9]/g, '')}\n${tradutor.texto4[0]} wa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${usedPrefix}estado\n${tradutor.texto4[1]} ${v.user.name || '-'}\n${tradutor.texto4[2]} ${ v.uptime ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) : "Desconocido"}`).join('\n\n');
-  const replyMessage = message.length === 0 ? tradutor.texto1 : message;
+  const message = users.map((v, index) => `*${index + 1}.-* @${v.user.jid.replace(/[^0-9]/g, '')}\n${translator.texto4[0]} wa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${usedPrefix}estado\n${translator.texto4[1]} ${v.user.name || '-'}\n${translator.texto4[2]} ${ v.uptime ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) : "Desconocido"}`).join('\n\n');
+  const replyMessage = message.length === 0 ? translator.texto1 : message;
   const totalUsers = users.length;
   const responseMessage = `
-${tradutor.texto2[0]}
+${translator.texto2[0]}
 
-${tradutor.texto2[1]}
+${translator.texto2[1]}
 
-${tradutor.texto2[2]}
+${translator.texto2[2]}
 
-${tradutor.texto2[3]} ${totalUsers || '0'}
+${translator.texto2[3]} ${totalUsers || '0'}
 
 ${replyMessage.trim()}`.trim();
 

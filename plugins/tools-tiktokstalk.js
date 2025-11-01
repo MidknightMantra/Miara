@@ -3,11 +3,11 @@ import fs from 'fs';
 
 const handler = async (m, { conn, text }) => {
  const datas = global;
- const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
- const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
- const tradutor = _translate.plugins.downloader_tiktokstalk;
+ const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+ const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+ const translator = _translate.plugins.downloader_tiktokstalk;
 
- if (!text) return conn.reply(m.chat, tradutor.texto1, m);  
+ if (!text) return conn.reply(m.chat, translator.texto1, m);  
  try {
  const response = await axios.get("https://delirius-apiofc.vercel.app/tools/tiktokstalk", {
   params: { q: text }
@@ -17,17 +17,17 @@ const handler = async (m, { conn, text }) => {
  if (data.status && data.result) {
  const user = data.result.users;
  const stats = data.result.stats;
- const body = `${tradutor.texto2[0]} ${user.username || '-'}\n${tradutor.texto2[1]} ${user.nickname || '-'}\n${tradutor.texto2[2]} ${stats.followerCount || '-'}\n${tradutor.texto2[3]} ${stats.followingCount || '-'}\n${tradutor.texto2[4]} ${stats.likeCount || '-'}\n${tradutor.texto2[5]} ${stats.videoCount || '-'}\n${tradutor.texto2[6]} ${user.signature || '-'}`.trim();
+ const body = `${translator.texto2[0]} ${user.username || '-'}\n${translator.texto2[1]} ${user.nickname || '-'}\n${translator.texto2[2]} ${stats.followerCount || '-'}\n${translator.texto2[3]} ${stats.followingCount || '-'}\n${translator.texto2[4]} ${stats.likeCount || '-'}\n${translator.texto2[5]} ${stats.videoCount || '-'}\n${translator.texto2[6]} ${user.signature || '-'}`.trim();
  const imageUrl = user.avatarLarger;
  const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
  const imageBuffer = Buffer.from(imageResponse.data, "binary");
 
  await conn.sendFile(m.chat, imageBuffer, 'profile.jpg', body, m);
  } else {
- throw tradutor.texto3; 
+ throw translator.texto3; 
   }
  } catch (e) {
- throw tradutor.texto3;  
+ throw translator.texto3;  
  }
 };
 

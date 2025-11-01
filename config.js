@@ -9,15 +9,10 @@ global.botnumber = "";
 global.confirmCode = "";
 global.authFile = `MiaraSession`;
 
-// Change to true if the bot responds to its own commands with commands.
-// Change to false if you use the bot from the same bot number.
-// Temporary fix for m.isBaileys marked as false
 global.isBaileysFail = false;
 
-// Default language
-global.defaultLenguaje = 'en';
+global.defaultLanguage = 'en';
 
-// Bot owners
 global.owner = [
   ['254758925674', '👑 Owner 👑', true],
   ['254732647560', '👑 Co-Owner 👑', true],
@@ -27,10 +22,7 @@ global.owner = [
 global.suittag = ['254758925674', '254732647560', '254743032398'];
 global.prems = [];
 
-// Base REST API
 global.BASE_API_DELIRIUS = "https://delirius-apiofc.vercel.app";
-
-// Watermark and branding
 global.packname = 'Sticker';
 global.author = 'MidknightMantra';
 global.wm = 'Miara';
@@ -38,8 +30,6 @@ global.titulowm = 'Miara';
 global.titulowm2 = `Miara`;
 global.igfg = 'Miara';
 global.wait = '*_[ ⏳ ] Loading..._*';
-
-// Menu images by language
 global.imagen1 = fs.readFileSync('./src/assets/images/menu/languages/es/menu.png');
 global.imagen2 = fs.readFileSync('./src/assets/images/menu/languages/pt/menu.png');
 global.imagen3 = fs.readFileSync('./src/assets/images/menu/languages/fr/menu.png');
@@ -48,16 +38,14 @@ global.imagen5 = fs.readFileSync('./src/assets/images/menu/languages/ru/menu.png
 
 global.mods = [];
 
-// ******** Time Settings ********
 global.d = new Date(new Date + 3600000);
-global.locale = 'es';
-global.dia = d.toLocaleDateString(locale, { weekday: 'long' });
-global.fecha = d.toLocaleDateString('es', { day: 'numeric', month: 'numeric', year: 'numeric' });
-global.mes = d.toLocaleDateString('es', { month: 'long' });
-global.año = d.toLocaleDateString('es', { year: 'numeric' });
-global.tiempo = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-// ******************************
-global.wm2 = `${dia} ${fecha}\nMiara`;
+global.locale = 'en';
+global.day = d.toLocaleDateString(locale, { weekday: 'long' });
+global.date = d.toLocaleDateString('en', { day: 'numeric', month: 'numeric', year: 'numeric' });
+global.month = d.toLocaleDateString('en', { month: 'long' });
+global.year = d.toLocaleDateString('en', { year: 'numeric' });
+global.time = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+global.wm2 = `${day} ${date}\nMiara`;
 global.gt = 'Miara';
 global.miaraBot = 'Miara';
 global.channel = 'https://whatsapp.com/channel/0029Vb74Dlf4CrfoqpAEBC2T';
@@ -66,7 +54,7 @@ global.miaraBotRepo = 'https://github.com/MidknightMantra/Miara';
 global.waitt = '*_[ ⏳ ] Loading..._*';
 global.waittt = '*_[ ⏳ ] Loading..._*';
 global.waitttt = '*_[ ⏳ ] Loading..._*';
-global.nomorown = '254758925674';
+global.ownerNumber = '254758925674';
 
 // File type support
 global.pdoc = [
@@ -80,26 +68,24 @@ global.pdoc = [
 ];
 
 // Menu text symbols and styles
-global.cmenut = '❖––––––『';
-global.cmenub = '┊✦ ';
-global.cmenuf = '╰━═┅═━––––––๑\n';
-global.cmenua = '\n⌕ ❙❘❙❙❘❙❚❙❘❙❙❚❙❘❙❘❙❚❙❘❙❙❚❙❘❙❙❘❙❚❙❘ ⌕\n     ';
-global.dmenut = '*❖─┅──┅〈*';
-global.dmenub = '*┊»*';
-global.dmenub2 = '*┊*';
-global.dmenuf = '*╰┅────────┅✦*';
+global.menuTop = '❖––––––『';
+global.menuBody = '┊✦ ';
+global.menuFooter = '╰━═┅═━––––––๑\n';
+global.menuArt = '\n⌕ ❙❘❙❙❘❙❚❙❘❙❙❚❙❘❙❘❙❚❙❘❙❙❚❙❘❙❙❘❙❚❙❘ ⌕\n     ';
+global.decorMenuTop = '*❖─┅──┅〈*';
+global.decorMenuBody = '*┊»*';
+global.decorMenuBody2 = '*┊*';
+global.decorMenuFooter = '*╰┅────────┅✦*';
 global.htjava = '⫹⫺';
 global.htki = '*⭑•̩̩͙⊱•••• ☪*';
 global.htka = '*☪ ••••̩̩͙⊰•⭑*';
-global.comienzo = '• • ◕◕════';
-global.fin = '════◕◕ • •';
+global.start = '• • ◕◕════';
+global.end = '════◕◕ • •';
 
-// Bot date and time
-global.botdate = `*[ 📅 ] Date:*  ${moment.tz('Africa/Nairobi').format('DD/MM/YY')}`;
-global.bottime = `*[ ⏳ ] Time:* ${moment.tz('Africa/Nairobi').format('HH:mm:ss')}`;
+global.botDate = `*[ 📅 ] Date:*  ${moment.tz('Africa/Nairobi').format('DD/MM/YY')}`;
+global.botTime = `*[ ⏳ ] Time:* ${moment.tz('Africa/Nairobi').format('HH:mm:ss')}`;
 
-// Fake GIF (used for message headers)
-global.fgif = { 
+global.fakeGif = { 
   key: { participant: '0@s.whatsapp.net' }, 
   message: { 
     'videoMessage': { 
@@ -107,27 +93,21 @@ global.fgif = {
       'h': `Hmm`, 
       'seconds': '999999999', 
       'gifPlayback': 'true', 
-      'caption': bottime, 
+      'caption': botTime, 
       'jpegThumbnail': fs.readFileSync('./src/assets/images/menu/languages/es/menu.png')
     }
   }
 };
 
-// Game XP multiplier
 global.multiplier = 99;
 
-// FlamingText effects for logo/text generation
-global.flaaa = [
+global.flamingTextEffects = [
   'https://flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=water-logo&fontsize=90&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextColor=%23000&shadowGlowColor=%23000&backgroundColor=%23000&text=',
   'https://flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=crafts-logo&fontsize=90&doScale=true&scaleWidth=800&scaleHeight=500&text=',
   'https://flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=amped-logo&doScale=true&scaleWidth=800&scaleHeight=500&text=',
   'https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=sketch-name&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextType=1&fillTextPattern=Warning!&text=',
   'https://www6.flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=sketch-name&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextType=1&fillTextPattern=Warning!&fillColor1Color=%23f2aa4c&fillColor2Color=%23f2aa4c&fillColor3Color=%23f2aa4c&fillColor4Color=%23f2aa4c&fillColor5Color=%23f2aa4c&fillColor6Color=%23f2aa4c&fillColor7Color=%23f2aa4c&fillColor8Color=%23f2aa4c&fillColor9Color=%23f2aa4c&fillColor10Color=%23f2aa4c&fillOutlineColor=%23f2aa4c&fillOutline2Color=%23f2aa4c&backgroundColor=%23101820&text=',
 ];
-
-// ************************
-
-// Auto reload when this file is edited
 const file = fileURLToPath(import.meta.url);
 watchFile(file, () => {
   unwatchFile(file);

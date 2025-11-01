@@ -6,19 +6,19 @@ const formatSize = sizeFormatter({
 
 const handler = async (m, {conn, args, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.descargas_gdrive
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.descargas_gdrive
 
-  if (!args[0]) throw `${tradutor.texto1} _${usedPrefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view_`;
+  if (!args[0]) throw `${translator.texto1} _${usedPrefix + command} https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view_`;
   try {
     GDriveDl(args[0]).then(async (res) => {
-      conn.reply(m.chat, tradutor.texto2, m);
+      conn.reply(m.chat, translator.texto2, m);
       if (!res) throw res;
       conn.sendFile(m.chat, res.downloadUrl, res.fileName, '', m, null, {mimetype: res.mimetype, asDocument: true});
     });
   } catch (e) {
-    m.reply(tradutor.texto3);
+    m.reply(translator.texto3);
     console.log(e);
   }
 };

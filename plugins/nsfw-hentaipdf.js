@@ -4,12 +4,12 @@ import {extractImageThumb} from "baileys";
 
 const handler = async (m, {conn, text, usedPrefix, command, args}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.adult_hentaipdf
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.adult_hentaipdf
 
-  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw tradutor.texto1;
-  if (!text) throw `${tradutor.texto2} ${usedPrefix + command} ${tradutor.texto2_1}`;
+  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw translator.texto1;
+  if (!text) throw `${translator.texto2} ${usedPrefix + command} ${translator.texto2_1}`;
   try {
     m.reply(global.wait);
     const res = await fetch(`https://api.lolhuman.xyz/api/nhentaisearch?apikey=${lolkeysapi}&query=${text}`);
@@ -27,7 +27,7 @@ const handler = async (m, {conn, text, usedPrefix, command, args}) => {
     const imagepdf = await toPDF(pages);
     await conn.sendMessage(m.chat, {document: imagepdf, jpegThumbnail, fileName: data.title.english + '.pdf', mimetype: 'application/pdf'}, {quoted: m});
   } catch {
-    throw `${tradutor.texto3}`;
+    throw `${translator.texto3}`;
   }
 };
 handler.tags = ['nsfw'];

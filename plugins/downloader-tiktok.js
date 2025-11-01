@@ -4,24 +4,24 @@ import {generateWAMessageFromContent} from "baileys";
 
 const handler = async (m, {conn, text, args, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.descargas_tiktok
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.descargas_tiktok
 
-  if (!text) throw `${tradutor.texto1} _${usedPrefix + command} https://vt.tiktok.com/ZSSm2fhLX/_`;
-  if (!/(?:https:?\/{2})?(?:w{3}|vm|vt|t)?\.?tiktok.com\/([^\s&]+)/gi.test(text)) throw `${tradutor.texto2} _${usedPrefix + command} https://vt.tiktok.com/ZSSm2fhLX/_`;
+  if (!text) throw `${translator.texto1} _${usedPrefix + command} https://vt.tiktok.com/ZSSm2fhLX/_`;
+  if (!/(?:https:?\/{2})?(?:w{3}|vm|vt|t)?\.?tiktok.com\/([^\s&]+)/gi.test(text)) throw `${translator.texto2} _${usedPrefix + command} https://vt.tiktok.com/ZSSm2fhLX/_`;
   
-  const texto = `${tradutor.texto3}`;
+  const texto = `${translator.texto3}`;
   
   try {
       const links = await fetchDownloadLinks(args[0], 'tiktok', conn, m);
       if (!links) throw new Error('No se pudieron obtener enlaces');
       const download = getDownloadLink('tiktok', links);
       if (!download) throw new Error('No se pudo obtener enlace de descarga');
-      const cap = `${tradutor.texto8[0]} _${usedPrefix}tomp3_ ${tradutor.texto8[1]}`;
+      const cap = `${translator.texto8[0]} _${usedPrefix}tomp3_ ${translator.texto8[1]}`;
       await conn.sendMessage(m.chat, {video: {url: download}, caption: cap}, {quoted: m});
     } catch {
-      throw `${tradutor.texto9}`;
+      throw `${translator.texto9}`;
     }
 };
 handler.command = /^(tiktok|ttdl|tiktokdl|tiktoknowm|tt|ttnowm|tiktokaudio)$/i;

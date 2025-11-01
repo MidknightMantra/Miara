@@ -1,12 +1,12 @@
 const handler = async (m, { conn, text, command }) => {
  const datas = global
- const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
- const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
- const tradutor = _translate.plugins.random_loli
+ const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+ const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+ const translator = _translate.plugins.random_loli
 
  const yh = global.loli;
  const url = yh[Math.floor(Math.random() * yh.length)];
- conn.sendMessage(m.chat, { image: { url: url }, caption: tradutor.texto1 }, { quoted: m });
+ conn.sendMessage(m.chat, { image: { url: url }, caption: translator.texto1 }, { quoted: m });
 };
 
 handler.help = ['loli'];

@@ -5,9 +5,9 @@ import cheerio from 'cheerio';
 
 async function wikipedia(querry) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.buscador_wikipedia
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.buscador_wikipedia
 
   try {
     const link = await axios.get(`https://es.wikipedia.org/wiki/${querry}`);
@@ -36,11 +36,11 @@ async function wikipedia(querry) {
   }
 }
 const handler = async (m, {conn, text, usedPrefix, command}) => {
-  if (!text) throw `*${tradutor.texto1[0]} *${usedPrefix + command} ${tradutor.texto1[1]} *${usedPrefix + command} Estrellas*`;
+  if (!text) throw `*${translator.texto1[0]} *${usedPrefix + command} ${translator.texto1[1]} *${usedPrefix + command} Estrellas*`;
   wikipedia(`${text}`).then((res) => {
-    m.reply(`*${tradutor.texto2}*\n\n` + res.result.isi);
+    m.reply(`*${translator.texto2}*\n\n` + res.result.isi);
   }).catch(() => {
-    m.reply(`*${tradutor.texto3}*`);
+    m.reply(`*${translator.texto3}*`);
   });
 };
 handler.help = ['wikipedia'].map((v) => v + ' <apa>');

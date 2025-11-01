@@ -1,11 +1,11 @@
 
 const handler = async (m, {conn}) => {
   const datas = global
-   const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-   const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-   const tradutor = _translate.plugins.info_tyc
+   const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+   const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+   const translator = _translate.plugins.info_tyc
    
-   global.terminos = tradutor.texto1;
+   global.terminos = translator.texto1;
 
   m.reply(global.terminos);
 };

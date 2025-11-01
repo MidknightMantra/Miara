@@ -8,9 +8,9 @@ import { performance } from "perf_hooks";
 
 const handler = async (m, { conn, usedPrefix }) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.info_estado
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.info_estado
 
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
@@ -29,31 +29,31 @@ const handler = async (m, { conn, usedPrefix }) => {
   const neww = performance.now();
   const rtime = (neww - old).toFixed(7);
   const wm = 'The Mystic Bot';
-  const info = ` ${tradutor.texto1[0]}
+  const info = ` ${translator.texto1[0]}
 
-  ${tradutor.texto1[1]} Bruno Sobrino
-  ${tradutor.texto1[2]} +5219996125657
-  ${tradutor.texto1[3]} paypal.me/BrunoSob
+  ${translator.texto1[1]} Bruno Sobrino
+  ${translator.texto1[2]} +5219996125657
+  ${translator.texto1[3]} paypal.me/BrunoSob
 
-  ${tradutor.texto1[4]} ${rtime}
-  ${tradutor.texto1[5]} ${uptime}
-  ${tradutor.texto1[6]} ${usedPrefix}
-  ${tradutor.texto1[7]} ${self ? "privado" : "público"}
-  ${tradutor.texto1[8]} ${totalusrReg}
-  ${tradutor.texto1[9]} ${totalusr}
-  ${tradutor.texto1[10]} ${(conn.user.jid == global.conn.user.jid ? '' : `Sub-bot de:\n ▢ +${global.conn.user.jid.split`@`[0]}`) || 'No es sub-bot'}
+  ${translator.texto1[4]} ${rtime}
+  ${translator.texto1[5]} ${uptime}
+  ${translator.texto1[6]} ${usedPrefix}
+  ${translator.texto1[7]} ${self ? "privado" : "público"}
+  ${translator.texto1[8]} ${totalusrReg}
+  ${translator.texto1[9]} ${totalusr}
+  ${translator.texto1[10]} ${(conn.user.jid == global.conn.user.jid ? '' : `Sub-bot de:\n ▢ +${global.conn.user.jid.split`@`[0]}`) || 'No es sub-bot'}
  
-  ${tradutor.texto1[11]} ${chats.length - groups.length}
-  ${tradutor.texto1[12]} ${groups.length}
-  ${tradutor.texto1[13]} ${chats.length}
+  ${translator.texto1[11]} ${chats.length - groups.length}
+  ${translator.texto1[12]} ${groups.length}
+  ${translator.texto1[13]} ${chats.length}
  
-  ${tradutor.texto1[14]} ${autoread ? "activo" : "desactivado"}
-  ${tradutor.texto1[15]} ${restrict ? "activo" : "desactivado"}
-  ${tradutor.texto1[16]} ${pconly ? "activado" : "desactivado"}
-  ${tradutor.texto1[17]} ${gconly ? "activado" : "desactivado"}
-  ${tradutor.texto1[18]} ${antiprivado ? "activado" : "desactivado"}
-  ${tradutor.texto1[19]} ${antiCall ? "activado" : "desactivado"}
-  ${tradutor.texto1[20]} ${modejadibot ? "activado" : "desactivado"}`.trim();
+  ${translator.texto1[14]} ${autoread ? "activo" : "desactivado"}
+  ${translator.texto1[15]} ${restrict ? "activo" : "desactivado"}
+  ${translator.texto1[16]} ${pconly ? "activado" : "desactivado"}
+  ${translator.texto1[17]} ${gconly ? "activado" : "desactivado"}
+  ${translator.texto1[18]} ${antiprivado ? "activado" : "desactivado"}
+  ${translator.texto1[19]} ${antiCall ? "activado" : "desactivado"}
+  ${translator.texto1[20]} ${modejadibot ? "activado" : "desactivado"}`.trim();
   const doc = [
     "pdf",
     "zip",
@@ -76,7 +76,7 @@ const handler = async (m, { conn, usedPrefix }) => {
         mediaType: 2,
         previewType: "pdf",
         title: "The Mystic - Bot",
-        body: tradutor.texto2,
+        body: translator.texto2,
         thumbnail: imagen1,
         sourceUrl: "https://github.com/BrunoSobrino/TheMystic-Bot-MD",
       },

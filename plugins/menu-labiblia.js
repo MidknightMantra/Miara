@@ -2,11 +2,11 @@ import fetch from 'node-fetch';
 
 const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.menu_labiblia
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.menu_labiblia
 
-if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1[0]} ${usedPrefix}enable modohorny*`; 
+if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${translator.texto1[0]} ${usedPrefix}enable modohorny*`; 
   try {
     const pp = imagen5;
     const vn = './src/assets/audio/01J673V13NHPW7FA028ZPYC18Q.mp3';
@@ -28,11 +28,11 @@ if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1[0]} 
     const str = `╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙══╮
 ║    ◉— *𝐓𝐡𝐞 𝐌𝐲𝐬𝐭𝐢𝐜 - 𝐁𝐨𝐭* —◉
 ║≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡║
-║➤ ${tradutor.texto1[1]} ${taguser}*
+║➤ ${translator.texto1[1]} ${taguser}*
 ╰═══╡✯✯✯✯✯✯✯✯✯╞═══╯
 
 ┏━━━━━━━━━━━━━━━━┓
-┃ ${tradutor.texto1[2]}
+┃ ${translator.texto1[2]}
 ┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
 ┣ ඬ⃟ 🔞 _${usedPrefix}pack_
 ┣ ඬ⃟ 🔞 _${usedPrefix}pack2_
@@ -76,7 +76,7 @@ if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1[0]} 
       await conn.sendFile(m.chat, vn, './src/assets/audio/01J673V13NHPW7FA028ZPYC18Q.mp3', null, m, true, {type: 'audioMessage', ptt: true});
     }
   } catch {
-    conn.reply(m.chat, tradutor.texto1[3], m);
+    conn.reply(m.chat, translator.texto1[3], m);
   }
 };
 handler.command = /^(menulabiblia|labiblia|Labiblia)$/i;

@@ -6,16 +6,16 @@ const handler = {
   
   async before(m) {
     const datas = global
-    const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-    const tradutor = _translate.plugins.game__cancion
+    const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+    const translator = _translate.plugins.game__cancion
 
     const id = m.chat;
     
     if (!m.quoted || !m.quoted.fromMe || !m.quoted.isBaileys || !/ADIVINA EL TITULO DE LA CANCION/i.test(m.quoted.text)) return !0;
     
     this.tebaklagu = this.tebaklagu ? this.tebaklagu : {};
-    if (!(id in this.tebaklagu)) return m.reply(tradutor.texto1 || "No hay juego activo en este chat.");
+    if (!(id in this.tebaklagu)) return m.reply(translator.texto1 || "No hay juego activo en este chat.");
     
     if (m.quoted.id == this.tebaklagu[id][0].id) {
       const json = JSON.parse(JSON.stringify(this.tebaklagu[id][1]));
@@ -37,7 +37,7 @@ const handler = {
         m.reply(`🎯 ¡Casi! Estás muy cerca...`);
       } else {
         // Respuesta incorrecta
-        m.reply(tradutor.texto2 || "❌ Incorrecto. ¡Sigue intentando!");
+        m.reply(translator.texto2 || "❌ Incorrecto. ¡Sigue intentando!");
       }
     }
     return !0;

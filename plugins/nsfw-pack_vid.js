@@ -2,12 +2,12 @@ import fetch from 'node-fetch';
 
 const handler = async (m, {conn, command, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.adult_pack_vid
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.adult_pack_vid
 
 
-  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1}`;
+  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${translator.texto1}`;
   switch (command) {
     case 'pack':
       const url = await pack[Math.floor(Math.random() * pack.length)];
@@ -23,11 +23,11 @@ const handler = async (m, {conn, command, usedPrefix}) => {
       break;
     case 'videoxxx': case 'vídeoxxx':
       const url4 = await videosxxxc[Math.floor(Math.random() * videosxxxc.length)];
-      await conn.sendMessage(m.chat, {video: {url: url4}, caption: `${tradutor.texto2} 🥵*`}, {quoted: m});
+      await conn.sendMessage(m.chat, {video: {url: url4}, caption: `${translator.texto2} 🥵*`}, {quoted: m});
       break;
     case 'videoxxxlesbi': case 'videolesbixxx': case 'pornolesbivid': case 'pornolesbianavid': case 'pornolesbiv': case 'pornolesbianav': case 'pornolesv':
       const url5 = await videosxxxc2[Math.floor(Math.random() * videosxxxc2.length)];
-      await conn.sendMessage(m.chat, {video: {url: url5}, caption: `${tradutor.texto2} 🥵*`}, {quoted: m});
+      await conn.sendMessage(m.chat, {video: {url: url5}, caption: `${translator.texto2} 🥵*`}, {quoted: m});
       break;
   }
 };

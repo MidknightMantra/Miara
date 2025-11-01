@@ -6,9 +6,9 @@ const winScore = 4999;
 const playScore = 99;
 export async function before(m) {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.game__ttt
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.game__ttt
 
   let ok;
   let isWin = !1;
@@ -33,10 +33,10 @@ export async function before(m) {
     }
     if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(m.text) - 1))) {
       m.reply({
-        '-3': tradutor.texto1[0],
-        '-2': tradutor.texto1[1],
-        '-1': tradutor.texto1[2],
-        '0': tradutor.texto1[3],
+        '-3': translator.texto1[0],
+        '-2': translator.texto1[1],
+        '-1': translator.texto1[2],
+        '0': translator.texto1[3],
       }[ok]);
       return !0;
     }
@@ -66,7 +66,7 @@ export async function before(m) {
     }
     const winner = isSurrender ? room.game.currentTurn : room.game.winner;
     const str = `
-🎮 ${tradutor.texto2} 🎮
+🎮 ${translator.texto2} 🎮
 
 ❎ = @${room.game.playerX.split('@')[0]}
 ⭕ = @${room.game.playerO.split('@')[0]}
@@ -75,7 +75,7 @@ export async function before(m) {
         ${arr.slice(3, 6).join('')}
         ${arr.slice(6).join('')}
 
-${isWin ? `@${(isSurrender ? room.game.currentTurn : room.game.winner).split('@')[0]} ${tradutor.texto3}` : isTie ? tradutor.texto4 : `${tradutor.texto5} @${room.game.currentTurn.split('@')[0]}`}
+${isWin ? `@${(isSurrender ? room.game.currentTurn : room.game.winner).split('@')[0]} ${translator.texto3}` : isTie ? translator.texto4 : `${translator.texto5} @${room.game.currentTurn.split('@')[0]}`}
 `.trim();
     const users = global.db.data.users;
     if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat) {

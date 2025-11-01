@@ -6,13 +6,13 @@
 
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.herramientas_nowa
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.herramientas_nowa
 
   const regex = /x/g;
-  if (!text) throw tradutor.texto1;
-  if (!text.match(regex)) throw `${tradutor.texto2} ${usedPrefix + command} 521999340434x*`;
+  if (!text) throw translator.texto1;
+  if (!text.match(regex)) throw `${translator.texto2} ${usedPrefix + command} 521999340434x*`;
   const random = text.match(regex).length; const total = Math.pow(10, random); const array = [];
   for (let i = 0; i < total; i++) {
     const list = [...i.toString().padStart(random, '0')];
@@ -24,7 +24,7 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
       array.push({exists: false, jid: result});
     }
   }
-  const txt = tradutor.texto3[0] + array.filter((v) => v.exists).map((v) => `${tradutor.texto3[1]} wa.me/${v.jid.split('@')[0]}\n${tradutor.texto3[2]} ${v.status || tradutor.texto3[3]}\n${tradutor.texto3[4]} ${formatDate(v.setAt)}`).join('\n\n') + tradutor.texto3[5] + array.filter((v) => !v.exists).map((v) => v.jid.split('@')[0]).join('\n');
+  const txt = translator.texto3[0] + array.filter((v) => v.exists).map((v) => `${translator.texto3[1]} wa.me/${v.jid.split('@')[0]}\n${translator.texto3[2]} ${v.status || translator.texto3[3]}\n${translator.texto3[4]} ${formatDate(v.setAt)}`).join('\n\n') + translator.texto3[5] + array.filter((v) => !v.exists).map((v) => v.jid.split('@')[0]).join('\n');
   m.reply(txt);
 };
 handler.command = /^nowa$/i;

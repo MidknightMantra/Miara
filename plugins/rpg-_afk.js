@@ -1,12 +1,12 @@
 export function before(m) {
  const datas = global
- const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
- const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
- const tradutor = _translate.plugins.afk__afk
+ const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+ const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+ const translator = _translate.plugins.afk__afk
 
  const user = global.db.data.users[m.sender];
  if (user.afk > -1) {
- m.reply(`${tradutor.texto2[0]} ${user.afkReason ? `${tradutor.texto2[1]}` + user.afkReason : ''}*\n\n*${tradutor.texto2[2]} ${(new Date - user.afk).toTimeString()}*`.trim());
+ m.reply(`${translator.texto2[0]} ${user.afkReason ? `${translator.texto2[1]}` + user.afkReason : ''}*\n\n*${translator.texto2[2]} ${(new Date - user.afk).toTimeString()}*`.trim());
    user.afk = -1;
    user.afkReason = '';
  }
@@ -30,7 +30,7 @@ const getQuotedSender = async () => {
    continue;
  }
  const reason = user.afkReason || '';
- m.reply(`${tradutor.texto1[0]}\n\n*—◉ ${tradutor.texto1[1]}*\n*—◉ ${reason ? `${tradutor.texto1[2]}` + reason : `${tradutor.texto1[3]}`}*\n*—◉ ${tradutor.texto1[4]} ${(new Date - afkTime).toTimeString()}*`.trim());
+ m.reply(`${translator.texto1[0]}\n\n*—◉ ${translator.texto1[1]}*\n*—◉ ${reason ? `${translator.texto1[2]}` + reason : `${translator.texto1[3]}`}*\n*—◉ ${translator.texto1[4]} ${(new Date - afkTime).toTimeString()}*`.trim());
  }
  })();  
  return true;

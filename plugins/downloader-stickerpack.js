@@ -5,11 +5,11 @@ import {sticker} from '../src/libraries/sticker.js';
 
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.downloader_stickerpack
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.downloader_stickerpack
 
-  if (!text) throw `${tradutor.texto1} ${usedPrefix + command}* https://getstickerpack.com/stickers/flork-memes-4-1`;
+  if (!text) throw `${translator.texto1} ${usedPrefix + command}* https://getstickerpack.com/stickers/flork-memes-4-1`;
   try {
     const url = text;
     const res = await fetch(`https://api.akuari.my.id/downloader/stickerpack?link=${url}`);
@@ -20,7 +20,7 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
       // await delay(1500)
     }
   } catch {
-    await m.reply(`${tradutor.texto2}`);
+    await m.reply(`${translator.texto2}`);
   }
 };
 handler.command = /^stickerpack$/i;

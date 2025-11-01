@@ -3,14 +3,14 @@ import cheerio from 'cheerio';
 
 const handler = async (m, {conn, args, command, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.adult_xnxxdl
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.adult_xnxxdl
 
-  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1}`;
-  if (!args[0]) throw `${tradutor.texto2} ${usedPrefix + command} https://www.xnxx.com/video-14lcwbe8/rubia_novia_follada_en_cuarto_de_bano*`;
+  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw `${translator.texto1}`;
+  if (!args[0]) throw `${translator.texto2} ${usedPrefix + command} https://www.xnxx.com/video-14lcwbe8/rubia_novia_follada_en_cuarto_de_bano*`;
   try {
-    await conn.reply(m.chat, tradutor.texto3, m);
+    await conn.reply(m.chat, translator.texto3, m);
     let xnxxLink = '';
     if (args[0].includes('xnxx')) {
       xnxxLink = args[0];
@@ -23,13 +23,13 @@ const handler = async (m, {conn, args, command, usedPrefix}) => {
             if (index < matchingItem.urls.length) {
               xnxxLink = matchingItem.urls[index];
             } else {
-              throw `${tradutor.texto4} ${matchingItem.urls.length}*`;
+              throw `${translator.texto4} ${matchingItem.urls.length}*`;
             }
           } else {
-            throw `${texto5} (${usedPrefix + command} ${tradutor.texto5_1} ${usedPrefix}xnxxsearch <texto>*`;
+            throw `${texto5} (${usedPrefix + command} ${translator.texto5_1} ${usedPrefix}xnxxsearch <texto>*`;
           }
         } else {
-          throw `${tradutor.texto6} (${usedPrefix + command} ${tradutor.texto6_1} ${usedPrefix}xnxxsearch <texto>*`;
+          throw `${translator.texto6} (${usedPrefix + command} ${translator.texto6_1} ${usedPrefix}xnxxsearch <texto>*`;
         }
       }
     }
@@ -37,7 +37,7 @@ const handler = async (m, {conn, args, command, usedPrefix}) => {
     const json = await res.result.files;
     conn.sendMessage(m.chat, {document: {url: json.high}, mimetype: 'video/mp4', fileName: res.result.title}, {quoted: m});
   } catch {
-    throw `${tradutor.texto7}\n*◉ https://www.xnxx.com/video-14lcwbe8/rubia_novia_follada_en_cuarto_de_bano*`;
+    throw `${translator.texto7}\n*◉ https://www.xnxx.com/video-14lcwbe8/rubia_novia_follada_en_cuarto_de_bano*`;
   }
 };
 handler.tags = ['nsfw'];

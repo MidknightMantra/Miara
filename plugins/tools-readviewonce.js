@@ -2,12 +2,12 @@ const {downloadContentFromMessage} = (await import("baileys"));
 
 const handler = async (m, {conn}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.herramientas_readviewonce
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.herramientas_readviewonce
 
-  if (!m.quoted) throw tradutor.texto1;
-  if (!m.quoted.viewOnce) throw tradutor.texto2;
+  if (!m.quoted) throw translator.texto1;
+  if (!m.quoted.viewOnce) throw translator.texto2;
   const msg = m.quoted;
   const type = msg.mtype 
   

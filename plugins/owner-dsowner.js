@@ -5,18 +5,18 @@ import path from 'path';
 
 const handler = async (m, { conn, usedPrefix }) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.fix_owner_esperando_mensajes
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.fix_owner_esperando_mensajes
 
   if (global.conn.user.jid !== conn.user.jid) {
-    return conn.sendMessage(m.chat, {text: tradutor.texto1}, {quoted: m});
+    return conn.sendMessage(m.chat, {text: translator.texto1}, {quoted: m});
   }
-  await conn.sendMessage(m.chat, {text: tradutor.texto2}, {quoted: m});
+  await conn.sendMessage(m.chat, {text: translator.texto2}, {quoted: m});
   const sessionPath = './MysticSession/';
   try {
     if (!existsSync(sessionPath)) {
-      return await conn.sendMessage(m.chat, {text: tradutor.texto3}, {quoted: m});
+      return await conn.sendMessage(m.chat, {text: translator.texto3}, {quoted: m});
     }
     const files = await fs.readdir(sessionPath);
     let filesDeleted = 0;
@@ -27,15 +27,15 @@ const handler = async (m, { conn, usedPrefix }) => {
       }
     }
     if (filesDeleted === 0) {
-      await conn.sendMessage(m.chat, {text: tradutor.texto4}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: translator.texto4}, {quoted: m});
     } else {
-      await conn.sendMessage(m.chat, {text: `${tradutor.texto5[0]} ${filesDeleted} ${tradutor.texto5[1]}`}, {quoted: m});
+      await conn.sendMessage(m.chat, {text: `${translator.texto5[0]} ${filesDeleted} ${translator.texto5[1]}`}, {quoted: m});
     }
   } catch (err) {
     console.error('Error al leer la carpeta o los archivos de sesión:', err);
-    await conn.sendMessage(m.chat, {text: tradutor.texto6}, {quoted: m});
+    await conn.sendMessage(m.chat, {text: translator.texto6}, {quoted: m});
   }
-  await conn.sendMessage(m.chat, {text: `${tradutor.texto7}\n${usedPrefix}s\n${usedPrefix}s\n${usedPrefix}s`}, {quoted: m});
+  await conn.sendMessage(m.chat, {text: `${translator.texto7}\n${usedPrefix}s\n${usedPrefix}s\n${usedPrefix}s`}, {quoted: m});
 };
 handler.help = ['del_reg_in_session_owner'];
 handler.tags = ['owner'];

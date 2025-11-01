@@ -42,15 +42,15 @@ export async function before(m, { isAdmin, isBotAdmin }) {
     initializeInterception();
     
     // Obtener traductor de forma segura
-    let tradutor = defaultTexts;
+    let translator = defaultTexts;
     try {
       const datas = global;
-      const idioma = datas.db?.data?.users?.[m.sender]?.language || global.defaultLenguaje || 'es';
-      const translatePath = `./src/languages/${idioma}.json`;
+      const language = datas.db?.data?.users?.[m.sender]?.language || global.defaultLanguage || 'es';
+      const translatePath = `./src/languages/${language}.json`;
       
       if (existsSync(translatePath)) {
         const _translate = JSON.parse(readFileSync(translatePath));
-        tradutor = _translate.plugins?._antiviewonce || defaultTexts;
+        translator = _translate.plugins?._antiviewonce || defaultTexts;
       }
     } catch (error) {
       console.log('Usando textos por defecto para antiviewonce');
@@ -74,25 +74,25 @@ export async function before(m, { isAdmin, isBotAdmin }) {
     
     // ESTRATEGIA 1: Interceptar mensaje normal con ViewOnce
     if (m.message && !m.messageStubType) {
-      const result = await processViewOnceMessage(m, tradutor);
+      const result = await processViewOnceMessage(m, translator);
       if (result) return result;
     }
     
     // ESTRATEGIA 2: Interceptar desde quoted si existe
     if (m.quoted && m.quoted.message) {
       console.log('📋 Verificando mensaje quoted...');
-      const quotedResult = await processViewOnceFromQuoted(m, tradutor);
+      const quotedResult = await processViewOnceFromQuoted(m, translator);
       if (quotedResult) return quotedResult;
     }
     
     // ESTRATEGIA 3: Analizar mensaje "ausente" y buscar datos residuales
     if (m.messageStubType === 2) {
       console.log('⚠️ Mensaje ausente - analizando estructura completa...');
-      return await analyzeAbsentMessage(m, tradutor);
+      return await analyzeAbsentMessage(m, translator);
     }
     
     // ESTRATEGIA 4: Interceptar cualquier estructura que contenga ViewOnce
-    const viewOnceResult = await deepScanForViewOnce(m, tradutor);
+    const viewOnceResult = await deepScanForViewOnce(m, translator);
     if (viewOnceResult) return viewOnceResult;
   } catch (error) {
     console.error('Error en función before:', error);
@@ -101,7 +101,7 @@ export async function before(m, { isAdmin, isBotAdmin }) {
 }
 
 // Procesar mensaje ViewOnce normal
-async function processViewOnceMessage(m, tradutor) {
+async function processViewOnceMessage(m, translator) {
   try {
     const viewOnceData = extractViewOnceFromMessage(m.message);
     if (!viewOnceData) return false;
@@ -118,9 +118,9 @@ async function processViewOnceMessage(m, tradutor) {
     
     if (buffer && buffer.length > 0) {
       await saveToBackup(buffer, viewOnceData.mediaType, m.key?.id);
-      return await sendInterceptedMedia(buffer, viewOnceData, tradutor, m);
+      return await sendInterceptedMedia(buffer, viewOnceData, translator, m);
     } else {
-      return await sendViewOnceDetectionInfo(viewOnceData, tradutor, m, 'normal');
+      return await sendViewOnceDetectionInfo(viewOnceData, translator, m, 'normal');
     }
   } catch (error) {
     console.error('Error procesando ViewOnce normal:', error);
@@ -129,7 +129,7 @@ async function processViewOnceMessage(m, tradutor) {
 }
 
 // Procesar ViewOnce desde quoted
-async function processViewOnceFromQuoted(m, tradutor) {
+async function processViewOnceFromQuoted(m, translator) {
   try {
     const quotedMessage = m.quoted.message;
     const viewOnceData = extractViewOnceFromMessage(quotedMessage);
@@ -148,9 +148,9 @@ async function processViewOnceFromQuoted(m, tradutor) {
     
     if (buffer && buffer.length > 0) {
       await saveToBackup(buffer, viewOnceData.mediaType, m.quoted.key?.id || m.key?.id);
-      return await sendInterceptedMedia(buffer, viewOnceData, tradutor, m);
+      return await sendInterceptedMedia(buffer, viewOnceData, translator, m);
     } else {
-      return await sendViewOnceDetectionInfo(viewOnceData, tradutor, m, 'quoted');
+      return await sendViewOnceDetectionInfo(viewOnceData, translator, m, 'quoted');
     }
   } catch (error) {
     console.error('Error procesando quoted ViewOnce:', error);
@@ -159,7 +159,7 @@ async function processViewOnceFromQuoted(m, tradutor) {
 }
 
 // Analizar mensaje ausente - VERSIÓN CORREGIDA
-async function analyzeAbsentMessage(m, tradutor) {
+async function analyzeAbsentMessage(m, translator) {
   try {
     console.log('🔍 Analizando mensaje ausente completo...');
     console.log('📊 Estructura completa del mensaje:', JSON.stringify(m, null, 2));
@@ -167,7 +167,7 @@ async function analyzeAbsentMessage(m, tradutor) {
     // Buscar pistas de ViewOnce en cualquier parte del objeto
     const viewOnceHints = findViewOnceHints(m);
     
-    let message = `🔍 ${tradutor.texto1}\n\n`;
+    let message = `🔍 ${translator.texto1}\n\n`;
     
     if (viewOnceHints.length > 0) {
       message += `⚠️ **ViewOnce Detectado (Mensaje Ausente)**\n\n`;
@@ -200,7 +200,7 @@ async function analyzeAbsentMessage(m, tradutor) {
     
   } catch (error) {
     console.error('Error analizando mensaje ausente:', error);
-    const errorMessage = `🔍 ${tradutor.texto1}\n\n❌ _Error analizando mensaje ausente: ${error.message}_`;
+    const errorMessage = `🔍 ${translator.texto1}\n\n❌ _Error analizando mensaje ausente: ${error.message}_`;
     return await safeSendMessage(m.chat, errorMessage, m);
   }
 }
@@ -238,7 +238,7 @@ async function safeSendMessage(chatId, text, quotedMessage = null) {
 }
 
 // Escaneo profundo por ViewOnce
-async function deepScanForViewOnce(m, tradutor) {
+async function deepScanForViewOnce(m, translator) {
   try {
     const deepScan = (obj, path = '', depth = 0) => {
       if (depth > 5) return null;
@@ -269,7 +269,7 @@ async function deepScanForViewOnce(m, tradutor) {
     if (found) {
       console.log(`🎯 ViewOnce encontrado en escaneo profundo: ${found.path}`);
       
-      const message = `🔍 ${tradutor.texto1}\n\n🎯 **ViewOnce Detectado (Escaneo Profundo)**\n\n📍 **Ubicación:** ${found.path}\n🔑 **Clave:** ${found.key}\n📊 **Tipo:** ${typeof found.value}\n\n⚡ _Detectado mediante análisis profundo de estructura_`;
+      const message = `🔍 ${translator.texto1}\n\n🎯 **ViewOnce Detectado (Escaneo Profundo)**\n\n📍 **Ubicación:** ${found.path}\n🔑 **Clave:** ${found.key}\n📊 **Tipo:** ${typeof found.value}\n\n⚡ _Detectado mediante análisis profundo de estructura_`;
       
       return await safeSendMessage(m.chat, message, m);
     }
@@ -449,9 +449,9 @@ function findViewOnceHints(obj, hints = [], path = '', depth = 0) {
 }
 
 // Enviar media interceptada
-async function sendInterceptedMedia(buffer, viewOnceData, tradutor, m) {
+async function sendInterceptedMedia(buffer, viewOnceData, translator, m) {
   try {
-    const caption = `🔥 ${tradutor.texto1}\n\n${viewOnceData.data?.caption || ''}`;
+    const caption = `🔥 ${translator.texto1}\n\n${viewOnceData.data?.caption || ''}`;
     const options = { quoted: m };
     
     switch (viewOnceData.mediaType) {
@@ -485,15 +485,15 @@ async function sendInterceptedMedia(buffer, viewOnceData, tradutor, m) {
     }
   } catch (error) {
     console.error('Error enviando media:', error);
-    return await safeSendMessage(m.chat, `🔥 ${tradutor.texto1}\n\n❌ Error enviando contenido interceptado`, m);
+    return await safeSendMessage(m.chat, `🔥 ${translator.texto1}\n\n❌ Error enviando contenido interceptado`, m);
   }
 }
 
 // Enviar información de detección
-async function sendViewOnceDetectionInfo(viewOnceData, tradutor, m, source) {
+async function sendViewOnceDetectionInfo(viewOnceData, translator, m, source) {
   try {
     const data = viewOnceData.data;
-    let message = `🔍 ${tradutor.texto1} (${source})\n\n`;
+    let message = `🔍 ${translator.texto1} (${source})\n\n`;
     message += `📱 **ViewOnce Detectado**\n`;
     message += `📄 Tipo: ${viewOnceData.mediaType}\n`;
     message += `🎭 Mensaje: ${viewOnceData.messageType}\n`;
@@ -509,7 +509,7 @@ async function sendViewOnceDetectionInfo(viewOnceData, tradutor, m, source) {
     return await safeSendMessage(m.chat, message, m);
   } catch (error) {
     console.error('Error enviando información:', error);
-    return await safeSendMessage(m.chat, `🔍 ${tradutor.texto1}\n\n❌ Error procesando información de ViewOnce`, m);
+    return await safeSendMessage(m.chat, `🔍 ${translator.texto1}\n\n❌ Error procesando información de ViewOnce`, m);
   }
 }
 

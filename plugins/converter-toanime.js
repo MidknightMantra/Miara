@@ -4,16 +4,16 @@ import FormData from 'form-data';
 
 const handler = async (m, {conn, text, args, usedPrefix, command}) => {
   const datas = global;
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`));
-  const tradutor = _translate.plugins.convertidor_toanime;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`));
+  const translator = _translate.plugins.convertidor_toanime;
 
   const q = m.quoted ? m.quoted : m;
   const mime = (q.msg || q).mimetype || q.mediaType || '';
   
-  if (!/image/g.test(mime)) throw `*${tradutor.texto1}*`;
+  if (!/image/g.test(mime)) throw `*${translator.texto1}*`;
   
-  m.reply(`*${tradutor.texto2}*`);
+  m.reply(`*${translator.texto2}*`);
   const data = await q.download?.();
   
   try {
@@ -42,7 +42,7 @@ const handler = async (m, {conn, text, args, usedPrefix, command}) => {
     
   } catch (error) {
     console.error(error);
-    throw `*${tradutor.texto3}*`;
+    throw `*${translator.texto3}*`;
   }
 };
 

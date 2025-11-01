@@ -4,11 +4,11 @@ import {format} from 'util';
 
 const handler = async (m, {text}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.owner_fetch_get
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.owner_fetch_get
 
-  if (!/^https?:\/\//.test(text)) throw tradutor.texto1;
+  if (!/^https?:\/\//.test(text)) throw translator.texto1;
   const _url = new URL(text);
   const url = global.API(_url.origin, _url.pathname, Object.fromEntries(_url.searchParams.entries()), 'APIKEY');
   const res = await fetch(url);

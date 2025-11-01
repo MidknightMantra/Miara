@@ -217,7 +217,7 @@ Use: ${usedPrefix}glx
                         break;
                     default:
 
-                        enviar10s(`_😢Necesitas registrarte en el juego_\n\n> Use *${usedPrefix}glx cadastrar* \n_Para registrarse._\n\n😁 *regístrate ahora, no pierdas tiempo.*`)
+                        enviar10s(`_😢Necesitas registrarte en el juego_\n\n> Use *${usedPrefix}glx cadastrar* \n_Para registrarse._\n\n😁 *regístrate ahora, no pierdas time.*`)
                         break;
                 }
 
@@ -737,7 +737,7 @@ _💡No olvides minar, *${usedPrefix}glx miner* Esto aumenta tu XP y fuerza.._
 *🛡️ Poder Defesa:* _${data.perfil.defesa.forca}_ P
 *🌀 Username:* _${data.perfil.username}_
 
-*🗣️ Idioma:* _${data.perfil.idioma}_
+*🗣️ Idioma:* _${data.perfil.language}_
 *💰 Moneda:* _${data.perfil.carteira.currency}_
 
 *🌏 Planeta:* _${data.perfil.casa.planeta}_
@@ -850,7 +850,7 @@ Diviértete minando, negociando e luchando para ser el más fuerte del mundo abi
 
 
         async function entrarplaneta(nomeplaneta) {
-            if (data.perfil.localizacao.viajando === true) return m.reply(`_Eh, ya estás viajando, espera q el tiempo se acabe o escribe _ *${usedPrefix}glx viajar casa*`)
+            if (data.perfil.localizacao.viajando === true) return m.reply(`_Eh, ya estás viajando, espera q el time se acabe o escribe _ *${usedPrefix}glx viajar casa*`)
 
             // Status para viajando
             data.perfil.localizacao.viajando = true;
@@ -929,7 +929,7 @@ Use: ${usedPrefix}glx
 
 
 
-                    conn.reply(data.perfil.id, `*_El tiempo de tu nave en el planeta ${data.perfil.localizacao.nomeplaneta} acabó, tu nave volvió al espacio!_*`, m)
+                    conn.reply(data.perfil.id, `*_El time de tu nave en el planeta ${data.perfil.localizacao.nomeplaneta} acabó, tu nave volvió al espacio!_*`, m)
 
                     data.perfil.localizacao.status = false;
                     data.perfil.localizacao.nomeplaneta = data.perfil.casa.planeta;
@@ -1080,7 +1080,7 @@ _⚡Haz ganado:_  ${db.itens.mineracao[item].poder} Puntos(poder)
             }, db.itens.mineracao[item].tempoMineracao)
         }
         function valorFormatado(valor) {
-            const valorFormatado = (valor).toLocaleString(data.perfil.idioma, { style: 'currency', currency: data.perfil.carteira.currency });
+            const valorFormatado = (valor).toLocaleString(data.perfil.language, { style: 'currency', currency: data.perfil.carteira.currency });
             return valorFormatado
         }
 

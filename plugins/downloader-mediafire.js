@@ -4,21 +4,21 @@ import { lookup } from 'mime-types';
 
 const handler = async (m, {conn, args, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.descargas_mediafire
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.descargas_mediafire
 
   if (!args[0]) throw `_*< DESCARGAS - MEDIAFIRE />*_\n\n*[ ℹ️ ] Ingrese un enlace de MediaFire.*\n\n*[ 💡 ] Ejemplo:* ${usedPrefix + command} http://www.mediafire.com/file/7a28wroqlhtfws7/FgsiRestAPI_1754243494124_fgsi_1754243490723.jpeg`;
   
   try {
     const res = await mediafireDl(args[0]);
     const {name, size, date, mime, link} = res;
-    const caption = `${tradutor.texto2[0]}\n\n${tradutor.texto2[1]} ${name}\n${tradutor.texto2[2]} ${size}\n${tradutor.texto2[3]} ${mime}\n\n${tradutor.texto2[4]}`.trim();
+    const caption = `${translator.texto2[0]}\n\n${translator.texto2[1]} ${name}\n${translator.texto2[2]} ${size}\n${translator.texto2[3]} ${mime}\n\n${translator.texto2[4]}`.trim();
     await m.reply(caption);
     await conn.sendFile(m.chat, link, name, '', m, null, {mimetype: mime, asDocument: true});
   } catch (error) {
     console.error('Error en MediaFire:', error);
-    await m.reply(tradutor.texto3);
+    await m.reply(translator.texto3);
   }
 };
 

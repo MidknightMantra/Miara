@@ -1,9 +1,9 @@
 
 const handler = async (m, {conn, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.menu_caja_fuerte
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.menu_caja_fuerte
 
   const pp = imagen4;
   try {
@@ -12,22 +12,22 @@ const handler = async (m, {conn, usedPrefix}) => {
     const name = await conn.getName(m.sender);
     const taguser = '@' + m.sender.split('@s.whatsapp.net')[0];
     const str = `
-*ミ💖 ${tradutor.texto1[0]} ${taguser} 💖彡*
+*ミ💖 ${translator.texto1[0]} ${taguser} 💖彡*
 
-ㅤㅤ ${tradutor.texto1[1]}
+ㅤㅤ ${translator.texto1[1]}
 
-${tradutor.texto1[2]}
+${translator.texto1[2]}
 
-${tradutor.texto1[3]}
+${translator.texto1[3]}
 
-° ඬ⃟🗳️ _${usedPrefix}agregarmsg ${tradutor.texto2[0]}
-° ඬ⃟🗳️ _${usedPrefix}agregarvn ${tradutor.texto2[1]}
-° ඬ⃟🗳️ _${usedPrefix}agregarvideo ${tradutor.texto2[2]}
-° ඬ⃟🗳️ _${usedPrefix}agregaraudio ${tradutor.texto2[3]}
-° ඬ⃟🗳️ _${usedPrefix}agregarimg ${tradutor.texto2[4]}
-° ඬ⃟🗳️ _${usedPrefix}agregarsticker ${tradutor.texto2[5]}
+° ඬ⃟🗳️ _${usedPrefix}agregarmsg ${translator.texto2[0]}
+° ඬ⃟🗳️ _${usedPrefix}agregarvn ${translator.texto2[1]}
+° ඬ⃟🗳️ _${usedPrefix}agregarvideo ${translator.texto2[2]}
+° ඬ⃟🗳️ _${usedPrefix}agregaraudio ${translator.texto2[3]}
+° ඬ⃟🗳️ _${usedPrefix}agregarimg ${translator.texto2[4]}
+° ඬ⃟🗳️ _${usedPrefix}agregarsticker ${translator.texto2[5]}
 
-${tradutor.texto1[4]}
+${translator.texto1[4]}
 
 ° ඬ⃟🗳️ _${usedPrefix}listamsg_
 ° ඬ⃟🗳️ _${usedPrefix}listavn_
@@ -36,23 +36,23 @@ ${tradutor.texto1[4]}
 ° ඬ⃟🗳️ _${usedPrefix}listaimg_
 ° ඬ⃟🗳️ _${usedPrefix}listasticker_
 
-${tradutor.texto1[5]}
+${translator.texto1[5]}
 
-° ඬ⃟🗳️ _${usedPrefix}vermsg ${tradutor.texto3[0]}
-° ඬ⃟🗳️ _${usedPrefix}vervn ${tradutor.texto3[1]}
-° ඬ⃟🗳️ _${usedPrefix}vervideo ${tradutor.texto3[2]}
-° ඬ⃟🗳️ _${usedPrefix}veraudio ${tradutor.texto3[3]}
-° ඬ⃟🗳️ _${usedPrefix}verimg ${tradutor.texto3[4]}
-° ඬ⃟🗳️ _${usedPrefix}versticker ${tradutor.texto3[5]}
+° ඬ⃟🗳️ _${usedPrefix}vermsg ${translator.texto3[0]}
+° ඬ⃟🗳️ _${usedPrefix}vervn ${translator.texto3[1]}
+° ඬ⃟🗳️ _${usedPrefix}vervideo ${translator.texto3[2]}
+° ඬ⃟🗳️ _${usedPrefix}veraudio ${translator.texto3[3]}
+° ඬ⃟🗳️ _${usedPrefix}verimg ${translator.texto3[4]}
+° ඬ⃟🗳️ _${usedPrefix}versticker ${translator.texto3[5]}
 
-${tradutor.texto1[6]}
+${translator.texto1[6]}
 
-° ඬ⃟🗳️ _${usedPrefix}eliminarmsg ${tradutor.texto4[0]}
-° ඬ⃟🗳️ _${usedPrefix}eliminarvn ${tradutor.texto4[1]}
-° ඬ⃟🗳️ _${usedPrefix}eliminarvideo ${tradutor.texto4[2]}
-° ඬ⃟🗳️ _${usedPrefix}eliminaraudio ${tradutor.texto4[3]}
-° ඬ⃟🗳️ _${usedPrefix}eliminarimg ${tradutor.texto4[4]}
-° ඬ⃟🗳️ _${usedPrefix}eliminarsticker ${tradutor.texto4[5]}`.trim();
+° ඬ⃟🗳️ _${usedPrefix}eliminarmsg ${translator.texto4[0]}
+° ඬ⃟🗳️ _${usedPrefix}eliminarvn ${translator.texto4[1]}
+° ඬ⃟🗳️ _${usedPrefix}eliminarvideo ${translator.texto4[2]}
+° ඬ⃟🗳️ _${usedPrefix}eliminaraudio ${translator.texto4[3]}
+° ඬ⃟🗳️ _${usedPrefix}eliminarimg ${translator.texto4[4]}
+° ඬ⃟🗳️ _${usedPrefix}eliminarsticker ${translator.texto4[5]}`.trim();
     if (m.isGroup) {
       conn.sendMessage(m.chat, {image: pp, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: m});
     } else {

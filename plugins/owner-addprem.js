@@ -2,14 +2,14 @@
 
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.owner_addprem
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.owner_addprem
 
   let who;
   if (m.isGroup) who = await await m.mentionedJid[0] ? await await m.mentionedJid[0] : m.quoted ? await m?.quoted?.sender : false;
   else who = m.chat;
-  const textpremERROR = `${tradutor.texto1[0]} ${usedPrefix + command} @${m.sender.split`@`[0]} 1*\n*◉ ${usedPrefix + command} 1 ${tradutor.texto1[1]}`;
+  const textpremERROR = `${translator.texto1[0]} ${usedPrefix + command} @${m.sender.split`@`[0]} 1*\n*◉ ${usedPrefix + command} 1 ${translator.texto1[1]}`;
   if (!who) return m.reply(textpremERROR, null, {mentions: conn.parseMention(textpremERROR)});
 
   const user = global.db.data.users[who];
@@ -17,22 +17,22 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
   // let name = await conn.getName(who)
   const name = await '@' + who.split`@`[0];
 
-  const ERROR = `${tradutor.texto2[0]} ${'@' + who.split`@`[0]} ${tradutor.texto2[1]}`;
+  const ERROR = `${translator.texto2[0]} ${'@' + who.split`@`[0]} ${translator.texto2[1]}`;
   if (!user) return m.reply(ERROR, null, {mentions: conn.parseMention(ERROR)});
 
   const segundos10 = 10 * 1000; // 10 segundos en milisegundos
   const hora1 = 60 * 60 * 1000 * txt; // 1 hora
   const dia1 = 24 * hora1 * txt; // 1 día
   const semana1 = 7 * dia1 * txt; // 1 semana
-  const mes1 = 30 * dia1 * txt; // 1 mes
+  const mes1 = 30 * dia1 * txt; // 1 month
   const now = Date.now();
 
   if (command == 'addprem' || command == 'userpremium') {
     if (now < user.premiumTime) user.premiumTime += hora1;
     else user.premiumTime = now + hora1;
     user.premium = true;
-    const timeLeft = (user.premiumTime - now) / 1000; // tiempo restante en segundos
-    const textprem1 = `${tradutor.texto3[0]} ${name} ${tradutor.texto3[1]}  ${txt} ${tradutor.texto4[0]} ${timeLeft} ${tradutor.texto5[0]}`;
+    const timeLeft = (user.premiumTime - now) / 1000; // time restante en segundos
+    const textprem1 = `${translator.texto3[0]} ${name} ${translator.texto3[1]}  ${txt} ${translator.texto4[0]} ${timeLeft} ${translator.texto5[0]}`;
     m.reply(textprem1, null, {mentions: conn.parseMention(textprem1)});
   }
 
@@ -40,8 +40,8 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
     if (now < user.premiumTime) user.premiumTime += dia1;
     else user.premiumTime = now + dia1;
     user.premium = true;
-    const timeLeft = (user.premiumTime - now) / 1000 / 60 / 60; // tiempo restante en horas
-    const textprem2 = `${tradutor.texto3[0]}  ${name} ${tradutor.texto3[1]}  ${txt} ${tradutor.texto4[1]}: ${timeLeft} ${tradutor.texto5[1]}`;
+    const timeLeft = (user.premiumTime - now) / 1000 / 60 / 60; // time restante en horas
+    const textprem2 = `${translator.texto3[0]}  ${name} ${translator.texto3[1]}  ${txt} ${translator.texto4[1]}: ${timeLeft} ${translator.texto5[1]}`;
     m.reply(textprem2, null, {mentions: conn.parseMention(textprem2)});
   }
 
@@ -50,7 +50,7 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
     else user.premiumTime = now + semana1;
     user.premium = true;
     formatTime(user.premiumTime - now).then((timeleft) => {
-      const textprem3 = `${tradutor.texto3[0]}  ${name} ${tradutor.texto3[1]}  ${txt} ${tradutor.texto4[2]} ${timeleft}*`;
+      const textprem3 = `${translator.texto3[0]}  ${name} ${translator.texto3[1]}  ${txt} ${translator.texto4[2]} ${timeleft}*`;
       m.reply(textprem3, null, {mentions: conn.parseMention(textprem3)});
     });
   }
@@ -60,7 +60,7 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
     else user.premiumTime = now + mes1;
     user.premium = true;
     formatTime(user.premiumTime - now).then((timeleft) => {
-      const textprem4 = `${tradutor.texto3[0]}  ${name} ${tradutor.texto3[1]}  ${txt} ${tradutor.texto4[3]} ${timeleft}*`;
+      const textprem4 = `${translator.texto3[0]}  ${name} ${translator.texto3[1]}  ${txt} ${translator.texto4[3]} ${timeleft}*`;
       m.reply(textprem4, null, {mentions: conn.parseMention(textprem4)});
     });
   }

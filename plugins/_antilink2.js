@@ -1,14 +1,14 @@
 // TheMystic-Bot-MD@BrunoSobrino - _antilink2.js
 
- // Para configurar o idioma, na raiz do projeto altere o arquivo config.json
-  // Para configurar el idioma, en la raíz del proyecto, modifique el archivo config.json.
+ // Para configurar o language, na raiz do projeto altere o arquivo config.json
+  // Para configurar el language, en la raíz del proyecto, modifique el archivo config.json.
   // To set the language, in the root of the project, modify the config.json file.
 
 const linkRegex = /https:/i;
 export async function before(m, {conn, isAdmin, isBotAdmin, text}) {
-    const idioma = global.db.data.users[m.sender].language || global.defaultLenguaje 
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-    const tradutor = _translate.plugins._antilink2
+    const language = global.db.data.users[m.sender].language || global.defaultLanguage 
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+    const translator = _translate.plugins._antilink2
 
   if (m.isBaileys && m.fromMe) {
     return !0;
@@ -29,13 +29,13 @@ export async function before(m, {conn, isAdmin, isBotAdmin, text}) {
       if (m.text.includes(linkThisGroup2)) return !0;
       if (m.text.includes(linkThisGroup3)) return !0;
     }
-    await this.sendMessage(m.chat, {text: tradutor.texto1, mentions: [m.sender]}, {quoted: m});
-    if (!isBotAdmin) return m.reply(tradutor.texto2);
+    await this.sendMessage(m.chat, {text: translator.texto1, mentions: [m.sender]}, {quoted: m});
+    if (!isBotAdmin) return m.reply(translator.texto2);
     if (isBotAdmin && bot.restrict) {
       await conn.sendMessage(m.chat, {delete: {remoteJid: m.chat, fromMe: false, id: bang, participant: delet}});
       const responseb = await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove');
       if (responseb[0].status === '404') return;
-    } else if (!bot.restrict) return m.reply(tradutor.texto3);
+    } else if (!bot.restrict) return m.reply(translator.texto3);
   }
   return !0;
 }

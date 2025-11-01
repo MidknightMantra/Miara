@@ -2,11 +2,11 @@ import axios from 'axios';
 import fetch from 'node-fetch';
 const handler = async (m, {command, conn}) => {
   const datas = global
-    const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-    const tradutor = _translate.plugins.adult_comandos
+    const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+    const translator = _translate.plugins.adult_comandos
 
-  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw tradutor.texto1;
+  if (!db.data.chats[m.chat].modohorny && m.isGroup) throw translator.texto1;
 
   if (command == 'nsfwloli') {
     const res = (await axios.get(`https://raw.githubusercontent.com/BrunoSobrino/TheMystic-Bot-MD/master/src/JSON/nsfwloli.json`)).data;

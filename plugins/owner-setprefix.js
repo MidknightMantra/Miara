@@ -2,13 +2,13 @@
 
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.owner_setprefix
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.owner_setprefix
 
-  if (!text) throw `${tradutor.texto1} ${usedPrefix + command} /`;
+  if (!text) throw `${translator.texto1} ${usedPrefix + command} /`;
   global.prefix = new RegExp('^[' + (text || global.opts['prefix'] || '‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']');
-  await m.reply(`${tradutor.texto2} ${text}*`);
+  await m.reply(`${translator.texto2} ${text}*`);
 };
 handler.help = ['setprefix'].map((v) => v + ' [prefix]');
 handler.tags = ['owner'];

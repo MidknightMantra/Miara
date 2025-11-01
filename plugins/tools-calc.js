@@ -1,15 +1,15 @@
 const handler = async (m, {conn, text}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.herramientas_calc
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.herramientas_calc
 
   const id = m.chat;
   conn.math = conn.math ? conn.math : {};
   if (id in conn.math) {
     clearTimeout(conn.math[id][3]);
     delete conn.math[id];
-    m.reply(tradutor.texto2);
+    m.reply(translator.texto2);
   }
   const val = text
       .replace(/[^0-9\-\/+*×÷πEe()piPI/]/g, '')
@@ -31,8 +31,8 @@ const handler = async (m, {conn, text}) => {
     if (!result) throw result;
     m.reply(`*${format}* = _${result}_`);
   } catch (e) {
-    if (e == undefined) throw tradutor.texto1;
-    throw tradutor.texto3;
+    if (e == undefined) throw translator.texto1;
+    throw translator.texto3;
   }
 };
 handler.help = ['calc <expression>'];

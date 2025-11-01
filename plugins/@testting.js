@@ -16,13 +16,13 @@ const VIDEO_SIZE_LIMIT = 100 * 1024 * 1024;
 const TMP_DIR = join(process.cwd(), './src/tmp');
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    const idioma = global?.db?.data?.users[m.sender]?.language || global.defaultLenguaje;
-    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}/${m.plugin}.json`));
-    const tradutor = _translate._testting;
+    const language = global?.db?.data?.users[m.sender]?.language || global.defaultLanguage;
+    const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}/${m.plugin}.json`));
+    const translator = _translate._testting;
     
     try {
         const query = args.join(' ');
-        if (!query) return m.reply(tradutor.errors.no_query.replace('@command', usedPrefix + command));
+        if (!query) return m.reply(translator.errors.no_query.replace('@command', usedPrefix + command));
 
         let video;
         const isYouTubeUrl = isValidYouTubeUrl(query);
@@ -31,11 +31,11 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
             video = await getVideoInfoFromUrl(query);
         } else {
             const { videos } = await yts(query);
-            if (!videos || videos.length === 0) return m.reply(tradutor.errors.no_results);
+            if (!videos || videos.length === 0) return m.reply(translator.errors.no_results);
             video = videos[0];
         }
 
-        const videoInfoMsg = `${tradutor.video_info.header}\n\n${tradutor.video_info.title.replace('@title', video.title)}\n${tradutor.video_info.author.replace('@author', video.author.name)}\n${tradutor.video_info.duration.replace('@duration', video.duration?.timestamp || '00:00')}\n${tradutor.video_info.views.replace('@views', (video.views || 0).toLocaleString())}\n${tradutor.video_info.published.replace('@published', video.ago || 'Desconocido')}\n${tradutor.video_info.id.replace('@id', video.videoId)}\n${tradutor.video_info.link.replace('@link', video.url)}`.trim();
+        const videoInfoMsg = `${translator.video_info.header}\n\n${translator.video_info.title.replace('@title', video.title)}\n${translator.video_info.author.replace('@author', video.author.name)}\n${translator.video_info.duration.replace('@duration', video.duration?.timestamp || '00:00')}\n${translator.video_info.views.replace('@views', (video.views || 0).toLocaleString())}\n${translator.video_info.published.replace('@published', video.ago || 'Desconocido')}\n${translator.video_info.id.replace('@id', video.videoId)}\n${translator.video_info.link.replace('@link', video.url)}`.trim();
 
         if (command !== 'ytmp3' && command !== 'ytmp4') { 
             conn.sendMessage(m.chat, { image: { url: video.thumbnail }, caption: videoInfoMsg }, { quoted: m });
@@ -195,10 +195,10 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                         
                         await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
                     } catch (urlError) {
-                        await m.reply(tradutor.errors.generic.replace('@error', 'Error de envío. Intenta nuevamente.'));
+                        await m.reply(translator.errors.generic.replace('@error', 'Error de envío. Intenta nuevamente.'));
                     }
                 } else {
-                    await m.reply(tradutor.errors.generic.replace('@error', audioError.message));
+                    await m.reply(translator.errors.generic.replace('@error', audioError.message));
                 }
             }
 
@@ -266,17 +266,17 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                         
                         await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
                     } catch (urlError) {
-                        await m.reply(tradutor.errors.generic.replace('@error', 'Error de envío. Intenta nuevamente.'));
+                        await m.reply(translator.errors.generic.replace('@error', 'Error de envío. Intenta nuevamente.'));
                     }
                 } else {
-                    await m.reply(tradutor.errors.generic.replace('@error', videoError.message));
+                    await m.reply(translator.errors.generic.replace('@error', videoError.message));
                 }
             }
         }
 
     } catch (e) {
         console.log('DEBUG: Error general en handler:', e.message);
-        await m.reply(tradutor.errors.generic.replace('@error', e.message));
+        await m.reply(translator.errors.generic.replace('@error', e.message));
     }
 };
 

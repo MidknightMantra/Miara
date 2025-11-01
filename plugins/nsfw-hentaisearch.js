@@ -3,12 +3,12 @@ import axios from 'axios';
 
 const handler = async (m, {conn, text, __dirname, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.adult_hentaisearch
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.adult_hentaisearch
 
-  if (!global.db.data.chats[m.chat].modohorny && m.isGroup) throw `${tradutor.texto1}`;
-  if (!text) throw `${tradutor.texto2}`;
+  if (!global.db.data.chats[m.chat].modohorny && m.isGroup) throw `${translator.texto1}`;
+  if (!text) throw `${translator.texto2}`;
   const searchResults = await searchHentai(text);
   let teks = searchResults.result.map((v, i) => `
 ${i+1}. *_${v.title}_*
@@ -20,7 +20,7 @@ ${i+1}. *_${v.title}_*
     randomThumbnail = searchResults.result[randomIndex].thumbnail;
   } else {
     randomThumbnail = 'https://pictures.hentai-foundry.com/e/Error-Dot/577798/Error-Dot-577798-Zero_Two.png';
-    teks = tradutor.texto3;
+    teks = translator.texto3;
   }
   conn.sendFile(m.chat, randomThumbnail, 'error.jpg', teks, m);
 };

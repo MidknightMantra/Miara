@@ -2,13 +2,13 @@ import fetch from 'node-fetch';
 
 const handler = async (m, {conn, args, text}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.downloader_pptiktok
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.downloader_pptiktok
 
-  if (!text) throw `${tradutor.texto1}`;
+  if (!text) throw `${translator.texto1}`;
   const res = `https://api.lolhuman.xyz/api/pptiktok/${text}?apikey=${lolkeysapi}`;
-  conn.sendFile(m.chat, res, 'error.jpg', `${tradutor.texto2} ${text}*`, m, false);
+  conn.sendFile(m.chat, res, 'error.jpg', `${translator.texto2} ${text}*`, m, false);
 };
 handler.help = ['tiktokfoto'].map((v) => v + ' <username>');
 handler.tags = ['downloader'];

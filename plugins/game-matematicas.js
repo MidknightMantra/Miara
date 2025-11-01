@@ -2,11 +2,11 @@ global.math = global.math ? global.math : {};
 
 const handler = async (m, {conn, args, usedPrefix, command}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.juegos_matemicas?.texto1 ? _translate.plugins.juegos_matemicas : _translate.plugins.juegos_matematicas
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.juegos_matemicas?.texto1 ? _translate.plugins.juegos_matemicas : _translate.plugins.juegos_matematicas
 
-  const mat =`${tradutor.texto1} _${usedPrefix + command} medium_\n\n${tradutor.texto2} ${Object.keys(modes).join(' | ')}`.trim();
+  const mat =`${translator.texto1} _${usedPrefix + command} medium_\n\n${translator.texto2} ${Object.keys(modes).join(' | ')}`.trim();
   if (args.length < 1) return await conn.reply(m.chat, mat, m);
   /* conn.sendButton(m.chat, mat, wm, null, [
 ['𝙼𝙰𝚃𝙴𝚂 𝙴𝙰𝚂𝚈', `${usedPrefix + command} easy`],
@@ -27,14 +27,14 @@ conn.sendHydrated(m.chat, mat, author, null, null, null, null, null, [
 ['𝙼𝙰𝚃𝙴𝚂 𝙷𝙰𝚁𝙳', `${usedPrefix + command} hard`]], m)*/
 
   const id = m.chat;
-  if (id in global.math) return conn.reply(m.chat, tradutor.texto3, global.math[id][0]);
+  if (id in global.math) return conn.reply(m.chat, translator.texto3, global.math[id][0]);
   const math = genMath(mode);
   global.math[id] = [
-    await conn.reply(m.chat, `${tradutor.texto4[0]} ${math.str}\n\n${tradutor.texto4[1]} ${(math.time / 1000).toFixed(2)}s\n\n${tradutor.texto4[2]} ${math.bonus} XP\n\njrU022n8Vf`, m),
+    await conn.reply(m.chat, `${translator.texto4[0]} ${math.str}\n\n${translator.texto4[1]} ${(math.time / 1000).toFixed(2)}s\n\n${translator.texto4[2]} ${math.bonus} XP\n\njrU022n8Vf`, m),
     math, 4,
     setTimeout(() => {
       if (global.math[id]) {
-        conn.reply(m.chat, `${tradutor.texto5} ${math.result}`, m),
+        conn.reply(m.chat, `${translator.texto5} ${math.result}`, m),
         // conn.sendButton(m.chat, `*[❗𝐈𝐍𝐅𝐎❗] 𝚂𝙴 𝙰𝙷 𝙵𝙸𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙾 𝙴𝙻 𝚃𝙸𝙴𝙼𝙿𝙾 𝙿𝙰𝚁𝙰 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴𝚁*\n\n*𝙻𝙰 𝚁𝙴𝚂𝙿𝚄𝙴𝚂𝚃𝙰 𝙴𝚂 ${math.result}*`, author, null, [['𝚅𝙾𝙻𝚅𝙴𝚁 𝙰 𝙸𝙽𝚃𝙴𝙽𝚃𝙰𝚁', `${usedPrefix + command} ${math.mode}`]], global.math[id][0])
         delete global.math[id];
       }

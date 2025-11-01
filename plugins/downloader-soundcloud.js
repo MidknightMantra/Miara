@@ -2,12 +2,12 @@ import axios from "axios";
 
 const handler = async (m, { conn, text }) => {
   const datas = global;
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje;
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage;
   const _translate = JSON.parse(
-    fs.readFileSync(`./src/languages/${idioma}.json`),
+    fs.readFileSync(`./src/languages/${language}.json`),
   );
-  const tradutor = _translate.plugins.downloader_soundcloud;
-  if (!text) throw `${tradutor.texto1}`;
+  const translator = _translate.plugins.downloader_soundcloud;
+  if (!text) throw `${translator.texto1}`;
   try {
     const searchxd = await axios.get(global.BASE_API_DELIRIUS + "/search/soundcloud",
       {
@@ -48,7 +48,7 @@ const handler = async (m, { conn, text }) => {
       { quoted: m },
     );
   } catch {
-    throw `${tradutor.texto3}`;
+    throw `${translator.texto3}`;
   }
 };
 handler.command = /^(soundcloud|cover)$/i;

@@ -6,12 +6,12 @@ import FormData from "form-data";
 const split = '|';
 const handler = async (m, {conn, args: [effect], text: txt, usedPrefix, command, name}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.maker_logos
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.maker_logos
 
-  if (!effect) throw tradutor.texto1 + effects.map((v) => v.title).join('\n° ඬ⃟📝 #logo ');
-  if (!effects.find((v) => (new RegExp(v.title, 'gi')).test(effect))) throw `${tradutor.texto2[0]} ${effect} ${tradutor.texto2[1]}`;  
+  if (!effect) throw translator.texto1 + effects.map((v) => v.title).join('\n° ඬ⃟📝 #logo ');
+  if (!effects.find((v) => (new RegExp(v.title, 'gi')).test(effect))) throw `${translator.texto2[0]} ${effect} ${translator.texto2[1]}`;  
   let text = txt.replace(new RegExp(effect, 'gi'), '').trimStart();
   if (text.includes(split)) {
     text = text.split(split).map((t) => t.trim());
@@ -19,9 +19,9 @@ const handler = async (m, {conn, args: [effect], text: txt, usedPrefix, command,
     text = [text.trim()];
   }
   const effectoSelect = effects.find((effectz) => new RegExp(effectz?.title, 'i').test(effect));
-  const res = await maker(effectoSelect?.url, [...text]).catch(_ => { throw tradutor.texto3 })
-   if (typeof res == 'number') throw res == -1 ? `${tradutor.texto4[0]} ${effect} ${tradutor.texto4[1]}` : `${tradutor.texto4[2]} ${usedPrefix + command} ${effect} ${new Array(res).fill('texto').map((v, i) => v + (i ? i + 1 : '')).join('|')}*`;
-  await conn.sendMessage(m.chat, {image: {url: res.image}, caption: `${tradutor.texto5} ${effect}*`}, {quoted: m});  
+  const res = await maker(effectoSelect?.url, [...text]).catch(_ => { throw translator.texto3 })
+   if (typeof res == 'number') throw res == -1 ? `${translator.texto4[0]} ${effect} ${translator.texto4[1]}` : `${translator.texto4[2]} ${usedPrefix + command} ${effect} ${new Array(res).fill('texto').map((v, i) => v + (i ? i + 1 : '')).join('|')}*`;
+  await conn.sendMessage(m.chat, {image: {url: res.image}, caption: `${translator.texto5} ${effect}*`}, {quoted: m});  
 };
 handler.help = ['logos'];
 handler.tags = ['maker'];

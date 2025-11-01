@@ -1,8 +1,8 @@
 const handler = async (m, {conn, args, text, command, usedPrefix}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.gc_warn
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.gc_warn
 
   const testi = await m?.mentionedJid
   if (testi.includes(conn.user.jid)) return;
@@ -21,7 +21,7 @@ const handler = async (m, {conn, args, text, command, usedPrefix}) => {
   const dReason = 'Sin motivo';
   const msgtext = text || dReason;
   const sdms = msgtext.replace(/@\d+-?\d* /g, '');
-  const warntext = `${tradutor.texto1}\n*${
+  const warntext = `${translator.texto1}\n*${
     usedPrefix + command
   } @${global.suittag}*`;
   if (!who) {
@@ -31,7 +31,7 @@ const handler = async (m, {conn, args, text, command, usedPrefix}) => {
   await m.reply(
       `${
       user.warn == 1 ? `*@${who.split`@`[0]}*` : `*@${who.split`@`[0]}*`
-      } ${tradutor.texto2[0]} ${sdms}\n${tradutor.texto2[1]} ${
+      } ${translator.texto2[0]} ${sdms}\n${translator.texto2[1]} ${
         user.warn
       }/3*`,
       null,
@@ -40,14 +40,14 @@ const handler = async (m, {conn, args, text, command, usedPrefix}) => {
   if (user.warn >= 3) {
     if (!bot.restrict) {
       return m.reply(
-          `${tradutor.texto3[0]} (#𝚎𝚗𝚊𝚋𝚕𝚎 𝚛𝚎𝚜𝚝𝚛𝚒𝚌𝚝) ${tradutor.texto3[1]}`,
+          `${translator.texto3[0]} (#𝚎𝚗𝚊𝚋𝚕𝚎 𝚛𝚎𝚜𝚝𝚛𝚒𝚌𝚝) ${translator.texto3[1]}`,
       );
     }
     user.warn = 0;
     await m.reply(
-        `${tradutor.texto4[0]}\n*@${
+        `${translator.texto4[0]}\n*@${
           who.split`@`[0]
-        }* ${tradutor.texto4[1]}`,
+        }* ${translator.texto4[1]}`,
         null,
         {mentions: [who]},
     );

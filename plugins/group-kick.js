@@ -3,13 +3,13 @@ const lidCache = new Map();
 
 const handler = async (m, {conn, participants, command, usedPrefix, text}) => {
   const datas = global
-  const idioma = datas.db.data.users[m.sender].language || global.defaultLenguaje
-  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${idioma}.json`))
-  const tradutor = _translate.plugins.grupos_eliminar
+  const language = datas.db.data.users[m.sender].language || global.defaultLanguage
+  const _translate = JSON.parse(fs.readFileSync(`./src/languages/${language}.json`))
+  const translator = _translate.plugins.grupos_eliminar
 
-  if (!global.db.data.settings[conn.user.jid].restrict) throw `${tradutor.texto1[0]} (*_restrict_*), ${tradutor.texto1[1]}`;
+  if (!global.db.data.settings[conn.user.jid].restrict) throw `${translator.texto1[0]} (*_restrict_*), ${translator.texto1[1]}`;
   
-  const kicktext = `${tradutor.texto2} _${usedPrefix + command} @${global.suittag}_`;
+  const kicktext = `${translator.texto2} _${usedPrefix + command} @${global.suittag}_`;
   
   const getMentionedUserAndReason = async () => {
     let mentionedJid = null;
@@ -54,11 +54,11 @@ const handler = async (m, {conn, participants, command, usedPrefix, text}) => {
   
   const { user: mentionedUser, reason: kickReason } = await getMentionedUserAndReason();
   if (!mentionedUser) return m.reply(kicktext, m.chat, {mentions: conn.parseMention(kicktext)});
-  if (conn.user.jid.includes(mentionedUser)) return m.reply(tradutor.texto4);
+  if (conn.user.jid.includes(mentionedUser)) return m.reply(translator.texto4);
   
   if (kickReason) {
     const userTag = mentionedUser.split('@')[0];
-    const reasonMessage = `╭─⬣「 🚫 *ADVERTENCIA* 🚫 」⬣\n│\n├❯ *Usuario:* @${userTag}\n├❯ *Acción:* Expulsión del grupo\n├❯ *Motivo:* ${kickReason}\n├❯ *Admin:* @${m.sender.split('@')[0]}\n│\n╰─⬣ *¡Hasta luego!* ⬣`;
+    const reasonMessage = `╭─⬣「 🚫 *WARNING* 🚫 」⬣\n│\n├❯ *User:* @${userTag}\n├❯ *Action:* Kicked from group\n├❯ *Reason:* ${kickReason}\n├❯ *Admin:* @${m.sender.split('@')[0]}\n│\n╰─⬣ *Goodbye!* ⬣`;
     
     await conn.sendMessage(m.chat, {
       text: reasonMessage,
@@ -71,9 +71,9 @@ const handler = async (m, {conn, participants, command, usedPrefix, text}) => {
   try {
     const response = await conn.groupParticipantsUpdate(m.chat, [mentionedUser], 'remove');
     const userTag = mentionedUser.split('@')[0];
-    const exitoso1 = `${tradutor.texto5[0]} @${userTag} ${tradutor.texto5[1]}`;
-    const error1 = `${tradutor.texto6[0]} @${userTag} ${tradutor.texto6[1]}`;
-    const error2 = `${tradutor.texto7[0]} @${userTag} ${tradutor.texto7[1]}`;
+    const exitoso1 = `${translator.texto5[0]} @${userTag} ${translator.texto5[1]}`;
+    const error1 = `${translator.texto6[0]} @${userTag} ${translator.texto6[1]}`;
+    const error2 = `${translator.texto7[0]} @${userTag} ${translator.texto7[1]}`;
     
     if (response[0]?.status === '200') {
       m.reply(exitoso1, m.chat, {mentions: conn.parseMention(exitoso1)});
@@ -82,10 +82,10 @@ const handler = async (m, {conn, participants, command, usedPrefix, text}) => {
     } else if (response[0]?.status === '404') {
       m.reply(error2, m.chat, {mentions: conn.parseMention(error2)});
     } else {
-      conn.sendMessage(m.chat, {text: `${tradutor.texto8}`, mentions: [m.sender], contextInfo: {forwardingScore: 999, isForwarded: true}}, {quoted: m});
+      conn.sendMessage(m.chat, {text: `${translator.texto8}`, mentions: [m.sender], contextInfo: {forwardingScore: 999, isForwarded: true}}, {quoted: m});
     }
   } catch (error) {
-    conn.sendMessage(m.chat, {text: `${tradutor.texto8}`, mentions: [m.sender], contextInfo: {forwardingScore: 999, isForwarded: true}}, {quoted: m});
+    conn.sendMessage(m.chat, {text: `${translator.texto8}`, mentions: [m.sender], contextInfo: {forwardingScore: 999, isForwarded: true}}, {quoted: m});
   }
 };
 
@@ -121,7 +121,7 @@ async function resolveLidToRealJid(lid, conn, groupChatId, maxRetries = 3, retry
                 }
             }
             
-            if (!metadata?.participants) throw new Error("No se obtuvieron participantes");
+            if (!metadata?.participants) throw new Error("Could not get participants");
             
             for (const participant of metadata.participants) {
                 try {
