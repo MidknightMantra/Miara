@@ -1,6 +1,1 @@
-node_modules/
-MiaraSession/
-temp/
-*.log
-.env
-package-lock.json
+node_modules
