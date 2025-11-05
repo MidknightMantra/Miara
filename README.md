@@ -86,29 +86,29 @@ Deploy Miara instantly to your favorite platform:
 
 <p align="center">
   <a href="https://heroku.com/deploy?template=https://github.com/MidknightMantra/Miara">
-    <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"/>
+    <img src="https://img.shields.io/badge/Deploy_to_Heroku-79589F?style=for-the-badge&logo=heroku&logoColor=white" alt="Deploy to Heroku"/>
   </a>
   &nbsp;
   <a href="https://railway.app/template/miara?referralCode=YOUR_REFERRAL_CODE">
-    <img src="https://railway.app/button.svg" alt="Deploy on Railway"/>
+    <img src="https://img.shields.io/badge/Deploy_on_Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" alt="Deploy on Railway"/>
   </a>
   &nbsp;
   <a href="https://render.com/deploy?repo=https://github.com/MidknightMantra/Miara">
-    <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"/>
+    <img src="https://img.shields.io/badge/Deploy_to_Render-232F3E?style=for-the-badge&logo=render&logoColor=white" alt="Deploy to Render"/>
   </a>
 </p>
 
 <p align="center">
   <a href="https://replit.com/github/MidknightMantra/Miara">
-    <img src="https://replit.com/badge/github/MidknightMantra/Miara" alt="Run on Replit"/>
+    <img src="https://img.shields.io/badge/Run_on_Replit-667881?style=for-the-badge&logo=replit&logoColor=white" alt="Run on Replit"/>
   </a>
   &nbsp;
   <a href="https://app.koyeb.com/deploy?type=git&repository=github.com/MidknightMantra/Miara">
-    <img src="https://www.koyeb.com/static/images/deploy/button.svg" alt="Deploy to Koyeb"/>
+    <img src="https://img.shields.io/badge/Deploy_to_Koyeb-222222?style=for-the-badge&logo=koyeb&logoColor=white" alt="Deploy to Koyeb"/>
   </a>
   &nbsp;
   <a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/MidknightMantra/Miara">
-    <img src="https://www.deploytodo.com/do-btn-blue.svg" alt="Deploy to DigitalOcean"/>
+    <img src="https://img.shields.io/badge/Deploy_to_DigitalOcean-0080FF?style=for-the-badge&logo=digitalocean&logoColor=white" alt="Deploy to DigitalOcean"/>
   </a>
 </p>
 
@@ -227,7 +227,7 @@ Contributions are welcome! Please follow these steps:
 ## 📜 License
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
@@ -236,20 +236,29 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-If you encounter any issues or have questions, reach out through any of these channels:
+If you encounter any issues or have questions, reach out through any of these channel.
 
 <p align="center">
-  <a href="https://github.com/MidknightMantra/Miara/issues">
-    <img src="https://img.shields.io/badge/GitHub_Issues-Open_an_Issue-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Issues"/>
+  <a href="https://github.com/MidknightMantra">
+    <img src="https://img.shields.io/badge/GitHub-MidknightMantra-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
   </a>
+  &nbsp;
   <a href="https://t.me/MidknightMantra">
-    <img src="https://img.shields.io/badge/Telegram-Contact_Me-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Support"/>
+    <img src="https://img.shields.io/badge/Telegram-MidknightMantra-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"/>
   </a>
+  &nbsp;
+  <a href="https://youtube.com/@MidknightMantra">
+    <img src="https://img.shields.io/badge/YouTube-MidknightMantra-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"/>
+  </a>
+</p>
+
+<p align="center">
   <a href="https://wa.me/254105745317">
-    <img src="https://img.shields.io/badge/WhatsApp-Chat_with_Me-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp Support"/>
+    <img src="https://img.shields.io/badge/WhatsApp-+254105745317-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"/>
   </a>
+  &nbsp;
   <a href="mailto:midknightmantra@gmail.com">
-    <img src="https://img.shields.io/badge/Email-Send_Message-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Support"/>
+    <img src="https://img.shields.io/badge/Email-midknightmantra@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
   </a>
 </p>
 
