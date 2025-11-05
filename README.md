@@ -59,7 +59,7 @@
 
 <p align="center">
   <a href="https://github.com/MidknightMantra">
-    <img src="https://raw.githubusercontent.com/shizothetechie/database/main/icon/github.png" alt="GitHub" width="60"/>
+    <img src="https://icons8.com/icon/12599/github" alt="GitHub" width="60"/>
   </a>
   &nbsp;&nbsp;
   <a href="https://t.me/MidknightMantra">
