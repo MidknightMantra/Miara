@@ -419,7 +419,7 @@ if (sender === OWNER_NUMBER && command) {
 
       case "setbio": {
   if (sender !== config.OWNER_NUMBER) {
-    await reply("🔒 Only the owner can use this command.");
+    await reply("❌ Only the owner can change the bio.");
     return;
   }
 
@@ -429,47 +429,18 @@ if (sender === OWNER_NUMBER && command) {
   }
 
   const newBio = args.join(" ");
-  const envPath = path.resolve("./.env");
 
   try {
-    // 🪄 Step 1: Update WhatsApp Bio
-    if (conn.updateProfileStatus) {
-      await conn.updateProfileStatus(newBio);
-      console.log(chalk.green("✅ WhatsApp bio updated successfully."));
-    } else {
-      throw new Error("updateProfileStatus not supported in this session.");
-    }
+    await conn.updateProfileStatus(newBio);
+    await reply(`✅ Bio updated successfully!\n\n📄 *New Bio:* ${newBio}`);
 
-    // 🪄 Step 2: Update or append BIO in .env
-    let envContent = "";
-    try {
-      envContent = await fs.promises.readFile(envPath, "utf8");
-    } catch {
-      envContent = "";
-    }
-
-    const newLine = `BIO="${newBio}"`;
-    if (/^BIO=.*$/m.test(envContent)) {
-      envContent = envContent.replace(/^BIO=.*/m, newLine);
-    } else {
-      envContent += `\n${newLine}`;
-    }
-
-    await fs.promises.writeFile(envPath, envContent.trim() + "\n", "utf8");
-
-    // 🪄 Step 3: Confirm success
-    await reply(`✅ *Bio updated successfully!*\n\n📄 *New Bio:* ${newBio}`);
-    await conn.sendMessage(from, { react: { text: "🌸", key: msgObj.key } });
+    // 🌸 React to confirm
+    await conn.sendMessage(from, {
+      react: { text: "🌸", key: msgObj.key },
+    });
   } catch (err) {
-    console.error(chalk.red("❌ setbio error:"), err);
-
-    if (String(err).includes("updateProfileStatus")) {
-      await reply(
-        "⚠️ Bio update failed. Miara might be running on a *linked device session*.\n\nTry logging in with a *main WhatsApp account* instead."
-      );
-    } else {
-      await reply("❌ Failed to update bio. Please try again later.");
-    }
+    console.error("❌ setbio error:", err);
+    await reply("⚠️ Failed to update bio. Please try again later.");
   }
 
   break;
