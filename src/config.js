@@ -10,6 +10,7 @@ export const config = {
   MODE: process.env.MODE?.toLowerCase() === "private" ? "private" : "public",
   LANGUAGE: process.env.LANGUAGE || "en",
   REGION: process.env.REGION || "Unknown",
+  BIO: process.env.BIO || "🌸 M I A R A 🌸",
   STICKER_PACK_NAME: process.env.STICKER_PACK_NAME || "Miara Pack",
   STICKER_AUTHOR: process.env.STICKER_AUTHOR || "MidKnightMantra🌸",
   SESSION_PATH: process.env.SESSION_PATH || "./src/session",

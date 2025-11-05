@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ignore": ["session/*", "session/**/*.json", "session/**/*.bin"],
+  "ext": "js,json",
+  "exec": "node src/main.js"
+}

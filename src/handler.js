@@ -2,13 +2,14 @@
  * 🌸 Miara
  * MidKnight Mantra
  */
-
 import chalk from "chalk";
 import moment from "moment-timezone";
 import os from "os";
+import fs from "fs";
 import { downloadMediaMessage } from "@whiskeysockets/baileys";
 import { Sticker, StickerTypes } from "wa-sticker-formatter";
-import { smsg, isUrl, sleep, getBuffer } from "./utils/helpers.js";
+import { fileTypeFromBuffer } from "file-type";
+import { smsg, isUrl, sleep, getBuffer, detectFileType } from "./utils/helpers.js";
 import { config } from "./config.js";
 import { t } from "./lang.js";
 
@@ -56,13 +57,35 @@ export async function messageHandler(conn, event, store) {
     chalk.whiteBright(text || "[media]")
   );
 
+  // 💬 Random Fun & Motivational Quotes
+const quotes = [
+  "I'm not lazy, I'm just on my energy-saving mode.",
+  "Life is short — smile while you still have teeth.",
+  "If you think nobody cares, try missing a couple of payments.",
+  "Some people need a high-five. In the face. With a chair.",
+  "I'm not saying I'm Batman, but no one has ever seen us together.",
+  "My bed is magical; it makes me remember everything I forgot to do.",
+  "Why do they call it beauty sleep if you wake up looking like a troll?",
+  "I'm great at multitasking — I can waste time and procrastinate all at once.",
+  "The road to success is always under construction.",
+  "Dream big, hustle smart, and stay kind. 🌸",
+  "Don’t count the days — make the days count.",
+  "Confidence is not ‘they will like me’, it’s ‘I’ll be fine if they don’t’.",
+  "Even the stars need darkness to shine. ✨",
+  "Keep your face always toward the sunshine — shadows will fall behind you.",
+  "You can’t pour from an empty cup. Take care of yourself first.",
+  "Every flower blooms at its own pace — keep growing 🌸.",
+  "Happiness is homemade — and so is coffee ☕.",
+  "A smile is the prettiest thing you can wear.",
+  "The best time for new beginnings is now.",
+];
   // ─────────────────────────────────────────────
   // 💬 Core Commands
   // ─────────────────────────────────────────────
   switch (command) {
     case "ping": {
   const start = Date.now();
-  await reply("🏓 Pinging...");
+  await reply("🏃 Pinging...");
 
   const latency = Date.now() - start;
   const now = new Date();
@@ -169,12 +192,31 @@ export async function messageHandler(conn, event, store) {
 ╰━━━━━━━━━━━━━━━━━━━━╯
 
 © 2025 *Miara* | *MidKnightMantra*🌸
-`;
+`.trim();
+      try {
+    // 🖼️ Load menu image from local path
+    const imagePath = "./assets/menu.jpg";
+    const imageBuffer = fs.readFileSync(imagePath);
 
-      await conn.sendMessage(from, { text: menuText, mentions: [m.sender] }, { quoted: msgObj });
-      await conn.sendMessage(from, { react: { text: "🌸", key: msgObj.key } });
-      break;
-    }
+    await conn.sendMessage(
+      from,
+      {
+        image: imageBuffer,
+        caption: menuText,
+        mentions: [m.sender],
+      },
+      { quoted: msgObj }
+    );
+
+    // 🌸 React with an emoji
+    await conn.sendMessage(from, { react: { text: "🌸", key: msgObj.key } });
+  } catch (err) {
+    console.error("Menu image error:", err);
+    await reply("⚠️ Failed to load menu image. Check if `assets/menu.jpg` exists.");
+  }
+
+  break;
+}
 
     case "sticker":
     case "s": {
@@ -240,30 +282,89 @@ export async function messageHandler(conn, event, store) {
   break;
     }
 
-    case "fetch": {
-      if (!args[0] || !isUrl(args[0])) {
-        await reply(t(lang,`🔗 Usage: ${prefix}fetch <image_url>`));
-        return;
-      }
-      try {
-        const media = await getBuffer(args[0]);
-        await conn.sendMessage(from, {
-          image: media,
-          caption: "✅ Fetched successfully!",
-        });
-      } catch (err) {
-        console.error(err);
-        await reply(t(lang, "❌ Could not fetch media."));
-      }
-      break;
-    }
+case "fetch": {
+  if (!args[0] || !isUrl(args[0])) {
+    await reply(`🔗 Usage: ${prefix}fetch <url>\nExample: ${prefix}fetch https://placekitten.com/400/400`);
+    return;
+  }
 
-    default: {
-      if (text && text.startsWith(prefix)) {
-        await reply(t(lang, `🤖 Unknown command. Try *${prefix}menu*.`));
-      }
-      break;
+  const url = args[0];
+  await reply(`📥 Fetching media from:\n${url}`);
+
+  try {
+    const buffer = await getBuffer(url);
+    const type = await detectFileType(buffer);
+    const sizeKB = (buffer.length / 1024).toFixed(2);
+    const time = moment().tz("Africa/Nairobi").format("HH:mm:ss");
+
+    const mime = type?.mime || "application/octet-stream";
+    const ext = type?.ext || "bin";
+
+    // Shorten URL for display
+    const shortUrl = new URL(url).hostname.replace("www.", "");
+
+    // 🏷️ Caption Template
+    const emoji =
+  mime.startsWith("image/") ? "🖼️" :
+  mime.startsWith("video/") ? "🎥" :
+  mime.startsWith("audio/") ? "🎧" :
+  mime.includes("pdf") ? "📄" :
+  mime.includes("zip") ? "📦" : "📁";
+
+const caption = `
+${emoji} *Fetched Successfully!*
+
+📄 *Type:* ${mime}
+📦 *Size:* ${sizeKB} KB
+🌐 *Source:* ${shortUrl}
+🕐 *Time:* ${time}
+
+— *${config.BOT_NAME || "Miara"}* 🌸
+    `.trim();
+
+    console.log(`📂 Detected MIME: ${mime}`);
+
+    if (mime.startsWith("image/")) {
+      await conn.sendMessage(from, { image: buffer, caption });
+      await conn.sendMessage(from, { react: { text: "🖼️", key: msgObj.key } });
+    } else if (mime.startsWith("video/")) {
+      await conn.sendMessage(from, { video: buffer, caption });
+      await conn.sendMessage(from, { react: { text: "🎥", key: msgObj.key } });
+    } else if (mime.startsWith("audio/")) {
+      await conn.sendMessage(from, {
+        audio: buffer,
+        mimetype: mime,
+        ptt: false,
+        caption,
+      });
+      await conn.sendMessage(from, { react: { text: "🎧", key: msgObj.key } });
+    } else if (
+      mime === "application/pdf" ||
+      mime.includes("zip") ||
+      mime.includes("msword")
+    ) {
+      await conn.sendMessage(from, {
+        document: buffer,
+        mimetype: mime,
+        fileName: `file.${ext}`,
+        caption,
+      });
+      await conn.sendMessage(from, { react: { text: "📚", key: msgObj.key } });
+    } else {
+      await conn.sendMessage(from, {
+        document: buffer,
+        mimetype: mime,
+        fileName: `file.${ext}`,
+        caption,
+      });
+      await conn.sendMessage(from, { react: { text: "📁", key: msgObj.key } });
     }
+  } catch (err) {
+    console.error("Fetch error:", err);
+    await reply("❌ Failed to fetch or send this media. Try a direct file URL ending in .jpg, .mp4, etc.");
+  }
+  break;
+}
   }
 
   // ─────────────────────────────────────────────
@@ -283,59 +384,108 @@ export async function messageHandler(conn, event, store) {
     }
   }
 
-  // ─────────────────────────────────────────────
-  // 👑 Owner-only Commands
-  // ─────────────────────────────────────────────
-  const OWNER_NUMBER = "2547xxxxxxxx@s.whatsapp.net"; // Replace with your JID
+// ─────────────────────────────────────────────
+// 👑 Owner-only Commands
+// ─────────────────────────────────────────────
+const OWNER_NUMBER = config.OWNER_NUMBER || "254105745317@s.whatsapp.net"; // replace as needed
 
-  if (sender === OWNER_NUMBER && command) {
-    (async () => {
-      switch (command) {
-        case "restart":
-          await reply(t(lang, "♻️ Restarting Miara..."));
-          await sleep(1000);
-          process.exit(0);
-          break;
+if (sender === OWNER_NUMBER && command) {
+  (async () => {
+    switch (command) {
+      case "restart":
+        await reply("♻️ Restarting Miara...");
+        await sleep(1000);
+        process.exit(0);
+        break;
 
-        case "broadcast":
-        case "bc": {
-          if (!args.length) {
-            await reply("📢 Usage: .broadcast <text>");
-            return;
-          }
-          const bcMsg = args.join(" ");
-          const chats = Object.keys(store.data.chats || {});
-          await reply(`📣 Broadcasting to *${chats.length}* chats...`);
-          for (const jid of chats) {
-            await conn.sendMessage(jid, {
-              text: `📢 *Broadcast Message*\n\n${bcMsg}\n\n— _Miara Admin_`,
-            });
-            await sleep(400);
-          }
-          await reply(t(lang, "✅ Broadcast completed!"));
-          break;
+      case "broadcast":
+      case "bc": {
+        if (!args.length) {
+          await reply("📢 Usage: .broadcast <text>");
+          return;
         }
-
-        case "setbio": {
-          if (!args.length) {
-            await reply("📝 Usage: .setbio <new bio text>");
-            return;
-          }
-          const bio = args.join(" ");
-          await conn.query({
-            tag: "iq",
-            attrs: { to: "@s.whatsapp.net", type: "set", xmlns: "status" },
-            content: [
-              { tag: "status", attrs: {}, content: Buffer.from(bio, "utf-8") },
-            ],
+        const bcMsg = args.join(" ");
+        const chats = Object.keys(store.data.chats || {});
+        await reply(`📣 Broadcasting to *${chats.length}* chats...`);
+        for (const jid of chats) {
+          await conn.sendMessage(jid, {
+            text: `📢 *Broadcast Message*\n\n${bcMsg}\n\n— _Miara Admin_`,
           });
-          await reply("✅ Bio updated successfully!");
-          break;
+          await sleep(400);
         }
+        await reply("✅ Broadcast completed!");
+        break;
       }
-    })();
+
+      case "setbio": {
+  if (sender !== config.OWNER_NUMBER) {
+    await reply("🔒 Only the owner can use this command.");
+    return;
   }
+
+  if (!args.length) {
+    await reply("📝 Usage: .setbio <new bio text>");
+    return;
+  }
+
+  const newBio = args.join(" ");
+  const envPath = path.resolve("./.env");
+
+  try {
+    // 🪄 Step 1: Update WhatsApp Bio
+    if (conn.updateProfileStatus) {
+      await conn.updateProfileStatus(newBio);
+      console.log(chalk.green("✅ WhatsApp bio updated successfully."));
+    } else {
+      throw new Error("updateProfileStatus not supported in this session.");
+    }
+
+    // 🪄 Step 2: Update or append BIO in .env
+    let envContent = "";
+    try {
+      envContent = await fs.promises.readFile(envPath, "utf8");
+    } catch {
+      envContent = "";
+    }
+
+    const newLine = `BIO="${newBio}"`;
+    if (/^BIO=.*$/m.test(envContent)) {
+      envContent = envContent.replace(/^BIO=.*/m, newLine);
+    } else {
+      envContent += `\n${newLine}`;
+    }
+
+    await fs.promises.writeFile(envPath, envContent.trim() + "\n", "utf8");
+
+    // 🪄 Step 3: Confirm success
+    await reply(`✅ *Bio updated successfully!*\n\n📄 *New Bio:* ${newBio}`);
+    await conn.sendMessage(from, { react: { text: "🌸", key: msgObj.key } });
+  } catch (err) {
+    console.error(chalk.red("❌ setbio error:"), err);
+
+    if (String(err).includes("updateProfileStatus")) {
+      await reply(
+        "⚠️ Bio update failed. Miara might be running on a *linked device session*.\n\nTry logging in with a *main WhatsApp account* instead."
+      );
+    } else {
+      await reply("❌ Failed to update bio. Please try again later.");
+    }
+  }
+
+  break;
 }
+
+      default:
+        await reply("🤖 Unknown owner command.");
+        break;
+    }
+  })();
+}
+
+
+// ─────────────────────────────────────────────
+// 🕓 Utility Functions
+// ─────────────────────────────────────────────
 
 // 🕓 Format uptime into HH:MM:SS
 function clockString(ms) {
@@ -356,26 +506,4 @@ function getGreeting() {
   return "Good Night 🌙 — don’t forget to dream big.";
 }
 
-// 💬 Random Fun & Motivational Quotes
-const quotes = [
-  "I'm not lazy, I'm just on my energy-saving mode.",
-  "Life is short — smile while you still have teeth.",
-  "If you think nobody cares, try missing a couple of payments.",
-  "Some people need a high-five. In the face. With a chair.",
-  "I'm not saying I'm Batman, but no one has ever seen us together.",
-  "My bed is magical; it makes me remember everything I forgot to do.",
-  "Why do they call it beauty sleep if you wake up looking like a troll?",
-  "I'm great at multitasking — I can waste time and procrastinate all at once.",
-  "The road to success is always under construction.",
-  "Dream big, hustle smart, and stay kind. 🌸",
-  "Don’t count the days — make the days count.",
-  "Confidence is not ‘they will like me’, it’s ‘I’ll be fine if they don’t’.",
-  "Even the stars need darkness to shine. ✨",
-  "Keep your face always toward the sunshine — shadows will fall behind you.",
-  "You can’t pour from an empty cup. Take care of yourself first.",
-  "Every flower blooms at its own pace — keep growing 🌸.",
-  "Happiness is homemade — and so is coffee ☕.",
-  "A smile is the prettiest thing you can wear.",
-  "The best time for new beginnings is now.",
-];
-
+}
