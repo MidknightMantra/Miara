@@ -190,28 +190,6 @@ Edit the `config.json` file to customize your bot:
 | `autoRead` | boolean | Automatically read messages |
 | `autoReconnect` | boolean | Auto-reconnect on disconnect |
 
-## 📝 Commands
-
-### General Commands
-- `.help` - Display all available commands
-- `.menu` - Show the main menu
-- `.info` - Get bot information
-
-### Media Commands
-- `.download [url]` - Download media from URL
-- `.ytmp3 [url]` - Download YouTube audio
-- `.ytmp4 [url]` - Download YouTube video
-
-### Fun Commands
-- `.joke` - Get a random joke
-- `.quote` - Get an inspirational quote
-- `.meme` - Get a random meme
-
-### Admin Commands
-- `.kick @user` - Remove user from group
-- `.promote @user` - Make user an admin
-- `.demote @user` - Remove admin privileges
-
 ## 👥 Contributors
 
 Thanks to all the amazing contributors who have helped make Miara better! 💙
