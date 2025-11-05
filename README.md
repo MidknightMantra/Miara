@@ -80,31 +80,35 @@
 
 ---
 
-## 🚀 Deploy
+## 🚀 Deploy Miara
 
-Deploy Miara to your favorite platform with one click:
+Deploy Miara instantly to your favorite platform:
 
 <p align="center">
   <a href="https://heroku.com/deploy?template=https://github.com/MidknightMantra/Miara">
-    <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" height="32"/>
+    <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"/>
   </a>
-  <a href="https://railway.app/template/miara?referralCode=your-code">
-    <img src="https://railway.app/button.svg" alt="Deploy on Railway" height="32"/>
+  &nbsp;
+  <a href="https://railway.app/template/miara?referralCode=YOUR_REFERRAL_CODE">
+    <img src="https://railway.app/button.svg" alt="Deploy on Railway"/>
   </a>
+  &nbsp;
   <a href="https://render.com/deploy?repo=https://github.com/MidknightMantra/Miara">
-    <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height="32"/>
+    <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"/>
   </a>
 </p>
 
 <p align="center">
   <a href="https://replit.com/github/MidknightMantra/Miara">
-    <img src="https://replit.com/badge/github/MidknightMantra/Miara" alt="Run on Replit" height="32"/>
+    <img src="https://replit.com/badge/github/MidknightMantra/Miara" alt="Run on Replit"/>
   </a>
+  &nbsp;
   <a href="https://app.koyeb.com/deploy?type=git&repository=github.com/MidknightMantra/Miara">
-    <img src="https://www.koyeb.com/static/images/deploy/button.svg" alt="Deploy to Koyeb" height="32"/>
+    <img src="https://www.koyeb.com/static/images/deploy/button.svg" alt="Deploy to Koyeb"/>
   </a>
+  &nbsp;
   <a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/MidknightMantra/Miara">
-    <img src="https://www.deploytodo.com/do-btn-blue.svg" alt="Deploy to DigitalOcean" height="32"/>
+    <img src="https://www.deploytodo.com/do-btn-blue.svg" alt="Deploy to DigitalOcean"/>
   </a>
 </p>
 
@@ -221,6 +225,7 @@ Contributions are welcome! Please follow these steps:
 5. Open a Pull Request
 
 ## 📜 License
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
