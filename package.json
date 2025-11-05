@@ -1,0 +1,40 @@
+{
+  "name": "miara-bot",
+  "version": "1.0.0",
+  "description": "Miara 🤖 — A smart and feature-packed WhatsApp bot with AI, media tools, and automation.",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "nodemon --ignore session --ignore src/database src/main.js",
+    "lint": "eslint . --ext .js",
+    "test": "jest"
+  },
+  "keywords": [
+    "whatsapp",
+    "baileys",
+    "bot",
+    "miara"
+  ],
+  "author": "Miara Dev Team",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "7.0.0-rc.6",
+    "awesome-phonenumber": "7.5.0",
+    "chalk": "^5.6.2",
+    "dotenv": "17.2.3",
+    "file-type": "^21.0.0",
+    "fs-extra": "^11.3.2",
+    "lowdb": "^7.0.1",
+    "node-fetch": "^3.3.2",
+    "pino": "^10.1.0",
+    "qrcode-terminal": "^0.12.0",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.10"
+  }
+}

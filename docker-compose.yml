@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  miara:
+    build: .
+    container_name: miara
+    volumes:
+      - ./src/session:/app/src/session
+      - ./src/database:/app/src/database
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
