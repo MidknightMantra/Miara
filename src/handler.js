@@ -6,6 +6,7 @@
 
 import chalk from "chalk";
 import { smsg, isUrl, sleep, getBuffer } from "./utils/helpers.js";
+import { config } from "./config.js";
 
 /**
  * Handles all incoming messages
@@ -46,17 +47,56 @@ export async function messageHandler(conn, event, store) {
   // ─────────────────────────────────────────────
   switch (command) {
     case "ping": {
-      const start = Date.now();
-      await reply("🏓 Pinging...");
-      const latency = Date.now() - start;
-      await reply(`✅ Pong! *${latency}ms*`);
-      break;
-    }
+  const start = Date.now();
+  await reply("🏓 Pinging...");
+
+  const latency = Date.now() - start;
+  const now = new Date();
+
+  const dateString = now.toLocaleDateString("en-KE", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const timeString = now.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+
+   // 🕓 Detect system timezone
+  const timeZone =
+    Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+    
+  const BOT_NAME = config?.BOT_NAME || "Miara🌸";
+
+  // Calculate uptime
+  const uptimeMs = process.uptime() * 1000;
+  const hours = Math.floor(uptimeMs / 3600000);
+  const minutes = Math.floor((uptimeMs % 3600000) / 60000);
+  const seconds = Math.floor((uptimeMs % 60000) / 1000);
+  const uptime = `${hours}h ${minutes}m ${seconds}s`;
+
+  const pingMsg = `
+✨ *${BOT_NAME}*
+⚡ Speed: *${latency}ms*
+🌍 Timezone: ${timeZone}
+📅 Date: ${dateString}
+🕐 Time: ${timeString}
+🕒 Uptime: ${uptime}
+`;
+
+  await reply(pingMsg);
+  break;
+}
 
     case "menu":
     case "help": {
       const menuText = `
-🌸 *Miara Bot — Main Menu* 🌸
+🌸 *Miara — Main Menu* 🌸
 
 ╭───❏  *User Commands*
 │ 💫 ${prefix}ping — Check latency
@@ -70,7 +110,7 @@ export async function messageHandler(conn, event, store) {
 • .setbio <new bio>
 • .restart
 
-© 2025 Miara Bot | by MidKnight
+© 2025 Miara | by MidKnightMantra
 `;
       await reply(menuText);
       break;
@@ -91,7 +131,7 @@ export async function messageHandler(conn, event, store) {
 • ${prefix}broadcast <text>
 • ${prefix}setbio <text>
 
-💫 _Bot by MidKnight_
+💫 _Bot by MidKnightMantra_
 `;
       await reply(cmdText);
       break;
