@@ -1,12 +1,16 @@
 /**
- * 🌸 Miara Bot — Message Handler (No Buttons)
- * Compatible with Baileys 7.x RC and Node 20+
- * Author: MidKnight
+ * 🌸 Miara
+ * MidKnight Mantra
  */
 
 import chalk from "chalk";
+import moment from "moment-timezone";
+import os from "os";
+import { downloadMediaMessage } from "@whiskeysockets/baileys";
+import { Sticker, StickerTypes } from "wa-sticker-formatter";
 import { smsg, isUrl, sleep, getBuffer } from "./utils/helpers.js";
 import { config } from "./config.js";
+import { t } from "./lang.js";
 
 /**
  * Handles all incoming messages
@@ -18,16 +22,26 @@ export async function messageHandler(conn, event, store) {
   const msgObj = event.messages?.[0];
   if (!msgObj?.message || msgObj.key.remoteJid === "status@broadcast") return;
 
+  const LANGUAGE = config.LANGUAGE;
+  const lang = LANGUAGE || "en";
   const m = smsg(conn, msgObj, store);
   const sender = m.sender;
   const from = m.from;
   const text = m.text?.trim() || "";
   const isGroup = m.isGroup;
 
-  const prefix = /^[.!#?/]/.test(text) ? text[0] : ".";
+  const prefix = config.PREFIX || ".";
   const command = text.startsWith(prefix)
     ? text.slice(prefix.length).split(" ")[0].toLowerCase()
     : "";
+  // 🔒 If bot is in private mode, only owner can use commands
+  if (config.MODE === "private" && sender !== config.OWNER_NUMBER) {
+  if (command) {
+    await reply(t(lang, "🔒 Miara is currently in *private mode*. Only the owner can use commands."));
+    return;
+  }
+}
+
   const args = text.split(" ").slice(1);
 
   const reply = (msg) =>
@@ -70,7 +84,7 @@ export async function messageHandler(conn, event, store) {
    // 🕓 Detect system timezone
   const timeZone =
     Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-    
+
   const BOT_NAME = config?.BOT_NAME || "Miara🌸";
 
   // Calculate uptime
@@ -89,76 +103,146 @@ export async function messageHandler(conn, event, store) {
 🕒 Uptime: ${uptime}
 `;
 
-  await reply(pingMsg);
+ await reply(pingMsg);
+
+  // 🌸 React to ping with emoji
+  await conn.sendMessage(from, {
+    react: { text: "💫", key: msgObj.key },
+  });
+
   break;
 }
 
-    case "menu":
+  case "menu":
     case "help": {
+      const d = new Date();
+      const BOT_NAME = config.BOT_NAME || "Miara🌸";
+      const OWNER_NAME = config.OWNER_NAME || "MidKnightMantra";
+      const locale = "en";
+      const week = d.toLocaleDateString(locale, { weekday: "long" });
+      const date = d.toLocaleDateString(locale, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+
+      const time = moment().tz("Africa/Nairobi").format("HH:mm:ss");
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const uptime = clockString(process.uptime() * 1000);
+      const taguser = "@" + m.sender.split("@")[0];
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      const greeting = getGreeting();
+      const platform = os.platform();
+      const totalMem = Math.round(os.totalmem() / 1024 / 1024);
+      const freeMem = Math.round(os.freemem() / 1024 / 1024);
+
       const menuText = `
-🌸 *Miara — Main Menu* 🌸
+╭━━━⊰ *${BOT_NAME}🌸* ⊱━━━╮
+┃ 👋Hello, ${taguser}!
+┃ ${greeting}
+┃
+┃ 📜 *${quote}*
+╰━━━━━━━━━━━━━━━━━━━━━━╯
 
-╭───❏  *User Commands*
-│ 💫 ${prefix}ping — Check latency
-│ 🖼️ ${prefix}sticker — Make a sticker from image/video
-│ 🌐 ${prefix}fetch <url> — Download image from a link
-│ 📜 ${prefix}commands — Show all commands
-╰───────────────❏
+╭━━━⊰ *TODAY* ⊱━━━╮
+┃ 📅 *Date:* ${week}, ${date}
+┃ ⏰ *Time:* ${time}
+┃ 🌍 *Timezone:* ${timezone}
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-👑 *Owner Commands*
-• .broadcast <text>
-• .setbio <new bio>
-• .restart
+╭━━━⊰ *BOT INFO* ⊱━━━╮
+┃ 🤖 *Bot:*🌸${BOT_NAME}
+┃ 👑 *Owner:* ${OWNER_NAME}
+┃ ⌨️ *Prefix:* ${prefix}
+┃ ⏱️ *Uptime:* ${uptime}
+┃ 🖥️ *Platform:* ${platform}
+┃ 💾 *RAM:* ${freeMem}MB / ${totalMem}MB
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-© 2025 Miara | by MidKnightMantra
+╭━━━⊰ *COMMANDS* ⊱━━━╮
+┃ 🧩 ${prefix}ping — Bot status
+┃ 🖼️ ${prefix}sticker — Make a sticker
+┃ 🌐 ${prefix}fetch <url> — Download media
+┃ 📜 ${prefix}menu — Show this menu
+┃ ♻️ ${prefix}restart — Restart bot (owner)
+┃ 📝 ${prefix}setbio — Change bio (owner)
+╰━━━━━━━━━━━━━━━━━━━━╯
+
+© 2025 *Miara* | *MidKnightMantra*🌸
 `;
-      await reply(menuText);
-      break;
-    }
 
-    case "commands":
-    case "commands_menu": {
-      const cmdText = `
-✨ *Available Commands*
-
-🧩 ${prefix}ping — Check latency
-🖼️ ${prefix}sticker — Convert image/video to sticker
-🌐 ${prefix}fetch <url> — Download image from URL
-📜 ${prefix}menu — Show main menu
-
-👑 Owner commands:
-• ${prefix}restart
-• ${prefix}broadcast <text>
-• ${prefix}setbio <text>
-
-💫 _Bot by MidKnightMantra_
-`;
-      await reply(cmdText);
+      await conn.sendMessage(from, { text: menuText, mentions: [m.sender] }, { quoted: msgObj });
+      await conn.sendMessage(from, { react: { text: "🌸", key: msgObj.key } });
       break;
     }
 
     case "sticker":
     case "s": {
-      const mediaMsg =
-        msgObj.message.imageMessage || msgObj.message.videoMessage;
-      if (!mediaMsg) {
-        await reply("📸 Reply to an image or short video with `.s` to make a sticker.");
-        return;
-      }
-      try {
-        const buffer = await conn.downloadMediaMessage(msgObj);
-        await conn.sendMessage(from, { sticker: buffer });
-        await conn.sendMessage(from, { react: { text: "🌸", key: msgObj.key } });
-      } catch (err) {
-        console.error(err);
-        await reply("❌ Failed to create sticker.");
-      }
-      break;
+  const argsText = args.join(" ");
+  const packMatch = argsText.match(/pack:(.+?)(?:\s|$)/i);
+  const authorMatch = argsText.match(/author:(.+?)(?:\s|$)/i);
+
+  const packName = packMatch ? packMatch[1].trim() : config.STICKER_PACK_NAME;
+  const authorName = authorMatch ? authorMatch[1].trim() : config.STICKER_AUTHOR;
+
+  // Handle quoted or direct media
+  const quoted =
+    msgObj.message?.extendedTextMessage?.contextInfo?.quotedMessage ||
+    msgObj.message;
+  const mediaMsg = quoted.imageMessage || quoted.videoMessage;
+
+  if (!mediaMsg) {
+    await reply(
+      "📸 Reply to an image or short video with `.s` to make a sticker.\n\n💡 You can also use:\n`.s pack:Miara author:MidKnight`"
+    );
+    return;
+  }
+
+  // 🕓 Restrict long videos to prevent memory overload
+  if (mediaMsg.seconds && mediaMsg.seconds > 10) {
+    await reply("🎞️ Video too long! Please send a clip under 10 seconds.");
+    return;
+  }
+
+  try {
+    // 🧩 Download media buffer
+    const buffer = await downloadMediaMessage(
+      { message: quoted },
+      "buffer",
+      {},
+      { logger: console }
+    );
+
+    if (!buffer || buffer.length < 1000) {
+      await reply("⚠️ Could not process this media. Try again.");
+      return;
+    }
+
+    // ✨ Create sticker with metadata
+    const sticker = new Sticker(buffer, {
+      pack: packName,
+      author: authorName,
+      type: StickerTypes.FULL, // FULL = standard square sticker
+      quality: 80,
+    });
+
+    const stickerBuffer = await sticker.build();
+
+    // 🖼️ Send sticker with embedded EXIF info
+    await conn.sendMessage(from, { sticker: stickerBuffer });
+
+    // 🪄 React with a fun emoji
+    await conn.sendMessage(from, { react: { text: "🪄", key: msgObj.key } });
+  } catch (err) {
+    console.error("Sticker error:", err);
+    await reply("❌ Failed to create sticker. Try again with a clear image or short video.");
+  }
+  break;
     }
 
     case "fetch": {
       if (!args[0] || !isUrl(args[0])) {
-        await reply(`🔗 Usage: ${prefix}fetch <image_url>`);
+        await reply(t(lang,`🔗 Usage: ${prefix}fetch <image_url>`));
         return;
       }
       try {
@@ -169,14 +253,14 @@ export async function messageHandler(conn, event, store) {
         });
       } catch (err) {
         console.error(err);
-        await reply("❌ Could not fetch media.");
+        await reply(t(lang, "❌ Could not fetch media."));
       }
       break;
     }
 
     default: {
       if (text && text.startsWith(prefix)) {
-        await reply(`🤖 Unknown command. Try *${prefix}menu*.`);
+        await reply(t(lang, `🤖 Unknown command. Try *${prefix}menu*.`));
       }
       break;
     }
@@ -208,7 +292,7 @@ export async function messageHandler(conn, event, store) {
     (async () => {
       switch (command) {
         case "restart":
-          await reply("♻️ Restarting Miara...");
+          await reply(t(lang, "♻️ Restarting Miara..."));
           await sleep(1000);
           process.exit(0);
           break;
@@ -228,7 +312,7 @@ export async function messageHandler(conn, event, store) {
             });
             await sleep(400);
           }
-          await reply("✅ Broadcast completed!");
+          await reply(t(lang, "✅ Broadcast completed!"));
           break;
         }
 
@@ -252,3 +336,46 @@ export async function messageHandler(conn, event, store) {
     })();
   }
 }
+
+// 🕓 Format uptime into HH:MM:SS
+function clockString(ms) {
+  const h = isNaN(ms) ? "--" : Math.floor(ms / 3600000);
+  const m = isNaN(ms) ? "--" : Math.floor(ms / 60000) % 60;
+  const s = isNaN(ms) ? "--" : Math.floor(ms / 1000) % 60;
+  return [h, m, s].map((v) => v.toString().padStart(2, "0")).join(":");
+}
+
+// 🌅 Dynamic Greeting Based on Time
+function getGreeting() {
+  const hour = parseInt(moment().tz("Africa/Nairobi").format("HH"));
+  
+  if (hour >= 0 && hour < 4) return "Good Night 🌙 — time to rest and recharge.";
+  if (hour >= 4 && hour < 12) return "Good Morning 🌄 — hope your day starts great!";
+  if (hour >= 12 && hour < 16) return "Good Afternoon ☀️ — keep up the energy!";
+  if (hour >= 16 && hour < 19) return "Good Evening 🌇 — the sun sets, but vibes stay up!";
+  return "Good Night 🌙 — don’t forget to dream big.";
+}
+
+// 💬 Random Fun & Motivational Quotes
+const quotes = [
+  "I'm not lazy, I'm just on my energy-saving mode.",
+  "Life is short — smile while you still have teeth.",
+  "If you think nobody cares, try missing a couple of payments.",
+  "Some people need a high-five. In the face. With a chair.",
+  "I'm not saying I'm Batman, but no one has ever seen us together.",
+  "My bed is magical; it makes me remember everything I forgot to do.",
+  "Why do they call it beauty sleep if you wake up looking like a troll?",
+  "I'm great at multitasking — I can waste time and procrastinate all at once.",
+  "The road to success is always under construction.",
+  "Dream big, hustle smart, and stay kind. 🌸",
+  "Don’t count the days — make the days count.",
+  "Confidence is not ‘they will like me’, it’s ‘I’ll be fine if they don’t’.",
+  "Even the stars need darkness to shine. ✨",
+  "Keep your face always toward the sunshine — shadows will fall behind you.",
+  "You can’t pour from an empty cup. Take care of yourself first.",
+  "Every flower blooms at its own pace — keep growing 🌸.",
+  "Happiness is homemade — and so is coffee ☕.",
+  "A smile is the prettiest thing you can wear.",
+  "The best time for new beginnings is now.",
+];
+
