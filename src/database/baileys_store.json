@@ -1,6 +1,4 @@
 {
-  "chats": {},
-  "contacts": {},
   "messages": {
     "254105745317@s.whatsapp.net": [
       {
@@ -654,6 +652,1043 @@
           }
         },
         "messageTimestamp": "1762385858",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0FDB82E99C9415E4112"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸* — *Status Report*\n━━━━━━━━━━━━━━━━━━\n✅ *Status:* Connected successfully!\n🕐 *Time:* 06 Nov 2025 • 14:34:52\n🕓 *Uptime:* 5s\n⚙️ *Commands Loaded:* 17\n💫 *Mode:* 🌐 Public\n━━━━━━━━━━━━━━━━━━\n🌷 _Miara awakens gracefully under the starlit code._"
+          }
+        },
+        "messageTimestamp": "1762428894",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0EF3A5819E0D13FF2CD"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸* — *Status Report*\n━━━━━━━━━━━━━━━━━━\n✅ *Status:* Connected successfully!\n🕐 *Time:* 06 Nov 2025 • 14:37:21\n🕓 *Uptime:* 3s\n⚙️ *Commands Loaded:* 17\n💫 *Mode:* 🌐 Public\n━━━━━━━━━━━━━━━━━━\n🌷 _Miara awakens gracefully under the starlit code._"
+          }
+        },
+        "messageTimestamp": "1762429043",
+        "status": "SERVER_ACK"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0B61CFE3EC0C3EFAC43"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸* — *Status Report*\n━━━━━━━━━━━━━━━━━━\n✅ *Status:* Connected successfully!\n🕐 *Time:* 06 Nov 2025 • 14:39:52\n🕓 *Uptime:* 4s\n⚙️ *Commands Loaded:* 17\n💫 *Mode:* 🌐 Public\n━━━━━━━━━━━━━━━━━━\n🌷 _Miara awakens gracefully under the starlit code._"
+          }
+        },
+        "messageTimestamp": "1762429194",
+        "status": "SERVER_ACK"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB030B13BEFD1551780B5"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸* — *Status Report*\n━━━━━━━━━━━━━━━━━━\n✅ *Status:* Connected successfully!\n🕐 *Time:* 06 Nov 2025 • 14:41:49\n🕓 *Uptime:* 2s\n⚙️ *Commands Loaded:* 17\n💫 *Mode:* 🌐 Public\n━━━━━━━━━━━━━━━━━━\n🌷 _Miara awakens gracefully under the starlit code._"
+          }
+        },
+        "messageTimestamp": "1762429311",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0E589DFF5F205FD0A41"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸* — *Status Report*\n━━━━━━━━━━━━━━━━━━\n✅ *Status:* Connected successfully!\n🕐 *Time:* 06 Nov 2025 • 14:51:13\n🕓 *Uptime:* 4s\n⚙️ *Commands Loaded:* 17\n💫 *Mode:* 🌐 Public\n━━━━━━━━━━━━━━━━━━\n🌷 _Miara awakens gracefully under the starlit code._"
+          }
+        },
+        "messageTimestamp": "1762429876",
+        "status": "SERVER_ACK"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "remoteJidAlt": "85689546862603@lid",
+          "fromMe": true,
+          "id": "ACCCE097F5D17DD9041209EDF83964F1",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762429895,
+        "pushName": "M.i.a.r.a.",
+        "broadcast": false,
+        "status": 2,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".ping",
+            "previewType": "NONE",
+            "contextInfo": {
+              "entryPointConversionSource": "non_contact",
+              "entryPointConversionApp": "whatsapp",
+              "entryPointConversionDelaySeconds": 409205
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0F75DB733BDCC41655C"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "ACCCE097F5D17DD9041209EDF83964F1",
+              "participant": ""
+            },
+            "text": "🏃",
+            "senderTimestampMs": "1762429895739"
+          }
+        },
+        "messageTimestamp": "1762429895",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB043F1D888041B8518BA"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🏃 Pinging...",
+            "contextInfo": {
+              "stanzaId": "ACCCE097F5D17DD9041209EDF83964F1",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762429895",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0594A8BE080606E2829"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "✨ *Miara🌸 Status*\n⚡ *Speed:* 25ms\n🕒 *Uptime:* 0h 0m 26s\n🧠 *Memory:* 6502MB / 11842MB (54.9% used)\n🧩 *CPU:* Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz (4 cores)\n📊 *Load Avg:* 2.51\n📅 *Date:* Thursday, November 6th 2025\n🕐 *Time:* 14:51:35",
+            "contextInfo": {
+              "stanzaId": "ACCCE097F5D17DD9041209EDF83964F1",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762429895",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB05439869F1AEF886C3F"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "ACCCE097F5D17DD9041209EDF83964F1",
+              "participant": ""
+            },
+            "text": "💫",
+            "senderTimestampMs": "1762429895778"
+          }
+        },
+        "messageTimestamp": "1762429895",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "remoteJidAlt": "85689546862603@lid",
+          "fromMe": true,
+          "id": "AC86C65EED9345A9CB59877B54C277F2",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762429907,
+        "pushName": "M.i.a.r.a.",
+        "broadcast": false,
+        "status": 2,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".weather kisii",
+            "previewType": "NONE",
+            "contextInfo": {
+              "entryPointConversionSource": "non_contact",
+              "entryPointConversionApp": "whatsapp",
+              "entryPointConversionDelaySeconds": 409218
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0EA46092AF26318F0C9"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "AC86C65EED9345A9CB59877B54C277F2",
+              "participant": ""
+            },
+            "text": "🔍",
+            "senderTimestampMs": "1762429907888"
+          }
+        },
+        "messageTimestamp": "1762429907",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0A8D4865A6C4600F496"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "☁️ *Kisii, KE*\n🕒 Thu, Nov 6 • 14:51\n🌤️ Scattered clouds\n🌡️ Temperature: 24.5°C (Feels like 24.4°C)\n💧 Humidity: 53%\n💨 Wind: 2.16 m/s\n🌅 Sunrise: 06:20\n🌇 Sunset: 18:28",
+            "contextInfo": {
+              "stanzaId": "AC86C65EED9345A9CB59877B54C277F2",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762429914",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB03232BCFD0F49AC75A8"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "AC86C65EED9345A9CB59877B54C277F2",
+              "participant": ""
+            },
+            "text": "✅",
+            "senderTimestampMs": "1762429914239"
+          }
+        },
+        "messageTimestamp": "1762429914",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0CCB5B45EC600734A62"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸* — *Status Report*\n━━━━━━━━━━━━━━━━━━\n✅ *Status:* Connected successfully!\n🕐 *Time:* 06 Nov 2025 • 15:01:05\n🕓 *Uptime:* 9s\n⚙️ *Commands Loaded:* 17\n💫 *Mode:* 🌐 Public\n━━━━━━━━━━━━━━━━━━\n🌷 _Miara awakens gracefully under the starlit code._"
+          }
+        },
+        "messageTimestamp": "1762430467",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACA1747CACDC0AAFC5473E7F0C5D42A5",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432977,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC6D410C47405E9F914A1D537559CE9A",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432977,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC019BB4FD5A9D45F1951781284DB109",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432977,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC4A72FF65CA5AFE1439660871EA7AE8",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432981,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC56A91710F71D57EEC235F9ECC78DB9",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432981,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACB79E36DE898D100B8D3CC92436C596",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432981,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACB6BD8E4EF64960739A18AF5E59B21A",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432996,
+        "broadcast": false,
+        "message": {
+          "protocolMessage": {
+            "type": "PEER_DATA_OPERATION_REQUEST_RESPONSE_MESSAGE",
+            "peerDataOperationRequestResponseMessage": {
+              "peerDataOperationRequestType": "PLACEHOLDER_MESSAGE_RESEND",
+              "stanzaId": "3EB0F7369461A02FEB563C",
+              "peerDataOperationResult": [
+                {
+                  "mediaUploadResult": "NOT_FOUND"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACD00F3302D816149563DF41447706EE",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432997,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "No matching sessions found for message"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC4EF4C951E6B8195EA4306F380E641E",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432997,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "No matching sessions found for message"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACF8327934D8D98461CD488CDFBC72BF",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762432999,
+        "broadcast": false,
+        "message": {
+          "protocolMessage": {
+            "type": "PEER_DATA_OPERATION_REQUEST_RESPONSE_MESSAGE",
+            "peerDataOperationRequestResponseMessage": {
+              "peerDataOperationRequestType": "PLACEHOLDER_MESSAGE_RESEND",
+              "stanzaId": "3EB07CD480560CF7BE47D6",
+              "peerDataOperationResult": [
+                {
+                  "mediaUploadResult": "NOT_FOUND"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACD5C3364A8A8FA1CB5A58E6B7F4C0E8",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433005,
+        "broadcast": false,
+        "message": {
+          "protocolMessage": {
+            "type": "PEER_DATA_OPERATION_REQUEST_RESPONSE_MESSAGE",
+            "peerDataOperationRequestResponseMessage": {
+              "peerDataOperationRequestType": "PLACEHOLDER_MESSAGE_RESEND",
+              "stanzaId": "3EB0F2E8C5DB12A5E5D3BB",
+              "peerDataOperationResult": [
+                {
+                  "mediaUploadResult": "NOT_FOUND"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "remoteJidAlt": "85689546862603@lid",
+          "fromMe": true,
+          "id": "AC4538E8A85BE4D7719F546A609F4C99",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433006,
+        "pushName": "M.i.a.r.a.",
+        "broadcast": false,
+        "status": 2,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "No matching sessions found for message"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC6F0D1C3414A060D01C2343DBE9946F",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433006,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "No matching sessions found for message"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC1E1A07A0731B0DD1A2075D6E06363C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433007,
+        "broadcast": false,
+        "message": {
+          "protocolMessage": {
+            "type": "PEER_DATA_OPERATION_REQUEST_RESPONSE_MESSAGE",
+            "peerDataOperationRequestResponseMessage": {
+              "peerDataOperationRequestType": "PLACEHOLDER_MESSAGE_RESEND",
+              "stanzaId": "3EB0ABE95887AD1CD392E4",
+              "peerDataOperationResult": [
+                {
+                  "mediaUploadResult": "NOT_FOUND"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "remoteJidAlt": "85689546862603@lid",
+          "fromMe": true,
+          "id": "AC4538E8A85BE4D7719F546A609F4C99",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433007,
+        "pushName": "M.i.a.r.a.",
+        "broadcast": false,
+        "status": 2,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".ping",
+            "previewType": "NONE",
+            "contextInfo": {
+              "entryPointConversionSource": "non_contact",
+              "entryPointConversionApp": "whatsapp",
+              "entryPointConversionDelaySeconds": 412310
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC729B4A4BAB6C30DBF26133F50D0214",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433009,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "No matching sessions found for message"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0636D265410C997CEB2"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "AC4538E8A85BE4D7719F546A609F4C99",
+              "participant": ""
+            },
+            "text": "🏃",
+            "senderTimestampMs": "1762433008181"
+          }
+        },
+        "messageTimestamp": "1762433008",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0DB4DD799DA620D5170"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🏃 Pinging...",
+            "contextInfo": {
+              "stanzaId": "AC4538E8A85BE4D7719F546A609F4C99",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762433009",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB075C3AC4A94A67DE859"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "✨ *Miara🌸 Status*\n⚡ *Speed:* 1575ms\n🕒 *Uptime:* 0h 0m 52s\n🧠 *Memory:* 7064MB / 11842MB (59.7% used)\n🧩 *CPU:* Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz (4 cores)\n📊 *Load Avg:* 2.39\n📅 *Date:* Thursday, November 6th 2025\n🕐 *Time:* 15:43:29",
+            "contextInfo": {
+              "stanzaId": "AC4538E8A85BE4D7719F546A609F4C99",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762433009",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0DE65BA451A5EA1B0D7"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "AC4538E8A85BE4D7719F546A609F4C99",
+              "participant": ""
+            },
+            "text": "💫",
+            "senderTimestampMs": "1762433010208"
+          }
+        },
+        "messageTimestamp": "1762433010",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC3EA625781D5B9A369AAD019A83D33A",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433017,
+        "broadcast": false,
+        "message": {
+          "protocolMessage": {
+            "type": "PEER_DATA_OPERATION_REQUEST_RESPONSE_MESSAGE",
+            "peerDataOperationRequestResponseMessage": {
+              "peerDataOperationRequestType": "PLACEHOLDER_MESSAGE_RESEND",
+              "stanzaId": "3EB043CB506EC07D5C58F5",
+              "peerDataOperationResult": [
+                {
+                  "mediaUploadResult": "SUCCESS",
+                  "placeholderMessageResendResponse": {
+                    "webMessageInfoBytes": "CkEKGzI1NDEwNTc0NTMxN0BzLndoYXRzYXBwLm5ldBABGiBBQzQ1MzhFOEE4NUJFNEQ3NzE5RjU0NkE2MDlGNEM5ORJUMi0KBS5waW5nUACKAR7qAQtub25fY29udGFjdPIBCHdoYXRzYXBw+AGWlRnoAQCaAiIaIIeCoqL99zVsuihSAxD0fUvC9K12N3rF3/0zHTZEWtCFGOevssgGIAQw7q+yyAbKAkgKNwobMjU0MTA1NzQ1MzE3QHMud2hhdHNhcHAubmV0EAEaFjNFQjBERTY1QkE0NTFBNUVBMUIwRDcSBPCfkqsgoJTGyaUzKAGKAyCHgqKi/fc1bLooUgMQ9H1LwvStdjd6xd/9Mx02RFrQhZoDGzI1NDEwNTc0NTMxN0BzLndoYXRzYXBwLm5ldIgEAA=="
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC714A7A054EAD6E8CF7A8A69BDCF3A9",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433017,
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "No matching sessions found for message"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "AC4538E8A85BE4D7719F546A609F4C99"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": ".ping",
+            "previewType": "NONE",
+            "contextInfo": {
+              "entryPointConversionSource": "non_contact",
+              "entryPointConversionApp": "whatsapp",
+              "entryPointConversionDelaySeconds": 412310
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          },
+          "messageContextInfo": {
+            "messageSecret": "h4Kiov33NWy6KFIDEPR9S8L0rXY3esXf/TMdNkRa0IU="
+          }
+        },
+        "messageTimestamp": "1762432999",
+        "status": "READ",
+        "messageC2STimestamp": "1762433006",
+        "reactions": [
+          {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "3EB0DE65BA451A5EA1B0D7"
+            },
+            "text": "💫",
+            "senderTimestampMs": "1762433010208",
+            "unread": true
+          }
+        ],
+        "messageSecret": "h4Kiov33NWy6KFIDEPR9S8L0rXY3esXf/TMdNkRa0IU=",
+        "originalSelfAuthorUserJidString": "254105745317@s.whatsapp.net",
+        "isMentionedInStatus": false
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0A7040B18611E86AEF2"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "AC4538E8A85BE4D7719F546A609F4C99"
+            },
+            "text": "🏃",
+            "senderTimestampMs": "1762433017825"
+          }
+        },
+        "messageTimestamp": "1762433017",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC2C930538823DC8AB3E4F7C98AFFFB8",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433018,
+        "broadcast": false,
+        "message": {
+          "protocolMessage": {
+            "type": "PEER_DATA_OPERATION_REQUEST_RESPONSE_MESSAGE",
+            "peerDataOperationRequestResponseMessage": {
+              "peerDataOperationRequestType": "PLACEHOLDER_MESSAGE_RESEND",
+              "stanzaId": "3EB0196B93B416CC492565",
+              "peerDataOperationResult": [
+                {
+                  "mediaUploadResult": "NOT_FOUND"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0535D26185C63A55760"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🏃 Pinging...",
+            "contextInfo": {
+              "stanzaId": "AC4538E8A85BE4D7719F546A609F4C99",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762433018",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB019D9EB6BC32C67CBB2"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "✨ *Miara🌸 Status*\n⚡ *Speed:* 1348ms\n🕒 *Uptime:* 0h 1m 2s\n🧠 *Memory:* 7010MB / 11842MB (59.2% used)\n🧩 *CPU:* Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz (4 cores)\n📊 *Load Avg:* 2.02\n📅 *Date:* Thursday, November 6th 2025\n🕐 *Time:* 15:43:39",
+            "contextInfo": {
+              "stanzaId": "AC4538E8A85BE4D7719F546A609F4C99",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762433019",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB041589B9023BCD9194F"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254105745317@s.whatsapp.net",
+              "fromMe": true,
+              "id": "AC4538E8A85BE4D7719F546A609F4C99"
+            },
+            "text": "💫",
+            "senderTimestampMs": "1762433019638"
+          }
+        },
+        "messageTimestamp": "1762433019",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC1E7C99F72557C2AF67D57D97C0DD21",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433032,
+        "broadcast": false,
+        "message": {
+          "protocolMessage": {
+            "type": "PEER_DATA_OPERATION_REQUEST_RESPONSE_MESSAGE",
+            "peerDataOperationRequestResponseMessage": {
+              "peerDataOperationRequestType": "PLACEHOLDER_MESSAGE_RESEND",
+              "stanzaId": "3EB0E3BC8958A87AD50190",
+              "peerDataOperationResult": [
+                {
+                  "mediaUploadResult": "NOT_FOUND"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB022AD95F40B52FCAEDE"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m239/AQNEyXEMPtyNXbmzfdf_gCspJ2o6PdPityta6MI5-zHxI4bYSe9QkrcWnPVJ_KLmuNQY4s1_VBQzixN0uHSD_dY1-tDq_ju4UIyEysknjA?ccb=9-4&oh=01_Q5Aa2wHdpf-GTPA9JmzLzvGBmTqAk8E1e8uaMiZZ9-HMF-r7Ow&oe=693410A8&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭──────────────────────────────────╮\n│ 💠 *Miara System Chronicle* 🪷\n│──────────────────────────────────│\n│ ⚙️ *Status:* Online & Blooming  \n│ 🧭 *Linked As:* 254105745317\n│ ⏳ *Uptime:* 15s\n│ 👑 *Curator:* MidKnightMantra\n│ 💬 *WhatsApp:* wa.me/254105745317\n│ 🌐 *Sanctum:* https://github.com/MidKnightMantra\n│ 🪄 *Maker:* MidKnightMantra\n╰──────────────────────────────────╯\n\n🌸 *Miara Bot* — _woven in code & calm by MidKnightMantra_ 🌙",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "kP4UPf9nVOtZzDXBgFOTD1/cWHvC8PqoUDpZsVrdHVg=",
+            "fileEncSha256": "Qzpy9G9npgDOIBwWcAaHVpM/lJ69N7i9PhmyD5oXkiU=",
+            "directPath": "/o1/v/t24/f2/m239/AQNEyXEMPtyNXbmzfdf_gCspJ2o6PdPityta6MI5-zHxI4bYSe9QkrcWnPVJ_KLmuNQY4s1_VBQzixN0uHSD_dY1-tDq_ju4UIyEysknjA?ccb=9-4&oh=01_Q5Aa2wHdpf-GTPA9JmzLzvGBmTqAk8E1e8uaMiZZ9-HMF-r7Ow&oe=693410A8&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762433413",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z"
+          }
+        },
+        "messageTimestamp": "1762433413",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB00A1E57E01FB836693D"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m232/AQM0X2Zr37Fq2NEZccUjyDimCnDNbaeN-sbDKD_Tfh63j60ApJZJJUCkaTo_Fga7yDZvK9vBGt1f0oHh4cSbpc1_Zep_arX3NH_GJQ13hg?ccb=9-4&oh=01_Q5Aa2wEEJkpsx1GKpPltOj6fKEYOuaWLurfWSZFtjEXL8xBkcg&oe=693400D6&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭──────────────────────────────────╮\n│ 💠 *Miara System Chronicle* 🪷\n│──────────────────────────────────│\n│ ⚙️ *Status:* Online & Blooming  \n│ 🧭 *Linked As:* 254105745317\n│ ⏳ *Uptime:* 10s\n│ 👑 *Curator:* MidKnightMantra\n│ 💬 *WhatsApp:* wa.me/254105745317\n│ 🌐 *Sanctum:* https://github.com/MidKnightMantra\n│ 🪄 *Maker:* MidKnightMantra\n╰──────────────────────────────────╯\n\n🌸 *Miara Bot* — _woven in code & calm by MidKnightMantra_ 🌙",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "/zMLL8LyL/i/jg6WQ87No5W8+6vfoFJY4hna4bG/ZLE=",
+            "fileEncSha256": "2xZUHJEG2gdbzfE5V0V+aD2VW4ZsFcorEGXtkIFRdFU=",
+            "directPath": "/o1/v/t24/f2/m232/AQM0X2Zr37Fq2NEZccUjyDimCnDNbaeN-sbDKD_Tfh63j60ApJZJJUCkaTo_Fga7yDZvK9vBGt1f0oHh4cSbpc1_Zep_arX3NH_GJQ13hg?ccb=9-4&oh=01_Q5Aa2wEEJkpsx1GKpPltOj6fKEYOuaWLurfWSZFtjEXL8xBkcg&oe=693400D6&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762433509",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z"
+          }
+        },
+        "messageTimestamp": "1762433509",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB02AB6F54B9EC6551E4F"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m269/AQNSgzb7Q6gvzK-gBLEA7Hebunds-V-cvQJiO0OcRW1F5x2r8bpq-Gj6HSbDhi2_UftobqhZrUKZ0YxyqkaUw50_k0Apc_2ocvbBY1Yrlw?ccb=9-4&oh=01_Q5Aa2wEGRGuvZuuUZixR5oZYjO8ZNvDJlH021jsyOv1Q9ngqQg&oe=69341740&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭──────────────────────────────────╮\n│ 💠 *Miara System Chronicle* 🪷\n│──────────────────────────────────│\n│ ⚙️ *Status:* Online & Blooming  \n│ 🧭 *Linked As:* 254105745317\n│ ⏳ *Uptime:* 6s\n│ 👑 *Curator:* MidKnightMantra\n│ 💬 *WhatsApp:* wa.me/254105745317\n│ 🌐 *Sanctum:* https://github.com/MidKnightMantra\n│ 🪄 *Maker:* MidKnightMantra\n╰──────────────────────────────────╯\n\n🌸 *Miara Bot* — _woven in code & calm by MidKnightMantra_ 🌙",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "+DI3f5NESEKuyKkOCp+cfYLEhnlLEeIrMG9vqo5rHYA=",
+            "fileEncSha256": "aJ8yQiorSC/COLc16Dn7zHbPVe5j+jbCw2n8kff4ow8=",
+            "directPath": "/o1/v/t24/f2/m269/AQNSgzb7Q6gvzK-gBLEA7Hebunds-V-cvQJiO0OcRW1F5x2r8bpq-Gj6HSbDhi2_UftobqhZrUKZ0YxyqkaUw50_k0Apc_2ocvbBY1Yrlw?ccb=9-4&oh=01_Q5Aa2wEGRGuvZuuUZixR5oZYjO8ZNvDJlH021jsyOv1Q9ngqQg&oe=69341740&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762433781",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z"
+          }
+        },
+        "messageTimestamp": "1762433781",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB046B99A4CD11F49547C"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m237/AQMa3wXXdJxDaY2R_MHgg3K9lNhzVeb-a3KxnLsU_RVajOlx53ja1QX6m9rX9UUWALmtx2FW-F_ohBKbuzQcgVEU0nZ3Ewcms5z0sTkulQ?ccb=9-4&oh=01_Q5Aa2wFpQjqEW3mWqGAC2AzqRYTxcThfhkwQKKSNBjXQW1_xEw&oe=693413BB&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭──────────────────────────────────╮\n│ 💠 *Miara System Chronicle* 🪷\n│──────────────────────────────────│\n│ ⚙️ *Status:* Online & Blooming  \n│ 🧭 *Linked As:* 254105745317\n│ ⏳ *Uptime:* 19s\n│ 👑 *Curator:* MidKnightMantra\n│ 💬 *WhatsApp:* wa.me/254105745317\n│ 🌐 *Sanctum:* https://github.com/MidKnightMantra\n│ 🪄 *Maker:* MidKnightMantra\n╰──────────────────────────────────╯\n\n🌸 *Miara Bot* — _woven in code & calm by MidKnightMantra_ 🌙",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "4tE7kkNJ93EEIhJPUQRWCoVT7E7szQ/MenBaEXY/twM=",
+            "fileEncSha256": "DsVpdpjyS03vUV+kuavoT6HoWIsqjYWfmURJq6dwXJM=",
+            "directPath": "/o1/v/t24/f2/m237/AQMa3wXXdJxDaY2R_MHgg3K9lNhzVeb-a3KxnLsU_RVajOlx53ja1QX6m9rX9UUWALmtx2FW-F_ohBKbuzQcgVEU0nZ3Ewcms5z0sTkulQ?ccb=9-4&oh=01_Q5Aa2wFpQjqEW3mWqGAC2AzqRYTxcThfhkwQKKSNBjXQW1_xEw&oe=693413BB&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762433905",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z"
+          }
+        },
+        "messageTimestamp": "1762433905",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB07686BE4C28EDB0DB49"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m239/AQO1WSyAlOaDm-g378fix_B4EKW7RvDcpsG5XTy5u48xHbdueaOMe69u8A4Ltk0RrYCDtYA-rTL0zgT_Q7UANqUdC2BDMARlw9Pl1KPmWA?ccb=9-4&oh=01_Q5Aa2wHl2vkQmxAfOIHVpsLsIzP27fkOB0M439DDgSikBUZniw&oe=693401AE&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭──────────────────────────────────╮\n│ 💠 *Miara System Chronicle* 🪷\n│──────────────────────────────────│\n│ ⚙️ *Status:* Online & Blooming  \n│ 🧭 *Linked As:* 254105745317\n│ ⏳ *Uptime:* 5s\n│ 👑 *Curator:* MidKnightMantra\n│ 💬 *WhatsApp:* wa.me/254105745317\n│ 🌐 *Sanctum:* https://github.com/MidKnightMantra\n│ 🪄 *Maker:* MidKnightMantra\n╰──────────────────────────────────╯\n\n🌸 *Miara Bot* — _woven in code & calm by MidKnightMantra_ 🌙",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "ReZ+8XOFr2g+pWOhejcAg34j6Q56dDl+luik8h0oegw=",
+            "fileEncSha256": "q9jv+MaPTVzt4If672L8M6SgkgcqE7Giqp5XTU3+NKg=",
+            "directPath": "/o1/v/t24/f2/m239/AQO1WSyAlOaDm-g378fix_B4EKW7RvDcpsG5XTy5u48xHbdueaOMe69u8A4Ltk0RrYCDtYA-rTL0zgT_Q7UANqUdC2BDMARlw9Pl1KPmWA?ccb=9-4&oh=01_Q5Aa2wHl2vkQmxAfOIHVpsLsIzP27fkOB0M439DDgSikBUZniw&oe=693401AE&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762433986",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z"
+          }
+        },
+        "messageTimestamp": "1762433986",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0E420BF9B94B0706E84"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m239/AQNnrREQFzRdyBCk3kBpnsj6OyMV5JB5rCt-6Ong75YD3JtahdXw513C7SkQZ3DScyGBHgM0OM6d5npzwMTT-ltOaUZ_vOuPCF1pZePHkg?ccb=9-4&oh=01_Q5Aa2wGxbUCufpXAl-oF69Fpd7ae9O9H5ZUpQr21g_GZ9AbRIw&oe=69341D0F&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭──────────────────────────────────╮\n│ 💠 *Miara System Chronicle* 🪷\n│──────────────────────────────────│\n│ ⚙️ *Status:* Online & Blooming  \n│ 🧭 *Linked As:* 254105745317\n│ ⏳ *Uptime:* 10s\n│ 👑 *Curator:* MidKnightMantra\n│ 💬 *WhatsApp:* wa.me/254105745317\n│ 🌐 *Sanctum:* https://github.com/MidKnightMantra\n│ 🪄 *Maker:* MidKnightMantra\n╰──────────────────────────────────╯\n\n🌸 *Miara Bot* — _woven in code & calm by MidKnightMantra_ 🌙",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "7DkxmheKDRZHCZsOlwy9xoMm19EFG+Bu8j3iJcDhCmM=",
+            "fileEncSha256": "M6acG2V1ecDeCxrQXfaSqSx3+H2s4sOjyqmpiepwX14=",
+            "directPath": "/o1/v/t24/f2/m239/AQNnrREQFzRdyBCk3kBpnsj6OyMV5JB5rCt-6Ong75YD3JtahdXw513C7SkQZ3DScyGBHgM0OM6d5npzwMTT-ltOaUZ_vOuPCF1pZePHkg?ccb=9-4&oh=01_Q5Aa2wGxbUCufpXAl-oF69Fpd7ae9O9H5ZUpQr21g_GZ9AbRIw&oe=69341D0F&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762434167",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z"
+          }
+        },
+        "messageTimestamp": "1762434167",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254105745317@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB066F8653BAD41478C69"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m232/AQOjdPB4rFmSlBXggYy-cuZcdmO4YrZv1q_qP1sD4141wyuvkQID6XTXjLcIxfncy20UWkxutsVl9qmMgUs-1o30ZlMqzNUzdbNTk5TylQ?ccb=9-4&oh=01_Q5Aa2wFGi8APhxTXxKbr7_1eQVCDY989J4c-xlYCJuyPK06YXg&oe=69342561&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭──────────────────────────────────╮\n│ 💠 *Miara System Chronicle* 🪷\n│──────────────────────────────────│\n│ ⚙️ *Status:* Online & Blooming  \n│ 🧭 *Linked As:* 254105745317\n│ ⏳ *Uptime:* 5s\n│ 👑 *Curator:* MidKnightMantra\n│ 💬 *WhatsApp:* wa.me/254105745317\n│ 🌐 *Sanctum:* https://github.com/MidKnightMantra\n│ 🪄 *Maker:* MidKnightMantra\n╰──────────────────────────────────╯\n\n🌸 *Miara Bot* — _woven in code & calm by MidKnightMantra_ 🌙",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "eQ0v74F5xNQMdW3EgVtFPgmw52gb1/C1k4Kg8pI5X54=",
+            "fileEncSha256": "LM3sFurVFDnnPaQaV2ug6KPnhiWZMTRQ6MhkI5vA6Y8=",
+            "directPath": "/o1/v/t24/f2/m232/AQOjdPB4rFmSlBXggYy-cuZcdmO4YrZv1q_qP1sD4141wyuvkQID6XTXjLcIxfncy20UWkxutsVl9qmMgUs-1o30ZlMqzNUzdbNTk5TylQ?ccb=9-4&oh=01_Q5Aa2wFGi8APhxTXxKbr7_1eQVCDY989J4c-xlYCJuyPK06YXg&oe=69342561&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762434336",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z"
+          }
+        },
+        "messageTimestamp": "1762434336",
         "status": "PENDING"
       }
     ],
@@ -2683,6 +3718,1332 @@
           }
         },
         "messageTimestamp": "1762426927",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "73B5F2D12104FF304B0C6F8E817048A2",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427282,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba mp3",
+            "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+            "title": "Xrated",
+            "previewType": "VIDEO",
+            "jpegThumbnail": "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",
+            "thumbnailDirectPath": "/v/t62.36144-24/542290040_1173200994787886_2392796925766984181_n.enc?ccb=11-4&oh=01_Q5Aa2wGwXuz89tJts0IXVL3HHVYMVy7yFr-qaLtKqMo3loPHbQ&oe=69340A9C&_nc_sid=5e03e0",
+            "thumbnailSha256": "FHyfe/lQSEWtjcxFf+R2wGYFroNCMZ2nMixp3j/6Rl0=",
+            "thumbnailEncSha256": "0RJw/OOws6laIhicpMNeFjDo0MVvigMGDlWFwva+Rw0=",
+            "mediaKey": "Li7lpoftY6xnxt25aeyWLX8ZWuNuXeItEWbZCtJe9IU=",
+            "mediaKeyTimestamp": "1762427279",
+            "thumbnailHeight": 576,
+            "thumbnailWidth": 1024,
+            "inviteLinkGroupTypeV2": "DEFAULT",
+            "linkPreviewMetadata": {}
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "BF9dSONLwYDDz2bDQmwTIokjVq7yk1oIeRrqOC1W0KE="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB06A5640C49A5F8237EC"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 Fetching from:\n🔗 https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba"
+          }
+        },
+        "messageTimestamp": "1762427282",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0525F3170CCCE84583B"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "❌ ⚠️ Failed to fetch or convert media.",
+            "contextInfo": {
+              "stanzaId": "73B5F2D12104FF304B0C6F8E817048A2",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba mp3",
+                  "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+                  "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+                  "title": "Xrated",
+                  "previewType": "VIDEO",
+                  "jpegThumbnail": "/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABaAFoDASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAABQYDBAcBAAL/xAA2EAACAQIEBAUDAgUEAwAAAAABAgMEEQAFEiEGEzFBIlFhcYEUkaEVsSMyQlLwByXB0TOS4f/EABoBAAMBAQEBAAAAAAAAAAAAAAIDBAAFAQb/xAAtEQACAgEDAgUDAwUAAAAAAAABAgARAwQhMRJBEyJRYXEysfAUgZEjwdHh8f/aAAwDAQACEQMRAD8AxBWeH+Kqk05bTfqQD0vj2YUqGFKimOmMG0iJ2J7j0xJQnkRMrajC0TAk/wBDWJX82+cconaJ9PK5sbKNaHodwd9x++AQENY7Sjw6FQXoeN49R1Ke9sFIqQSPYxM7EeFUJuTbY9D3scMGR8O/qVRHHUvBSxM2ktISdHuACcaPl/8Ap3llbTKaHMkkkgm01cyXVeSRclQQCNhbf1xbpsoyZDi78xepxDDjGZ/p/P8AkxlssnRLPTTiQkWuhAtYny9D9jjn6VVKCz00wUA3JQi34xu+X8B5FmFPTzwVmcSrUSSrDIrqRGASCTt02+b4F5DwGlRlObVWZZhVOYpJEp3jf+eKM+Jrd746PgGSnUaYEg9Qo1x3sj7g/wATGVoJmZgkTvp6lRcW8/wcSjLpkBYQuUItqdNtxjcMv4H4b/21aSpzhnzBC8LCRRZF7nbYWP5xOeDMhNRUUtQc6jjggeZ2mkADKpG4236Y9GnNbwBnwlTsb39PUj55FcTDZadKKM6jqDC19PoLj74rU1G1Y+tHaGGPYydyfIDz/b92z/VDh4ZLJRy0dW9VldVGJaZibEA9Qe3lv64VPpqqGKLmrrgXUwGvwMAxB3HUE7XB8rHHM1PUSVHIleIqEB7H7+k5WhLOsbPKqG2tyCfYnzwKIe/8uDmbItJBTU0QvoUFtuptdifn9sEaWhjelhdurICftiBWCrcoXD4jGXnyVzFHV5W4npTfUF3ZR/ziXL8nrHFS9JrYSxq5jjYg6d2O3QgW6Hz+ceyymzLhvMI5HDwxk+Mka4mX36E9fI41vgzizhGorIXqOdTVAXlPeEcty9wRtvYi/UYbgXrN3tC1ubwl2Xf0iJUZJMlKmYUplaljPWwDcxgWbYG+kBb/AB2vg5lPF1DktNTUMNM4Dsxrgy7kEEd+3p/9xr1XleU5nlcaZNPSzU6vzWCG5uFCjw9b2GMF4zy6qos1rY5WbSoI5V4wAhJ7knfxE7C9z84tRv07eIguc3DmXVKcOYWea3/16/sd+RGei42yujoKPLaZJhlhSRJOzKCbggj5GPqj4/oKSSiooKVjlkcBjd2W8gNt9/Xa+M8oDNNFcw0zpuLomnSTftYf3fgeWL3IsxIgiUXuAyk+vS/pb5xamrZluhGPo8G4KbH55N2eed+eQKjZScU0SZvkj0nP+noKR4nFgv8ASB59NhiyvGOUNLUBoq2cTxGJg7s5YE/y+nxhEqJGpRd4Y2t/ZGpt03/b74rUkcmYMY6lyYywCIjBD37nY28vXA5Na6XQG8YumxMSzLt7Fh3vs3qbhbiCpreLcyo6anoTTUSqIKZLW0k2AHpsQPY/GB7cLVEdBLAkMk1XE7M0YTwooALE97grbpa18a1wPwjy8tgq5Z0gCOG1y2F1U3Fz2YdPbvho4i4k4RyqOqlecTTTgo5gj1Xublb+5GJG85LOdzI31ZDhcK7D8/f73yZgtBwZV5ii1dckkES2W7blz0Nh5k4MjKMghAjMjEp4dpbdPS+L3EPFrcU1/wCnZKGoo1ZgY3UWYC9zcff5wstwZGGIkzIBwfEC1jfv3xxs1Y36XavifTabOnhgqt/M7DxWrUT0FRAJ45oiALXAJOw336f5tgDw5IaVZmi01ExQOOYpOggnr7DfbtgPMHelgaJigZxqcG1/MX9NsXKWU0jwGKRkll2UBgQbWvubd8Pw9GImu8jzYzkAHYbTSeF81qTlJqonaFI1tIgOoCx3ILbgW3ABv2wv8WcXU05pViFTU1liWuNBXtuBfxdTf1GPqBFioo6iPMKczOtzBImklQLkj13Plgbm2SHLM8qq2KbnwygaGjNrAbNqHb+kj/LbLmVuJ5p9MyG/wSbhfiGlq6sUc1OI538Kb7E+RtbfDNWVmV0lSKapnCVGkEru2geu23zhDyrI3zDimjky12WlSVZJZpbKqgNfYgAE9Bthv4Mr8vgrM+hziqT9Qkq2R0dgjcoMf5STuPMDfYeliGoONLG8cMZZuky7mFJGlPVSnTFEqrrkLXGm4Pta4v0wCyfNcpaZJa6UmBAbB3CMdjbTv545xTmvM4CSPQ0GtwKdGNm5AY6CR6gDY+XtjvB0CU+QNMKuJ+bGVC6GuHYeHV4ulu1uo264nyZSwsxyJ5gB8xuos5eteqjoKuQQxkrq0IFPYabC4UkHcW9sKVbmU8mb1KGFJIo1AkZ9Ts503uGPQXsB8fFLJmgXLqxXq1SKCreJWEdwY9yDcn12/fHqlD9JSmjrQ7yIrFNGyL0BJvvbFKZ1UVOc2lZm6oHyWepp85epow7yMGAUHbrfti3PNXGaQyBtZY6rdL3xRy6OWCnrDK7JNCRpsdu2+3ffFaTO64uxKQsbncg7/nAMQ7kgR6IFQBpbyJRmVKcte2l15iA/3A9B74J5jR5TTulHRGT62J7W17X072uO5PT3+FXJK2ESBoi91HiB2IHn32wUrZvqJ0rIUfUbWYnq4PX7Wwk42GSxx/eIViCQIcmy0R0sf1EvLrkjLaJRYyL5A79x+cSJUO0ZNUZWDEIwjTT4ejA+Zt0HTzxRizaWqil+oEbM1leWclmAPS3sTe+DOW5TFJkVXmNXUuJJP/EP7je4NvM7D749CGrbmOxZz4d5Ludo6t4pGaENyGkKQwsPGsYNxv54leZos6hjyTKKaYTDnCoZgJi4tquW6bEiwuLHFyWiop8iy6qkW1SyMRpa2kW1D3t6+uF7MpFjWolpwRXLoaOSM9fCDYAeZODx4Ot6v39oZ1P9MGjzXvLFXlseZVUiZrE9OlVOnMjpXLBdAYbXvbr0A9sTLBl9NBMs2TSU8EamNZKUtKZF2sGk2PTex2tt0OI8vkinp4J5pOc0Q1DVuSzMN28xc7jEFa0o5NPSNUJFKBzI3BJc9T288Y4T1EMePz7THUcBQd+/f8uQpVU6U0lHSUlPRmWQyG7N4yuwJ1N4TZum+K+TUxlRIopYkFzGxc+Egtf2tfa2LNRQmmVo4v4lZITaEeJo1v3+LYExaqSVpp7NDBJq0E6Q7enXvgfDJBKd4b5AEommEsZnS/p1UIagNK1uZIFFvQD4GAxnUGyIQo6ePtiHiPNJ3VJhqDOSvMbrby9OuFo1kpNzK/8A7HB4sbdPm5k65+ldxZhjKXp5ZpqgRfT6gqrGhJW/f/vBSnqNdPLHAn8FZLIzG1lv0H4+wxFlmVtLCTDPTxzgaQkp0q3XcG1genW2JI6GeGMUs0TxTIwJOsMhUi4NgN/O9+mGLkV7W4AToqu0MRwS1FfHHLIiakBO99lOwthro6YSTx08zKaaIAwKpAAvckm3cEfnCfSCOFxM7vI67LJex9h5Yu0+cJJOogDJGh3ZmF7eQ+cC6MfplKFduqN0EMSZxFSVKh6UIzQ+QB3N/Ubj5xHXUEVTxbQiGEpSImqR7Gx07gfcj4OAb50j1UCpIWkU3FhcWPW5x912d2leNGdJHTTG+rbp/wBj84SFyA37VHXiC173L1BlizZvmFTJEsNDr0pFYEFtrt7f8nF2YRSqKqYtykI5a38SqN7k+ZwsjPnakaJ0RJjty2PhYYjnzrnUpR7Qz+b3K+o8iDjNiyMbPxMMyIp6fmWsw5sjR1aEtUatTWIUhSLAC/x9sLtRPNS5kv8ABDpuEWQCwY2JI7fOLkOcIzhKxtJ6Fx4h74q5nPDWRxXdy6AqpDGyi99vLck4pRSvl7SfKQ/mEF5oyS0D0xXx7MpbrsTf9xhWNPKCRob7YcWpJ6ikWSaWKOIMQJ5bl3FraQO9vj3wPlSNpXIcAEkjbBhDdiTOy7Btp6Op0xjfBSWvWopY49zNCdmB2CHsfnp7nC7F298SUhKTtpJWxPTbEaIL6vSOU3tC4rGJZHQ6vIYioq5aeq5jQxzEG+iQbX9cUUJ5rG5vtj7bcb4uQWtGLyGzHHL81yqacuuRQJd9RH1TgWuNt/nHzmWY0sE9PKmV02hZeZfmCQkbjSVNxb3G9u2Fyk2i2xDOTrO5wsYFvv8Ayf8AM9JpIxyZ/Q1EbJLkdO95i4kDiJrdl8IG1rfNz3xHmdXl9bRBaag+hkDb6HZwRvYbn/PPyXIz4sSyMdPU4IYFU7fcwQdrnhcNp1FVJsW9PbE1NVN9QIwyIpOnU+4QHvgfITvucTkDmzHvy2/cY2TYw8ftCmZ1NJXUlVNJW8qWnVUp4WUkyi+5J897/OF3mjzxTJNxueuO3xQuwoSFiSSTP//Z",
+                  "thumbnailDirectPath": "/v/t62.36144-24/542290040_1173200994787886_2392796925766984181_n.enc?ccb=11-4&oh=01_Q5Aa2wGwXuz89tJts0IXVL3HHVYMVy7yFr-qaLtKqMo3loPHbQ&oe=69340A9C&_nc_sid=5e03e0",
+                  "thumbnailSha256": "FHyfe/lQSEWtjcxFf+R2wGYFroNCMZ2nMixp3j/6Rl0=",
+                  "thumbnailEncSha256": "0RJw/OOws6laIhicpMNeFjDo0MVvigMGDlWFwva+Rw0=",
+                  "mediaKey": "Li7lpoftY6xnxt25aeyWLX8ZWuNuXeItEWbZCtJe9IU=",
+                  "mediaKeyTimestamp": "1762427279",
+                  "thumbnailHeight": 576,
+                  "thumbnailWidth": 1024,
+                  "inviteLinkGroupTypeV2": "DEFAULT",
+                  "linkPreviewMetadata": {}
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": "1762427299",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0C639AE56E589721317"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "73B5F2D12104FF304B0C6F8E817048A2",
+              "participant": ""
+            },
+            "text": "💔",
+            "senderTimestampMs": "1762427299894"
+          }
+        },
+        "messageTimestamp": "1762427299",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "B9843248251450D2472610CFE3C2095B",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427329,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+            "title": "Xrated",
+            "previewType": "VIDEO",
+            "jpegThumbnail": "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",
+            "thumbnailDirectPath": "/v/t62.36144-24/541595889_776364418765693_1720491747020288645_n.enc?ccb=11-4&oh=01_Q5Aa2wHy_xEonm6NStwNsqtmDV7fl-z4GwEaJvrcXV_LVf_B9Q&oe=6933E716&_nc_sid=5e03e0",
+            "thumbnailSha256": "FHyfe/lQSEWtjcxFf+R2wGYFroNCMZ2nMixp3j/6Rl0=",
+            "thumbnailEncSha256": "0Mk3RiwvcQyYtxLwwBtAKLHkIwu1u6+wQhn4lT+DnX0=",
+            "mediaKey": "QNmfwmw8TwlaQ6SDbYhMZ4cN6C8bdrTnhHJaqMRMiOQ=",
+            "mediaKeyTimestamp": "1762427326",
+            "thumbnailHeight": 576,
+            "thumbnailWidth": 1024,
+            "inviteLinkGroupTypeV2": "DEFAULT",
+            "faviconMMSMetadata": {
+              "thumbnailDirectPath": "/v/t62.36144-24/540537900_1252520223570139_3491359386643614311_n.enc?ccb=11-4&oh=01_Q5Aa2wHqZB7NjmTpU77Lyf0Uk5XEl3tVNr6Ue6P_KUR2d2z9EA&oe=6933FBB9&_nc_sid=5e03e0",
+              "thumbnailSha256": "nOTybK2cR9n8FBA2frQgan9Gq6BAILTEDsL4/dMI/kM=",
+              "thumbnailEncSha256": "3cJzQgAcOwnikxyE2Gqh23e8kirCuD28odNUqGY1Efg=",
+              "mediaKey": "F97uGIXex5gXx8H7TnYCLeT9sb79yfK7onl03OBX2no=",
+              "mediaKeyTimestamp": "1762427326",
+              "thumbnailHeight": 36,
+              "thumbnailWidth": 36
+            },
+            "linkPreviewMetadata": {}
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "t2ln8Lr0I1i8WSfEgV2OSKE2r9sEZmXRLDbjuf2GRCk="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB05EA3DC8F9C2833AD10"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 Fetching from:\n🔗 https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba"
+          }
+        },
+        "messageTimestamp": "1762427330",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0DBE67F7F1E914D1880"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "❌ ⚠️ Failed to fetch or convert media.",
+            "contextInfo": {
+              "stanzaId": "B9843248251450D2472610CFE3C2095B",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+                  "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+                  "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+                  "title": "Xrated",
+                  "previewType": "VIDEO",
+                  "jpegThumbnail": "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",
+                  "thumbnailDirectPath": "/v/t62.36144-24/541595889_776364418765693_1720491747020288645_n.enc?ccb=11-4&oh=01_Q5Aa2wHy_xEonm6NStwNsqtmDV7fl-z4GwEaJvrcXV_LVf_B9Q&oe=6933E716&_nc_sid=5e03e0",
+                  "thumbnailSha256": "FHyfe/lQSEWtjcxFf+R2wGYFroNCMZ2nMixp3j/6Rl0=",
+                  "thumbnailEncSha256": "0Mk3RiwvcQyYtxLwwBtAKLHkIwu1u6+wQhn4lT+DnX0=",
+                  "mediaKey": "QNmfwmw8TwlaQ6SDbYhMZ4cN6C8bdrTnhHJaqMRMiOQ=",
+                  "mediaKeyTimestamp": "1762427326",
+                  "thumbnailHeight": 576,
+                  "thumbnailWidth": 1024,
+                  "inviteLinkGroupTypeV2": "DEFAULT",
+                  "faviconMMSMetadata": {
+                    "thumbnailDirectPath": "/v/t62.36144-24/540537900_1252520223570139_3491359386643614311_n.enc?ccb=11-4&oh=01_Q5Aa2wHqZB7NjmTpU77Lyf0Uk5XEl3tVNr6Ue6P_KUR2d2z9EA&oe=6933FBB9&_nc_sid=5e03e0",
+                    "thumbnailSha256": "nOTybK2cR9n8FBA2frQgan9Gq6BAILTEDsL4/dMI/kM=",
+                    "thumbnailEncSha256": "3cJzQgAcOwnikxyE2Gqh23e8kirCuD28odNUqGY1Efg=",
+                    "mediaKey": "F97uGIXex5gXx8H7TnYCLeT9sb79yfK7onl03OBX2no=",
+                    "mediaKeyTimestamp": "1762427326",
+                    "thumbnailHeight": 36,
+                    "thumbnailWidth": 36
+                  },
+                  "linkPreviewMetadata": {}
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": "1762427341",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0561FC5ABAC646ADEA0"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "B9843248251450D2472610CFE3C2095B",
+              "participant": ""
+            },
+            "text": "💔",
+            "senderTimestampMs": "1762427341352"
+          }
+        },
+        "messageTimestamp": "1762427341",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "40B223B670E354FBB504E592BA7EE21C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427428,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+            "title": "Xrated",
+            "previewType": "VIDEO",
+            "jpegThumbnail": "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",
+            "thumbnailDirectPath": "/v/t62.36144-24/536612366_1114945903960116_2208900681645409641_n.enc?ccb=11-4&oh=01_Q5Aa2wHuK-NVpjZdbnhN-PdfnHlLcXu01gmy5bQeORGaeL3VuQ&oe=6933E2D3&_nc_sid=5e03e0",
+            "thumbnailSha256": "FHyfe/lQSEWtjcxFf+R2wGYFroNCMZ2nMixp3j/6Rl0=",
+            "thumbnailEncSha256": "/QTNjloUu5MkJv6aKjTQuBL/7TiZBRabYGG57w1E5wc=",
+            "mediaKey": "Ys4vQwOQvit5Eyoz+yoOOjQQgUpkJXo3a9s1DFAmdC8=",
+            "mediaKeyTimestamp": "1762427423",
+            "thumbnailHeight": 576,
+            "thumbnailWidth": 1024,
+            "inviteLinkGroupTypeV2": "DEFAULT",
+            "faviconMMSMetadata": {
+              "thumbnailDirectPath": "/v/t62.36144-24/538300169_639103372502939_1029384162851522535_n.enc?ccb=11-4&oh=01_Q5Aa2wG7J7WuFRVnJbarxDXLugDd3M6e4zH73vwpUQtDRmCiBg&oe=6933F801&_nc_sid=5e03e0",
+              "thumbnailSha256": "nOTybK2cR9n8FBA2frQgan9Gq6BAILTEDsL4/dMI/kM=",
+              "thumbnailEncSha256": "5p3BZBXGx4zb8Ma1ubiDeH8FxErBaV/mKyhJ0SxMns4=",
+              "mediaKey": "FB7noXOlzuwdNEhQqbHMSSty4M43crn+L7Dvd3ndI8g=",
+              "mediaKeyTimestamp": "1762427423",
+              "thumbnailHeight": 36,
+              "thumbnailWidth": 36
+            },
+            "linkPreviewMetadata": {}
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "BVsciqbxxF9rAE2idk2W8b9hIx+vL2bypKr2TX2n2jQ="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0A4B23252791BE732D6"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🪷 Fetching from:\n🔗 https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba"
+          }
+        },
+        "messageTimestamp": "1762427428",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB086458CE112508D4B29"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "❌ ⚠️ Failed to fetch or convert media.",
+            "contextInfo": {
+              "stanzaId": "40B223B670E354FBB504E592BA7EE21C",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+                  "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+                  "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+                  "title": "Xrated",
+                  "previewType": "VIDEO",
+                  "jpegThumbnail": "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",
+                  "thumbnailDirectPath": "/v/t62.36144-24/536612366_1114945903960116_2208900681645409641_n.enc?ccb=11-4&oh=01_Q5Aa2wHuK-NVpjZdbnhN-PdfnHlLcXu01gmy5bQeORGaeL3VuQ&oe=6933E2D3&_nc_sid=5e03e0",
+                  "thumbnailSha256": "FHyfe/lQSEWtjcxFf+R2wGYFroNCMZ2nMixp3j/6Rl0=",
+                  "thumbnailEncSha256": "/QTNjloUu5MkJv6aKjTQuBL/7TiZBRabYGG57w1E5wc=",
+                  "mediaKey": "Ys4vQwOQvit5Eyoz+yoOOjQQgUpkJXo3a9s1DFAmdC8=",
+                  "mediaKeyTimestamp": "1762427423",
+                  "thumbnailHeight": 576,
+                  "thumbnailWidth": 1024,
+                  "inviteLinkGroupTypeV2": "DEFAULT",
+                  "faviconMMSMetadata": {
+                    "thumbnailDirectPath": "/v/t62.36144-24/538300169_639103372502939_1029384162851522535_n.enc?ccb=11-4&oh=01_Q5Aa2wG7J7WuFRVnJbarxDXLugDd3M6e4zH73vwpUQtDRmCiBg&oe=6933F801&_nc_sid=5e03e0",
+                    "thumbnailSha256": "nOTybK2cR9n8FBA2frQgan9Gq6BAILTEDsL4/dMI/kM=",
+                    "thumbnailEncSha256": "5p3BZBXGx4zb8Ma1ubiDeH8FxErBaV/mKyhJ0SxMns4=",
+                    "mediaKey": "FB7noXOlzuwdNEhQqbHMSSty4M43crn+L7Dvd3ndI8g=",
+                    "mediaKeyTimestamp": "1762427423",
+                    "thumbnailHeight": 36,
+                    "thumbnailWidth": 36
+                  },
+                  "linkPreviewMetadata": {}
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": "1762427444",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0CBEFCB95193B996473"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "40B223B670E354FBB504E592BA7EE21C",
+              "participant": ""
+            },
+            "text": "💔",
+            "senderTimestampMs": "1762427444625"
+          }
+        },
+        "messageTimestamp": "1762427444",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "F1624191FF2F20CFD0881E2F6BD3DAF3",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427544,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".weather kisii",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "R8HkhBSpDCgityZ1Grqupt3JDrpX+BmQgUu7knyLtSY="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB00EF389CC9F55A7D9FB"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "F1624191FF2F20CFD0881E2F6BD3DAF3",
+              "participant": ""
+            },
+            "text": "🌤️",
+            "senderTimestampMs": "1762427544676"
+          }
+        },
+        "messageTimestamp": "1762427544",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0DBF7BD851EBDC2500B"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌍 *Weather in Kisii, KE*\n🌤️ Light rain\n🌡️ 23.47°C (Feels like 23.39°C)\n💧 Humidity: 58%\n💨 Wind: 2.68 m/s",
+            "contextInfo": {
+              "stanzaId": "F1624191FF2F20CFD0881E2F6BD3DAF3",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762427546",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0EBAB6342774A7F3D3E"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "F1624191FF2F20CFD0881E2F6BD3DAF3",
+              "participant": ""
+            },
+            "text": "✅",
+            "senderTimestampMs": "1762427546771"
+          }
+        },
+        "messageTimestamp": "1762427546",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "24F8968F970F25919661EA1F0373866C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427587,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba mp3",
+            "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+            "title": "Xrated",
+            "previewType": "VIDEO",
+            "jpegThumbnail": "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",
+            "inviteLinkGroupTypeV2": "DEFAULT",
+            "linkPreviewMetadata": {}
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "kqi+1Ac17Y7kgghSYOeBbimMPZfXJu+vqxR2v5ha87k="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB01F3C7C201EA1F98A4A"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🪷 Fetching from:\n🔗 https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba"
+          }
+        },
+        "messageTimestamp": "1762427587",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB00255683A5204873C5C"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "⚠️ *Unsupported or invalid link.*\n\nMiara couldn't find a downloadable file.\nTry again with a YouTube, TikTok, or direct media link."
+          }
+        },
+        "messageTimestamp": "1762427603",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "8B5DBD12679F2401632B3B52C473147B",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427617,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "matchedText": "https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba",
+            "description": "Provided to YouTube by ONErpmXrated · Vybz Kartel · Kalash · ADIJAH PALMER · Kévin VallerayXrated℗ TJ RecordsReleased on: 2025-10-31Producer: TJ RecordsAuto-...",
+            "title": "Xrated",
+            "previewType": "VIDEO",
+            "jpegThumbnail": "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",
+            "thumbnailDirectPath": "/v/t62.36144-24/541293287_2812142518992999_8756100472354376403_n.enc?ccb=11-4&oh=01_Q5Aa2wEtKKt8x-42s86ZYCddKwOjdxmx7W6UHu7uQPf_CyONGQ&oe=6933FB04&_nc_sid=5e03e0",
+            "thumbnailSha256": "FHyfe/lQSEWtjcxFf+R2wGYFroNCMZ2nMixp3j/6Rl0=",
+            "thumbnailEncSha256": "DLaL9EToHpgGlRZJaUKkwYEDdXvlE5VudanZbu65NKs=",
+            "mediaKey": "0LKgIZ6f6S0eGCsjVwtSTi4apAmm8CtTE/i4HDZzTzc=",
+            "mediaKeyTimestamp": "1762427610",
+            "thumbnailHeight": 576,
+            "thumbnailWidth": 1024,
+            "inviteLinkGroupTypeV2": "DEFAULT",
+            "faviconMMSMetadata": {
+              "thumbnailDirectPath": "/v/t62.36144-24/539032657_1538092677310301_7083800748976016084_n.enc?ccb=11-4&oh=01_Q5Aa2wF-QbzcN7QuheM55mmAB1M29VOoanQV2HYEpP7pC90CQA&oe=69340DF6&_nc_sid=5e03e0",
+              "thumbnailSha256": "nOTybK2cR9n8FBA2frQgan9Gq6BAILTEDsL4/dMI/kM=",
+              "thumbnailEncSha256": "P5c/rfl0akfNDkthTSu7Hc/MrnkPYjLGAdsbFIfplo8=",
+              "mediaKey": "aryK5k+TY20rydwYJc51cEvuPzs/fDvzdNVGHoTCn+E=",
+              "mediaKeyTimestamp": "1762427610",
+              "thumbnailHeight": 36,
+              "thumbnailWidth": 36
+            },
+            "linkPreviewMetadata": {}
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "Y35T2CJifEj4ZGFxN8TO03ruZxzGEFDU3KDYhssnIfg="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0CFF611745FDEE955B1"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🪷 Fetching from:\n🔗 https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba"
+          }
+        },
+        "messageTimestamp": "1762427617",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB080820BA2567A01DCD5"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "⚠️ *Unsupported or invalid link.*\n\nMiara couldn't find a downloadable file.\nTry again with a YouTube, TikTok, or direct media link."
+          }
+        },
+        "messageTimestamp": "1762427632",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "EE8BBC4F87AD5EA7887B88AD540788A9",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427840,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".groupinfo",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "2vSf68fPBxBu+0C9WyWQ3E5YM0N8JfFym5DeAq5bhTc="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "26EA5593DF3FF79654C4F6A7A4EBEEEA",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427874,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ping",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "YtRG30uywOPa2LQyYRNG+eEoP/I+XXenE9EGCl2Fvgc="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0B10EDB94011CA458C3"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "26EA5593DF3FF79654C4F6A7A4EBEEEA",
+              "participant": ""
+            },
+            "text": "🏃",
+            "senderTimestampMs": "1762427874761"
+          }
+        },
+        "messageTimestamp": "1762427874",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0F4A7F36B6F49546B7B"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🏃 Pinging...",
+            "contextInfo": {
+              "stanzaId": "26EA5593DF3FF79654C4F6A7A4EBEEEA",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762427877",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0F9FF387BC94F894DCA"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "✨ *Miara🌸 Status*\n⚡ *Speed:* 2491ms\n🕒 *Uptime:* 0h 1m 36s\n🧠 *Memory:* 5902MB / 11842MB (49.8% used)\n🧩 *CPU:* Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz (4 cores)\n📊 *Load Avg:* 0.63\n📅 *Date:* Thursday, November 6th 2025\n🕐 *Time:* 14:17:57",
+            "contextInfo": {
+              "stanzaId": "26EA5593DF3FF79654C4F6A7A4EBEEEA",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762427877",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB04653CBCBDC5D312113"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "26EA5593DF3FF79654C4F6A7A4EBEEEA",
+              "participant": ""
+            },
+            "text": "💫",
+            "senderTimestampMs": "1762427877260"
+          }
+        },
+        "messageTimestamp": "1762427877",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "02703A283A62EC9242549A7AB113CB73",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762427887,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".groupinfo",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "gUXBWh0+JncHRClvwWzt+YOIrTGSIHscZUfA1R4ETCs="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "F1110B5265843C711F79200E52C6DE7E",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762429753,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".weather kisii",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "vsS+5f2qklYi3A7/3oHVtyjvBIvgZbSwW7MZzpzh6gU="
+          }
+        }
+      }
+    ],
+    "120363402683520571@g.us": [
+      {
+        "key": {
+          "remoteJid": "120363402683520571@g.us",
+          "fromMe": false,
+          "id": "2829246077",
+          "participant": "14573478363301@lid"
+        },
+        "messageTimestamp": "1762429957",
+        "participant": "14573478363301@lid",
+        "messageStubType": "GROUP_CREATE",
+        "messageStubParameters": [
+          "M I A R A"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "120363402683520571@g.us",
+          "fromMe": false,
+          "id": "D24A67A1D48DFF90F9236873CEAAE83A",
+          "participant": "14573478363301@lid",
+          "participantAlt": "254710407153@s.whatsapp.net",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1762429965,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "senderKeyDistributionMessage": {
+            "groupId": "120363402683520571@g.us",
+            "axolotlSenderKeyDistributionMessage": "MwiRg8z8AxA3GiARHSPUuiUApqb5KJhtHev5zABt5HMhCZQ8NmBPkHkI9CIhBbIRjrXm/emWQg4sbodvQELweKVRqeUreejTGcSvCK0x"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2
+          }
+        },
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received an instance of Object"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "120363402683520571@g.us",
+          "fromMe": false,
+          "id": "D24A67A1D48DFF90F9236873CEAAE83A",
+          "participant": "14573478363301@lid",
+          "participantAlt": "254710407153@s.whatsapp.net",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1762429966,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ping",
+          "senderKeyDistributionMessage": {
+            "groupId": "120363402683520571@g.us",
+            "axolotlSenderKeyDistributionMessage": "MwiRg8z8AxA4GiDOcWBpm8Otu8cBO3datm727Jiu/vsA9vcwKNgs3jKU4iIhBbIRjrXm/emWQg4sbodvQELweKVRqeUreejTGcSvCK0x"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "aeOpZHR0gDTAP4aX8Yhf2NIoKHJy6LO9WCL2qXfWbX8="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "120363402683520571@g.us",
+          "fromMe": false,
+          "id": "573DA7D8EEF87210C0A8352782CCA7A0",
+          "participant": "14573478363301@lid",
+          "participantAlt": "254710407153@s.whatsapp.net",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1762430144,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ping",
+          "senderKeyDistributionMessage": {
+            "groupId": "120363402683520571@g.us",
+            "axolotlSenderKeyDistributionMessage": "MwiRg8z8AxA7GiAZTO3xvU5OYwlJqMA0W4wjdbs00C4t70og/tRctx523SIhBbIRjrXm/emWQg4sbodvQELweKVRqeUreejTGcSvCK0x"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "t26wvR+vF+ThtQ==",
+              "recipientTimestamp": "1762430095"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "BLqrtrgc384Kq2OWjec726rRuaiIPfwAS/Tb5bwGufI="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "120363402683520571@g.us",
+          "fromMe": false,
+          "id": "9B551F6A7009FAE908599B5459EBA742",
+          "participant": "14573478363301@lid",
+          "participantAlt": "254710407153@s.whatsapp.net",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1762430175,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "messageStubType": 2,
+        "messageStubParameters": [
+          "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received an instance of Object"
+        ]
+      },
+      {
+        "key": {
+          "remoteJid": "120363402683520571@g.us",
+          "fromMe": false,
+          "id": "9B551F6A7009FAE908599B5459EBA742",
+          "participant": "14573478363301@lid",
+          "participantAlt": "254710407153@s.whatsapp.net",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1762430469,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".menu",
+          "senderKeyDistributionMessage": {
+            "groupId": "120363402683520571@g.us",
+            "axolotlSenderKeyDistributionMessage": "MwiRg8z8AxA7GiAZTO3xvU5OYwlJqMA0W4wjdbs00C4t70og/tRctx523SIhBbIRjrXm/emWQg4sbodvQELweKVRqeUreejTGcSvCK0x"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "t26wvR+vF+ThtQ==",
+              "recipientTimestamp": "1762430095"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "pghwOsGQWz86GqPtbGSIrVSOrvkVRsFr34VeWZt1wNg="
+          }
+        }
+      }
+    ],
+    "254759006509@s.whatsapp.net": [
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "AC5EF1034EBB46C0E383D3CE2518CF79",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433079,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".menu",
+            "previewType": "NONE",
+            "contextInfo": {
+              "entryPointConversionSource": "contact_card",
+              "entryPointConversionApp": "whatsapp",
+              "entryPointConversionDelaySeconds": 3
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "DHOFW10oZUDuXg==",
+              "senderTimestamp": "1762369041",
+              "recipientKeyHash": "rHPcwLLBl930GA==",
+              "recipientTimestamp": "1759495479"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "JPpgEwlGjyDBWvL2A5Nz0p2EnyiXuy8UzFNRCW5QJJM="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "3EB07DF920D96B3664D487",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433080,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m269/AQOPlsJ4MSZ3GzhyiMCnMyXd6X41qsgvSKaVe9Q4TyqaEPe-p0F5bTwgzwoyzF0dBLXPk7_uZFDDtzBu0eUHYIpeDV7PKiHqeg_eW-Bp9w?ccb=9-4&oh=01_Q5Aa2wGy6N8AhHJLj04Jr4hxccXNZ2SQdyNFcOBp6Y3NGk2FeA&oe=6933EEAA&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "\n💊 *Benzo-MD*\n\n*Version:* V3\n*Runtime:* 0d 17h 33m 48s\n*Platform:* linux\n*Memory:* 72.36MB\n*Creator:* Amon\n\n*📁 AVAILABLE COMMANDS*\n\n┌─「 🛠️ *GENERAL* 」\n│ • .help / .menu\n│ • .ping\n│ • .alive\n│ • .tts <text>\n│ • .owner\n│ • .joke\n│ • .quote\n│ • .fact\n│ • .weather <city>\n│ • .news\n│ • .attp <text>\n│ • .lyrics <song_title>\n│ • .8ball <question>\n│ • .groupinfo\n│ • .staff / .admins\n│ • .vv\n│ • .trt <text> <lang>\n│ • .ss <link>\n│ • .jid\n│ • .url\n└─\n\n┌─「 🔧 *ADMIN* 」\n│ • .ban @user\n│ • .promote @user\n│ • .demote @user\n│ • .mute <minutes>\n│ • .unmute\n│ • .delete / .del\n│ • .kick @user\n│ • .warnings @user\n│ • .warn @user\n│ • .antilink\n│ • .antibadword\n│ • .clear\n│ • .tag <message>\n│ • .tagall\n│ • .tagnotadmin\n│ • .hidetag <message>\n│ • .chatbot\n│ • .resetlink\n│ • .antitag <on/off>\n│ • .welcome <on/off>\n│ • .goodbye <on/off>\n│ • .setgdesc <description>\n│ • .setgname <new name>\n│ • .setgpp (reply to image)\n└─\n\n┌─「 👑 *OWNER* 」\n│ • .mode <public/private>\n│ • .clearsession\n│ • .antidelete\n│ • .cleartmp\n│ • .update\n│ • .settings\n│ • .setpp <reply to image>\n│ • .autoreact <on/off>\n│ • .autostatus <on/off>\n│ • .autostatus react <on/off>\n│ • .autotyping <on/off>\n│ • .autoread <on/off>\n│ • .anticall <on/off>\n│ • .pmblocker <on/off/status>\n│ • .pmblocker setmsg <text>\n│ • .setmention <reply to msg/media>\n│ • .mention <on/off>\n└─\n\n┌─「 🎨 *IMAGE/STICKER* 」\n│ • .blur <image>\n│ • .simage <reply to sticker>\n│ • .sticker <reply to image>\n│ • .removebg\n│ • .remini\n│ • .crop <reply to image>\n│ • .tgsticker <Link>\n│ • .meme\n│ • .take <packname>\n│ • .emojimix <emj1>+<emj2>\n│ • .igs <insta link>\n│ • .igsc <insta link>\n└─\n\n┌─「 👩 *PIES* 」\n│ • .pies <country>\n│ • .china\n│ • .indonesia\n│ • .japan\n│ • .korea\n│ • .hijab\n└─\n\n┌─「 🎮 *GAME* 」\n│ • .tictactoe @user\n│ • .hangman\n│ • .guess <letter>\n│ • .trivia\n│ • .answer <answer>\n│ • .truth\n│ • .dare\n└─\n\n┌─「 🤖 *AI* 」\n│ • .gpt <question>\n│ • .gemini <question>\n│ • .imagine <prompt>\n│ • .flux <prompt>\n│ • .sora <prompt>\n└─\n\n┌─「 🎭 *FUN* 」\n│ • .compliment @user\n│ • .insult @user\n│ • .flirt\n│ • .shayari\n│ • .goodnight\n│ • .roseday\n│ • .character @user\n│ • .wasted @user\n│ • .ship @user\n│ • .simp @user\n│ • .stupid @user [text]\n└─\n\n┌─「 ✨ *TEXTMAKER* 」\n│ • .metallic <text>\n│ • .ice <text>\n│ • .snow <text>\n│ • .impressive <text>\n│ • .matrix <text>\n│ • .light <text>\n│ • .neon <text>\n│ • .devil <text>\n│ • .purple <text>\n│ • .thunder <text>\n│ • .leaves <text>\n│ • .1917 <text>\n│ • .arena <text>\n│ • .hacker <text>\n│ • .sand <text>\n│ • .blackpink <text>\n│ • .glitch <text>\n│ • .fire <text>\n└─\n\n┌─「 ⬇️ *DOWNLOADER* 」\n│ • .play <song_name>\n│ • .song <song_name>\n│ • .spotify <query>\n│ • .instagram <link>\n│ • .facebook <link>\n│ • .tiktok <link>\n│ • .video <song name>\n│ • .ytmp4 <Link>\n└─\n\n┌─「 🎨 *MISC* 」\n│ • .heart\n│ • .horny\n│ • .circle\n│ • .lgbt\n│ • .lolice\n│ • .its-so-stupid\n│ • .namecard\n│ • .oogway\n│ • .tweet\n│ • .ytcomment\n│ • .comrade\n│ • .gay\n│ • .glass\n│ • .jail\n│ • .passed\n│ • .triggered\n└─\n\n┌─「 🎎 *ANIME* 」\n│ • .neko\n│ • .waifu\n│ • .loli\n│ • .nom\n│ • .poke\n│ • .cry\n│ • .kiss\n│ • .pat\n│ • .hug\n│ • .wink\n│ • .facepalm\n└─\n\n┌─「 💻 *GITHUB* 」\n│ • .git\n│ • .github\n│ • .sc\n│ • .script\n│ • .repo\n└─\n\n*📢 Stay updated with our newsletter!*",
+            "fileSha256": "tTgDPkt0M2fYOuKPdI940d4yvzYB7liCAHp/pqigG3g=",
+            "fileLength": "2368335",
+            "height": 1536,
+            "width": 1024,
+            "mediaKey": "pDU1uDeaytWDDT8KNY+GgRkUvSEFxf+niqkThn5PNZY=",
+            "fileEncSha256": "gRUIITqub6xAFUMQOjlQ/DHC+l/VANSacm/vZWIf5UY=",
+            "directPath": "/o1/v/t24/f2/m269/AQOPlsJ4MSZ3GzhyiMCnMyXd6X41qsgvSKaVe9Q4TyqaEPe-p0F5bTwgzwoyzF0dBLXPk7_uZFDDtzBu0eUHYIpeDV7PKiHqeg_eW-Bp9w?ccb=9-4&oh=01_Q5Aa2wGy6N8AhHJLj04Jr4hxccXNZ2SQdyNFcOBp6Y3NGk2FeA&oe=6933EEAA&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762433079",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAwACADASIAAhEBAxEB/8QAGQABAQEAAwAAAAAAAAAAAAAAAwQCAAEG/8QAJRAAAgIBAwIHAQAAAAAAAAAAAQIDEQAEEiETMQUiMkFRcYFh/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//EACARAAIBAwQDAAAAAAAAAAAAAAABEQISIQMTMkEiMWH/2gAMAwEAAhEDEQA/APH6WDRyaU9aXpy7+D/K+M4+m0aoGXU7jY8te15IeBirvCRkKCX4BP3ltz7LuJLiiySHw0qvTcjz0bJsC/j4rJtTBpo4gYZ+o+764wSzU1gbuxP7lMEMJ8PmlldRJYEag+Ym+ePisKj6K9VRxRK3bKzINOVUqrL09h7Hn3r94wNlKrsQq3wT74fVPV6iEhgQV/lZuYOMXCTTCVj5Qo27RQrthp6cy7s7WxskknNxjy/uE5ZYhGXBL0LJPtmQGXkAivfEEjQzrInDIQw+8d/FNS4kUsu2T1KFFHjJgvl0iRrJs9zzzncfqypfFNSqKoKUoAFoOw7YBkaWdpHrc3JoVjAz2j//2Q==",
+            "contextInfo": {
+              "stanzaId": "AC5EF1034EBB46C0E383D3CE2518CF79",
+              "participant": "254759006509@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".menu",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              },
+              "forwardingScore": 999,
+              "isForwarded": true,
+              "forwardedNewsletterMessageInfo": {
+                "newsletterJid": "120363422423159626@newsletter",
+                "serverMessageId": -1,
+                "newsletterName": "Benzo Bot"
+              }
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "3EB0787F402AE899150315",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433081,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "audioMessage": {
+            "url": "https://mmg.whatsapp.net/v/t62.7114-24/543184323_867082568983316_3283487398918834170_n.enc?ccb=11-4&oh=01_Q5Aa2wHIoTI4EVRTtRCX_pywimk180up2g2x09BT0PFcQpggBQ&oe=69340ED5&_nc_sid=5e03e0&mms3=true",
+            "mimetype": "audio/mpeg",
+            "fileSha256": "iLqS8TdUV0wGC9jbViuZ0ukrAmXdgfoJuHF6gbXNDec=",
+            "fileLength": "2171481",
+            "seconds": 135,
+            "ptt": false,
+            "mediaKey": "1tHgLhfff//Q13rd4kcyDuy44XQ7rxFHbej6NyyBFOo=",
+            "fileEncSha256": "D2GCbpg7+4nXLx1iOFFiCvS/XyLw0pnRqDkOwt7zwTw=",
+            "directPath": "/v/t62.7114-24/543184323_867082568983316_3283487398918834170_n.enc?ccb=11-4&oh=01_Q5Aa2wHIoTI4EVRTtRCX_pywimk180up2g2x09BT0PFcQpggBQ&oe=69340ED5&_nc_sid=5e03e0",
+            "mediaKeyTimestamp": "1762433081"
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "3EB0831DDE5FCD85128549",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433081,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254759006509@s.whatsapp.net",
+              "fromMe": false,
+              "id": "AC5EF1034EBB46C0E383D3CE2518CF79",
+              "participant": ""
+            },
+            "text": "⏳",
+            "senderTimestampMs": "1762433081560"
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB06E7EA63DE12388792B"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸 Commands*\n\n• *.about* — Show Miara’s system info with animated gradient, avatar, and system gauges.\n• *.gpt* — AI chat with persistent + semantic memory and fallback providers\n• *.broadcast* — Send a message or media to all chats (owner only).\n• *.fetch* — Fetch and transform media from any URL 🌸\n• *.default* — No description available.\n• *.help* — Get details for a specific command or view the full menu.\n• *.imgurl* — Convert an uploaded image to a public URL.\n• *.menu* — Show Miara’s command menu, grouped by category.\n• *.owner* — Get the contact information of the bot owner.\n• *.ping* — Check Miara’s speed, uptime, and system performance.\n• *.qr* — Generate a QR code from text or URL.\n• *.reload* — Reload all bot commands without restart.\n• *.restart* — Restart Miara (owner only).\n• *.setbio* — Change Miara’s WhatsApp bio (owner only).\n• *.sticker* — Convert an image, GIF, or short video into a Miara-style sticker 🌸\n• *.tts* — Convert text to speech using Google TTS.\n• *.weather* — Get current weather or a 3-day forecast for any city 🌦️\n\n💫 Prefix: ."
+          }
+        },
+        "messageTimestamp": "1762433080",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB04338558A426A4A2DD7"
+        },
+        "message": {
+          "stickerMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m269/AQP7sAH6-0pcAVXk2-awtYpdMUZKCJ4G9O5rBYRDTHUTlLoo6xERcNydgcl7372rDv3DZFvrm8q6iy_POPJ7KGq6bbxk--83fUdJthWCCg?ccb=9-4&oh=01_Q5Aa2wGK-wRBuPPH0wCIWBgah_tlQXVzxRudIXv1sxPbOykXiw&oe=6933F100&_nc_sid=e6ed6c&mms3=true",
+            "fileSha256": "tTgDPkt0M2fYOuKPdI940d4yvzYB7liCAHp/pqigG3g=",
+            "fileEncSha256": "yGis/kVW8KuhO3yVkOnLAxcM+9g9zMiyOroWxEOkaAk=",
+            "mediaKey": "mpy7NCIkM60DxlgnNDOY9MdAN24SHkEdz/u/RAX20D8=",
+            "mimetype": "image/webp",
+            "directPath": "/o1/v/t24/f2/m269/AQP7sAH6-0pcAVXk2-awtYpdMUZKCJ4G9O5rBYRDTHUTlLoo6xERcNydgcl7372rDv3DZFvrm8q6iy_POPJ7KGq6bbxk--83fUdJthWCCg?ccb=9-4&oh=01_Q5Aa2wGK-wRBuPPH0wCIWBgah_tlQXVzxRudIXv1sxPbOykXiw&oe=6933F100&_nc_sid=e6ed6c",
+            "fileLength": "2368335",
+            "mediaKeyTimestamp": "1762433098"
+          }
+        },
+        "messageTimestamp": "1762433098",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0BBE66C134724C20A6D"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254759006509@s.whatsapp.net",
+              "fromMe": false,
+              "id": "3EB07DF920D96B3664D487",
+              "participant": ""
+            },
+            "text": "✨",
+            "senderTimestampMs": "1762433099007"
+          }
+        },
+        "messageTimestamp": "1762433099",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433233,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ping",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "DHOFW10oZUDuXg==",
+              "senderTimestamp": "1762369041",
+              "recipientKeyHash": "rHPcwLLBl930GA==",
+              "recipientTimestamp": "1762432965"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "SCNP24R12TSjBbgw8ZENmYaCjuTaamBsD6DW1RxTqmI="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "3EB0CB70B3F2A6DCC3EB40",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433234,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": "🏓 Pong!",
+            "contextInfo": {
+              "stanzaId": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+              "participant": "254759006509@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".ping"
+              }
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB048612C5C49E945FB3F"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254759006509@s.whatsapp.net",
+              "fromMe": false,
+              "id": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+              "participant": ""
+            },
+            "text": "🏃",
+            "senderTimestampMs": "1762433233810"
+          }
+        },
+        "messageTimestamp": "1762433233",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "3EB0D81AC9B216F89F6500",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433234,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": "\n*Pong!* 🏓\n*Response Speed:* *0.2623* seconds\n\n*💻 Benzo Bot* Server Info\nRAM Usage: *29.04 GB / 62.29 GB*\nCPU Cores: *8*\nCPU Speed: *3297.50 MHz*\n",
+            "contextInfo": {
+              "stanzaId": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+              "participant": "254759006509@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".ping"
+              },
+              "forwardingScore": 999,
+              "isForwarded": true,
+              "forwardedNewsletterMessageInfo": {
+                "newsletterJid": "120363422423159626@newsletter",
+                "serverMessageId": -1,
+                "newsletterName": "Benzo Bot"
+              }
+            }
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "remoteJidAlt": "182403217784854@lid",
+          "fromMe": false,
+          "id": "3EB060B8395E84E89FBB00",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762433234,
+        "pushName": "🕸️꧁⛓️༒☬A͜͡mon☬༒⛓️꧂🕸",
+        "broadcast": false,
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254759006509@s.whatsapp.net",
+              "fromMe": false,
+              "id": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+              "participant": ""
+            },
+            "text": "⏳",
+            "senderTimestampMs": "1762433234207"
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB09898CE3D8CB273251E"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🏃 Pinging...",
+            "contextInfo": {
+              "stanzaId": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+              "participant": "254759006509@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762433234",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB096DADD2548AFE636FE"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "✨ *Miara🌸 Status*\n⚡ *Speed:* 1066ms\n🕒 *Uptime:* 0h 4m 37s\n🧠 *Memory:* 7045MB / 11842MB (59.5% used)\n🧩 *CPU:* Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz (4 cores)\n📊 *Load Avg:* 1.22\n📅 *Date:* Thursday, November 6th 2025\n🕐 *Time:* 15:47:14",
+            "contextInfo": {
+              "stanzaId": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+              "participant": "254759006509@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762433234",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254759006509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB08EC09FFC94C20DEA26"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254759006509@s.whatsapp.net",
+              "fromMe": false,
+              "id": "AC41CB2D2EB9F524F95FB475FBDBBBBF",
+              "participant": ""
+            },
+            "text": "💫",
+            "senderTimestampMs": "1762433235332"
+          }
+        },
+        "messageTimestamp": "1762433235",
         "status": "PENDING"
       }
     ]

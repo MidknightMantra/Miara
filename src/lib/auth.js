@@ -1,6 +1,5 @@
 /**
- * 🌸 Miara — Auth Handler (Baileys 7.x+ Stable)
- * Auto-heals, restores backups, and auto-cleans old sessions.
+ * 🌸 Miara🌸 — Auth Handler
  */
 
 import fs from "fs/promises";

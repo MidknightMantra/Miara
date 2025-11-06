@@ -1,12 +1,14 @@
 /**
- * 🌸 Miara Fetch+ — Smart Universal Media Downloader
+ * 🌸 Miara Fetch+ — Celestial Edition
  * Author: MidKnightMantra
- * Enhanced by GPT-5
+ * Refined by GPT-5
  *
- * Features:
- * 🔗 Auto media preview (YouTube, Twitter, TikTok, etc.)
- * 🧠 Auto conversion to .mp3 or .mp4
- * 🌈 Unique emoji aesthetic & graceful fallback
+ * ✨ Features:
+ * 🪷 Auto media preview (YouTube, TikTok, Twitter, etc.)
+ * 🌈 Unique emojis for each file type
+ * 🧠 Auto mp3/mp4 conversion
+ * 🪐 Graceful error handling
+ * 🌷 Safe, polished, production-ready
  */
 
 import moment from "moment-timezone";
@@ -21,32 +23,35 @@ if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR);
 
 export default {
   name: "fetch",
-  description: "Download and auto-convert media from any URL 🌸",
+  description: "Fetch and transform media from any URL 🌸",
   category: "utility",
-  usage: ".fetch <url> or .fetch <url> mp3/mp4",
+  usage: ".fetch <url> [mp3/mp4]",
 
   async execute(conn, m, args) {
     const prefix = config.PREFIX || ".";
-    if (!args[0] || !isUrl(args[0])) {
+    const url = args[0];
+    const format = args[1]?.toLowerCase() || null;
+
+    if (!url || !isUrl(url)) {
       await conn.sendMessage(m.from, {
-        text: `🌍 *Usage:* ${prefix}fetch <url> [mp3/mp4]\n\n_Example:_\n${prefix}fetch https://youtu.be/abc123 mp3`,
+        text: `🌍 *Usage:* ${prefix}fetch <url> [mp3/mp4]\n\n🪷 _Example:_\n${prefix}fetch https://youtu.be/dQw4w9WgXcQ mp3`,
       });
       return;
     }
 
-    const url = args[0];
-    const format = args[1]?.toLowerCase() || null;
-    await conn.sendMessage(m.from, { text: `🌸 Fetching media from:\n🔗 ${url}` });
+    await conn.sendMessage(m.from, { text: `🌠 Traversing the cosmos for:\n🔗 ${url}` });
 
     try {
-      // ✨ Detect platform
+      // 🔭 Platform detection
       const isYouTube = /youtu\.?be/.test(url);
       const isTwitter = /twitter\.com|x\.com/.test(url);
       const isTikTok = /tiktok\.com/.test(url);
       const isInstagram = /instagram\.com/.test(url);
       const isReddit = /reddit\.com/.test(url);
+      const isGeneric =
+        !isYouTube && !isTwitter && !isTikTok && !isInstagram && !isReddit;
 
-      // 🎥 Universal Fallback APIs (with built-in conversion)
+      // 🌐 Multi-API fallback
       const FALLBACK_APIS = [
         `https://api.neoxr.eu/api/ytdl?url=${encodeURIComponent(url)}`,
         `https://api.ryzendesu.vip/api/download/ytv2?url=${encodeURIComponent(url)}`,
@@ -60,28 +65,19 @@ export default {
         `https://api.lolhuman.xyz/api/ytmusic?apikey=lolhuman&url=${encodeURIComponent(url)}`,
       ];
 
-      let mediaUrl, thumb, title, mime, fileName;
+      let mediaUrl, thumb, title, duration;
 
-      // 🧠 Smart API selection
+      // 🌟 Try all sources until a valid URL appears
       for (const api of FALLBACK_APIS) {
         try {
           const res = await fetch(api);
           const data = await res.json();
 
-          // Normalize results
           title =
             data.title ||
             data.result?.title ||
             data.data?.title ||
-            "Untitled Media";
-
-          mediaUrl =
-            (format === "mp3"
-              ? data.audio || data.result?.audio || data.data?.audio
-              : data.video || data.result?.video || data.data?.video) ||
-            data.url ||
-            data.result ||
-            data.downloadUrl;
+            "Unnamed Celestial Artifact";
 
           thumb =
             data.thumbnail ||
@@ -89,56 +85,176 @@ export default {
             data.data?.thumbnail ||
             null;
 
+          duration =
+            data.duration ||
+            data.result?.duration ||
+            data.data?.duration ||
+            null;
+
+          const possibleUrls = [
+            data.audio,
+            data.video,
+            data.result?.audio,
+            data.result?.video,
+            data.data?.audio,
+            data.data?.video,
+            data.url,
+            data.result,
+            data.downloadUrl,
+          ];
+
+          mediaUrl = possibleUrls.find(
+            (u) => typeof u === "string" && isUrl(u)
+          );
+
           if (mediaUrl) break;
         } catch {
           continue;
         }
       }
 
-      if (!mediaUrl) {
-        throw new Error("❌ All media APIs failed or URL unsupported.");
+      // 🛑 No valid link found
+      if (!mediaUrl && !isGeneric) {
+        await conn.sendMessage(m.from, {
+          text: `🪐 *Link not supported or invalid.*\nMiara could not retrieve this star's data.\nTry again with a YouTube, TikTok, or direct media link.`,
+        });
+        return;
       }
 
-      // 🧾 Fetch buffer
-      const buffer = await getBuffer(mediaUrl);
-      const type = await detectFileType(buffer);
-      mime = type?.mime || (format === "mp3" ? "audio/mpeg" : "video/mp4");
-      fileName = `${title.replace(/[^\w\s]/gi, "_")}.${format || (mime.includes("audio") ? "mp3" : "mp4")}`;
+      // 🎞️ Preview if no format chosen
+      if (!format && !isGeneric && mediaUrl && thumb) {
+        const caption = `
+🌷 *${title}*
+⌛ Duration: ${duration || "Unknown"}
+✨ Choose your destiny:
+`.trim();
 
-      const time = moment().tz("Africa/Nairobi").format("HH:mm:ss");
+        await conn.sendMessage(
+          m.from,
+          {
+            image: { url: thumb },
+            caption,
+            footer: "🌸 Miara Media Gateway",
+            buttons: [
+              {
+                buttonId: `${prefix}fetch ${url} mp3`,
+                buttonText: { displayText: "🎼 Extract MP3" },
+                type: 1,
+              },
+              {
+                buttonId: `${prefix}fetch ${url} mp4`,
+                buttonText: { displayText: "🎬 Download MP4" },
+                type: 1,
+              },
+            ],
+            headerType: 4,
+          },
+          { quoted: m }
+        );
+        return;
+      }
+
+      // 📦 Download
+      let buffer, mimeGuess, fileName;
+      if (isGeneric) {
+        const res = await fetch(url);
+        if (!res.ok)
+          throw new Error(`HTTP ${res.status} ${res.statusText}`);
+        buffer = await res.buffer();
+        const type = await detectFileType(buffer);
+        mimeGuess =
+          type?.mime ||
+          res.headers.get("content-type") ||
+          "application/octet-stream";
+        fileName =
+          url.split("/").pop().split("?")[0] ||
+          `artifact.${mimeGuess.split("/")[1] || "bin"}`;
+      } else {
+        if (!mediaUrl || !isUrl(mediaUrl)) {
+          await conn.sendMessage(m.from, {
+            text: `⚠️ The cosmic link returned by APIs was invalid.\nMiara suggests trying another format.`,
+          });
+          return;
+        }
+
+        buffer = await getBuffer(mediaUrl);
+        const type = await detectFileType(buffer);
+        mimeGuess =
+          type?.mime ||
+          (format === "mp3" ? "audio/mpeg" : "video/mp4");
+        fileName = `${title.replace(/[^\w\s]/gi, "_")}.${format || (mimeGuess.includes("audio") ? "mp3" : "mp4")}`;
+      }
+
+      // 🕒 Metadata and emoji theme
       const sizeMB = (buffer.length / 1024 / 1024).toFixed(2);
+      const time = moment().tz("Africa/Nairobi").format("HH:mm:ss");
 
-      // 🌸 Unique Emojis
-      const emoji = mime.includes("audio")
-        ? "🎧"
-        : mime.includes("video")
-        ? "📽️"
-        : "🪐";
+      const emoji =
+        mimeGuess.startsWith("audio/")
+          ? "🎼" // melody for audio
+          : mimeGuess.startsWith("video/")
+          ? "🎬" // film slate for video
+          : mimeGuess.includes("pdf")
+          ? "📜" // scroll for docs
+          : mimeGuess.includes("zip") || mimeGuess.includes("rar")
+          ? "💠" // crystal for archives
+          : "🌌"; // cosmic default
 
       const caption = `
-${emoji} *${title}*
+${emoji} *${title || "Unknown Artifact"}*
 ━━━━━━━━━━━━━━━
-📄 *Type:* ${mime}
+📄 *Type:* ${mimeGuess}
 💾 *Size:* ${sizeMB} MB
 🕰️ *Fetched:* ${time}
 🌷 *${config.BOT_NAME}*
 ━━━━━━━━━━━━━━━
-✨ _Miara transformed this link for you._ 🌸
+🌠 _Transmitted across galaxies by Miara._ ✨
 `.trim();
 
+      // 💫 Send the right format
       const msg =
-        mime.startsWith("audio/")
-          ? { audio: buffer, mimetype: mime, fileName, caption, ptt: false }
-          : { video: buffer, mimetype: mime, fileName, caption, thumbnail: thumb };
+        mimeGuess.startsWith("audio/")
+          ? {
+              audio: buffer,
+              mimetype: mimeGuess,
+              fileName,
+              caption,
+              ptt: false,
+            }
+          : mimeGuess.startsWith("video/")
+          ? {
+              video: buffer,
+              mimetype: mimeGuess,
+              fileName,
+              caption,
+              thumbnail: thumb,
+            }
+          : {
+              document: buffer,
+              mimetype: mimeGuess,
+              fileName,
+              caption,
+            };
 
       await conn.sendMessage(m.from, msg, { quoted: m.message });
-      await conn.sendMessage(m.from, { react: { text: "🌈", key: m.message.key } });
-    } catch (err) {
-      console.error("❌ Fetch+ error:", err);
       await conn.sendMessage(m.from, {
-        text: `⚠️ Failed to process media.\n${err.message}`,
+        react: { text: "💫", key: m.message.key },
       });
-      await conn.sendMessage(m.from, { react: { text: "💔", key: m.message.key } });
+    } catch (err) {
+      console.error("❌ Fetch error:", err);
+
+      const errMsg =
+        err.message.includes("Invalid URL") ||
+        err.message.includes("undefined")
+          ? "🌑 The portal link was invalid or unreachable."
+          : err.name === "AbortError"
+          ? "⏰ Connection timeout — star too distant."
+          : "💥 Miara couldn’t retrieve that artifact.";
+
+      await conn.sendMessage(m.from, { text: `❌ ${errMsg}` }, { quoted: m.message });
+      await conn.sendMessage(m.from, {
+        react: { text: "💔", key: m.message.key },
+      });
     }
   },
 };

@@ -1,6 +1,6 @@
 /**
- * 🌸 Miara — Logger Utility (Baileys 7.x+ Stable)
- * by MidKnight — 2025
+ * 🌸 Miara 🌸— Logger Utility
+ * by MidKnightMantra — 2025
  */
 
 import chalk from "chalk";

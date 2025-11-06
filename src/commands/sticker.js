@@ -1,170 +1,108 @@
-// Filename: ./src/commands/sticker.js
-
-// Import necessary modules using ES6 syntax
-import { downloadMediaMessage } from "@whiskeysockets/baileys";
-import { Sticker, StickerTypes } from "wa-sticker-formatter";
-import { config } from "../config.js"; // Import config for default pack/author
-
-// Define default configuration fallbacks
-const DEFAULT_PACK_NAME = "MyStickerPack";
-const DEFAULT_AUTHOR_NAME = "MiaraBot";
-const MAX_VIDEO_DURATION_SEC = 10; // Maximum allowed video duration in seconds
-
 /**
- * Sticker Command Module
- * Creates a sticker from an image or short video.
+ * 🌸 Miara — Smart Sticker Command (2025 Edition)
+ * ------------------------------------------------
+ * Converts images, GIFs, or short videos into stylish WhatsApp stickers
+ * with EXIF metadata and quality optimization.
+ *
+ * by MidKnightMantra + GPT-5
  */
+
+import fs from "fs";
+import path from "path";
+import { exec } from "child_process";
+import { downloadMediaMessage } from "@whiskeysockets/baileys";
+import webp from "node-webpmux";
+import crypto from "crypto";
+import { config } from "../config.js";
+
 export default {
   name: "sticker",
-  alias: ["s", "stiker"], // Added a common alias
-  description: "Create a sticker from an image or short video.",
+  aliases: ["s", "stick", "stiker"],
+  description: "Convert an image, GIF, or short video into a Miara-style sticker 🌸",
   category: "media",
-  usage: ".s [pack:<name>] [author:<name>]",
+  usage: ".sticker (reply to image/video)",
 
-  /**
-   * Executes the sticker command.
-   * @async
-   * @param {object} conn - The Baileys connection object.
-   * @param {object} m - The processed message object from the handler (smsg output).
-   * @param {string[]} args - The command arguments.
-   * @param {Map} commands - Map of all loaded commands (optional, for potential future use).
-   * @param {object} store - The message store (optional, for potential future use).
-   */
-  async execute(conn, m, args, commands, store) {
-    const { from, quoted, message, key } = m; // Destructure the processed message object
+  async execute(conn, m) {
+    const { from } = m;
+    const quoted = m.quoted || m.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+    const mediaMsg =
+      quoted?.imageMessage ||
+      quoted?.videoMessage ||
+      m.message?.imageMessage ||
+      m.message?.videoMessage;
+
+    if (!mediaMsg) {
+      await conn.sendMessage(from, {
+        text: "📸 Reply to an *image*, *GIF*, or *short video* with `.sticker` to create a sticker.",
+      });
+      return;
+    }
 
     try {
-      // 1. Parse arguments for pack/author names using the provided args array
-      const argsText = args.join(" ").trim();
-      const packMatch = argsText.match(/pack:(.+?)(?:\s|$)/i);
-      const authorMatch = argsText.match(/author:(.+?)(?:\s|$)/i);
+      // ⏳ React to show processing
+      await conn.sendMessage(from, { react: { text: "⏳", key: m.key } });
 
-      const packName = packMatch ? packMatch[1].trim() : config.STICKER_PACK_NAME || DEFAULT_PACK_NAME;
-      const authorName = authorMatch ? authorMatch[1].trim() : config.STICKER_AUTHOR || DEFAULT_AUTHOR_NAME;
+      // 📥 Download media
+      const buffer = await downloadMediaMessage(m, "buffer", {}, { logger: console });
+      if (!buffer) throw new Error("Failed to download media.");
 
-      // 2. Identify the media message (it should be in the 'quoted' part if the command was a reply)
-      // The smsg helper correctly identifies the quoted message structure.
-      const quotedMsg = m.quoted; // This comes from smsg
-      const mediaMsg = quotedMsg?.imageMessage || quotedMsg?.videoMessage;
+      const tmpDir = path.join(process.cwd(), "tmp");
+      if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
 
-      // 3. Validate media presence in the quoted message
-      if (!mediaMsg) {
-        await conn.sendMessage(from, {
-          text: "📸 Please reply to an image or a short video (under 10 seconds) to create a sticker using `.s`.",
-        });
-        console.log(`Sticker command: No media found in quoted message from ${m.sender}`);
-        return;
-      }
+      const inputPath = path.join(tmpDir, `input_${Date.now()}.tmp`);
+      const outputPath = path.join(tmpDir, `sticker_${Date.now()}.webp`);
 
-      // 4. Validate video duration if it's a video message
-      if (quotedMsg.videoMessage && quotedMsg.videoMessage.seconds > MAX_VIDEO_DURATION_SEC) {
-        await conn.sendMessage(from, { text: `🎞️ Video is too long! Please use a video under ${MAX_VIDEO_DURATION_SEC} seconds.` });
-        console.log(`Sticker command: Video too long (${quotedMsg.videoMessage.seconds}s) from ${m.sender}`);
-        return;
-      }
+      fs.writeFileSync(inputPath, buffer);
 
-      // 5. Download the media content as a buffer using Baileys helper
-      // The downloadMediaMessage function expects the full message object containing the media.
-      // Since 'quoted' is the object containing imageMessage/videoMessage, we pass { message: { [type]: mediaMsg } }
-      // But Baileys is smart enough if we pass the 'quoted' object itself IF it has the message structure like { imageMessage: {...} }
-      // Let's pass the correct structure expected by downloadMediaMessage: { key: ..., message: { ...Media } }
-      // The 'quoted' object from smsg is the *content* of the quoted message, not the full WA message event format.
-      // The original message event structure containing the quoted message contextInfo is in m.message.extendedTextMessage.contextInfo
-      // However, downloadMediaMessage can work with the content directly if we construct the minimal object.
-      // The safest way using the smsg output 'm' is to get the key of the quoted message if available, but smsg doesn't provide it directly.
-      // The original key is in m.message.extendedTextMessage.contextInfo.participant and stanzaId, reconstructed within smsg.
-      // The quoted content from smsg (m.quoted) is the message content (e.g., { imageMessage: {...} }).
-      // So, we reconstruct the minimal object for downloadMediaMessage:
-      const mediaKey = m.message?.extendedTextMessage?.contextInfo?.stanzaId; // Get the ID of the quoted message
-      const participant = m.message?.extendedTextMessage?.contextInfo?.participant; // Get the sender of the quoted message
-      const remoteJid = m.from; // The chat where the quote happened
+      // 🎞️ FFmpeg conversion
+      const isAnimated =
+        mediaMsg.mimetype?.includes("gif") || mediaMsg.mimetype?.includes("video");
 
-      if (!mediaKey) {
-          console.error("Could not get the key of the quoted media message.");
-          await conn.sendMessage(from, { text: "❌ Could not process the media: missing message key." });
-          return;
-      }
+      const ffmpegCmd = isAnimated
+        ? `ffmpeg -i "${inputPath}" -vf "scale=512:512:force_original_aspect_ratio=decrease,fps=15,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000000" -c:v libwebp -preset default -loop 0 -vsync 0 -pix_fmt yuva420p -quality 75 -compression_level 6 "${outputPath}"`
+        : `ffmpeg -i "${inputPath}" -vf "scale=512:512:force_original_aspect_ratio=decrease,format=rgba,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=#00000000" -c:v libwebp -preset default -loop 0 -vsync 0 -pix_fmt yuva420p -quality 80 -compression_level 6 "${outputPath}"`;
 
-      // Reconstruct the minimal message object for downloadMediaMessage
-      const messageForDownload = {
-          key: {
-              id: mediaKey,
-              remoteJid: remoteJid,
-              fromMe: participant === conn.user?.id?.split(':')[0] + "@s.whatsapp.net", // Attempt to determine if media was sent by bot
-              participant: participant // Needed for group messages
-          },
-          message: {
-              // Attach the correct message type based on what was found
-              ...(quotedMsg.imageMessage && { imageMessage: quotedMsg.imageMessage }),
-              ...(quotedMsg.videoMessage && { videoMessage: quotedMsg.videoMessage })
-          }
-      };
-
-      console.log(`Downloading media from quoted message ID: ${mediaKey}`);
-      const buffer = await downloadMediaMessage(
-        messageForDownload, // Pass the reconstructed message object
-        "buffer",
-        { logger: console } // Pass logger options if needed
-      );
-
-      // Check if buffer is empty or invalid (optional but good practice)
-      if (!buffer || buffer.length === 0) {
-          console.error("Downloaded media buffer is empty.");
-          await conn.sendMessage(from, { text: "❌ Could not process the media file (empty buffer)." });
-          return;
-      }
-      console.log(`Downloaded media buffer, size: ${buffer.length} bytes`);
-
-      // 6. Create the sticker using wa-sticker-formatter
-      const sticker = new Sticker(buffer, {
-        pack: packName, // The pack name
-        author: authorName, // The author name
-        type: StickerTypes.FULL, // Or StickerTypes.CROPPED - check wa-sticker-formatter docs
-        quality: 80, // Quality of the output webp
-        // Optional: Add background color if needed for transparent images (for FULL type)
-        // backgroundColor: '#000000' // Example: black background
+      await new Promise((resolve, reject) => {
+        exec(ffmpegCmd, (err) => (err ? reject(err) : resolve()));
       });
 
-      // 7. Build the sticker buffer
-      console.log(`Building sticker with pack: ${packName}, author: ${authorName}`);
-      const stickerBuffer = await sticker.build();
-      console.log(`Sticker built successfully, size: ${stickerBuffer.length} bytes`);
+      const stickerBuffer = fs.readFileSync(outputPath);
 
-      // 8. Send the created sticker back to the user
-      await conn.sendMessage(from, { sticker: stickerBuffer });
-      console.log(`Sticker sent successfully to ${from}`);
+      // 🖋️ Embed metadata
+      const img = new webp.Image();
+      await img.load(stickerBuffer);
+      const exif = {
+        "sticker-pack-id": crypto.randomBytes(16).toString("hex"),
+        "sticker-pack-name": config.STICKER_PACK_NAME || "Miara Pack 🌸",
+        "sticker-pack-publisher": config.STICKER_AUTHOR || "MidKnightMantra",
+      };
 
-      // 9. React to the original command message
-      await conn.sendMessage(from, { react: { text: "🪄", key: key } });
-      console.log(`Reacted to command message with ✨`);
+      const exifAttr = Buffer.from([
+        0x49, 0x49, 0x2a, 0x00, 0x08, 0x00, 0x00, 0x00,
+        0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x16, 0x00, 0x00, 0x00,
+      ]);
 
+      const jsonBuf = Buffer.from(JSON.stringify(exif), "utf8");
+      const finalExif = Buffer.concat([exifAttr, jsonBuf]);
+      finalExif.writeUIntLE(jsonBuf.length, 14, 4);
+      img.exif = finalExif;
+
+      const finalSticker = await img.save(null);
+
+      // 🌸 Send the sticker
+      await conn.sendMessage(from, { sticker: finalSticker }, { quoted: m });
+      await conn.sendMessage(from, { react: { text: "🌸", key: m.key } });
+
+      // 🧹 Cleanup
+      fs.unlinkSync(inputPath);
+      fs.unlinkSync(outputPath);
     } catch (err) {
-      // 10. Comprehensive error handling
-      console.error("Error in sticker command:", err); // Log the full error
-
-      let errorMessage = "❌ Sticker creation failed due to an unexpected error.";
-      if (err.message) {
-          // Attempt to provide more specific error messages based on common issues
-          if (err.message.includes("download") || err.message.includes("buffer") || err.message.includes("404") || err.message.includes("403")) {
-              errorMessage = "❌ Failed to download the media file. It might have expired or be inaccessible.";
-          } else if (err.message.includes("sticker") || err.message.includes("webp") || err.message.includes("sharp")) {
-              errorMessage = "❌ Failed to process the media into a sticker. It might be too large, corrupted, or an unsupported format.";
-          } else if (err.message.includes("QR") || err.message.includes("connection")) {
-              errorMessage = "❌ Bot connection issue. Please check the bot status.";
-          } else if (err.message.includes("missing message key")) {
-              errorMessage = "❌ Could not process the media: internal error retrieving message details.";
-          }
-          // Add other specific checks if needed based on wa-sticker-formatter errors
-      }
-
-      try {
-        // Attempt to send the error message back to the user
-        await conn.sendMessage(from, { text: errorMessage });
-        console.log(`Sent error message to ${from}: ${errorMessage}`);
-      } catch (sendErr) {
-        // If sending the error message also fails, log it
-        console.error("Failed to send error message to user:", sendErr);
-      }
+      console.error("❌ Sticker Error:", err);
+      await conn.sendMessage(from, {
+        text: `⚠️ Failed to create sticker.\nReason: ${err.message}`,
+      });
+      await conn.sendMessage(from, { react: { text: "❌", key: m.key } });
     }
   },
 };

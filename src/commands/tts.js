@@ -1,79 +1,99 @@
-// src/commands/tts.js
+/**
+ * 🎙️ Miara  — Smart Text-to-Speech (2025)
+ * --------------------------------------------------
+ */
 
-import axios from "axios";
-import fetch from 'node-fetch'; // Ensure node-fetch is installed: npm install node-fetch
+import fetch from "node-fetch";
 import { config } from "../config.js";
 
 const GOOGLE_TTS_URL = "https://translate.google.com/translate_tts";
 
 export default {
-  name: "tts", // Name of the command
-  alias: ["say"], // Alternative names
-  description: "Convert text to speech using Google TTS.",
-  category: "media", // Category
-  usage: ".tts <language_code> <text>", // Usage instructions
+  name: "tts",
+  aliases: ["say", "speak", "voice"],
+  description: "Convert any text to speech using Google TTS 🎧",
+  category: "media",
+  usage: ".tts <language_code> <text>",
 
   async execute(conn, m, args) {
     const { from } = m;
-    const text = args.join(" ").trim(); // Join all arguments as the text input
+    const text = args.join(" ").trim();
 
     if (!text) {
-      await conn.sendMessage(from, { text: "🔊 Please provide text to convert. Usage: .tts <lang> <text>\nExample: .tts en Hello World" });
+      await conn.sendMessage(from, {
+        text: "🎙️ *Text-to-Speech Usage:*\n\n💡 `.tts <lang> <text>`\nExample: `.tts en Hello world!`\n\n🌐 *Languages:* en, es, fr, de, hi, ja, zh, etc.",
+      });
       return;
     }
 
-    // Default language, can be changed or parsed from args
-    let langCode = "en"; // Default to English
+    let langCode = "en";
     let ttsText = text;
 
-    // Simple parsing: if the first argument looks like a language code (e.g., en, es, fr), use it
-    if (args.length > 1 && args[0].length === 2 && /^[a-zA-Z]+$/.test(args[0])) {
-        langCode = args[0].toLowerCase();
-        ttsText = args.slice(1).join(" ").trim(); // Text is the rest
-        if (!ttsText) {
-             await conn.sendMessage(from, { text: `🔊 Please provide text to convert after the language code. Usage: .tts ${langCode} <text>` });
-             return;
-        }
+    // 🧠 Detect if first arg is a language code
+    if (args.length > 1 && /^[a-zA-Z-]{2,5}$/.test(args[0])) {
+      langCode = args[0].toLowerCase();
+      ttsText = args.slice(1).join(" ").trim();
+
+      if (!ttsText) {
+        await conn.sendMessage(from, { text: `⚠️ Please provide text after the language code.\nExample: .tts ${langCode} Hello there!` });
+        return;
+      }
     }
 
-    // Validate language code (optional, basic check)
-    // You could have a list of supported codes here
-    const supportedLangs = ["af", "sq", "ar", "hy", "bn", "ca", "zh", "zh-cn", "zh-tw", "zh-yue", "hr", "cs", "da", "nl", "en", "eo", "fi", "fr", "de", "el", "hi", "hu", "is", "id", "it", "ja", "km", "ko", "la", "lv", "mk", "no", "pl", "pt", "ro", "ru", "sr", "sk", "es", "sw", "sv", "ta", "th", "tr", "vi", "cy"];
+    // 🌍 Supported languages
+    const supportedLangs = [
+      "af","sq","ar","hy","bn","ca","zh","zh-cn","zh-tw","zh-yue","hr","cs","da","nl","en",
+      "eo","fi","fr","de","el","hi","hu","is","id","it","ja","km","ko","la","lv","mk","no",
+      "pl","pt","ro","ru","sr","sk","es","sw","sv","ta","th","tr","vi","cy"
+    ];
+
     if (!supportedLangs.includes(langCode)) {
-        langCode = "en"; // Fallback to English if unsupported
-        ttsText = text; // Use the original text if language was invalid
-        console.log(`Unsupported language code '${langCode}' provided, falling back to 'en'.`);
+      await conn.sendMessage(from, {
+        text: `🌐 Language *"${langCode}"* not supported — defaulting to *English (en)* 🇬🇧`,
+      });
+      langCode = "en";
     }
-
 
     try {
-      console.log(`Generating TTS for text: "${ttsText}" in language: ${langCode}`);
+      await conn.sendMessage(from, { react: { text: "🎧", key: m.key } });
+      await conn.sendMessage(from, { text: `🗣️ Speaking in *${langCode.toUpperCase()}*...` });
 
-      // Construct the Google TTS URL (this method might be fragile)
-      // A more robust approach would be to use the official Google Cloud TTS API with an API key.
-      const ttsUrl = `${GOOGLE_TTS_URL}?ie=UTF-8&q=${encodeURIComponent(ttsText)}&tl=${langCode}&total=1&idx=0&textlen=${ttsText.length}&client=tw-ob&prev=input`;
+      // 🎼 Generate the TTS URL
+      const ttsUrl = `${GOOGLE_TTS_URL}?ie=UTF-8&q=${encodeURIComponent(
+        ttsText
+      )}&tl=${langCode}&total=1&idx=0&textlen=${ttsText.length}&client=tw-ob`;
 
-      // Fetch the audio stream
-      const response = await fetch(ttsUrl);
-      if (!response.ok) {
-        throw new Error(`TTS API responded with status ${response.status}`);
-      }
+      // 🕒 Timeout controller for 10 seconds
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
 
-      // Get the audio buffer
-      const audioBuffer = await response.buffer(); // node-fetch's buffer() method
+      const response = await fetch(ttsUrl, { signal: controller.signal });
+      clearTimeout(timeout);
 
-      // Send the audio as an audio message (not a voice note)
-      await conn.sendMessage(from, { audio: audioBuffer, mimetype: 'audio/mpeg' });
+      if (!response.ok) throw new Error(`TTS API returned ${response.status}`);
 
-      console.log(`TTS audio sent successfully to ${from} (lang: ${langCode})`);
+      const audioBuffer = await response.buffer();
+
+      // 🎵 Send as voice/audio message
+      await conn.sendMessage(from, {
+        audio: audioBuffer,
+        mimetype: "audio/mpeg",
+        ptt: true, // 🎙️ send as voice note
+      });
+
+      await conn.sendMessage(from, { react: { text: "✅", key: m.key } });
+      console.log(`✅ TTS sent successfully (${langCode}): "${ttsText}"`);
 
     } catch (err) {
-      console.error("Error in tts command:", err);
-      let errorMessage = "❌ Failed to generate speech.";
-      if (err.message) {
-          errorMessage += ` Error: ${err.message}`;
-      }
-      await conn.sendMessage(from, { text: errorMessage });
+      console.error("💥 TTS Error:", err.message);
+
+      let msg = "❌ *Failed to generate speech.*";
+      if (err.name === "AbortError") msg = "⏱️ Request timed out. Try shorter text.";
+      else if (err.message.includes("ENOTFOUND")) msg = "🌐 Could not reach Google TTS servers.";
+      else if (err.message.includes("status 403")) msg = "🚫 Google blocked this request temporarily.";
+
+      await conn.sendMessage(from, { text: msg });
+      await conn.sendMessage(from, { react: { text: "❌", key: m.key } });
     }
   },
 };

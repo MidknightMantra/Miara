@@ -1,7 +1,50 @@
+# ─────────────────────────────────────────────
+# 🌸 Miara 🌸— .gitignore
+# by MidKnightMantra — 2025
+# ─────────────────────────────────────────────
+
+# ── Node Modules ──
 node_modules/
-src/session/
-src/database/database.json
-.env
 npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+
+# ── Environment Config ──
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# ── Platform-Specific Files ──
 .DS_Store
-session
+Thumbs.db
+
+# ── Session & Auth Data ──
+session/
+src/session/
+src/auth/
+src/creds/
+**/creds.json
+
+# ── Database / Cache Files ──
+src/database/database.json
+src/database/baileys_store.json
+src/database/miara_cache.db
+src/database/*.sqlite
+
+# ── Logs & Temp Files ──
+logs/
+*.log
+*.tmp
+*.bak
+*.swp
+
+# ── Backups ──
+backup/
+*.zip
+*.tar.gz
+
+# ── VSCode / Editor Folders ──
+.vscode/
+.idea/

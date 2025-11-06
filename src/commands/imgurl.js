@@ -1,79 +1,114 @@
 /**
- * 📸 Miara Command: Image to URL (Fixed)
+ * 🪞 Miara Command: Image to URL — “Mirror of the Web” (2025)
+ * ------------------------------------------------------------
+ * Uploads an image or sticker to Telegra.ph and returns a public URL.
+ * by MidKnightMantra 🌸
  */
 
 import axios from "axios";
 import FormData from "form-data";
-import { downloadMediaMessage } from "@whiskeysockets/baileys";
 import fs from "fs";
 import path from "path";
+import { downloadMediaMessage } from "@whiskeysockets/baileys";
 
 export default {
   name: "imgurl",
-  aliases: ["imageurl", "uploadimg"],
-  description: "Convert an uploaded image to a public URL.",
+  aliases: ["imageurl", "uploadimg", "mirror"],
+  description: "Convert or mirror an image/sticker into a public URL 🌐",
   category: "tools",
-  usage: ".imgurl (attach or reply to an image)",
+  usage: ".imgurl (attach or reply to an image/sticker)",
 
   async execute(conn, m) {
     const from = m.from;
+    const key = m.key;
 
     try {
-      await conn.sendMessage(from, { react: { text: "📸", key: m.key } });
+      // 🌸 Step 1: Aesthetic reaction
+      await conn.sendMessage(from, { react: { text: "📸", key } });
 
-      const msg = m.message?.imageMessage
-        ? m
-        : m.quoted
-        ? m.quoted
-        : null;
+      // 🧩 Step 2: Find valid image or sticker
+      const target =
+        m.message?.imageMessage ||
+        m.message?.stickerMessage ||
+        m.quoted?.message?.imageMessage ||
+        m.quoted?.message?.stickerMessage
+          ? m.message?.imageMessage ? m : m.quoted
+          : null;
 
-      if (!msg) {
+      if (!target) {
         await conn.sendMessage(
           from,
           {
-            text: "🖼️ Please send or reply to an image with `.imgurl`",
+            text: "🪞 Please *send or reply* to an *image or sticker* with `.imgurl` ✨",
           },
           { quoted: m }
         );
         return;
       }
 
-      const buffer = await downloadMediaMessage(msg, "buffer", {}, { logger: console });
+      // 🧠 Step 3: Download media
+      await conn.sendMessage(from, { react: { text: "⏳", key } });
+      const buffer = await downloadMediaMessage(target, "buffer", {}, { logger: console });
 
-      const tempDir = "./temp";
-      const tempFile = path.join(tempDir, `${Date.now()}.jpg`);
-      fs.mkdirSync(tempDir, { recursive: true });
-      fs.writeFileSync(tempFile, buffer);
+      if (!buffer || buffer.length === 0) throw new Error("Empty buffer — could not download image.");
 
+      // 💾 Step 4: Save temp file safely
+      const tempDir = path.join(process.cwd(), "temp");
+      await fs.promises.mkdir(tempDir, { recursive: true });
+      const tempFile = path.join(tempDir, `${Date.now()}_miara.jpg`);
+      await fs.promises.writeFile(tempFile, buffer);
+
+      // 🌐 Step 5: Upload to Telegra.ph
       const formData = new FormData();
       formData.append("file", fs.createReadStream(tempFile));
 
-      const uploadRes = await axios.post("https://telegra.ph/upload", formData, {
+      const res = await axios.post("https://telegra.ph/upload", formData, {
         headers: formData.getHeaders(),
-        timeout: 15000,
+        timeout: 20000,
       });
 
-      if (uploadRes.data && Array.isArray(uploadRes.data) && uploadRes.data[0].src) {
-        const imageUrl = "https://telegra.ph" + uploadRes.data[0].src;
-        await conn.sendMessage(
-          from,
-          {
-            text: `✅ *Image Uploaded Successfully!*\n\n📸 *URL:* ${imageUrl}`,
-          },
-          { quoted: m }
-        );
-      } else {
-        throw new Error("Invalid Telegra.ph response");
+      // ✨ Step 6: Parse upload result
+      const uploaded = res.data?.[0]?.src;
+      if (!uploaded) throw new Error("Invalid Telegra.ph response.");
+
+      const finalUrl = `https://telegra.ph${uploaded}`;
+
+      // 🌸 Step 7: Respond beautifully
+      const replyText = `
+🪞 *Miara’s Mirror of the Web*  
+━━━━━━━━━━━━━━━━━━━  
+✨ *Upload Complete!*  
+📸 *Public URL:*  
+${finalUrl}
+
+💫 Your image now lives in the cloud — gracefully.  
+🌸 _Whispered through Telegra.ph_
+      `.trim();
+
+      await conn.sendMessage(from, { text: replyText }, { quoted: m.message });
+      await conn.sendMessage(from, { react: { text: "🌸", key } });
+
+      // 🧹 Step 8: Cleanup
+      try {
+        await fs.promises.unlink(tempFile);
+      } catch (e) {
+        console.warn("Cleanup skipped:", e.message);
       }
 
-      fs.unlinkSync(tempFile);
+      console.log(`✅ Uploaded image → ${finalUrl}`);
     } catch (err) {
-      console.error("❌ Image Upload Error:", err.response?.data || err.message);
-      await conn.sendMessage(
-        from,
-        { text: "❌ Failed to upload image. Please try again later." },
-        { quoted: m }
-      );
+      console.error("❌ Image Upload Error:", err.message);
+      const errorMsg = `
+💔 *Upload Failed!*  
+━━━━━━━━━━━━━━━  
+⚠️ ${err.message || "An unknown issue occurred."}  
+Please try again with a valid image.
+
+🌸 Miara will always try again — patiently.
+      `.trim();
+
+      await conn.sendMessage(from, { text: errorMsg }, { quoted: m.message });
+      await conn.sendMessage(from, { react: { text: "💫", key: m.key } });
     }
   },
 };
