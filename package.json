@@ -1,7 +1,7 @@
 {
   "name": "miara-bot",
   "version": "1.0.0",
-  "description": "Miara 🤖 — A smart and feature-packed WhatsApp bot with AI, media tools, and automation.",
+  "description": "Miara 🤖 — A smart and feature-packed WhatsApp bot with AI, media tools, and automation. Note: Requires system dependencies ffmpeg and libwebp-tools (for webpmux) to be installed for sticker functionality.",
   "main": "src/main.js",
   "type": "module",
   "scripts": {
@@ -21,17 +21,21 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@whiskeysockets/baileys": "7.0.0-rc.6",
-    "awesome-phonenumber": "7.5.0",
+    "awesome-phonenumber": "^7.5.0",
     "axios": "^1.13.2",
     "chalk": "^5.6.2",
-    "dotenv": "17.2.3",
+    "dotenv": "^17.2.3",
     "file-type": "^21.0.0",
+    "form-data": "^4.0.4",
     "fs-extra": "^11.3.2",
     "lowdb": "^7.0.1",
     "moment-timezone": "^0.6.0",
     "node-fetch": "^3.3.2",
+    "openai": "^6.8.1",
     "pino": "^10.1.0",
+    "qrcode": "^1.5.4",
     "qrcode-terminal": "^0.12.0",
+    "sharp": "^0.34.4",
     "wa-sticker-formatter": "^4.4.4",
     "yargs": "^18.0.0"
   },

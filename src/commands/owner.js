@@ -1,32 +1,39 @@
-/**
- * owner commands, restricted to bot owner(s)
- * Usage: !restart, !eval <js>
- */
+// src/commands/owner.js
 
 import { config } from "../config.js";
 
-function isOwner(sender) {
-  const plain = sender.replace(/@.*/, "");
-  return config.OWNER_NUMBER.includes(plain);
-}
+export default {
+  name: "owner",
+  alias: ["creator", "dev"],
+  description: "Get the contact information of the bot owner.",
+  category: "owner", // This category triggers the owner check in the handler
+  usage: ".owner",
 
-export default async function (Miara, m, args) {
-  const command = args[0];
-  if (!isOwner(m.sender)) return Miara.sendMessage(m.chat, { text: "⚠️ Owner only." }, { quoted: m });
+  async execute(conn, m, args) {
+    const { from } = m;
 
-  if (command === "restart") {
-    await Miara.sendMessage(m.chat, { text: "Restarting..." }, { quoted: m });
-    process.exit(0);
-  } else if (command === "eval") {
     try {
-      const code = args.slice(1).join(" ");
-      let result = eval(code); // owner-only; be careful
-      if (result instanceof Promise) result = await result;
-      await Miara.sendMessage(m.chat, { text: `Result:\n${String(result).slice(0, 1500)}` }, { quoted: m });
-    } catch (e) {
-      await Miara.sendMessage(m.chat, { text: `Error: ${e.message}` }, { quoted: m });
+      if (config.OWNER_NUMBER.length === 0) {
+        await conn.sendMessage(from, { text: "❌ Owner information is not set in the configuration." });
+        return;
+      }
+
+      // Assuming the first number in the config is the primary owner
+      const ownerNumber = config.OWNER_NUMBER[0].replace(/[^0-9]/g, '') + "@s.whatsapp.net"; // Format as JID
+      const ownerName = config.OWNER_NAME || "The Owner";
+
+      // Send a contact card
+      await conn.sendMessage(from, {
+        contacts: {
+          displayName: ownerName,
+          contacts: [{ vcard: `BEGIN:VCARD\nVERSION:3.0\nFN:${ownerName}\nTEL;type=CELL;type=VOICE;waid=${ownerNumber.split('@')[0]}:+${ownerNumber.split('@')[0]}\nEND:VCARD` }]
+        }
+      });
+
+      console.log(`Owner contact sent to ${from}`);
+    } catch (err) {
+      console.error("Error in owner command:", err);
+      await conn.sendMessage(from, { text: "❌ Failed to send owner information." });
     }
-  } else {
-    await Miara.sendMessage(m.chat, { text: "Owner commands: restart, eval" }, { quoted: m });
-  }
-}
+  },
+};
