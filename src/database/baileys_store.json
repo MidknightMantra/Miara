@@ -1443,6 +1443,399 @@
           }
         }
       }
+    ],
+    "254710407153@s.whatsapp.net": [
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "E24B624FCF73B564486C2193D33CE6EE",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762420918,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ping",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "ILRoP3xPFn3sujy7ahHMFvX22EGx1v/K5y29bvENgcM="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "B4D6C44544519511DD9389B1A5CDC0AB",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762421606,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ping",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "VO9cuQmtBFWLcNtLUCTCrsEQsjhPX2p0r8sL99z4Za4="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0891F5937D271D57FBF"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "B4D6C44544519511DD9389B1A5CDC0AB",
+              "participant": ""
+            },
+            "text": "🏃",
+            "senderTimestampMs": "1762421608506"
+          }
+        },
+        "messageTimestamp": "1762421608",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0425851884CCF1A76C3"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🏃 Pinging...",
+            "contextInfo": {
+              "stanzaId": "B4D6C44544519511DD9389B1A5CDC0AB",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762421610",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0D965BCA8A978ADD5D5"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "✨ *Miara🌸 Status*\n⚡ *Speed:* 2259ms\n🕒 *Uptime:* 0h 2m 10s\n🧠 *Memory:* 4240MB / 11842MB (35.8% used)\n🧩 *CPU:* Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz (4 cores)\n📊 *Load Avg:* 2.14\n📅 *Date:* Thursday, November 6th 2025\n🕐 *Time:* 12:33:30",
+            "contextInfo": {
+              "stanzaId": "B4D6C44544519511DD9389B1A5CDC0AB",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762421610",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0C9D89DA06F25030F9C"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "B4D6C44544519511DD9389B1A5CDC0AB",
+              "participant": ""
+            },
+            "text": "💫",
+            "senderTimestampMs": "1762421611321"
+          }
+        },
+        "messageTimestamp": "1762421611",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "743BB7E274B9CEA32D1D246752E52E38",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762421626,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".menu",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "jWD+XRIeqJyaOyaroEKG67UsjThrxiZWJAT8QatWzbM="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB01E9A78DDA675A19A76"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸 Commands*\n\n• *.about* — Show Miara’s system info, version, and credits.\n• *.gpt* — Chat with AI using GPT or Gemini models.\n• *.broadcast* — Send a message to all chats (owner only).\n• *.fetch* — Download media from a given URL.\n• *.default* — No description\n• *.help* — Get details for a specific command or view the full menu.\n• *.imgurl* — Convert an uploaded image to a public URL.\n• *.menu* — Show Miara’s command menu, grouped by category.\n• *.owner* — Get the contact information of the bot owner.\n• *.ping* — Check Miara’s speed, uptime, and system performance.\n• *.qr* — Generate a QR code from text or URL.\n• *.reload* — Reload all bot commands without restart.\n• *.restart* — Restart Miara (owner only).\n• *.setbio* — Change Miara’s WhatsApp bio (owner only).\n• *.sticker* — Create a sticker from an image or short video.\n• *.tts* — Convert text to speech using Google TTS.\n• *.weather* — Check current weather or 3-day forecast for a city.\n\n💫 Prefix: .",
+            "contextInfo": {
+              "stanzaId": "743BB7E274B9CEA32D1D246752E52E38",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762421627",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "A1B2AF82B5B326D26200E37CFB51A2C8",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762421653,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".gpt what's a bowel",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "6rHD/Gm0u4JBX1ePhUfEDJbZP3dpQMvF3yAdTnGMBRM="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB07DD6462829B6917439"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "A1B2AF82B5B326D26200E37CFB51A2C8",
+              "participant": ""
+            },
+            "text": "📖",
+            "senderTimestampMs": "1762421654134"
+          }
+        },
+        "messageTimestamp": "1762421654",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB012AB8ECB42A245A979"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "📚 *Miara Response:*\n\n⚠️ No response from GPT.",
+            "contextInfo": {
+              "stanzaId": "A1B2AF82B5B326D26200E37CFB51A2C8",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762421656",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "FEB4EB8BD66E6C40CAEFA9BCC0C5F62C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762421675,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".gpt what are donkeys",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "FSokjpwsGDyGLA0LUGIABQFAHrUn48Pr50deYPGu/xo="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB025D8E5B0726BA46A2C"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "FEB4EB8BD66E6C40CAEFA9BCC0C5F62C",
+              "participant": ""
+            },
+            "text": "📖",
+            "senderTimestampMs": "1762421676338"
+          }
+        },
+        "messageTimestamp": "1762421676",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0808991D23D524D3EF9"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "📚 *Miara Response:*\n\n⚠️ No response from GPT.",
+            "contextInfo": {
+              "stanzaId": "FEB4EB8BD66E6C40CAEFA9BCC0C5F62C",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762421678",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "7997DF6AE0DBA23F08D198D3858433AC",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762421695,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".about",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "dF40RujcA3sbxjZi3PB/rcSb/WyQhbTNJolpMEFvwc8="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0AB727E3C5E2CDCE740"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m232/AQPfoMpcR0mJQavXJ-KDMXG2CFs7e4pOrnZGBmYPiIrdcmrOjHTteUYiMi-41pqmhDME4ZUOyLJcMy3AQ778V5UF6EIPezw_NY3yXuitvw?ccb=9-4&oh=01_Q5Aa2wEKoyaouXkBRUrQGRr2VzRFn6C0KLCWgV6nC7HMf5-Nkg&oe=6933CB1A&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭━━━⊰ *Miara🌸 Info* ⊱━━━╮\n┃ 🤖 *Bot Name:* Miara🌸\n┃ 👑 *Owner:* MidknightMantra\n┃ 💻 *Prefix:* .\n┃ 🕓 *Uptime:* 0h 3m 36s\n┃ 🗓️ *Time:* 12:34:56, Thursday, November 6th 2025\n┃ 🌍 *Timezone:* Africa/Nairobi\n┃ ⚙️ *Version:* 1.0.0\n╰━━━━━━━━━━━━━━━━━━━━━━╯\n\n╭━━━⊰ *SYSTEM STATUS* ⊱━━━╮\n┃ 💻 *OS:* linux (x64)\n┃ 🧠 *RAM:* 7586MB / 11842MB\n┃ ⚡ *NodeJS:* v20.19.5\n╰━━━━━━━━━━━━━━━━━━━━━━╯\n\n🌸 Crafted with love by *MidknightMantra*\n💬 Type *.menu* to explore commands.",
+            "fileSha256": "ftCxak8yDTl2D4Rd/yVUBDPPa2Vpuavh6kKHGsAFOJc=",
+            "fileLength": "1130610",
+            "height": 4273,
+            "width": 6410,
+            "mediaKey": "KLEyELFmobQf2eSGXjIITTqGDF9Pqyw8AwdQYLab24A=",
+            "fileEncSha256": "21cDSgJnT1ftcDL2lHUTm0DTlwhl6gXsCvesRr/WFF0=",
+            "directPath": "/o1/v/t24/f2/m232/AQPfoMpcR0mJQavXJ-KDMXG2CFs7e4pOrnZGBmYPiIrdcmrOjHTteUYiMi-41pqmhDME4ZUOyLJcMy3AQ778V5UF6EIPezw_NY3yXuitvw?ccb=9-4&oh=01_Q5Aa2wEKoyaouXkBRUrQGRr2VzRFn6C0KLCWgV6nC7HMf5-Nkg&oe=6933CB1A&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762421700",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAVACADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQBAgb/xAAfEAADAAICAgMAAAAAAAAAAAAAAQIRIQMxEkEiUaH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAISQRH/2gAMAwEAAhEDEQA/APBALvecFKqbeJUufXHWv0vjpE66mBa8cD+fjGsvinbevf0SW5d04lzOdLOcAuM9chMAjDap1TdNtt7bfZgAH//Z",
+            "contextInfo": {
+              "stanzaId": "7997DF6AE0DBA23F08D198D3858433AC",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".about"
+              },
+              "mentionedJid": [
+                "254710407153@s.whatsapp.net"
+              ]
+            }
+          }
+        },
+        "messageTimestamp": "1762421700",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB099AADB1B9CD60A20E0"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "7997DF6AE0DBA23F08D198D3858433AC",
+              "participant": ""
+            },
+            "text": "💖",
+            "senderTimestampMs": "1762421701642"
+          }
+        },
+        "messageTimestamp": "1762421701",
+        "status": "PENDING"
+      }
     ]
   }
 }
