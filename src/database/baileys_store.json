@@ -1835,6 +1835,855 @@
         },
         "messageTimestamp": "1762421701",
         "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "E91E9536C8487C17F682674AEA507F8C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762422673,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".about",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "S777z0FWG6KZZrB9K2iPboJeyscaVR9rhM2j0n3AzKw="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0B99667A5F07C57BD6A"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m231/AQMz3eXVUf92ds5wMEQClfc2U7_4pBhc70dHGeDXoAfCxRUP_1ySuDznH9cFtLiomvlvEbue0EGfqzQSJmbIPnQpSLGNrB92krUv74fe3w?ccb=9-4&oh=01_Q5Aa2wFjG2PhfdZYOYfiya13m7-k6ta39FWczo370M6n6ZNu2w&oe=6933EF49&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "✨ *Miara🌸 System Overview*",
+            "fileSha256": "w0w8dhfiTnduWbpIIgQjo+qkS2Cd9f58ouFXxgW8jpM=",
+            "fileLength": "157146",
+            "height": 600,
+            "width": 1000,
+            "mediaKey": "DV6GHGxt9Zgh9Oq9cgjQ5sI32WE4RmRNWHkJ9j+dtho=",
+            "fileEncSha256": "E4+LuM/0L290ognzGL8Zj60zlKaUIS9h2HUIexyr3w0=",
+            "directPath": "/o1/v/t24/f2/m231/AQMz3eXVUf92ds5wMEQClfc2U7_4pBhc70dHGeDXoAfCxRUP_1ySuDznH9cFtLiomvlvEbue0EGfqzQSJmbIPnQpSLGNrB92krUv74fe3w?ccb=9-4&oh=01_Q5Aa2wFjG2PhfdZYOYfiya13m7-k6ta39FWczo370M6n6ZNu2w&oe=6933EF49&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1762422678",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAATACADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAQGAQP/xAAlEAABBAEDAwUBAAAAAAAAAAABAAIDEQQFIUESImEGIzFRcaH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAFxEBAQEBAAAAAAAAAAAAAAAAAAERAv/aAAwDAQACEQMRAD8Aqchsr5JGMnmj6htTgK8iwm4+sju6SPsG0rkD3T2E0OCd/wCLvFCxu4LjzufhXB1XZSGjapruR6nlx8uN4xgXh7DFTYgLoh3PH7arkX5SqNwpkTSMyWsa6mkbilmPPI/KcxzraOKQhM6cWIQprOv/2Q==",
+            "contextInfo": {
+              "stanzaId": "E91E9536C8487C17F682674AEA507F8C",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".about"
+              },
+              "mentionedJid": [
+                "254710407153@s.whatsapp.net"
+              ]
+            }
+          }
+        },
+        "messageTimestamp": "1762422678",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0281A6A6B556599321B"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "E91E9536C8487C17F682674AEA507F8C",
+              "participant": ""
+            },
+            "text": "💖",
+            "senderTimestampMs": "1762422678979"
+          }
+        },
+        "messageTimestamp": "1762422678",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "FF59757C8FE6F85CF86C1C36AE95BD0D",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762422787,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".gpt what's up today",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "1CgvhW5B976zknCT8BNcO/8l/PuMVzeKTeqMCnZIyRM="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB033C8D44B9217A989BB"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "FF59757C8FE6F85CF86C1C36AE95BD0D",
+              "participant": ""
+            },
+            "text": "🤖",
+            "senderTimestampMs": "1762422787757"
+          }
+        },
+        "messageTimestamp": "1762422787",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0D00B011F77C15D554E"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "⚠️ Sorry, all AI providers failed to respond. Please try again later.",
+            "contextInfo": {
+              "stanzaId": "FF59757C8FE6F85CF86C1C36AE95BD0D",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762422800",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0C724A01A4F3AD48C15"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "FF59757C8FE6F85CF86C1C36AE95BD0D",
+              "participant": ""
+            },
+            "text": "❌",
+            "senderTimestampMs": "1762422800972"
+          }
+        },
+        "messageTimestamp": "1762422800",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "1006C9833E5F18BC0C68978988D4961D",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762422999,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".gpt write a short poem about naruto",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "44ihE3pl4zIuBWVupqrJX3VTNi4yiYG6VrGMN/Clnlo="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "5028A4BC448B4845E12AABAA2DBC3A8F",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762423129,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".mix write a horror story in 3 lines",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "XCSFpsaOhjzGMC4qlMo/stN8oV7SdkaDoEWi+46i22s="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB04A581B38961644A961"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "5028A4BC448B4845E12AABAA2DBC3A8F",
+              "participant": ""
+            },
+            "text": "🤖",
+            "senderTimestampMs": "1762423130136"
+          }
+        },
+        "messageTimestamp": "1762423130",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB01227E7C2C63BB3E268"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "⚠️ Sorry, all AI sources failed to respond. Please try again later.",
+            "contextInfo": {
+              "stanzaId": "5028A4BC448B4845E12AABAA2DBC3A8F",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762423193",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB01C9CF706EAD8168E51"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "5028A4BC448B4845E12AABAA2DBC3A8F",
+              "participant": ""
+            },
+            "text": "❌",
+            "senderTimestampMs": "1762423193050"
+          }
+        },
+        "messageTimestamp": "1762423193",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "F28A90315B6F830D095A0EA66E1D3A4D",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762423657,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ai write a horror story in 3 lines",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "NUsL3YjYAdHfkTrTWIwErEjeNVw5t6pBFxbT084qaz8="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB01144F71105C373C5E0"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "F28A90315B6F830D095A0EA66E1D3A4D",
+              "participant": ""
+            },
+            "text": "🤖",
+            "senderTimestampMs": "1762423658163"
+          }
+        },
+        "messageTimestamp": "1762423658",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB09B4A1ABCF50F53D330"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "⚠️ Sorry, all AI sources failed to respond. Please try again later.",
+            "contextInfo": {
+              "stanzaId": "F28A90315B6F830D095A0EA66E1D3A4D",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762423736",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB026EFD9871136DF9AA4"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "F28A90315B6F830D095A0EA66E1D3A4D",
+              "participant": ""
+            },
+            "text": "❌",
+            "senderTimestampMs": "1762423736687"
+          }
+        },
+        "messageTimestamp": "1762423736",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "48664E1859EC738C6CFB4D2D698BC73A",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762423840,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".gpt write a two line story",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "lSTJtTYinlA0t5kNBMpv9YVkH/ZQv4o5bVDSS6MQIug="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0EFB85B60F86FB50AB4"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "48664E1859EC738C6CFB4D2D698BC73A",
+              "participant": ""
+            },
+            "text": "🤖",
+            "senderTimestampMs": "1762423840946"
+          }
+        },
+        "messageTimestamp": "1762423840",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0CE06EA5E0164655E33"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "💬 *GPT AI says:*\n\nIn a quiet village, a mysterious door appeared overnight, shimmering with golden light. Curiosity drew the townsfolk close, but only the bravest dared to turn the handle, unlocking a world of dreams and forgotten memories.",
+            "contextInfo": {
+              "stanzaId": "48664E1859EC738C6CFB4D2D698BC73A",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762423845",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0BC2DCFBB0EB9A1668B"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "48664E1859EC738C6CFB4D2D698BC73A",
+              "participant": ""
+            },
+            "text": "✅",
+            "senderTimestampMs": "1762423845732"
+          }
+        },
+        "messageTimestamp": "1762423845",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "7D72EAB64011C8C7EAB1FE98C741299D",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762425646,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".gpt who's Jabez",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "LkjPyDWQz8CyAXbvtx1iJYLF0RaT69ZJT4WN/f5nT2M="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0650A4C750BCE30141B"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "7D72EAB64011C8C7EAB1FE98C741299D",
+              "participant": ""
+            },
+            "text": "🤖",
+            "senderTimestampMs": "1762425647098"
+          }
+        },
+        "messageTimestamp": "1762425647",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB09368004F19A7361C2E"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "💬 *GPT AI says:*\n\nJabez is a biblical figure mentioned in the Old Testament of the Bible, specifically in 1 Chronicles 4:9-10. He is described as being more honorable than his brothers and is known for his prayer to God, asking for blessings, increased territory, and protection from harm. His prayer is notable for its emphasis on seeking divine assistance and is often cited in discussions about faith and prayer. Jabez's story gained popularity in the late 1990s and early 2000s, particularly due to the book \"The Prayer of Jabez\" by Bruce Wilkinson, which emphasized the transformative power of prayer.",
+            "contextInfo": {
+              "stanzaId": "7D72EAB64011C8C7EAB1FE98C741299D",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762425655",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB08B5A9DD03D6AF8EC48"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "7D72EAB64011C8C7EAB1FE98C741299D",
+              "participant": ""
+            },
+            "text": "✅",
+            "senderTimestampMs": "1762425655948"
+          }
+        },
+        "messageTimestamp": "1762425655",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "FE1856AEB266BAE9EB6B5108FD732ED0",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762425880,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".ai what's quantum entanglement",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "jdkGkZVgne1Clt/P0/AS6b1m7Eds+jUVeSJ4CD2M908="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB06624247075C76EF0F5"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "FE1856AEB266BAE9EB6B5108FD732ED0",
+              "participant": ""
+            },
+            "text": "🤖",
+            "senderTimestampMs": "1762425880945"
+          }
+        },
+        "messageTimestamp": "1762425880",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0A156E0A784CE8906EE"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "💬 *.AI AI says:*\n\nQuantum entanglement is a phenomenon in quantum mechanics where two or more particles become interconnected in such a way that the state of one particle cannot be described independently of the state of the other(s), even when the particles are separated by large distances. This means that the measurement of a property (such as spin, position, or polarization) of one particle will instantaneously affect the state of the other particle(s).\n\nEntanglement is a key feature of quantum mechanics that has no classical counterpart. It leads to correlations between the particles that are stronger than what can be explained by classical physics. For example, if two particles are entangled, measuring the spin of one particle will immediately determine the spin of the other particle, regardless of the distance separating them.\n\nThis phenomenon has profound implications for our understanding of the nature of reality and has been experimentally verified in numerous experiments, such as those testing Bell's theorem. Quantum entanglement is also a fundamental resource for emerging technologies, including quantum computing and quantum cryptography, which leverage these unique correlations for processing information in ways that classical systems cannot achieve.",
+            "contextInfo": {
+              "stanzaId": "FE1856AEB266BAE9EB6B5108FD732ED0",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762425887",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0C0296C507462D3CE19"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "FE1856AEB266BAE9EB6B5108FD732ED0",
+              "participant": ""
+            },
+            "text": "✅",
+            "senderTimestampMs": "1762425887418"
+          }
+        },
+        "messageTimestamp": "1762425887",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "0D6EF0230D1420C3C5EEFC3A566D005E",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762425938,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "extendedTextMessage": {
+            "text": ".ai explain further",
+            "previewType": "NONE",
+            "contextInfo": {
+              "stanzaId": "3EB0A156E0A784CE8906EE",
+              "participant": "254105745317@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": "💬 *.AI AI says:*\n\nQuantum entanglement is a phenomenon in quantum mechanics where two or more particles become interconnected in such a way that the state of one particle cannot be described independently of the state of the other(s), even when the particles are separated by large distances. This means that the measurement of a property (such as spin, position, or polarization) of one particle will instantaneously affect the state of the other particle(s).\n\nEntanglement is a key feature of quantum mechanics that has no classical counterpart. It leads to correlations between the particles that are stronger than what can be explained by classical physics. For example, if two particles are entangled, measuring the spin of one particle will immediately determine the spin of the other particle, regardless of the distance separating them.\n\nThis phenomenon has profound implications for our understanding of the nature of reality and has been experimentally verified in numerous experiments, such as those testing Bell's theorem. Quantum entanglement is also a fundamental resource for emerging technologies, including quantum computing and quantum cryptography, which leverage these unique correlations for processing information in ways that classical systems cannot achieve."
+              }
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT",
+            "linkPreviewMetadata": {}
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "FGN5ufvoB3OKxbgeOy1fXGPu6CY1mKNC3MIAiWCQMQM="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB06A2A57D8A8D44FE61F"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "0D6EF0230D1420C3C5EEFC3A566D005E",
+              "participant": ""
+            },
+            "text": "🤖",
+            "senderTimestampMs": "1762425938764"
+          }
+        },
+        "messageTimestamp": "1762425938",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0891AF3C781D31DB5F7"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "💬 *.AI AI says:*\n\nOf course! However, I'll need a bit more context regarding what you'd like me to explain further. Could you please provide more details or specify the topic you're interested in?",
+            "contextInfo": {
+              "stanzaId": "0D6EF0230D1420C3C5EEFC3A566D005E",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762425948",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0221779432BE9138176"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "0D6EF0230D1420C3C5EEFC3A566D005E",
+              "participant": ""
+            },
+            "text": "✅",
+            "senderTimestampMs": "1762425948507"
+          }
+        },
+        "messageTimestamp": "1762425948",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "A18ECCC7F5A975885C18A7E80049FC8D",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762426006,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".menu",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "1Lg4R+RnqchXPVz/hug3fomvz82NyRDMTE40Kq8HxUU="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB09A466A50D17F19634E"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 *Miara🌸 Commands*\n\n• *.about* — Show Miara’s system info with animated gradient, avatar, and system gauges.\n• *.gpt* — Chat with AI using multiple providers and full fallback API pool.\n• *.broadcast* — Send a message or media to all chats (owner only).\n• *.fetch* — Download media from a given URL.\n• *.default* — No description\n• *.help* — Get details for a specific command or view the full menu.\n• *.imgurl* — Convert an uploaded image to a public URL.\n• *.menu* — Show Miara’s command menu, grouped by category.\n• *.owner* — Get the contact information of the bot owner.\n• *.ping* — Check Miara’s speed, uptime, and system performance.\n• *.qr* — Generate a QR code from text or URL.\n• *.reload* — Reload all bot commands without restart.\n• *.restart* — Restart Miara (owner only).\n• *.setbio* — Change Miara’s WhatsApp bio (owner only).\n• *.sticker* — Create a sticker from an image or short video.\n• *.tts* — Convert text to speech using Google TTS.\n• *.weather* — Check current weather or 3-day forecast for a city.\n\n💫 Prefix: .",
+            "contextInfo": {
+              "stanzaId": "A18ECCC7F5A975885C18A7E80049FC8D",
+              "participant": "254710407153@s.whatsapp.net",
+              "quotedMessage": {}
+            }
+          }
+        },
+        "messageTimestamp": "1762426007",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "remoteJidAlt": "14573478363301@lid",
+          "fromMe": false,
+          "id": "88EEAFD57667120121F34EAA712A53B5",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "messageTimestamp": 1762426910,
+        "pushName": "T.e.n.e.b.r.i.s",
+        "broadcast": false,
+        "message": {
+          "conversation": ".fetch https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba mp3",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "zNvqN8i7vjHBMw==",
+              "senderTimestamp": "1761753273",
+              "recipientKeyHash": "YWDi5nADXGIGVg==",
+              "recipientTimestamp": "1762381449"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "TzKDVbjJwd+qgjgES//z2F6CJ/IkTl1XwjCA+9gGvY4="
+          }
+        }
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0D5BAED65D8E1F20F2C"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "🌸 Fetching media from:\n🔗 https://youtu.be/yfjLUnOxQEY?si=1lBQn9BsBH740Wba"
+          }
+        },
+        "messageTimestamp": "1762426910",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB009F8A33F5A6AF7E78C"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "⚠️ Failed to process media.\nInvalid URL"
+          }
+        },
+        "messageTimestamp": "1762426927",
+        "status": "PENDING"
+      },
+      {
+        "key": {
+          "remoteJid": "254710407153@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB09755FEED7CBC1EE243"
+        },
+        "message": {
+          "reactionMessage": {
+            "key": {
+              "remoteJid": "254710407153@s.whatsapp.net",
+              "fromMe": false,
+              "id": "88EEAFD57667120121F34EAA712A53B5",
+              "participant": ""
+            },
+            "text": "💔",
+            "senderTimestampMs": "1762426927828"
+          }
+        },
+        "messageTimestamp": "1762426927",
+        "status": "PENDING"
       }
     ]
   }
