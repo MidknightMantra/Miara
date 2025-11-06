@@ -1,8 +1,8 @@
 /**
- * 🌸 Miara Command: Owner — Portrait & Adaptive Cosmic Curator Card
- * -----------------------------------------------------------------
- * Fetches the Curator's WhatsApp profile picture (if available) and
- * sends it as a visual header, followed by an adaptive social card + vCard.
+ * 🌸 Miara Command: Owner — The Celestial Curator’s Card (Guru Style)
+ * -------------------------------------------------------------------
+ * Sends the Curator’s portrait, clickable WhatsApp link, and social realms.
+ * Radiates poetic energy with Miara’s signature aura 🌌
  *
  * by MidKnightMantra 🌸
  */
@@ -15,15 +15,14 @@ import { getBuffer, safeReact, safeQuoted } from "../utils/helpers.js";
 export default {
   name: "owner",
   aliases: ["creator", "curator", "dev", "about"],
-  description: "Reveal the cosmic identity of Miara’s Curator with portrait 🌌",
-  category: "owner",
+  description: "Meet Miara’s Curator and explore her connected realms 🌸",
+  category: "general",
   usage: ".owner",
 
   async execute(conn, m) {
     const { from } = m;
 
     try {
-      // ⚙️ Validate configuration
       if (!config.OWNER_NUMBER || config.OWNER_NUMBER.length === 0) {
         await conn.sendMessage(
           from,
@@ -41,31 +40,22 @@ export default {
       const ownerName = config.OWNER_NAME || "MidKnightMantra 🌸";
       const BOT_NAME = config.BOT_NAME || "Miara 🌸";
 
-      // 🌠 Social Universes (auto-detect)
-      const socialsMap = {
-        Telegram: config.TELEGRAM,
-        GitHub: config.GITHUB,
-        YouTube: config.YOUTUBE,
-        Instagram: config.INSTAGRAM,
-        X: config.TWITTER || config.X,
-        Website: config.WEBSITE,
+      // 🌐 Social Universes
+      const socials = {
+        "🔮 Telegram": config.TELEGRAM || "https://t.me/MidKnightMantra",
+        "💻 GitHub": config.GITHUB || "https://github.com/MidKnightMantra",
+        "🎥 YouTube": config.YOUTUBE || "https://youtube.com/@MidKnightMantra",
+        "📸 Instagram": config.INSTAGRAM || "https://instagram.com/MidKnightMantra",
+        "🐦 X": config.TWITTER || config.X || "https://x.com/MidKnightMantra",
+        "🌐 Website": config.WEBSITE || "https://github.com/MidKnightMantra",
+        "💬 WhatsApp": `https://wa.me/${primaryOwner}`,
       };
 
-      const availableSocials = Object.entries(socialsMap)
-        .filter(([_, url]) => url && url.toString().trim().length > 0)
-        .map(([platform, url]) => {
-          const emoji =
-            platform === "Telegram" ? "🔮" :
-            platform === "GitHub" ? "💻" :
-            platform === "YouTube" ? "🎥" :
-            platform === "Instagram" ? "📸" :
-            platform === "X" ? "🐦" :
-            platform === "Website" ? "🌐" :
-            "✨";
-          return `${emoji} *${platform}:* ${url}`;
-        });
+      const socialsList = Object.entries(socials)
+        .map(([name, link]) => `${name}: ${link}`)
+        .join("\n");
 
-      // 💫 Random poetic whisper
+      // 💫 Whisper lines
       const whispers = [
         "🌙 *“Even silence hums with her design.”*",
         "🩵 *“A mind that codes in rhythm, a soul that dreams in syntax.”*",
@@ -76,20 +66,15 @@ export default {
       ];
       const signature = whispers[Math.floor(Math.random() * whispers.length)];
 
-      // 🖼️ Attempt to fetch owner's profile picture
+      // 🖼️ Portrait
       let headerImageBuffer = null;
       try {
         const url = await conn.profilePictureUrl(ownerJid, "image").catch(() => null);
-        if (url) headerImageBuffer = await getBuffer(url).catch(() => null);
+        if (url) headerImageBuffer = await getBuffer(url);
       } catch {
-        headerImageBuffer = null;
-      }
-
-      // Fallback to local asset or tiny placeholder
-      if (!headerImageBuffer) {
         try {
-          const fallbackPath = path.join(process.cwd(), "assets", "owner.jpg");
-          headerImageBuffer = await fs.readFile(fallbackPath);
+          const fallback = path.join(process.cwd(), "assets", "owner.jpg");
+          headerImageBuffer = await fs.readFile(fallback);
         } catch {
           headerImageBuffer = Buffer.from(
             "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=",
@@ -106,34 +91,38 @@ FN:${ownerName}
 ORG:${BOT_NAME} Project (2025)
 TITLE:Curator & Architect of Emotion
 TEL;type=CELL;type=VOICE;waid=${primaryOwner}:+${primaryOwner}
+URL:https://wa.me/${primaryOwner}
 NOTE:🌸 “Emotion is code, written by the heart.”
 END:VCARD
       `.trim();
 
-      // 🧭 Build the adaptive message body
-      const socialsBlock =
-        availableSocials.length > 0
-          ? `🌐 *Social Universes*\n${availableSocials.join("\n")}\n━━━━━━━━━━━━━━━━━━━\n`
-          : "";
-
+      // 🪷 Message Card (Guru Layout)
       const message = `
-🌌 *Miara’s Celestial Curator*
-━━━━━━━━━━━━━━━━━━━
-👑 *Name:* ${ownerName}
-📞 *Contact:* +${primaryOwner}
-🧭 *Role:* Creator & Architect of ${BOT_NAME}
-━━━━━━━━━━━━━━━━━━━
-${socialsBlock}${signature}
+╭━━━⊰ *${BOT_NAME}’s Celestial Curator* ⊱━━━╮
+┃ 👑 *Name:* ${ownerName}
+┃ 💬 *WhatsApp:* wa.me/${primaryOwner}
+┃ 🧭 *Role:* Creator & Architect of ${BOT_NAME}
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━╯
+
+╭━━━⊰ *Social Universes* ⊱━━━╮
+${socialsList}
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━╯
+
+${signature}
+🌸 _Grace in logic, Emotion in code._
       `.trim();
 
-      // 📸 Send portrait
+      // 🖼️ Send portrait
       await conn.sendMessage(
         from,
-        { image: headerImageBuffer, caption: `🖼️ *Portrait of the Curator — ${ownerName}*` },
+        {
+          image: headerImageBuffer,
+          caption: `🖼️ *Portrait of the Curator — ${ownerName}*`,
+        },
         safeQuoted(m)
       );
 
-      // 📇 Send contact
+      // 📇 Send vCard contact
       await conn.sendMessage(
         from,
         {
@@ -145,11 +134,36 @@ ${socialsBlock}${signature}
         safeQuoted(m)
       );
 
-      // 🌠 Send cosmic card
-      await conn.sendMessage(from, { text: message }, safeQuoted(m));
+      // 🌌 Send Main Message with Buttons
+      await conn.sendMessage(
+        from,
+        {
+          text: message,
+          footer: "💫 The Curator’s presence echoes through Miara’s code 🌸",
+          buttons: [
+            {
+              buttonId: "chat_curator",
+              buttonText: { displayText: "💬 Message the Curator" },
+              type: 1,
+            },
+            {
+              buttonId: "visit_github",
+              buttonText: { displayText: "🌐 Visit GitHub Sanctuary" },
+              type: 1,
+            },
+            {
+              buttonId: "visit_telegram",
+              buttonText: { displayText: "🔮 Connect on Telegram" },
+              type: 1,
+            },
+          ],
+          headerType: 1,
+        },
+        safeQuoted(m)
+      );
 
-      await safeReact(conn, m, "🪷");
-      console.log(`🌸 Adaptive Curator card (with portrait) shared with ${from}`);
+      await safeReact(conn, m, "🌸");
+      console.log(`✅ Curator card shared with ${from}`);
     } catch (err) {
       console.error("❌ Owner command error:", err);
       await conn.sendMessage(
