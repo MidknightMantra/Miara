@@ -14,9 +14,11 @@ import { config } from "../config.js";
 // Optional custom font
 try {
   registerFont("./assets/fonts/Poppins-SemiBold.ttf", { family: "Poppins" });
-  registerFont("./assets/fonts/Poppins-Regular.ttf", { family: "Poppins", weight: "400" });
+  registerFont("./assets/fonts/Poppins-Regular.ttf", {
+    family: "Poppins",
+    weight: "400"
+  });
   registerFont("./assets/fonts/Poppins-Bold.ttf", { family: "Poppins", weight: "700" });
-
 } catch {}
 
 export default {
@@ -30,7 +32,7 @@ export default {
       BOT_NAME = "Miara🌸",
       OWNER_NAME = "MidKnightMantra",
       PREFIX = ".",
-      VERSION = "1.0.0",
+      VERSION = "1.0.0"
     } = config;
 
     // System Info
@@ -38,7 +40,7 @@ export default {
     const uptime = {
       h: Math.floor(uptimeMs / 3600000),
       m: Math.floor((uptimeMs % 3600000) / 60000),
-      s: Math.floor((uptimeMs % 60000) / 1000),
+      s: Math.floor((uptimeMs % 60000) / 1000)
     };
 
     const totalMem = os.totalmem();
@@ -48,10 +50,14 @@ export default {
 
     const cpus = os.cpus();
     const avgCpuLoad = Math.round(
-      cpus.map((cpu) => {
-        const t = cpu.times;
-        return (t.user + t.nice + t.sys + t.irq) / (t.user + t.nice + t.sys + t.irq + t.idle);
-      }).reduce((a, b) => a + b, 0) / cpus.length * 100
+      (cpus
+        .map((cpu) => {
+          const t = cpu.times;
+          return (t.user + t.nice + t.sys + t.irq) / (t.user + t.nice + t.sys + t.irq + t.idle);
+        })
+        .reduce((a, b) => a + b, 0) /
+        cpus.length) *
+        100
     );
 
     const sys = {
@@ -59,7 +65,7 @@ export default {
       node: process.version,
       time: moment().tz("Africa/Nairobi").format("HH:mm:ss"),
       date: moment().tz("Africa/Nairobi").format("dddd, MMMM Do YYYY"),
-      tz: "Africa/Nairobi",
+      tz: "Africa/Nairobi"
     };
 
     // Canvas setup
@@ -166,10 +172,14 @@ export default {
 
     await conn.sendMessage(
       m.from,
-      { image: buffer, caption: `✨ *${BOT_NAME} System Overview*`, mentions: [m.sender] },
+      {
+        image: buffer,
+        caption: `✨ *${BOT_NAME} System Overview*`,
+        mentions: [m.sender]
+      },
       { quoted: m.message }
     );
 
     await conn.sendMessage(m.from, { react: { text: "💖", key: m.message.key } });
-  },
+  }
 };

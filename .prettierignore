@@ -1,0 +1,7 @@
+node_modules/
+session/
+sessions/
+src/database/
+coverage/
+package-lock.json
+*.log

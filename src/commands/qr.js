@@ -22,7 +22,7 @@ export default {
     // 🧩 Input validation
     if (!qrData) {
       await conn.sendMessage(from, {
-        text: "🌙 Please share text or a link to encode.\nExample:\n.qr https://miara.ai\n.qr Miara awakens 🌸",
+        text: "🌙 Please share text or a link to encode.\nExample:\n.qr https://miara.ai\n.qr Miara awakens 🌸"
       });
       return;
     }
@@ -41,8 +41,8 @@ export default {
         margin: 2,
         color: {
           dark: "#4B0082", // Indigo glow
-          light: "#FAF5FF", // Soft lavender background
-        },
+          light: "#FAF5FF" // Soft lavender background
+        }
       });
 
       // 🌸 Caption design
@@ -57,7 +57,7 @@ ${typeEmoji} *${title}*
       // ✉️ Send the QR code image
       await conn.sendMessage(from, {
         image: qrBuffer,
-        caption,
+        caption
       });
 
       // React (if message key exists)
@@ -81,5 +81,5 @@ ${typeEmoji} *${title}*
         await conn.sendMessage(from, { react: { text: "💔", key: m.key } });
       }
     }
-  },
+  }
 };

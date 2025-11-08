@@ -29,14 +29,20 @@ export default {
 
     if (!isOwner) {
       await conn.sendMessage(m.from, {
-        text: "🚫 Only the Celestial Curator may trigger Miara’s rebirth 🌠",
+        text: "🚫 Only the Celestial Curator may trigger Miara’s rebirth 🌠"
       });
       return;
     }
 
     const BOT_NAME = config.BOT_NAME || "Miara 🌸";
-    const time = moment().tz(config.TIMEZONE || "Africa/Nairobi").format("HH:mm:ss");
-    const platform = os.platform().replace("linux", "🐧 Linux Realm").replace("darwin", "🍏 macOS Halo").replace("win32", "🪟 Windows Gate");
+    const time = moment()
+      .tz(config.TIMEZONE || "Africa/Nairobi")
+      .format("HH:mm:ss");
+    const platform = os
+      .platform()
+      .replace("linux", "🐧 Linux Realm")
+      .replace("darwin", "🍏 macOS Halo")
+      .replace("win32", "🪟 Windows Gate");
 
     const rebootMsg = `
 🕊️ *${BOT_NAME} — Phoenix Rebirth Protocol*
@@ -74,5 +80,5 @@ export default {
     // Exit gracefully
     process.exitCode = 0;
     process.exit(0);
-  },
+  }
 };

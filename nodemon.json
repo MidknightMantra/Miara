@@ -1,6 +1,20 @@
 {
   "watch": ["src"],
-  "ignore": ["session/*", "session/**/*.json", "session/**/*.bin"],
+  "ignore": [
+    "node_modules",
+    "session/*",
+    "session/**/*.json",
+    "session/**/*.bin",
+    "src/database/*",
+    "src/database/**/*.json",
+    "logs/*",
+    "tmp/*"
+  ],
   "ext": "js,json",
-  "exec": "node src/main.js"
+  "delay": "500",
+  "exec": "node src/main.js",
+  "restartable": "rs",
+  "env": {
+    "NODE_ENV": "development"
+  }
 }

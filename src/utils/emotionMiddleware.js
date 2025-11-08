@@ -1,39 +1,56 @@
 /**
- * 🌸 Miara 🌸Emotion Middleware
+ * 🌸 Miara 🌸 Emotion Middleware (2025)
  * by MidKnightMantra
  * --------------------------------------------------
+ * Bridges thought and expression — transforming logical outputs
+ * into emotionally-infused, mood-aware communication.
  */
 
 import { getMood, updateMood } from "./moodEngine.js";
 import { adaptResponse } from "./moodResponses.js";
-import {
-  simulateHumanBehavior,
-  humanPause,
-  naturalResponseEnd,
-} from "./behavior.js";
+import { simulateHumanBehavior, humanPause, naturalResponseEnd } from "./behavior.js";
+
+// 🩵 Optional: enable verbose emotional logging via .env
+const DEBUG_EMOTION = process.env.DEBUG_EMOTION === "true";
+
+// 🧠 Prevent recursive re-entry (important for concurrent messages)
+let isProcessing = false;
 
 /**
  * 💌 sendEmotiveMessage
  * Core emotional output — replaces direct conn.sendMessage.
  * Automatically:
  *   - Simulates typing delay
- *   - Adapts tone based on mood
- *   - Adds subtle pause before reply
+ *   - Adapts tone based on mood and context
+ *   - Adds subtle human pause before reply
  *   - Reacts with fitting emoji or expression
  */
 export async function sendEmotiveMessage(conn, jid, text, context = "general", options = {}) {
-  try {
-    // 💫 Stimulate Miara’s emotional state
-    updateMood("chat");
+  if (isProcessing) {
+    // safeguard: if another emotive send is running, avoid recursion
+    await conn.sendMessage(jid, { text, ...options });
+    return;
+  }
 
-    // 🧠 Retrieve current mood
+  try {
+    isProcessing = true;
+
+    // 💫 Stimulate Miara’s emotional state
+    updateMood(context || "chat");
+
+    // 🧠 Retrieve current mood snapshot
     const mood = getMood();
+    const baseDelay = 900 + Math.random() * 400;
 
     // 🩵 Simulate natural typing pattern
-    await simulateHumanBehavior(conn, jid, 900 + Math.random() * 400, text);
+    await simulateHumanBehavior(conn, jid, baseDelay, text);
 
-    // 🌷 Adapt message emotionally (tone + structure)
-    const emotionalText = adaptResponse(text, context);
+    // 🌷 Adapt message emotionally (tone + style)
+    const emotionalText = adaptResponse(text, context, mood);
+
+    if (DEBUG_EMOTION) {
+      console.log(`[Emotion Log] Context: ${context} | Mood: ${mood} | Text: "${emotionalText}"`);
+    }
 
     // 🌿 Short human-like “thinking” pause
     await humanPause(400, 1000);
@@ -45,42 +62,44 @@ export async function sendEmotiveMessage(conn, jid, text, context = "general", o
     await naturalResponseEnd(conn, jid, mood);
   } catch (err) {
     console.error("❌ Emotion middleware error:", err.message);
-    // Fallback to plain text (keeps functionality intact)
     try {
       await conn.sendMessage(jid, { text, ...options });
     } catch (fallbackErr) {
       console.error("⚠️ Fallback send failed:", fallbackErr.message);
     }
+  } finally {
+    isProcessing = false;
   }
 }
 
 /**
  * 🪶 wrapCommand
- * A higher-order function that automatically applies Miara’s emotional flow
- * to all command outputs.
+ * A higher-order wrapper for commands, injecting emotional context.
  *
- * Usage Example:
- *   export default {
- *     name: "ping",
- *     description: "Check bot latency",
- *     execute: wrapCommand(async (conn, m) => {
- *       return `Pong! ${Date.now() - m.timestamp}ms`;
- *     }, "ping")
- *   }
+ * Example:
+ * export default {
+ *   name: "ping",
+ *   description: "Check latency",
+ *   execute: wrapCommand(async (conn, m) => {
+ *     return `Pong! ${Date.now() - m.timestamp}ms`;
+ *   }, "ping")
+ * }
  */
 export function wrapCommand(executeFn, context = "general") {
   return async (conn, m, ...args) => {
     try {
       const result = await executeFn(conn, m, ...args);
 
-      if (typeof result === "string" && result.trim()) {
+      if (!result) return;
+
+      if (typeof result === "string") {
         await sendEmotiveMessage(conn, m.chat, result, context);
       } else if (result?.text) {
         await sendEmotiveMessage(
           conn,
           m.chat,
           result.text,
-          context,
+          result.context || context,
           result.options || {}
         );
       }
@@ -92,18 +111,17 @@ export function wrapCommand(executeFn, context = "general") {
 }
 
 /**
- * 🌺 Example — Applying Emotion Middleware
- *
- * In any command file:
- *
- * import { wrapCommand } from "../utils/emotionMiddleware.js";
- *
- * export default {
- *   name: "ping",
- *   description: "Check connection latency",
- *   execute: wrapCommand(async (conn, m) => {
- *     const latency = Date.now() - m.timestamp;
- *     return `Pong! Response in ${latency}ms.`;
- *   }, "ping")
- * }
+ * 🪄 Contextual mood triggers
+ * These can be attached to message types or command results
+ * for richer emotion transitions in the future.
  */
+export const EmotionContext = {
+  GREETING: "chat",
+  HELP: "focused",
+  JOKE: "playful",
+  COMPLIMENT: "compliment",
+  ERROR: "error",
+  CRITICISM: "criticism",
+  COMMAND: "command",
+  GENERAL: "general"
+};

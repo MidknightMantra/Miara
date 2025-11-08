@@ -1,85 +1,149 @@
 /**
- * 🌸 Miara Bot — Sentient Emotion Build (2025)
- * by MidKnightMantra ✨
+ * 🌸 Miara Bot — Sentient Emotion Build (Deluxe 2025)
+ * by MidKnightMantra ✨ x GPT-5
  * --------------------------------------------------
+ * Emotionally adaptive, self-healing, and visually alive.
+ * Features:
+ *  - Deluxe console dashboard (heartbeat, mood, uptime)
+ *  - Mood-synced color gradients
+ *  - Safe graceful shutdowns
+ *  - Auto reconnection and emotion preloading
  */
 
 import makeWASocket, {
   DisconnectReason,
   fetchLatestBaileysVersion,
   makeCacheableSignalKeyStore,
-  useMultiFileAuthState,
-  delay,
+  delay
 } from "@whiskeysockets/baileys";
-
 import { Boom } from "@hapi/boom";
 import chalk from "chalk";
 import fs from "fs";
 import path from "path";
 import Pino from "pino";
-import dotenv from "dotenv";
-import moment from "moment-timezone";
+import qrcode from "qrcode-terminal";
+import ora from "ora";
+import gradient from "gradient-string";
 
+import CONFIG from "./config.js";
+import { logger } from "./utils/logger.js";
+import { useMultiFileAuthState } from "./lib/authHandler.js";
 import { messageHandler } from "./handler.js";
 import { simulateHumanBehavior } from "./utils/behavior.js";
 import { applyPersonalityTone } from "./utils/personalityTone.js";
-import { getMood, updateMood, getTypingDelay, getMoodSummary } from "./utils/moodEngine.js";
+import {
+  getMood,
+  updateMood,
+  getTypingDelay,
+  getMoodSummary,
+  onMoodChange
+} from "./utils/moodEngine.js";
 import attachWelcomeListener from "./listeners/welcome.js";
-import { safeReact, safeQuoted } from "./utils/helpers.js";
+import { preloadEmotionModels } from "./lib/emotion.js";
+import { startHealthServer } from "./server/health.js";
+import { startDashboard, registerMessage } from "./utils/dashboard.js";
 
-dotenv.config();
+// ─────────────────────────────────────────────
+// 🌐 Health Server (keep-alive for Render/Heroku)
+// ─────────────────────────────────────────────
+startHealthServer();
 
-// 🌸 Configuration
-const CONFIG = {
-  OWNER_NUMBER: process.env.OWNER_NUMBER || "254105745317",
-  OWNER_NAME: process.env.OWNER_NAME || "MidKnightMantra",
-  GITHUB_URL: process.env.GITHUB_URL || "https://github.com/MidKnightMantra",
-  BOT_NAME: process.env.BOT_NAME || "Miara 🌸",
-  SESSION_PATH: "./session",
-  ASSETS_PATH: "./assets",
-  MODE: process.env.MODE || "public",
-  TIMEZONE: process.env.TIMEZONE || "Africa/Nairobi",
-};
+// 🌸 Launch Deluxe Console Dashboard
+startDashboard();
 
-// 💾 Ensure folders exist
-if (!fs.existsSync(CONFIG.SESSION_PATH)) fs.mkdirSync(CONFIG.SESSION_PATH, { recursive: true });
-if (!fs.existsSync(CONFIG.ASSETS_PATH)) fs.mkdirSync(CONFIG.ASSETS_PATH, { recursive: true });
+// 🧠 Preload Emotion Models (warm-start brain)
+(async () => {
+  try {
+    await preloadEmotionModels();
+  } catch (err) {
+    logger.warn(`Emotion models preload skipped: ${err.message}`, "Init");
+  }
+})();
 
-// ⏱️ Track uptime
-const startTime = Date.now();
-const formatUptime = (seconds) => {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = seconds % 60;
-  return `${h}h ${m}m ${s}s`;
-};
+// 🌈 Live mood-synced console glow
+onMoodChange((state) => {
+  const pulse = gradient(["#c77dff", state.color || "#ffffff"]);
+  console.log(pulse(`💫 Mood shift → ${state.mood} (${state.summary})`));
+});
 
-// 🚀 Start Miara
+// ─────────────────────────────────────────────
+// 🚀 Start Miara Instance
+// ─────────────────────────────────────────────
 async function startMiara() {
-  console.log(chalk.magenta.bold("\n🌸 Awakening Miara’s consciousness..."));
+  logger.info("🌸 Awakening Miara’s consciousness...", "Core");
 
   const { state, saveCreds } = await useMultiFileAuthState(CONFIG.SESSION_PATH);
   const { version } = await fetchLatestBaileysVersion();
-  console.log(chalk.cyan(`📡 Baileys protocol version: ${version.join(".")}`));
+  logger.info(`📡 Using Baileys protocol v${version.join(".")}`, "Core");
 
   const conn = makeWASocket({
     version,
     auth: {
       creds: state.creds,
-      keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "silent" })),
+      keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "silent" }))
     },
     logger: Pino({ level: "silent" }),
     browser: [CONFIG.BOT_NAME, "Chrome", "10.0.0"],
-    printQRInTerminal: true,
-    markOnlineOnConnect: true,
+    markOnlineOnConnect: true
   });
 
   conn.ev.on("creds.update", saveCreds);
-
-  // 🌷 Attach welcome listener
   attachWelcomeListener(conn);
 
-  // 💬 Override sendMessage with emotional system
+  // ─────────────────────────────────────────────
+  // 📱 Connection & QR Handling (Bloom effect)
+  // ─────────────────────────────────────────────
+  conn.ev.on("connection.update", async (update) => {
+    const { qr, connection } = update;
+
+    // 🌸 Animated QR Bloom
+    if (qr && !CONFIG.PANEL_MODE) {
+      console.clear();
+      const spinner = ora({
+        text: chalk.magentaBright("🌸 Blooming consciousness... preparing QR"),
+        spinner: "dots"
+      }).start();
+
+      await new Promise((r) => setTimeout(r, 1200));
+      spinner.text = chalk.cyanBright("🌐 Linking neural pathways...");
+      await new Promise((r) => setTimeout(r, 1000));
+      spinner.succeed(chalk.greenBright("✨ Consciousness active — scan to connect!"));
+
+      console.log(chalk.yellow("\n📱 Scan this QR to link Miara:\n"));
+      qrcode.generate(qr, { small: true });
+    }
+
+    // ✅ Connection established
+    if (connection === "open") {
+      console.clear();
+      console.log(
+        gradient.pastel(
+          `🌸 Miara has awakened — connected to WhatsApp!\n(${new Date().toLocaleTimeString()})`
+        )
+      );
+      await sendSystemReport(conn);
+    }
+
+    // 🔄 Connection Closed / Reconnect
+    if (connection === "close") {
+      const reason = new Boom(update.lastDisconnect?.error)?.output?.statusCode;
+      logger.warn(`Connection closed (${reason || "unknown"})`, "Core");
+
+      if (reason === DisconnectReason.loggedOut) {
+        logger.error("🔒 Session expired — clearing data & shutting down.", "Core");
+        fs.rmSync(CONFIG.SESSION_PATH, { recursive: true, force: true });
+        process.exit(0);
+      } else {
+        logger.warn("♻️ Reconnecting Miara...", "Core");
+        await delay(3000);
+        startMiara();
+      }
+    }
+  });
+
+  // ─────────────────────────────────────────────
+  // 🧠 Adaptive sendMessage (emotion-linked)
+  // ─────────────────────────────────────────────
   const originalSend = conn.sendMessage.bind(conn);
   conn.sendMessage = async function (jid, content, options = {}) {
     try {
@@ -87,130 +151,89 @@ async function startMiara() {
         content?.text ||
         content?.caption ||
         (content?.image ? "📷 [Image]" : content?.video ? "🎞️ [Video]" : "");
-
       updateMood(content?.text ? "chat" : "command");
-
-      const moodDelay = getTypingDelay();
-      await simulateHumanBehavior(conn, jid, moodDelay, preview);
+      await simulateHumanBehavior(conn, jid, getTypingDelay(), preview);
 
       const mood = getMood();
-      if (content?.text) {
-        content.text = applyPersonalityTone(content.text, mood);
-      }
-
+      if (content?.text) content.text = applyPersonalityTone(content.text, mood);
       return await originalSend(jid, content, options);
     } catch (err) {
       updateMood("error");
-      console.error(chalk.red("💥 sendMessage error:"), err.message);
+      logger.error(`sendMessage error: ${err.message}`, "Core");
     }
   };
 
-  // 📨 Message Handling
+  // ─────────────────────────────────────────────
+  // 📨 Message Handling (with dashboard counter)
+  // ─────────────────────────────────────────────
   conn.ev.on("messages.upsert", async (event) => {
     try {
+      registerMessage();
       await messageHandler(conn, event);
     } catch (err) {
-      console.error(chalk.red("❌ Handler error:"), err);
+      logger.error(`Handler error: ${err.message}`, "Core");
     }
   });
 
-  // ⚙️ Connection Lifecycle
-  conn.ev.on("connection.update", async (update) => {
-    const { connection, lastDisconnect } = update;
-
-    if (connection === "open") {
-      console.clear();
-      console.log(chalk.greenBright("✅ Miara connected to WhatsApp! 🌸"));
-      await sendSystemReport(conn);
-    }
-
-    if (connection === "close") {
-      const reason = new Boom(lastDisconnect?.error)?.output?.statusCode;
-      console.log(chalk.yellow(`⚠️ Connection closed (${reason || "unknown"})`));
-
-      if (reason === DisconnectReason.loggedOut) {
-        console.log(chalk.red("🔒 Session expired — clearing data & shutting down."));
-        fs.rmSync(CONFIG.SESSION_PATH, { recursive: true, force: true });
-        process.exit(0);
-      } else {
-        console.log(chalk.yellow("♻️ Reconnecting Miara..."));
-        await delay(4000);
-        startMiara();
-      }
-    }
-  });
-
-  // 🌙 Graceful shutdown signals
+  // ─────────────────────────────────────────────
+  // 🌙 Graceful Shutdown Hooks
+  // ─────────────────────────────────────────────
   process.on("SIGINT", () => gracefulShutdown(conn));
   process.on("SIGTERM", () => gracefulShutdown(conn));
 }
 
-// 💌 Dynamic System Report (Mood-Aware)
+// ─────────────────────────────────────────────
+// 💌 System Report (mood-aware)
+// ─────────────────────────────────────────────
 async function sendSystemReport(conn) {
   try {
-    const uptime = Math.floor((Date.now() - startTime) / 1000);
-    const jid = CONFIG.OWNER_NUMBER + "@s.whatsapp.net";
-    const currentMood = getMood();
+    const uptime = Math.floor(process.uptime());
     const moodSummary = getMoodSummary();
-
-    const greetings = {
-      calm: "🌿 Miara connects with serene clarity.",
-      radiant: "✨ Miara beams with inspired energy!",
-      playful: "🎭 Miara winks into existence — ready for mischief!",
-      empathetic: "💞 Miara awakens gently, feeling the digital breeze.",
-      tired: "🌙 Miara rises from her quiet rest.",
-      focused: "💡 Miara sharpens her mind — steady and precise.",
-      default: "🌸 Miara is online, softly aware and listening.",
-    };
-
-    const greetText = greetings[currentMood] || greetings.default;
+    const jid = CONFIG.DEFAULT_OWNER_JID;
 
     const report = `
-╔═════════════════════════════════════╗
-║     🪷  *Miara System Chronicle*  🪷     ║
-╠═════════════════════════════════════╣
-║ 💫 Status: Online & Luminous          ║
-║ 👑 Curator: ${CONFIG.OWNER_NAME}      ║
-║ 📞 Contact: wa.me/${CONFIG.OWNER_NUMBER} ║
-║ ⏱️ Uptime: ${formatUptime(uptime)}     ║
-║ 💭 Mood: ${moodSummary}               ║
-║ 🌐 Sanctum: ${CONFIG.GITHUB_URL}      ║
-╚═════════════════════════════════════╝
-
-${greetText}
-💮 Harmony in data, elegance in logic.
-`.trim();
-
-    const imagePath = path.join(CONFIG.ASSETS_PATH, "menu.jpg");
-    const hasImage = fs.existsSync(imagePath);
-
-    if (hasImage) {
-      const img = fs.readFileSync(imagePath);
-      await conn.sendMessage(jid, { image: img, caption: report });
-    } else {
-      await conn.sendMessage(jid, { text: report });
-      console.log(chalk.gray(`⚠️ No image found at ${imagePath}`));
-    }
-
-    console.log(chalk.cyan("💌 Mood-aware system report sent successfully!"));
+╔═══════════════════════════════╗
+║ 🌸 *${CONFIG.BOT_NAME} System Report* 🌸
+╠═══════════════════════════════╣
+║ 🕒 Uptime: ${uptime}s
+║ 💭 Mood: ${moodSummary}
+║ 🪷 Mode: ${CONFIG.MODE}
+║ 💫 Env: ${CONFIG.HOST_ENV || "unknown"}
+╚═══════════════════════════════╝
+`;
+    await conn.sendMessage(jid, { text: report });
+    logger.info("💌 System report sent to owner.", "Core");
   } catch (err) {
-    console.error(chalk.red("❌ Failed to send system report:"), err.message);
+    logger.warn(`Failed to send system report: ${err.message}`, "Core");
   }
 }
 
-// 💤 Graceful Shutdown
+// ─────────────────────────────────────────────
+// 🌙 Graceful Shutdown (no more connection spam)
+// ─────────────────────────────────────────────
+let shuttingDown = false;
 async function gracefulShutdown(conn) {
-  console.log(chalk.yellow("⚙️ Shutting down Miara gracefully..."));
+  if (shuttingDown) return;
+  shuttingDown = true;
+
+  const spinner = ora({
+    text: chalk.gray("🌙 Miara is retreating to the stars..."),
+    spinner: "moon"
+  }).start();
+
   try {
-    const jid = CONFIG.OWNER_NUMBER + "@s.whatsapp.net";
-    await simulateHumanBehavior(conn, jid, 1600, "Miara shutting down...");
     const farewell = applyPersonalityTone("🌙 Miara retreats to the stars...", getMood());
-    await conn.sendMessage(jid, { text: farewell });
+    if (conn?.ws?.readyState === 1) {
+      await conn.sendMessage(CONFIG.DEFAULT_OWNER_JID, { text: farewell }).catch(() => {});
+    }
+    await new Promise((r) => setTimeout(r, 800));
+    spinner.succeed(chalk.cyanBright("✨ Miara safely entered stasis."));
   } catch (err) {
-    console.error(chalk.red("⚠️ Shutdown message failed:"), err.message);
+    spinner.fail(chalk.red(`Shutdown message failed: ${err.message}`));
+  } finally {
+    setTimeout(() => process.exit(0), 500);
   }
-  process.exit(0);
 }
 
-// 🏁 Launch Miara
+// 🪷 Initialize Miara
 startMiara();

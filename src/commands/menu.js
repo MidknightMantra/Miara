@@ -13,7 +13,11 @@ import { config } from "../config.js";
 
 // 🌅 Greeting by time
 function ucapan() {
-  const hour = parseInt(moment().tz(config.TIMEZONE || "Africa/Nairobi").format("HH"));
+  const hour = parseInt(
+    moment()
+      .tz(config.TIMEZONE || "Africa/Nairobi")
+      .format("HH")
+  );
   if (hour >= 0 && hour < 4) return "Good Night 🌙";
   if (hour >= 4 && hour < 12) return "Good Morning 🌄";
   if (hour >= 12 && hour < 16) return "Good Afternoon ☀️";
@@ -39,7 +43,7 @@ const quotes = [
   "Simplicity is the soul of efficiency 🌿",
   "Why debug when you can vibe? 🎶",
   "Code like poetry, deploy like chaos 💫",
-  "Behind every bot is a sleep-deprived human ☕",
+  "Behind every bot is a sleep-deprived human ☕"
 ];
 
 export default {
@@ -64,7 +68,9 @@ export default {
       const time = moment().tz(TIMEZONE).format("HH:mm:ss");
       const uptime = clockString(process.uptime() * 1000);
       const totalUsers = Object.values(global.db?.data?.users || {}).length;
-      const registered = Object.values(global.db?.data?.users || {}).filter((u) => u.registered).length;
+      const registered = Object.values(global.db?.data?.users || {}).filter(
+        (u) => u.registered
+      ).length;
       const greeting = ucapan();
       const quote = quotes[Math.floor(Math.random() * quotes.length)];
       const userTag = "@" + m.sender.split("@")[0];
@@ -79,7 +85,7 @@ export default {
         owner: "👑",
         ai: "🤖",
         system: "⚙️",
-        misc: "✨",
+        misc: "✨"
       };
 
       // 🧩 Group commands by category
@@ -147,7 +153,7 @@ ${readMore}
         {
           image: logo,
           caption: menuText,
-          mentions: [m.sender],
+          mentions: [m.sender]
         },
         { quoted: m }
       );
@@ -161,5 +167,5 @@ ${readMore}
         { quoted: m }
       );
     }
-  },
+  }
 };

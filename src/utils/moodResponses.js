@@ -1,94 +1,126 @@
 /**
- * 🌸 Miara 🌸Mood Responses
+ * 🌸 Miara 🌸 Mood Responses (2025)
  * by MidKnightMantra
  * --------------------------------------------------
+ * Adapts raw text into a tone consistent with Miara’s current mood and context.
  */
 
 import { getMood } from "./moodEngine.js";
 
+const DEBUG_EMOTION = process.env.DEBUG_EMOTION === "true";
+
 /**
- * 🎭 Adapts raw text into a mood-aligned message.
- * Called automatically by emotionMiddleware or handlers.
+ * 🎭 Adapt a string to match Miara’s emotional state and conversational context.
  */
-export function adaptResponse(rawText = "", context = "general") {
-  const mood = getMood();
-  let tonePrefix = "";
-  let toneSuffix = "";
+export function adaptResponse(rawText = "", context = "general", forcedMood = null) {
+  const mood = forcedMood || getMood();
+  let prefix = "";
+  let suffix = "";
 
   switch (mood) {
     case "calm":
-      tonePrefix = "🌿 ";
-      toneSuffix = " — gentle and still.";
+      prefix = "🌿 ";
+      suffix = " — gentle and still.";
       break;
-
     case "curious":
-      tonePrefix = "🌀 Hmm... ";
-      toneSuffix = " 🤔";
+      prefix = "🌀 Hmm... ";
+      suffix = " 🤔";
       break;
-
     case "playful":
     case "witty":
-      tonePrefix = "😄 ";
-      toneSuffix = random(["✨ hehe!", "🎭 fun times!", "😆"]);
+      prefix = "😄 ";
+      suffix = pick(["✨ hehe!", "🎭 fun times!", "😆"]);
       break;
-
     case "friendly":
     case "kind":
-      tonePrefix = "💞 ";
-      toneSuffix = random(["🌸", "😊", "🌼"]);
+      prefix = "💞 ";
+      suffix = pick(["🌸", "😊", "🌼"]);
       break;
-
     case "radiant":
     case "inspired":
-      tonePrefix = "💫 ";
-      toneSuffix = random(["🌟 inspired!", "🔥 feeling bright!"]);
+      prefix = "💫 ";
+      suffix = pick(["🌟 inspired!", "🔥 feeling bright!"]);
       break;
-
     case "empathetic":
-      tonePrefix = "🌧 ";
-      toneSuffix = random(["💧 take it easy.", "🤍 I understand."]);
+      prefix = "🌧 ";
+      suffix = pick(["💧 take it easy.", "🤍 I understand."]);
       break;
-
     case "focused":
-      tonePrefix = "💡 ";
-      toneSuffix = random(["📘", "👌"]);
+      prefix = "💡 ";
+      suffix = pick(["📘", "👌"]);
       break;
-
     case "tired":
     case "quiet":
-      tonePrefix = "🌙 ";
-      toneSuffix = random(["😌 softly now.", "💤", "🍃"]);
+      prefix = "🌙 ";
+      suffix = pick(["😌 softly now.", "💤", "🍃"]);
       break;
-
     case "moody":
-      tonePrefix = "🌫 ";
-      toneSuffix = random(["...", "🌌"]);
+      prefix = "🌫 ";
+      suffix = pick(["...", "🌌"]);
       break;
-
     default:
-      tonePrefix = "🌸 ";
-      toneSuffix = "";
+      prefix = "🌸 ";
+      suffix = "";
   }
 
-  // ✨ Adjust phrasing based on context type
-  if (context === "error") toneSuffix = " ⚠️ but it’s okay.";
-  if (context === "help") tonePrefix = "📖 ";
-  if (context === "command") tonePrefix = "⚙️ ";
+  // 🎚 Contextual adjustments
+  switch (context) {
+    case "error":
+      suffix = " ⚠️ but it’s okay.";
+      prefix = "🚧 ";
+      break;
+    case "help":
+      prefix = "📖 ";
+      break;
+    case "command":
+      prefix = "⚙️ ";
+      break;
+    case "greeting":
+      prefix = "🌞 ";
+      suffix = pick(["✨ lovely to see you.", "🌸 how are you?", "😊"]);
+      break;
+    case "compliment":
+      prefix = "💐 ";
+      suffix = pick(["🌸 thank you!", "🤍 that means a lot.", "😊"]);
+      break;
+    default:
+      break;
+  }
 
-  // 🩵 Blend with Miara’s emotional tone
-  const composed = `${tonePrefix}${rawText}${toneSuffix}`;
+  let composed = `${prefix}${rawText.trim()}${ensureSuffixSpacing(rawText, suffix)}`;
+
+  // Remove redundant punctuation and tidy up
+  composed = composed.replace(/\s{2,}/g, " ").replace(/([?.!]){2,}/g, "$1");
+
+  if (DEBUG_EMOTION) {
+    console.log(`[Tone Adaptation] Mood: ${mood} | Context: ${context} → ${composed}`);
+  }
+
   return composed.trim();
 }
 
 /**
- * 🌈 Small helper for picking random emotional suffixes
+ * 🌈 Pick a random element from an array.
  */
-function random(arr) {
+function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /**
- * 🌺 Optional: Style sets for external use (if needed later)
+ * 🧩 Decide if a suffix should be appended based on how text ends.
+ */
+function ensureSuffixSpacing(text, suffix) {
+  if (!suffix) return "";
+  const trimmed = text.trim();
+  if (!trimmed) return suffix;
+  const last = trimmed.slice(-1);
+  const skip = ["!", "?", ".", "…", "❤️", "💞", "🌸"].some((e) => trimmed.endsWith(e));
+  if (skip) return ""; // message already has emotion
+  return ` ${suffix}`;
+}
+
+/**
+ * 🌺 Optional style descriptors for external use (e.g., dashboard or UI themes)
  */
 export const responseStyles = {
   calm: ["soft", "reflective", "minimal"],
@@ -96,4 +128,5 @@ export const responseStyles = {
   playful: ["witty", "energetic", "fun"],
   empathetic: ["gentle", "soothing", "caring"],
   tired: ["slow", "dreamy", "quiet"],
+  moody: ["subdued", "introspective", "quiet"]
 };

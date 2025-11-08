@@ -1,0 +1,135 @@
+{
+  "name": "Miara WhatsApp Bot 🌸",
+  "description": "An intelligent, emotionally aware WhatsApp AI bot built on Baileys + GPT-5. Supports Render, Heroku, and VPS with PostgreSQL or local JSON persistence.",
+  "repository": "https://github.com/<your-username>/miara-bot",
+  "logo": "https://i.imgur.com/vdfZJcF.png",
+  "keywords": [
+    "whatsapp",
+    "ai",
+    "bot",
+    "baileys",
+    "gpt",
+    "openai",
+    "heroku",
+    "render",
+    "railway",
+    "automation",
+    "postgresql"
+  ],
+
+  "buildpacks": [
+    { "url": "heroku/nodejs" }
+  ],
+
+  "scripts": {
+    "postdeploy": "echo '✅ Miara successfully deployed! Scan the QR or connect via panel.'"
+  },
+
+  "env": {
+    "PORT": {
+      "description": "Port for Express health server (Render/Heroku use this)",
+      "value": "3000"
+    },
+    "NODE_ENV": {
+      "description": "Node environment mode",
+      "value": "production"
+    },
+    "PRIVATE_MODE": {
+      "description": "Set to true for owner-only command mode",
+      "value": "false"
+    },
+    "OWNER_NUMBER": {
+      "description": "Primary WhatsApp admin number (no + or 00, comma-separated for multiple)",
+      "required": true,
+      "value": "254712345678"
+    },
+    "OWNER_NAME": {
+      "description": "Name of the bot’s curator or admin",
+      "value": "MidKnightMantra"
+    },
+    "BOT_NAME": {
+      "description": "Bot display name (shown in logs and messages)",
+      "value": "Miara🌸"
+    },
+    "BIO": {
+      "description": "Short Miara bio for console and greeting messages",
+      "value": "🌸 M I A R A 🌸"
+    },
+    "OPENAI_API_KEY": {
+      "description": "Your OpenAI API key for GPT-based responses",
+      "required": true
+    },
+    "GOOGLE_GEMINI_KEY": {
+      "description": "Optional Google Gemini API key for AI responses",
+      "required": false
+    },
+    "MISTRAL_KEY": {
+      "description": "Optional Mistral AI API key",
+      "required": false
+    },
+    "HF_TOKEN": {
+      "description": "Optional HuggingFace API token for emotion detection and text models",
+      "required": false
+    },
+    "OPENWEATHER_API_KEY": {
+      "description": "API key for weather features (optional)",
+      "value": "your-openweather-key",
+      "required": false
+    },
+    "DATABASE_URL": {
+      "description": "Render or Railway PostgreSQL connection string",
+      "required": false
+    },
+    "MONGO_URI": {
+      "description": "Optional MongoDB URI (used if PostgreSQL is not set)",
+      "required": false
+    },
+    "ADMIN_KEY": {
+      "description": "Secret key to protect /sessions and /backup routes",
+      "value": "YourSuperSecretKey123"
+    },
+    "TIMEZONE": {
+      "description": "Default timezone for logs and greetings",
+      "value": "Africa/Nairobi"
+    },
+    "REGION": {
+      "description": "Server region or location tag",
+      "value": "Unknown"
+    },
+    "AUTO_STICKER": {
+      "description": "Enable auto sticker generation for media",
+      "value": "true"
+    },
+    "GREETING_MESSAGES": {
+      "description": "Send join/leave greetings in groups",
+      "value": "true"
+    },
+    "EMOTION_CAPTIONS": {
+      "description": "Add emotion captions to stickers (uses face detection)",
+      "value": "true"
+    },
+    "PANEL_MODE": {
+      "description": "Hide QR and allow panel-based pairing for remote connections",
+      "value": "false"
+    },
+    "SESSION_BACKUP_RETENTION_DAYS": {
+      "description": "Days to keep session backups before cleanup",
+      "value": "5"
+    }
+  },
+
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev"
+    }
+  ],
+
+  "success_url": "/health"
+}

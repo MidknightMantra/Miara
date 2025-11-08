@@ -21,9 +21,13 @@ export default {
 
     // 🌍 No city provided
     if (!args.length) {
-      await conn.sendMessage(from, {
-        text: "🌍 Please provide a city name!\n\n💡 Examples:\n.weather Nairobi\n.weather London 3day",
-      }, { quoted: m });
+      await conn.sendMessage(
+        from,
+        {
+          text: "🌍 Please provide a city name!\n\n💡 Examples:\n.weather Nairobi\n.weather London 3day"
+        },
+        { quoted: m }
+      );
       return;
     }
 
@@ -47,7 +51,7 @@ export default {
       Sand: ["🏜️"],
       Ash: ["🌋"],
       Squall: ["🌬️"],
-      Tornado: ["🌪️"],
+      Tornado: ["🌪️"]
     };
 
     // 🌡️ Get proper emoji for intensity
@@ -81,7 +85,9 @@ export default {
       const min = Math.min(...temps);
       const range = max - min || 1;
       const blocks = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"];
-      return temps.map(t => blocks[Math.round(((t - min) / range) * (blocks.length - 1))]).join("");
+      return temps
+        .map((t) => blocks[Math.round(((t - min) / range) * (blocks.length - 1))])
+        .join("");
     };
 
     try {
@@ -91,7 +97,7 @@ export default {
       if (!isForecast) {
         const res = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
           params: { q: city, appid: apiKey, units: "metric" },
-          timeout: 12000,
+          timeout: 12000
         });
 
         const data = res.data;
@@ -99,7 +105,9 @@ export default {
         const t = data.main;
         const icon = getWeatherEmoji(w.main, t.humidity / 100);
         const feelsSummary = getFeelsLikeSummary(t.temp, t.humidity, w.description);
-        const time = moment().utcOffset(data.timezone / 60).format("ddd, MMM D • HH:mm");
+        const time = moment()
+          .utcOffset(data.timezone / 60)
+          .format("ddd, MMM D • HH:mm");
 
         const report = `
 ${icon} *${data.name}, ${data.sys.country}*
@@ -108,8 +116,14 @@ ${icon} *${data.name}, ${data.sys.country}*
 🌡️ Temperature: *${t.temp.toFixed(1)}°C* (Feels like ${t.feels_like.toFixed(1)}°C)
 💧 Humidity: ${t.humidity}%
 💨 Wind: ${data.wind.speed} m/s
-🌅 Sunrise: ${moment.unix(data.sys.sunrise).utcOffset(data.timezone / 60).format("HH:mm")}
-🌇 Sunset: ${moment.unix(data.sys.sunset).utcOffset(data.timezone / 60).format("HH:mm")}
+🌅 Sunrise: ${moment
+          .unix(data.sys.sunrise)
+          .utcOffset(data.timezone / 60)
+          .format("HH:mm")}
+🌇 Sunset: ${moment
+          .unix(data.sys.sunset)
+          .utcOffset(data.timezone / 60)
+          .format("HH:mm")}
 🧠 *Feels Like:* ${feelsSummary}
         `.trim();
 
@@ -120,7 +134,7 @@ ${icon} *${data.name}, ${data.sys.country}*
       else {
         const res = await axios.get("https://api.openweathermap.org/data/2.5/forecast", {
           params: { q: city, appid: apiKey, units: "metric" },
-          timeout: 12000,
+          timeout: 12000
         });
 
         const data = res.data;
@@ -128,7 +142,10 @@ ${icon} *${data.name}, ${data.sys.country}*
         const grouped = {};
 
         for (const e of data.list) {
-          const date = moment.unix(e.dt).utcOffset(timezone / 60).format("YYYY-MM-DD");
+          const date = moment
+            .unix(e.dt)
+            .utcOffset(timezone / 60)
+            .format("YYYY-MM-DD");
           if (!grouped[date]) grouped[date] = [];
           grouped[date].push(e);
         }
@@ -138,7 +155,7 @@ ${icon} *${data.name}, ${data.sys.country}*
 
         for (const date of days) {
           const entries = grouped[date];
-          const temps = entries.map(e => e.main.temp);
+          const temps = entries.map((e) => e.main.temp);
           const desc = entries[Math.floor(entries.length / 2)].weather[0];
           const avg = (temps.reduce((a, b) => a + b, 0) / temps.length).toFixed(1);
           const min = Math.min(...temps).toFixed(1);
@@ -155,7 +172,6 @@ ${icon} *${data.name}, ${data.sys.country}*
       }
 
       await conn.sendMessage(from, { react: { text: "✅", key: m.key } });
-
     } catch (err) {
       console.error("❌ Weather error:", err.message);
       let msg = "⚠️ Couldn't fetch weather data.";
@@ -167,5 +183,5 @@ ${icon} *${data.name}, ${data.sys.country}*
       await conn.sendMessage(from, { text: msg }, { quoted: m });
       await conn.sendMessage(from, { react: { text: "❌", key: m.key } });
     }
-  },
+  }
 };

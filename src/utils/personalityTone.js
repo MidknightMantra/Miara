@@ -1,43 +1,53 @@
 /**
- * 🌸 Miara 🌸Personality Tone Engine
+ * 🌸 Miara 🌸 Personality Tone Engine (2025)
  * by MidKnightMantra
  * ------------------------------------------------------------
+ * Applies emotional texture to Miara’s language — giving her
+ * words cadence, warmth, and playfulness without breaking semantics.
  */
 
 import { getMood } from "./moodEngine.js";
 
+const DEBUG_TONE = process.env.DEBUG_TONE === "true";
+const MUTE_EMOJIS = process.env.MUTE_EMOJIS === "true";
+
+let lastTone = null; // For blending between messages
+
 /**
  * 💬 Applies Miara’s personal tone to outgoing messages.
- * This is a lightweight emotional decorator, not a full rewrite.
+ * Lightweight and non-destructive — adjusts flow, adds warmth, or softens phrasing.
  */
 export function applyPersonalityTone(text = "", moodOverride = null) {
   const mood = moodOverride || getMood();
+  const tone = blendTone(mood);
 
-  // 🌈 Base tone modifiers per mood
   const toneAdjustments = {
-    calm: (t) => `🌿 ${softenText(t)}.`,
-    radiant: (t) => `✨ ${enhanceEnergy(t)} 🌟`,
-    kind: (t) => `💞 ${gentleTone(t)}`,
-    playful: (t) => `😄 ${addPlayfulness(t)} ✨`,
-    witty: (t) => `${addWit(t)} 😏`,
-    empathetic: (t) => `🤍 ${gentleTone(t)}`,
-    tired: (t) => `🌙 ${softenText(t)}...`,
-    quiet: (t) => `🍃 ${softenText(t)}.`,
-    focused: (t) => `💡 ${clarifyText(t)}`,
-    moody: (t) => `🌫 ${softenText(t)}...`,
+    calm: (t) => addTone("🌿", softenText(t), "— gentle and still."),
+    radiant: (t) => addTone("✨", enhanceEnergy(t), "🌟"),
+    kind: (t) => addTone("💞", gentleTone(t)),
+    playful: (t) => addTone("😄", addPlayfulness(t), "✨"),
+    witty: (t) => addTone("", addWit(t), "😏"),
+    empathetic: (t) => addTone("🤍", gentleTone(t)),
+    tired: (t) => addTone("🌙", softenText(t), "..."),
+    quiet: (t) => addTone("🍃", softenText(t), "."),
+    focused: (t) => addTone("💡", clarifyText(t)),
+    moody: (t) => addTone("🌫", softenText(t), "...")
   };
 
-  const transform = toneAdjustments[mood] || ((t) => `🌸 ${t}`);
-  return transform(text);
+  const transform = toneAdjustments[tone] || ((t) => addTone("🌸", t));
+  const result = transform(text);
+
+  if (DEBUG_TONE) {
+    console.log(`[Tone Engine] Mood: ${tone} | Result: "${result}"`);
+  }
+
+  return tidyPunctuation(result);
 }
 
 /* ────────────────────────────────
  * 🎨 Tone Style Helpers
  * ──────────────────────────────── */
 
-/**
- * 💭 Soften phrasing for calm / quiet moods
- */
 function softenText(text) {
   return text
     .replace(/!+/g, ".")
@@ -46,53 +56,69 @@ function softenText(text) {
     .trim();
 }
 
-/**
- * 🔆 Add liveliness for radiant moods
- */
 function enhanceEnergy(text) {
+  if (MUTE_EMOJIS) return `${text.trim()}!`;
   const exclamations = ["✨", "🌟", "💫", "🔥"];
-  const end = exclamations[Math.floor(Math.random() * exclamations.length)];
-  return `${text.trim()} ${end}`;
+  return `${text.trim()} ${pick(exclamations)}`;
 }
 
-/**
- * 🕊 Gentle kindness tone
- */
 function gentleTone(text) {
-  return text.replace(/([.!?])?$/, " 🤍");
+  return text.replace(/([.!?])?$/, MUTE_EMOJIS ? "." : " 🤍");
 }
 
-/**
- * 🎠 Light-hearted fun
- */
 function addPlayfulness(text) {
   const fillers = ["hehe~", "teehee!", "just saying~", "funny huh?"];
-  const filler = fillers[Math.floor(Math.random() * fillers.length)];
+  const filler = pick(fillers);
   return `${text.trim()} ${filler}`;
 }
 
-/**
- * 💡 Clear and confident articulation
- */
 function clarifyText(text) {
   return text.replace(/^\s*[\.\!\?]+/, "").trim();
 }
 
-/**
- * 😏 Add a bit of dry humor or cheekiness
- */
 function addWit(text) {
   const remarks = [
     `${text.trim()} — clever, right?`,
     `Hmm... ${text.trim()}, but with flair.`,
-    `${text.trim()} 😉`,
+    `${text.trim()} 😉`
   ];
-  return remarks[Math.floor(Math.random() * remarks.length)];
+  return pick(remarks);
+}
+
+function addTone(prefix, main, suffix = "") {
+  if (MUTE_EMOJIS) return main.trim();
+  return [prefix, main.trim(), suffix].filter(Boolean).join(" ").trim();
+}
+
+function tidyPunctuation(text) {
+  return text
+    .replace(/\s{2,}/g, " ")
+    .replace(/([.!?]){2,}/g, "$1")
+    .trim();
+}
+
+function pick(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /**
- * ✨ Default export (optional) — for systems that prefer auto-binding
+ * 🎚 Blend tones to avoid abrupt mood jumps
+ */
+function blendTone(current) {
+  if (!lastTone) {
+    lastTone = current;
+    return current;
+  }
+  if (lastTone !== current && Math.random() < 0.3) {
+    lastTone = current;
+    return current;
+  }
+  return lastTone;
+}
+
+/**
+ * ✨ Default export
  */
 export default {
-  applyPersonalityTone,
+  applyPersonalityTone
 };

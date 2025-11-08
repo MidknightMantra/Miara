@@ -1,8 +1,8 @@
 /**
  * 🌸 Miara Helpers (2025)
  * Centralized utility collection for Miara Framework.
- * -----------------------------------------------
- * by MidKnightMantra x GPT-5
+ * ----------------------------------------------------
+ * by MidKnightMantra × GPT-5
  */
 
 import fs from "fs/promises";
@@ -13,8 +13,9 @@ import http from "http";
 import os from "os";
 import PhoneNumber from "awesome-phonenumber";
 import * as fileType from "file-type";
+import { logger } from "./logger.js";
 
-// 🌐 Constants
+// 🌐 Config constants
 const FETCH_TIMEOUT = 90000;
 const FETCH_RETRY_DELAY = 1500;
 const FETCH_MAX_RETRIES = 1;
@@ -23,10 +24,12 @@ const AXIOS_USER_AGENT =
 const DEFAULT_MIME_TYPE = "application/octet-stream";
 const DEFAULT_FILE_EXTENSION = "bin";
 
+const DEBUG_HELPERS = process.env.DEBUG_HELPERS === "true";
+
 // ──────────────────────────────
 // 🧠 Simplify Baileys Message
 // ──────────────────────────────
-export const smsg = (conn, m) => {
+export function smsg(conn, m) {
   try {
     const M = m.messages?.[0] || m;
     const { key, pushName } = M;
@@ -38,6 +41,10 @@ export const smsg = (conn, m) => {
     const quotedMessage = contextInfo.quotedMessage;
 
     const sender = participant || remoteJid;
+    const text = messageContent.conversation || content.caption || content.text || "";
+
+    if (DEBUG_HELPERS)
+      logger.debug(`Simplified message from ${sender || "unknown"}: "${text.slice(0, 40)}"`);
 
     return {
       key,
@@ -46,17 +53,13 @@ export const smsg = (conn, m) => {
       sender,
       isGroup: remoteJid?.endsWith("@g.us") || false,
       pushName: pushName || "",
-      text:
-        messageContent.conversation ||
-        content.caption ||
-        content.text ||
-        "",
+      text,
       mime: content.mimetype || "",
       quoted: quotedMessage,
-      message: M,
+      message: M
     };
   } catch (e) {
-    console.error("⚠️ Error simplifying message object:", e);
+    logger.warn(`Error simplifying message object: ${e.message}`, "smsg");
     return {
       key: {},
       id: "",
@@ -67,10 +70,10 @@ export const smsg = (conn, m) => {
       text: "",
       mime: "",
       quoted: null,
-      message: m,
+      message: m
     };
   }
-};
+}
 
 // ──────────────────────────────
 // 💤 Sleep Helper
@@ -80,7 +83,7 @@ export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // ──────────────────────────────
 // 🌐 Smart Fetcher (Axios + Stream Fallback)
 // ──────────────────────────────
-export const getBuffer = async (url, options = {}) => {
+export async function getBuffer(url, options = {}) {
   const timeout = options.timeout || FETCH_TIMEOUT;
   const agent = url.startsWith("https://")
     ? new https.Agent({ rejectUnauthorized: false })
@@ -96,65 +99,64 @@ export const getBuffer = async (url, options = {}) => {
         timeout,
         headers: {
           "User-Agent": AXIOS_USER_AGENT,
-          Accept:
-            "application/pdf,video/*,image/*,audio/*,application/octet-stream,*/*",
-          Referer: "https://google.com/",
+          "Accept": "application/pdf,video/*,image/*,audio/*,application/octet-stream,*/*",
+          "Referer": "https://google.com/"
         },
         httpsAgent: agent,
         httpAgent: agent,
-        validateStatus: (status) => status >= 200 && status < 400,
+        validateStatus: (status) => status >= 200 && status < 400
       });
+
       if (response.status >= 200 && response.status < 300) {
+        if (DEBUG_HELPERS) logger.debug(`Fetched buffer from ${url}`);
         return Buffer.from(response.data);
-      } else {
-        throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
       }
+      throw new Error(`HTTP Error ${response.status} ${response.statusText}`);
     } catch (err) {
-      console.warn(`⚠️ Fetch attempt ${attempt} failed for ${url}:`, err.message);
+      logger.warn(`Fetch attempt ${attempt} failed for ${url}: ${err.message}`);
       if (attempt > FETCH_MAX_RETRIES) {
-        console.error(`❌ All fetch attempts failed for ${url}`);
+        logger.error(`All fetch attempts failed for ${url}`);
         throw err;
       }
       await sleep(FETCH_RETRY_DELAY);
     }
   }
-};
+}
 
 // ──────────────────────────────
 // 📂 File Type Detector
 // ──────────────────────────────
-export const detectFileType = async (buf) => {
+export async function detectFileType(buf) {
   try {
     const type = await fileType.fromBuffer(buf);
     return type || { mime: DEFAULT_MIME_TYPE, ext: DEFAULT_FILE_EXTENSION };
   } catch (e) {
-    console.error("Error detecting file type:", e);
+    logger.error(`File type detection failed: ${e.message}`);
     return { mime: DEFAULT_MIME_TYPE, ext: DEFAULT_FILE_EXTENSION };
   }
-};
+}
 
 // ──────────────────────────────
 // 🔗 URL Validator
 // ──────────────────────────────
-export const isUrl = (text) => {
+export function isUrl(text) {
   try {
     new URL(text);
     return true;
   } catch {
     return /^https?:\/\//i.test(text);
   }
-};
+}
 
 // ──────────────────────────────
 // 📏 Buffer Size Helper
 // ──────────────────────────────
-export const getSizeMedia = (buf) =>
-  Buffer.isBuffer(buf) ? buf.length : 0;
+export const getSizeMedia = (buf) => (Buffer.isBuffer(buf) ? buf.length : 0);
 
 // ──────────────────────────────
 // ☎️ WhatsApp Number Formatter
 // ──────────────────────────────
-export const formatNumber = (jid) => {
+export function formatNumber(jid) {
   try {
     const number = jid.replace("@s.whatsapp.net", "").replace("@g.us", "");
     const pn = new PhoneNumber(`+${number}`);
@@ -162,7 +164,7 @@ export const formatNumber = (jid) => {
   } catch {
     return jid;
   }
-};
+}
 
 // ──────────────────────────────
 // 📁 Ensure Directory Exists
@@ -171,25 +173,25 @@ export async function ensureDir(dir) {
   try {
     await fs.mkdir(dir, { recursive: true });
   } catch (e) {
-    console.error(`Error ensuring directory ${dir}:`, e);
+    logger.error(`Failed to ensure directory ${dir}: ${e.message}`);
   }
 }
 
 // ──────────────────────────────
 // ⏱️ Milliseconds → HH:MM:SS
 // ──────────────────────────────
-export const clockString = (ms) => {
+export function clockString(ms) {
   if (typeof ms !== "number" || isNaN(ms)) return "--:--:--";
   const h = Math.floor(ms / 3600000);
   const m = Math.floor((ms % 3600000) / 60000);
   const s = Math.floor((ms % 60000) / 1000);
   return [h, m, s].map((t) => t.toString().padStart(2, "0")).join(":");
-};
+}
 
 // ──────────────────────────────
 // 💻 Platform Detector
 // ──────────────────────────────
-export const getPlatform = () => {
+export function getPlatform() {
   const platform = os.platform();
   switch (platform) {
     case "win32":
@@ -201,31 +203,23 @@ export const getPlatform = () => {
     default:
       return platform.toUpperCase();
   }
-};
+}
 
 // ──────────────────────────────
-// 🪷 Safe React & Safe Quote Helpers
-// (Prevents Baileys crash when key is null)
+// 🪷 Safe React & Quote Helpers
 // ──────────────────────────────
-
-/**
- * React safely to a message without crashing Baileys if key is null.
- */
 export async function safeReact(conn, m, emoji) {
   try {
     if (m?.key?.remoteJid && m?.key?.id) {
       await conn.sendMessage(m.chat, { react: { text: emoji, key: m.key } });
     } else {
-      console.log(`⚙️ Skipped reaction (invalid key): ${emoji}`);
+      logger.debug(`Skipped reaction (invalid key): ${emoji}`);
     }
   } catch (err) {
-    console.warn(`⚠️ safeReact error: ${err.message}`);
+    logger.warn(`safeReact error: ${err.message}`);
   }
 }
 
-/**
- * Wrap message quoting safely to avoid remoteJid null errors.
- */
 export function safeQuoted(m) {
   try {
     return m?.message && m?.key?.remoteJid ? { quoted: m.message } : {};

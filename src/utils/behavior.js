@@ -1,26 +1,30 @@
 /**
- * 🌸 Miara🌸Human Behavior Engine
+ * 🌸 Miara 🌸 Human Behavior Engine (2025)
  * by MidKnightMantra
  * --------------------------------------------------
+ * Simulates subtle human traits — rhythm, emotion, and imperfection.
  */
 
 import { getMood } from "./moodEngine.js";
 
+// 🕰 Configurable safety cap for very long pauses (ms)
+const MAX_DELAY = 7000;
+
 /**
  * ✨ Simulates typing & human-like timing
- * Adjusts delay and rhythm based on Miara’s current mood.
+ * Adjusts delay and rhythm based on Miara’s current mood and message context.
  */
 export async function simulateHumanBehavior(conn, jid, baseDelay = 1000, userText = "") {
   const mood = getMood();
   const delay = calculateDelay(mood, baseDelay, userText);
-  const typingDuration = delay * (0.5 + Math.random() * 0.5);
+  const typingDuration = Math.min(delay * (0.5 + Math.random() * 0.5), MAX_DELAY);
 
   try {
     // 🟡 Begin typing indicator
     await conn.sendPresenceUpdate("composing", jid);
     await wait(typingDuration);
 
-    // 🔵 Occasionally pause mid-typing (adds realism)
+    // 🔵 Occasional pause to mimic hesitation
     if (Math.random() < 0.2) {
       await conn.sendPresenceUpdate("paused", jid);
       await wait(300 + Math.random() * 700);
@@ -34,56 +38,67 @@ export async function simulateHumanBehavior(conn, jid, baseDelay = 1000, userTex
 }
 
 /**
- * ⏱️ Calculates realistic human delay based on mood and message complexity
+ * ⏱ Calculates realistic delay based on mood and message complexity.
  */
-function calculateDelay(mood, baseDelay, text) {
-  const wordCount = text.trim().split(/\s+/).length;
-  const lengthFactor = Math.min(wordCount / 5, 4);
+function calculateDelay(mood, baseDelay, text = "") {
+  const words = text.trim().split(/\s+/).length || 1;
+  const lengthFactor = Math.min(words / 5, 4);
   let multiplier;
 
   switch (mood) {
-    case "calm": multiplier = 1.3; break;      // slower and deliberate
+    case "calm":
+      multiplier = 1.3;
+      break; // thoughtful, slow
     case "radiant":
-    case "inspired": multiplier = 0.8; break; // quick, creative energy
+    case "inspired":
+      multiplier = 0.8;
+      break; // energetic, quick
+    case "friendly":
     case "kind":
-    case "friendly": multiplier = 1.1; break; // gentle, composed
+      multiplier = 1.1;
+      break; // gentle, smooth
     case "playful":
-    case "witty": multiplier = 0.9; break;    // energetic and lively
+    case "witty":
+      multiplier = 0.9;
+      break; // lively, impulsive
     case "quiet":
-    case "tired": multiplier = 1.6; break;    // reflective, soft tone
-    default: multiplier = 1.0;
+    case "tired":
+      multiplier = 1.6;
+      break; // reflective, slow
+    default:
+      multiplier = 1.0;
   }
 
-  return baseDelay * multiplier + lengthFactor * 300;
+  const totalDelay = baseDelay * multiplier + lengthFactor * 300;
+  return Math.min(totalDelay, MAX_DELAY);
 }
 
 /**
- * 🌿 Natural human pause (thinking moment between actions)
+ * 🌿 Natural human pause — a brief “thinking” delay.
  */
 export async function humanPause(min = 400, max = 1200) {
   await wait(min + Math.random() * (max - min));
 }
 
 /**
- * 🩵 Wait helper
+ * 🩵 Generic wait helper.
  */
 export function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
- * 🌼 Random subtle expressions
- * Occasionally sends small, quiet “presence” messages to feel alive.
+ * 🌼 Ambient presence
+ * Occasionally sends a quiet, poetic “presence” message to feel alive.
  */
 export async function occasionalHumanTouch(conn, jid) {
-  if (Math.random() >= 0.1) return; // 10% chance per message
-
+  if (Math.random() >= 0.1) return; // ~10% chance per message
   const touches = [
     "💭 ...thinking softly.",
     "🩵 just here, quietly existing.",
     "✨ still awake... barely.",
     "🌸 I like how calm this feels.",
-    "😌 silence can be comforting, sometimes.",
+    "😌 silence can be comforting, sometimes."
   ];
 
   const text = touches[Math.floor(Math.random() * touches.length)];
@@ -98,7 +113,7 @@ export async function occasionalHumanTouch(conn, jid) {
 
 /**
  * 💫 Natural response finisher
- * Adds gentle delay or emoji reaction to emulate emotional response.
+ * Adds gentle delay or emoji reaction to emulate emotional resonance.
  */
 export async function naturalResponseEnd(conn, jid, mood, quotedKey = null) {
   const emojiMap = {
@@ -107,7 +122,7 @@ export async function naturalResponseEnd(conn, jid, mood, quotedKey = null) {
     kind: ["🩷", "🌸", "🌼"],
     playful: ["😆", "🎠", "✨"],
     quiet: ["🌙", "🌌", "🍃"],
-    tired: ["😴", "😌", "🌙"],
+    tired: ["😴", "😌", "🌙"]
   };
 
   const emojis = emojiMap[mood] || ["🌸"];
@@ -120,5 +135,17 @@ export async function naturalResponseEnd(conn, jid, mood, quotedKey = null) {
     } catch (err) {
       console.warn("⚠️ Reaction send failed:", err.message);
     }
+  }
+}
+
+/**
+ * 🪶 “Human consistency mode”
+ * Optional helper for future: can be used to create a pacing queue
+ * if Miara ever handles many messages at once (avoids robotic overlap).
+ */
+export async function queueHumanizedActions(actions = []) {
+  for (const act of actions) {
+    await humanPause(500, 1500);
+    await act();
   }
 }

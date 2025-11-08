@@ -29,7 +29,7 @@ export default {
         await conn.sendMessage(
           from,
           {
-            text: "🌐 Please provide a valid *URL*.\n\nExamples:\n• .url2img https://example.com\n• .url2img https://telegra.ph/file/xyz.jpg",
+            text: "🌐 Please provide a valid *URL*.\n\nExamples:\n• .url2img https://example.com\n• .url2img https://telegra.ph/file/xyz.jpg"
           },
           { quoted: m }
         );
@@ -45,7 +45,8 @@ export default {
       // 🧿 Step 3: Handle image URLs directly
       if (isImageLink) {
         const buffer = await getBuffer(input);
-        if (!buffer || buffer.length === 0) throw new Error("Image not accessible or empty buffer.");
+        if (!buffer || buffer.length === 0)
+          throw new Error("Image not accessible or empty buffer.");
         await conn.sendMessage(
           from,
           {
@@ -54,7 +55,7 @@ export default {
 🖼️ *Miara’s Reflection Manifested*  
 ━━━━━━━━━━━━━━━━━━━  
 📡 *Source:* ${input}  
-💫 “Captured straight from the digital stream.” 🌸`,
+💫 “Captured straight from the digital stream.” 🌸`
           },
           { quoted: m.message }
         );
@@ -63,11 +64,15 @@ export default {
       }
 
       // 🧠 Step 4: If not an image → treat as webpage
-      await conn.sendMessage(from, { text: "🖥️ This seems like a webpage... preparing snapshot 🪄" }, { quoted: m });
+      await conn.sendMessage(
+        from,
+        { text: "🖥️ This seems like a webpage... preparing snapshot 🪄" },
+        { quoted: m }
+      );
 
       const browser = await puppeteer.launch({
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        headless: "new",
+        headless: "new"
       });
 
       const page = await browser.newPage();
@@ -87,14 +92,13 @@ export default {
 🌐 *Miara’s Web Vision*  
 ━━━━━━━━━━━━━━━━━━━  
 👁️ *Captured from:* ${input}  
-💫 “She doesn’t just see links — she witnesses the web itself.” 🌸`,
+💫 “She doesn’t just see links — she witnesses the web itself.” 🌸`
         },
         { quoted: m.message }
       );
 
       await conn.sendMessage(from, { react: { text: "👁️", key } });
       console.log(`📸 Webpage rendered successfully → ${input}`);
-
     } catch (err) {
       console.error("❌ URL2IMG Error:", err.message);
       await conn.sendMessage(
@@ -104,11 +108,11 @@ export default {
 💔 *Failed to mirror the digital reflection.*  
 ━━━━━━━━━━━━━━━  
 ⚠️ ${err.message || "Unknown cosmic interference."}  
-Try again with a valid image or webpage link.`,
+Try again with a valid image or webpage link.`
         },
         { quoted: m.message }
       );
       await conn.sendMessage(from, { react: { text: "💫", key } });
     }
-  },
+  }
 };

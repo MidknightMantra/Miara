@@ -28,13 +28,15 @@ export default {
 
     if (!isOwner) {
       await conn.sendMessage(m.from, {
-        text: "🚫 Only the Cosmic Curator may silence my celestial hum 🌘",
+        text: "🚫 Only the Cosmic Curator may silence my celestial hum 🌘"
       });
       return;
     }
 
     const BOT_NAME = config.BOT_NAME || "Miara 🌸";
-    const time = moment().tz(config.TIMEZONE || "Africa/Nairobi").format("HH:mm:ss");
+    const time = moment()
+      .tz(config.TIMEZONE || "Africa/Nairobi")
+      .format("HH:mm:ss");
     const platform = os
       .platform()
       .replace("linux", "🐧 Lunar Linux")
@@ -72,5 +74,5 @@ export default {
 
     // End without signaling a restart
     process.exit(0);
-  },
+  }
 };

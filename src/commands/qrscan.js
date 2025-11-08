@@ -22,15 +22,11 @@ export default {
 
     // 🪬 Step 1: Check if user replied to an image
     const q = quoted || m.quoted;
-    const mime =
-      q?.mimetype ||
-      q?.msg?.mimetype ||
-      m?.message?.imageMessage?.mimetype ||
-      "";
+    const mime = q?.mimetype || q?.msg?.mimetype || m?.message?.imageMessage?.mimetype || "";
 
     if (!/image/.test(mime)) {
       await conn.sendMessage(from, {
-        text: "🪬 Please reply to an *image containing a QR code* with `.qrscan`.\n\nExample:\n.qrscan (reply to image)",
+        text: "🪬 Please reply to an *image containing a QR code* with `.qrscan`.\n\nExample:\n.qrscan (reply to image)"
       });
       return;
     }
@@ -52,17 +48,14 @@ export default {
 
       if (!decoded) {
         await conn.sendMessage(from, {
-          text: "⚠️ I couldn’t read that sigil... Try sending a clearer QR image.",
+          text: "⚠️ I couldn’t read that sigil... Try sending a clearer QR image."
         });
         await conn.sendMessage(from, { react: { text: "💔", key: m.key } });
         return;
       }
 
       // 🌠 Step 4: Prepare response
-      const emoji =
-        /^https?:\/\//.test(decoded) ? "🌐" :
-        decoded.length > 50 ? "📜" :
-        "💎";
+      const emoji = /^https?:\/\//.test(decoded) ? "🌐" : decoded.length > 50 ? "📜" : "💎";
 
       const caption = `
 ${emoji} *Decoded Sigil Revealed!*
@@ -77,13 +70,12 @@ ${emoji} *Decoded Sigil Revealed!*
       await conn.sendMessage(from, { react: { text: "✨", key: m.key } });
 
       console.log(`🪷 QR Decoded → ${decoded}`);
-
     } catch (err) {
       console.error("❌ QRScan error:", err);
       await conn.sendMessage(from, {
-        text: `🚨 *QRScan Failed:*\n${err.message || "Unknown decoding error"}\nTry again with a higher-resolution QR image.`,
+        text: `🚨 *QRScan Failed:*\n${err.message || "Unknown decoding error"}\nTry again with a higher-resolution QR image.`
       });
       await conn.sendMessage(from, { react: { text: "💔", key: m.key } });
     }
-  },
+  }
 };

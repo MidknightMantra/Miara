@@ -9,7 +9,7 @@
 
 import axios from "axios";
 import moment from "moment-timezone";
-import { config } from "../config.js";
+import CONFIG from "../config.js";
 
 export default {
   name: "repo",
@@ -20,28 +20,24 @@ export default {
 
   async execute(conn, m, args) {
     try {
-      const mainRepo =
-        config.GITHUB_URL || "https://github.com/MidKnightMantra/Miara";
-      const curator = config.OWNER_NAME || "MidKnightMantra 🌸";
-      const botName = config.BOT_NAME || "Miara 🌸";
-      const repoApi = mainRepo.replace(
-        "https://github.com/",
-        "https://api.github.com/repos/"
-      );
+      const mainRepo = CONFIG.GITHUB_URL || "https://github.com/MidKnightMantra/Miara";
+      const curator = CONFIG.OWNER_NAME || "MidKnightMantra 🌸";
+      const botName = CONFIG.BOT_NAME || "Miara 🌸";
+      const repoApi = mainRepo.replace("https://github.com/", "https://api.github.com/repos/");
 
       let stars = "✨";
       let forks = "🔁";
       let updated = "—";
 
       try {
-        const { data } = await axios.get(repoApi, { timeout: 15000 });
-        stars = data.stargazers_count || 0;
-        forks = data.forks_count || 0;
+        const { data } = await axios.get(repoApi, { timeout: 10000 });
+        stars = data.stargazers_count ?? "0";
+        forks = data.forks_count ?? "0";
         updated = moment(data.updated_at)
-          .tz("Africa/Nairobi")
+          .tz(CONFIG.TIMEZONE || "Africa/Nairobi")
           .format("DD MMM YYYY, HH:mm");
       } catch {
-        console.warn("⚠️ Could not fetch live repo data — fallback values used.");
+        console.warn("⚠️ Could not fetch live GitHub data — fallback values used.");
       }
 
       const message = `
@@ -74,15 +70,15 @@ export default {
             {
               buttonId: "visit_repo",
               buttonText: { displayText: "💻 Visit Miara Repository" },
-              type: 1,
+              type: 1
             },
             {
               buttonId: "visit_owner",
               buttonText: { displayText: "👑 About the Curator" },
-              type: 1,
-            },
+              type: 1
+            }
           ],
-          headerType: 1,
+          headerType: 1
         },
         { quoted: m }
       );
@@ -96,11 +92,11 @@ export default {
         {
           text: `💔 *Miara couldn’t fetch her source right now.*\nReason: ${
             err.message || "Network anomaly."
-          }`,
+          }`
         },
         { quoted: m }
       );
       await conn.sendMessage(m.chat, { react: { text: "💫", key: m.key } });
     }
-  },
+  }
 };

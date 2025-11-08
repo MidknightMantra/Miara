@@ -18,7 +18,11 @@ export default {
     try {
       const sender = m.sender.split("@")[0];
       if (!config.OWNER_NUMBER.includes(sender)) {
-        await conn.sendMessage(m.from, { text: "❌ Only the bot owner can use this command." }, { quoted: m });
+        await conn.sendMessage(
+          m.from,
+          { text: "❌ Only the bot owner can use this command." },
+          { quoted: m }
+        );
         return;
       }
 
@@ -26,9 +30,13 @@ export default {
       const text = args.join(" ").trim();
 
       if (!text && !quoted) {
-        await conn.sendMessage(m.from, {
-          text: "📢 Usage: `.bc <text>` or reply to an image/video/document with `.bc <caption>`",
-        }, { quoted: m });
+        await conn.sendMessage(
+          m.from,
+          {
+            text: "📢 Usage: `.bc <text>` or reply to an image/video/document with `.bc <caption>`"
+          },
+          { quoted: m }
+        );
         return;
       }
 
@@ -38,9 +46,13 @@ export default {
       let count = 0;
       const startTime = Date.now();
 
-      await conn.sendMessage(m.from, {
-        text: `📣 *Broadcast started!*\n\nSending to ${total} chats... This may take a while.`,
-      }, { quoted: m });
+      await conn.sendMessage(
+        m.from,
+        {
+          text: `📣 *Broadcast started!*\n\nSending to ${total} chats... This may take a while.`
+        },
+        { quoted: m }
+      );
 
       for (const jid of chats) {
         try {
@@ -56,16 +68,19 @@ export default {
             const mime = quoted.mimetype || "application/octet-stream";
 
             await conn.sendMessage(jid, {
-              [mime.startsWith("image") ? "image" :
-               mime.startsWith("video") ? "video" :
-               mime.startsWith("audio") ? "audio" :
-               "document"]: media,
+              [mime.startsWith("image")
+                ? "image"
+                : mime.startsWith("video")
+                  ? "video"
+                  : mime.startsWith("audio")
+                    ? "audio"
+                    : "document"]: media,
               caption: text || "📢 *Broadcast Message*",
-              mimetype: mime,
+              mimetype: mime
             });
           } else {
             await conn.sendMessage(jid, {
-              text: `📢 *Broadcast Message*\n\n${text}\n\n— 🌸 _Miara Bot_`,
+              text: `📢 *Broadcast Message*\n\n${text}\n\n— 🌸 _Miara Bot_`
             });
           }
 
@@ -80,13 +95,17 @@ export default {
 
       const timeTaken = ((Date.now() - startTime) / 1000).toFixed(1);
       await conn.sendMessage(m.from, {
-        text: `✅ *Broadcast complete!*\n\n📤 Sent to: ${count}/${total} chats\n🕒 Duration: ${timeTaken}s`,
+        text: `✅ *Broadcast complete!*\n\n📤 Sent to: ${count}/${total} chats\n🕒 Duration: ${timeTaken}s`
       });
     } catch (err) {
       console.error("❌ Broadcast Error:", err);
-      await conn.sendMessage(m.from, {
-        text: "❌ An error occurred while sending broadcast.",
-      }, { quoted: m });
+      await conn.sendMessage(
+        m.from,
+        {
+          text: "❌ An error occurred while sending broadcast."
+        },
+        { quoted: m }
+      );
     }
-  },
+  }
 };

@@ -1,23 +1,43 @@
 {
-  "name": "miara-bot",
-  "version": "1.0.0",
-  "description": "Miara 🤖 — A smart and feature-packed WhatsApp bot with AI, media tools, and automation. Note: Requires system dependencies ffmpeg and libwebp-tools (for webpmux) to be installed for sticker functionality.",
+  "name": "miara",
+  "version": "1.0.5",
+  "description": "🌸 Miara — A sentient, emotionally adaptive WhatsApp bot with AI, stickers, PostgreSQL persistence, and full Render/Heroku/Railway/Docker support.",
   "main": "src/main.js",
   "type": "module",
-  "scripts": {
-    "start": "node src/main.js",
-    "dev": "nodemon --ignore session --ignore src/database src/main.js",
-    "lint": "eslint . --ext .js",
-    "test": "jest"
+  "author": "MidKnightMantra",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<your-username>/miara-bot"
   },
   "keywords": [
     "whatsapp",
     "baileys",
-    "bot",
-    "miara"
+    "ai",
+    "miara",
+    "postgresql",
+    "heroku",
+    "render",
+    "railway",
+    "docker",
+    "tensorflow",
+    "automation",
+    "stickers",
+    "openai",
+    "puppeteer"
   ],
-  "author": "Miara Dev Team",
-  "license": "MIT",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "nodemon --ignore session --ignore src/database src/main.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.js\"",
+    "format:check": "prettier --check .",
+    "test": "jest",
+    "clean": "rm -rf session sessions && echo '🌸 Cleared all Miara session data.'",
+    "prepare": "npm run lint && echo '✨ Miara prepared for launch.'",
+    "postinstall": "echo '📦 Dependencies installed — ffmpeg/webp handled via ffmpeg-static.'"
+  },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@tensorflow/tfjs-node": "^4.22.0",
@@ -29,14 +49,19 @@
     "canvas": "^3.2.0",
     "chalk": "^5.6.2",
     "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "ffmpeg-static": "^5.2.0",
     "file-type": "^21.0.0",
     "form-data": "^4.0.4",
     "fs-extra": "^11.3.2",
+    "gradient-string": "^3.0.0",
     "jimp": "^1.6.0",
     "lowdb": "^7.0.1",
     "moment-timezone": "^0.6.0",
     "node-fetch": "^3.3.2",
     "openai": "^6.8.1",
+    "ora": "^9.0.0",
+    "pg": "^8.12.0",
     "pino": "^10.1.0",
     "puppeteer": "^24.29.0",
     "qrcode": "^1.5.4",
@@ -44,11 +69,37 @@
     "qrcode-terminal": "^0.12.0",
     "sharp": "^0.34.4",
     "wa-sticker-formatter": "^4.4.4",
+    "webp-converter": "^2.3.3",
     "yargs": "^18.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^15.6.0",
     "jest": "^30.2.0",
-    "nodemon": "^3.1.10"
-  }
+    "nodemon": "^3.1.10",
+    "prettier": "^3.4.2"
+  },
+  "engines": {
+    "node": ">=18 <23"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "verbose": true
+  },
+  "eslintConfig": {
+    "root": true,
+    "ignorePatterns": [
+      "node_modules/",
+      "session/",
+      "sessions/",
+      "coverage/"
+    ]
+  },
+  "private": false
 }

@@ -36,7 +36,7 @@ async function measureSpeed(url = "https://speed.hetzner.de/100MB.bin", sampleSi
       });
       res.on("end", () => {
         const durationSec = (Date.now() - start) / 1000;
-        const mbps = (downloaded / (1024 * 1024)) / durationSec;
+        const mbps = downloaded / (1024 * 1024) / durationSec;
         resolve(mbps);
       });
     });
@@ -82,7 +82,11 @@ export default {
       const platform = getPlatform();
 
       // 🌐 Network speeds (short benchmark)
-      await conn.sendMessage(m.from, { text: "📡 Testing network speed... (may take a few seconds)" }, { quoted: m });
+      await conn.sendMessage(
+        m.from,
+        { text: "📡 Testing network speed... (may take a few seconds)" },
+        { quoted: m }
+      );
 
       const downloadSpeed = await measureSpeed("https://speed.hetzner.de/10MB.bin", 3);
       const uploadSpeed = downloadSpeed > 0 ? (downloadSpeed * 0.8).toFixed(2) : "0.00"; // simulate upload at 80% of DL
@@ -116,5 +120,5 @@ export default {
       console.error("❌ Ping Error:", err);
       await conn.sendMessage(m.from, { text: `⚠️ Ping failed: ${err.message}` }, { quoted: m });
     }
-  },
+  }
 };

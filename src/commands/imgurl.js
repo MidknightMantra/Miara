@@ -32,14 +32,16 @@ export default {
         m.message?.stickerMessage ||
         m.quoted?.message?.imageMessage ||
         m.quoted?.message?.stickerMessage
-          ? m.message?.imageMessage ? m : m.quoted
+          ? m.message?.imageMessage
+            ? m
+            : m.quoted
           : null;
 
       if (!target) {
         await conn.sendMessage(
           from,
           {
-            text: "🪞 Please *send or reply* to an *image or sticker* with `.imgurl` ✨",
+            text: "🪞 Please *send or reply* to an *image or sticker* with `.imgurl` ✨"
           },
           { quoted: m }
         );
@@ -50,7 +52,8 @@ export default {
       await conn.sendMessage(from, { react: { text: "⏳", key } });
       const buffer = await downloadMediaMessage(target, "buffer", {}, { logger: console });
 
-      if (!buffer || buffer.length === 0) throw new Error("Empty buffer — could not download image.");
+      if (!buffer || buffer.length === 0)
+        throw new Error("Empty buffer — could not download image.");
 
       // 💾 Step 4: Save temp file safely
       const tempDir = path.join(process.cwd(), "temp");
@@ -64,7 +67,7 @@ export default {
 
       const res = await axios.post("https://telegra.ph/upload", formData, {
         headers: formData.getHeaders(),
-        timeout: 20000,
+        timeout: 20000
       });
 
       // ✨ Step 6: Parse upload result
@@ -110,5 +113,5 @@ Please try again with a valid image.
       await conn.sendMessage(from, { text: errorMsg }, { quoted: m.message });
       await conn.sendMessage(from, { react: { text: "💫", key: m.key } });
     }
-  },
+  }
 };

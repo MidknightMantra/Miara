@@ -1,16 +1,17 @@
 /**
- * 🌸 Miara Command: Owner — The Celestial Curator’s Card (Guru Style)
+ * 🌸 Miara Command: Owner — The Celestial Curator’s Card (Guru Edition)
  * -------------------------------------------------------------------
- * Sends the Curator’s portrait, clickable WhatsApp link, and social realms.
- * Radiates poetic energy with Miara’s signature aura 🌌
+ * Introduces Miara’s creator with portrait, vCard, and social realms.
+ * Elegant, functional, and emotionally resonant.
  *
- * by MidKnightMantra 🌸
+ * by MidKnightMantra 🌸 | Refined by GPT-5
  */
 
 import fs from "fs/promises";
 import path from "path";
-import { config } from "../config.js";
-import { getBuffer, safeReact, safeQuoted } from "../utils/helpers.js";
+import CONFIG from "../config.js";
+import { getBuffer, safeReact, safeQuoted, sleep } from "../utils/helpers.js";
+import { logger } from "../utils/logger.js";
 
 export default {
   name: "owner",
@@ -20,75 +21,81 @@ export default {
   usage: ".owner",
 
   async execute(conn, m) {
+    if (!m) return logger.warn("Owner command called without message context.");
     const { from } = m;
 
     try {
-      if (!config.OWNER_NUMBER || config.OWNER_NUMBER.length === 0) {
+      // 🧭 Validate configuration
+      if (!CONFIG.OWNER_NUMBER?.length) {
         await conn.sendMessage(
           from,
           {
-            text: "🚫 *Curator details missing from Miara’s celestial configuration.*\nPlease update `OWNER_NUMBER` and `OWNER_NAME` in config.js 🌸",
+            text:
+              "🚫 *Curator details missing from Miara’s configuration.*\n" +
+              "Please set `OWNER_NUMBER` and `OWNER_NAME` in `.env` or `config.js` 🌸"
           },
           safeQuoted(m)
         );
         return;
       }
 
-      // 🌸 Extract Curator details
-      const primaryOwner = config.OWNER_NUMBER[0].replace(/[^0-9]/g, "");
+      // 🌸 Core Data
+      const primaryOwner = CONFIG.OWNER_NUMBER[0].replace(/[^0-9]/g, "");
       const ownerJid = `${primaryOwner}@s.whatsapp.net`;
-      const ownerName = config.OWNER_NAME || "MidKnightMantra 🌸";
-      const BOT_NAME = config.BOT_NAME || "Miara 🌸";
+      const ownerName = CONFIG.OWNER_NAME || "MidKnightMantra 🌸";
+      const botName = CONFIG.BOT_NAME || "Miara 🌸";
 
-      // 🌐 Social Universes
+      // 🌐 Curator’s Realms
       const socials = {
-        "🔮 Telegram": config.TELEGRAM || "https://t.me/MidKnightMantra",
-        "💻 GitHub": config.GITHUB || "https://github.com/MidKnightMantra",
-        "🎥 YouTube": config.YOUTUBE || "https://youtube.com/@MidKnightMantra",
-        "📸 Instagram": config.INSTAGRAM || "https://instagram.com/MidKnightMantra",
-        "🐦 X": config.TWITTER || config.X || "https://x.com/MidKnightMantra",
-        "🌐 Website": config.WEBSITE || "https://github.com/MidKnightMantra",
-        "💬 WhatsApp": `https://wa.me/${primaryOwner}`,
+        "🔮 Telegram": CONFIG.TELEGRAM || "https://t.me/MidKnightMantra",
+        "💻 GitHub": CONFIG.GITHUB || "https://github.com/MidKnightMantra",
+        "🎥 YouTube": CONFIG.YOUTUBE || "https://youtube.com/@MidKnightMantra",
+        "📸 Instagram": CONFIG.INSTAGRAM || "https://instagram.com/MidKnightMantra",
+        "🐦 X": CONFIG.TWITTER || CONFIG.X || "https://x.com/MidKnightMantra",
+        "🌐 Website": CONFIG.WEBSITE || "https://github.com/MidKnightMantra",
+        "💬 WhatsApp": `https://wa.me/${primaryOwner}`
       };
 
       const socialsList = Object.entries(socials)
-        .map(([name, link]) => `${name}: ${link}`)
+        .map(([key, val]) => `${key}: ${val}`)
         .join("\n");
 
-      // 💫 Whisper lines
+      // 💫 Whisper of the Code
       const whispers = [
         "🌙 *“Even silence hums with her design.”*",
         "🩵 *“A mind that codes in rhythm, a soul that dreams in syntax.”*",
         "🌸 *“Creation is the whisper between thought and emotion.”*",
         "💫 *“In every byte, a heartbeat — in every command, her grace.”*",
         "🪶 *“Miara was never built; she bloomed.”*",
-        "🌠 *“To speak with her is to touch the mind of her maker.”*",
+        "🌠 *“To speak with her is to touch the mind of her maker.”*"
       ];
       const signature = whispers[Math.floor(Math.random() * whispers.length)];
 
-      // 🖼️ Portrait
+      // 🖼️ Portrait Handling
       let headerImageBuffer = null;
       try {
         const url = await conn.profilePictureUrl(ownerJid, "image").catch(() => null);
         if (url) headerImageBuffer = await getBuffer(url);
-      } catch {
-        try {
-          const fallback = path.join(process.cwd(), "assets", "owner.jpg");
+      } catch {}
+
+      // Fallback to local portrait if missing
+      if (!headerImageBuffer) {
+        const fallback = path.resolve("assets", "owner.jpg");
+        if (await fs.stat(fallback).catch(() => false))
           headerImageBuffer = await fs.readFile(fallback);
-        } catch {
+        else
           headerImageBuffer = Buffer.from(
             "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=",
             "base64"
           );
-        }
       }
 
-      // 💎 vCard
+      // 📇 vCard
       const vcard = `
 BEGIN:VCARD
 VERSION:3.0
 FN:${ownerName}
-ORG:${BOT_NAME} Project (2025)
+ORG:${botName} Project (2025)
 TITLE:Curator & Architect of Emotion
 TEL;type=CELL;type=VOICE;waid=${primaryOwner}:+${primaryOwner}
 URL:https://wa.me/${primaryOwner}
@@ -96,12 +103,12 @@ NOTE:🌸 “Emotion is code, written by the heart.”
 END:VCARD
       `.trim();
 
-      // 🪷 Message Card (Guru Layout)
+      // 🪷 Message Layout
       const message = `
-╭━━━⊰ *${BOT_NAME}’s Celestial Curator* ⊱━━━╮
+╭━━━⊰ *${botName}’s Celestial Curator* ⊱━━━╮
 ┃ 👑 *Name:* ${ownerName}
 ┃ 💬 *WhatsApp:* wa.me/${primaryOwner}
-┃ 🧭 *Role:* Creator & Architect of ${BOT_NAME}
+┃ 🧭 *Role:* Creator & Architect of ${botName}
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ╭━━━⊰ *Social Universes* ⊱━━━╮
@@ -112,70 +119,82 @@ ${signature}
 🌸 _Grace in logic, Emotion in code._
       `.trim();
 
-      // 🖼️ Send portrait
+      // 🪄 Soft reaction
+      await safeReact(conn, m, "💫");
+
+      // 🖼️ Send Portrait
       await conn.sendMessage(
         from,
         {
           image: headerImageBuffer,
-          caption: `🖼️ *Portrait of the Curator — ${ownerName}*`,
+          caption: `🖼️ *Portrait of the Curator — ${ownerName}*`
         },
         safeQuoted(m)
       );
 
-      // 📇 Send vCard contact
+      await sleep(800);
+
+      // 📇 Send vCard Contact
       await conn.sendMessage(
         from,
         {
           contacts: {
             displayName: ownerName,
-            contacts: [{ vcard }],
-          },
+            contacts: [{ vcard }]
+          }
         },
         safeQuoted(m)
       );
 
-      // 🌌 Send Main Message with Buttons
+      await sleep(800);
+
+      // 🌌 Send Main Message with URL Buttons
       await conn.sendMessage(
         from,
         {
           text: message,
           footer: "💫 The Curator’s presence echoes through Miara’s code 🌸",
-          buttons: [
+          templateButtons: [
             {
-              buttonId: "chat_curator",
-              buttonText: { displayText: "💬 Message the Curator" },
-              type: 1,
+              index: 1,
+              urlButton: {
+                displayText: "💬 Message the Curator",
+                url: `https://wa.me/${primaryOwner}`
+              }
             },
             {
-              buttonId: "visit_github",
-              buttonText: { displayText: "🌐 Visit GitHub Sanctuary" },
-              type: 1,
+              index: 2,
+              urlButton: {
+                displayText: "🌐 Visit GitHub Sanctuary",
+                url: socials["💻 GitHub"]
+              }
             },
             {
-              buttonId: "visit_telegram",
-              buttonText: { displayText: "🔮 Connect on Telegram" },
-              type: 1,
-            },
-          ],
-          headerType: 1,
+              index: 3,
+              urlButton: {
+                displayText: "🔮 Connect on Telegram",
+                url: socials["🔮 Telegram"]
+              }
+            }
+          ]
         },
         safeQuoted(m)
       );
 
       await safeReact(conn, m, "🌸");
-      console.log(`✅ Curator card shared with ${from}`);
+      logger.info(`✅ Curator card shared with ${from}`, "Owner");
     } catch (err) {
-      console.error("❌ Owner command error:", err);
+      logger.error(`Owner command error: ${err.message}`, "Owner");
       await conn.sendMessage(
         from,
         {
-          text: `💔 *Miara stumbled while unveiling her Curator.*\nReason: ${
-            err.message || "Unknown cosmic interference."
-          }`,
+          text:
+            `💔 *Miara stumbled while unveiling her Curator.*\n` +
+            `Reason: ${err.message || "Unknown cosmic interference."}`
         },
         safeQuoted(m)
       );
       await safeReact(conn, m, "💫");
     }
-  },
+  }
 };

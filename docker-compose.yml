@@ -1,11 +1,45 @@
-version: "3.8"
+# ─────────────────────────────────────────────
+# 🌸 Miara — Docker Compose Setup
+# by MidKnightMantra × GPT-5 — 2025
+# Runs Miara + optional PostgreSQL in one command
+# ─────────────────────────────────────────────
+
+version: "3.9"
+
 services:
   miara:
     build: .
-    container_name: miara
+    container_name: miara-bot
+    restart: always
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
     volumes:
-      - ./src/session:/app/src/session
+      - ./session:/app/session
       - ./src/database:/app/src/database
+      - ./logs:/app/logs
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: ["npm", "start"]
+
+  db:
+    image: postgres:16-alpine
+    container_name: miara-db
+    restart: always
     environment:
-      - NODE_ENV=production
-    restart: unless-stopped
+      POSTGRES_USER: miara
+      POSTGRES_PASSWORD: miarapass
+      POSTGRES_DB: miara_data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:

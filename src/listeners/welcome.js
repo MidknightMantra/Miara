@@ -4,25 +4,52 @@
  * Listens for group participant changes and sends a beautiful welcome message
  * when a user joins (uses per-group settings stored in /data/group_settings.json).
  *
- * Place this after your Baileys `conn` is created (for example in src/main.js).
- *
- * Author: MidKnightMantra 🌸 — Enhanced by GPT-5
+ * Author: MidKnightMantra × GPT-5
  */
 
 import fs from "fs";
 import path from "path";
 import moment from "moment-timezone";
-import { getBuffer } from "../utils/helpers.js"; // uses your helper
-import { config } from "../config.js";
+import { getBuffer } from "../utils/helpers.js";
+import config from "../config.js";
+import { logger } from "../utils/logger.js";
 
-const DATA_FILE = path.join(process.cwd(), "data", "group_settings.json");
-if (!fs.existsSync(path.join(process.cwd(), "data"))) fs.mkdirSync(path.join(process.cwd(), "data"));
+const DATA_DIR = path.join(process.cwd(), "data");
+const DATA_FILE = path.join(DATA_DIR, "group_settings.json");
+
+// ensure directories exist
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, "{}");
 
-const readSettings = () => JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
-const writeSettings = (data) => fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+let settingsCache = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
+let lastCacheSync = Date.now();
 
-// Default welcome template — placeholders: @user, @group, @owner, @members, @time
+/**
+ * Light cache layer: reduces file I/O on frequent joins.
+ */
+function readSettings(force = false) {
+  const now = Date.now();
+  if (force || now - lastCacheSync > 60_000) {
+    try {
+      settingsCache = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
+      lastCacheSync = now;
+    } catch (err) {
+      logger.warn(`Failed to read group settings: ${err.message}`, "Welcome");
+    }
+  }
+  return settingsCache;
+}
+
+function writeSettings(data) {
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+    settingsCache = data;
+  } catch (err) {
+    logger.error(`Failed to write group settings: ${err.message}`, false, "Welcome");
+  }
+}
+
+// 🌸 Default welcome template
 const DEFAULT_WELCOME = `🪷 *Welcome @user to @group!*  
 ━━━━━━━━━━━━━━━━━━━  
 🌠 We bloom because you joined.  
@@ -33,53 +60,51 @@ const DEFAULT_WELCOME = `🪷 *Welcome @user to @group!*
 🪬 *— Miara*`;
 
 export default function attachWelcomeListener(conn) {
-  // Ensure conn.ev exists (Baileys v4/v5)
-  if (!conn || !conn.ev || !conn.sendMessage) {
-    console.warn("attachWelcomeListener: Invalid conn object — cannot attach welcome listener.");
+  if (!conn?.ev?.on) {
+    logger.warn("attachWelcomeListener: Invalid conn object — cannot attach listener.", "Welcome");
     return;
   }
 
   conn.ev.on("group-participants.update", async (update) => {
     try {
       const settings = readSettings();
-
-      // update has shape { id: '123@g.us', participants: ['123@s.whatsapp.net'], action: 'add'|'remove'|'promote'|'demote' }
       const groupId = update.id;
-      const action = update.action; // 'add' | 'remove' ...
+      const action = update.action;
       const participants = update.participants || [];
 
-      // Only react to joins
-      if (action !== "add") return;
+      // react only to joins
+      if (action !== "add" || participants.length === 0) return;
 
-      // Check if welcome is enabled for this group
-      if (!settings[groupId] || !settings[groupId].welcome) return;
+      // check per-group toggle
+      if (!settings[groupId]?.welcome) return;
 
-      // fetch group metadata
       const metadata = await conn.groupMetadata(groupId).catch(() => null);
       const subject = metadata?.subject || "this group";
-      const owner = metadata?.owner || metadata?.subjectOwner || (config.OWNER_NUMBER && config.OWNER_NUMBER[0] ? `${config.OWNER_NUMBER[0]}@s.whatsapp.net` : null);
+      const owner =
+        metadata?.owner ||
+        metadata?.subjectOwner ||
+        (config.OWNER_NUMBER?.[0] ? `${config.OWNER_NUMBER[0]}@s.whatsapp.net` : null);
       const membersCount = metadata?.participants?.length || "unknown";
 
-      // assemble mentions array
       const mentions = [...participants];
 
-      // build welcome template (custom or default)
-      const template = settings[groupId].customWelcome && settings[groupId].customWelcome.trim().length > 0
-        ? settings[groupId].customWelcome
-        : DEFAULT_WELCOME;
+      const template =
+        settings[groupId].customWelcome?.trim()?.length > 0
+          ? settings[groupId].customWelcome
+          : DEFAULT_WELCOME;
 
-      // For each participant, send a personalized welcome (or send one combined message with multiple mentions)
-      // We'll send a single combined message when multiple join at once.
-      const names = await Promise.all(participants.map(async (jid) => {
-        try {
-          const v = await conn.getName(jid).catch(() => jid.split("@")[0]);
-          return v || jid.split("@")[0];
-        } catch {
-          return jid.split("@")[0];
-        }
-      }));
+      // gather participant names
+      const names = await Promise.all(
+        participants.map(async (jid) => {
+          try {
+            return (await conn.getName(jid)) || jid.split("@")[0];
+          } catch {
+            return jid.split("@")[0];
+          }
+        })
+      );
 
-      // Try to fetch the participant(s) profile pictures — prefer first participant's avatar
+      // try participant avatar first
       let headerImage = null;
       for (const p of participants) {
         try {
@@ -89,33 +114,33 @@ export default function attachWelcomeListener(conn) {
             if (headerImage) break;
           }
         } catch {
-          headerImage = null;
+          /* ignore */
         }
       }
 
-      // If no participant avatar found, try group profile pic
+      // fallback: group picture
       if (!headerImage) {
         try {
           const groupPp = await conn.profilePictureUrl(groupId, "image").catch(() => null);
           if (groupPp) headerImage = await getBuffer(groupPp).catch(() => null);
         } catch {
-          headerImage = null;
+          /* ignore */
         }
       }
 
-      // Finally fallback to local asset or small placeholder
+      // fallback: local placeholder
       if (!headerImage) {
-        try {
-          const fallbackPath = path.join(process.cwd(), "assets", "welcome.jpg");
-          if (fs.existsSync(fallbackPath)) headerImage = fs.readFileSync(fallbackPath);
-        } catch {
-          headerImage = null;
+        const fallbackPath = path.join(process.cwd(), "assets", "welcome.jpg");
+        if (fs.existsSync(fallbackPath)) {
+          headerImage = fs.readFileSync(fallbackPath);
         }
       }
 
-      // Replace placeholders in template
-      const timeStr = moment().tz(config.TIMEZONE || "Africa/Nairobi").format("DD MMM YYYY • HH:mm");
-      const userMentionText = participants.map((p, i) => `@${p.split("@")[0]}`).join(", ");
+      const timeStr = moment()
+        .tz(config.TIMEZONE || "Africa/Nairobi")
+        .format("DD MMM YYYY • HH:mm");
+      const userMentionText = participants.map((p) => `@${p.split("@")[0]}`).join(", ");
+
       let finalText = template
         .replace(/@user/g, userMentionText)
         .replace(/@group/g, subject)
@@ -123,23 +148,19 @@ export default function attachWelcomeListener(conn) {
         .replace(/@members/g, `${membersCount}`)
         .replace(/@time/g, timeStr);
 
-      // Small cosmetic enhancements
-      finalText = finalText + `\n\n🌸 *Remember:* Be kind, be curious — Miara watches kindly.`;
+      finalText += `\n\n🌸 *Remember:* Be kind, be curious — Miara watches kindly.`;
 
-      // Send message (image + caption if image available)
-      const sendOptions = {
-        mentions,
-      };
+      const messageContent = headerImage
+        ? { image: headerImage, caption: finalText, mentions }
+        : { text: finalText, mentions };
 
-      if (headerImage) {
-        await conn.sendMessage(groupId, { image: headerImage, caption: finalText, mentions }, { });
-      } else {
-        await conn.sendMessage(groupId, { text: finalText, mentions }, { });
-      }
+      await conn.sendMessage(groupId, messageContent);
+
+      logger.info(`Welcomed ${userMentionText} in ${subject}.`, "Welcome");
     } catch (err) {
-      console.error("❌ Welcome listener error:", err);
+      logger.error(`Welcome listener error: ${err.message}`, false, "Welcome");
     }
   });
 
-  console.log("🌸 Welcome listener attached.");
+  logger.info("🌸 Welcome listener attached.", "Welcome");
 }

@@ -21,7 +21,7 @@ export default {
 
     if (!text) {
       await conn.sendMessage(from, {
-        text: "🎙️ *Text-to-Speech Usage:*\n\n💡 `.tts <lang> <text>`\nExample: `.tts en Hello world!`\n\n🌐 *Languages:* en, es, fr, de, hi, ja, zh, etc.",
+        text: "🎙️ *Text-to-Speech Usage:*\n\n💡 `.tts <lang> <text>`\nExample: `.tts en Hello world!`\n\n🌐 *Languages:* en, es, fr, de, hi, ja, zh, etc."
       });
       return;
     }
@@ -35,28 +35,75 @@ export default {
       ttsText = args.slice(1).join(" ").trim();
 
       if (!ttsText) {
-        await conn.sendMessage(from, { text: `⚠️ Please provide text after the language code.\nExample: .tts ${langCode} Hello there!` });
+        await conn.sendMessage(from, {
+          text: `⚠️ Please provide text after the language code.\nExample: .tts ${langCode} Hello there!`
+        });
         return;
       }
     }
 
     // 🌍 Supported languages
     const supportedLangs = [
-      "af","sq","ar","hy","bn","ca","zh","zh-cn","zh-tw","zh-yue","hr","cs","da","nl","en",
-      "eo","fi","fr","de","el","hi","hu","is","id","it","ja","km","ko","la","lv","mk","no",
-      "pl","pt","ro","ru","sr","sk","es","sw","sv","ta","th","tr","vi","cy"
+      "af",
+      "sq",
+      "ar",
+      "hy",
+      "bn",
+      "ca",
+      "zh",
+      "zh-cn",
+      "zh-tw",
+      "zh-yue",
+      "hr",
+      "cs",
+      "da",
+      "nl",
+      "en",
+      "eo",
+      "fi",
+      "fr",
+      "de",
+      "el",
+      "hi",
+      "hu",
+      "is",
+      "id",
+      "it",
+      "ja",
+      "km",
+      "ko",
+      "la",
+      "lv",
+      "mk",
+      "no",
+      "pl",
+      "pt",
+      "ro",
+      "ru",
+      "sr",
+      "sk",
+      "es",
+      "sw",
+      "sv",
+      "ta",
+      "th",
+      "tr",
+      "vi",
+      "cy"
     ];
 
     if (!supportedLangs.includes(langCode)) {
       await conn.sendMessage(from, {
-        text: `🌐 Language *"${langCode}"* not supported — defaulting to *English (en)* 🇬🇧`,
+        text: `🌐 Language *"${langCode}"* not supported — defaulting to *English (en)* 🇬🇧`
       });
       langCode = "en";
     }
 
     try {
       await conn.sendMessage(from, { react: { text: "🎧", key: m.key } });
-      await conn.sendMessage(from, { text: `🗣️ Speaking in *${langCode.toUpperCase()}*...` });
+      await conn.sendMessage(from, {
+        text: `🗣️ Speaking in *${langCode.toUpperCase()}*...`
+      });
 
       // 🎼 Generate the TTS URL
       const ttsUrl = `${GOOGLE_TTS_URL}?ie=UTF-8&q=${encodeURIComponent(
@@ -78,22 +125,22 @@ export default {
       await conn.sendMessage(from, {
         audio: audioBuffer,
         mimetype: "audio/mpeg",
-        ptt: true, // 🎙️ send as voice note
+        ptt: true // 🎙️ send as voice note
       });
 
       await conn.sendMessage(from, { react: { text: "✅", key: m.key } });
       console.log(`✅ TTS sent successfully (${langCode}): "${ttsText}"`);
-
     } catch (err) {
       console.error("💥 TTS Error:", err.message);
 
       let msg = "❌ *Failed to generate speech.*";
       if (err.name === "AbortError") msg = "⏱️ Request timed out. Try shorter text.";
       else if (err.message.includes("ENOTFOUND")) msg = "🌐 Could not reach Google TTS servers.";
-      else if (err.message.includes("status 403")) msg = "🚫 Google blocked this request temporarily.";
+      else if (err.message.includes("status 403"))
+        msg = "🚫 Google blocked this request temporarily.";
 
       await conn.sendMessage(from, { text: msg });
       await conn.sendMessage(from, { react: { text: "❌", key: m.key } });
     }
-  },
+  }
 };

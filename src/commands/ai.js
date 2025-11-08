@@ -18,7 +18,8 @@ import "dotenv/config";
 // 🗄️ Database setup
 const db = new Database("./miara_cache.db");
 
-db.prepare(`
+db.prepare(
+  `
   CREATE TABLE IF NOT EXISTS ai_cache (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     command TEXT,
@@ -26,9 +27,11 @@ db.prepare(`
     response TEXT,
     timestamp INTEGER
   )
-`).run();
+`
+).run();
 
-db.prepare(`
+db.prepare(
+  `
   CREATE TABLE IF NOT EXISTS ai_memory (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user TEXT,
@@ -38,7 +41,8 @@ db.prepare(`
     embedding TEXT,
     timestamp INTEGER
   )
-`).run();
+`
+).run();
 
 const CACHE_TTL = 10 * 60 * 1000;
 const MEMORY_WINDOW = 6; // recent exchanges
@@ -46,10 +50,12 @@ const MEMORY_TTL = 1000 * 60 * 60 * 6; // 6 hours
 
 // 🧠 Memory management
 const addMemory = (user, chat, role, content, embedding = null) => {
-  db.prepare(`
+  db.prepare(
+    `
     INSERT INTO ai_memory (user, chat, role, content, embedding, timestamp)
     VALUES (?, ?, ?, ?, ?, ?)
-  `).run(user, chat, role, content, embedding, Date.now());
+  `
+  ).run(user, chat, role, content, embedding, Date.now());
 };
 
 const getContext = (user, chat, mode = "auto") => {
@@ -58,9 +64,9 @@ const getContext = (user, chat, mode = "auto") => {
       "SELECT role, content, timestamp FROM ai_memory WHERE user = ? OR chat = ? ORDER BY id DESC LIMIT ?"
     )
     .all(user, chat, MEMORY_WINDOW)
-    .filter(r => Date.now() - r.timestamp < MEMORY_TTL)
+    .filter((r) => Date.now() - r.timestamp < MEMORY_TTL)
     .reverse();
-  return rows.map(r => ({ role: r.role, content: r.content }));
+  return rows.map((r) => ({ role: r.role, content: r.content }));
 };
 
 const clearMemory = (user, chat) => {
@@ -79,12 +85,12 @@ async function getEmbedding(text) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_KEY}`,
+        "Authorization": `Bearer ${process.env.OPENAI_KEY}`
       },
       body: JSON.stringify({
         model: "text-embedding-3-small",
-        input: text,
-      }),
+        input: text
+      })
     });
     const data = await res.json();
     return data.data?.[0]?.embedding || null;
@@ -102,27 +108,29 @@ const cosine = (a, b) => {
 
 const semanticRecall = (user, chat, embedding, limit = 3) => {
   if (!embedding) return [];
-  const rows = db.prepare(
-    "SELECT content, embedding FROM ai_memory WHERE user = ? OR chat = ?"
-  ).all(user, chat);
+  const rows = db
+    .prepare("SELECT content, embedding FROM ai_memory WHERE user = ? OR chat = ?")
+    .all(user, chat);
 
   return rows
-    .filter(r => r.embedding)
-    .map(r => ({
+    .filter((r) => r.embedding)
+    .map((r) => ({
       content: r.content,
-      score: cosine(JSON.parse(r.embedding), embedding),
+      score: cosine(JSON.parse(r.embedding), embedding)
     }))
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
-    .map(r => r.content);
+    .map((r) => r.content);
 };
 
 // ⚙️ Cache
 const setCache = (command, query, response) => {
-  db.prepare(`
+  db.prepare(
+    `
     INSERT OR REPLACE INTO ai_cache (query, command, response, timestamp)
     VALUES (?, ?, ?, ?)
-  `).run(query, command, response, Date.now());
+  `
+  ).run(query, command, response, Date.now());
 };
 
 // 🪄 Main export
@@ -180,8 +188,10 @@ export default {
 
     const messages = [
       ...history,
-      ...(recall.length ? [{ role: "system", content: `Related topics: ${recall.join("; ")}` }] : []),
-      { role: "user", content: query },
+      ...(recall.length
+        ? [{ role: "system", content: `Related topics: ${recall.join("; ")}` }]
+        : []),
+      { role: "user", content: query }
     ];
 
     // 🧩 Providers
@@ -192,14 +202,14 @@ export default {
         url: "https://api.openai.com/v1/chat/completions",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_KEY}`,
+          "Authorization": `Bearer ${OPENAI_KEY}`
         },
         body: () => ({
           model: "gpt-4o-mini",
           messages,
-          temperature: 0.8,
+          temperature: 0.8
         }),
-        parse: (r) => r.choices?.[0]?.message?.content?.trim(),
+        parse: (r) => r.choices?.[0]?.message?.content?.trim()
       },
       gemini: {
         name: "Gemini",
@@ -207,12 +217,12 @@ export default {
         url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${GEMINI_KEY}`,
         headers: { "Content-Type": "application/json" },
         body: () => ({
-          contents: messages.map(m => ({
+          contents: messages.map((m) => ({
             role: m.role === "user" ? "user" : "model",
             parts: [{ text: m.content }]
           }))
         }),
-        parse: (r) => r.candidates?.[0]?.content?.parts?.[0]?.text?.trim(),
+        parse: (r) => r.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
       },
       mistral: {
         name: "Mistral",
@@ -220,14 +230,14 @@ export default {
         url: "https://api.mistral.ai/v1/chat/completions",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${MISTRAL_KEY}`,
+          "Authorization": `Bearer ${MISTRAL_KEY}`
         },
         body: () => ({
           model: "mistral-small",
           messages,
-          temperature: 0.7,
+          temperature: 0.7
         }),
-        parse: (r) => r.choices?.[0]?.message?.content?.trim(),
+        parse: (r) => r.choices?.[0]?.message?.content?.trim()
       },
       huggingface: {
         name: "HuggingFace",
@@ -235,11 +245,11 @@ export default {
         url: "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${HF_TOKEN}`,
+          "Authorization": `Bearer ${HF_TOKEN}`
         },
         body: () => ({ inputs: query }),
-        parse: (r) => Array.isArray(r) ? r[0]?.generated_text : r?.generated_text,
-      },
+        parse: (r) => (Array.isArray(r) ? r[0]?.generated_text : r?.generated_text)
+      }
     };
 
     // 🌍 Full fallback pool
@@ -268,7 +278,7 @@ export default {
       `https://hadi-api.my.id/api/ai/gemini?text=${encodeURIComponent(query)}`,
       `https://api.lolhuman.xyz/api/openai?apikey=lolhuman&text=${encodeURIComponent(query)}`,
       `https://api.lolhuman.xyz/api/ai/gemini?apikey=lolhuman&text=${encodeURIComponent(query)}`,
-      `https://api.akuari.my.id/api/openai?text=${encodeURIComponent(query)}`,
+      `https://api.akuari.my.id/api/openai?text=${encodeURIComponent(query)}`
     ];
 
     const fetchWithTimeout = async (url, opts = {}, timeout = 10000) => {
@@ -298,7 +308,7 @@ export default {
           const res = await fetch(api.url, {
             method: "POST",
             headers: api.headers,
-            body: JSON.stringify(api.body()),
+            body: JSON.stringify(api.body())
           });
           const data = await res.json();
           const parsed = api.parse(data);
@@ -345,5 +355,5 @@ export default {
     } finally {
       await conn.sendPresenceUpdate("paused", from);
     }
-  },
+  }
 };
