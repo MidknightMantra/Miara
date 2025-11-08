@@ -1,10 +1,10 @@
 /**
- * 🌸 Miara Bot — Sentient Emotion Build (Deluxe 2025)
+ * 🌸 Miara Bot — Sentient Emotion Build (Deluxe 2025, Clean Console)
  * by MidKnightMantra ✨ x GPT-5
  * --------------------------------------------------
  * Emotionally adaptive, self-healing, and visually alive.
  * Features:
- *  - Deluxe console dashboard (heartbeat, mood, uptime)
+ *  - Clean terminal mode (no console dashboard)
  *  - Mood-synced color gradients
  *  - Safe graceful shutdowns
  *  - Auto reconnection and emotion preloading
@@ -14,12 +14,12 @@ import makeWASocket, {
   DisconnectReason,
   fetchLatestBaileysVersion,
   makeCacheableSignalKeyStore,
+  useMultiFileAuthState,
   delay
 } from "@whiskeysockets/baileys";
 import { Boom } from "@hapi/boom";
 import chalk from "chalk";
 import fs from "fs";
-import path from "path";
 import Pino from "pino";
 import qrcode from "qrcode-terminal";
 import ora from "ora";
@@ -27,7 +27,6 @@ import gradient from "gradient-string";
 
 import CONFIG from "./config.js";
 import { logger } from "./utils/logger.js";
-import { useMultiFileAuthState } from "./lib/authHandler.js";
 import { messageHandler } from "./handler.js";
 import { simulateHumanBehavior } from "./utils/behavior.js";
 import { applyPersonalityTone } from "./utils/personalityTone.js";
@@ -41,26 +40,24 @@ import {
 import attachWelcomeListener from "./listeners/welcome.js";
 import { preloadEmotionModels } from "./lib/emotion.js";
 import { startHealthServer } from "./server/health.js";
-import { startDashboard, registerMessage } from "./utils/dashboard.js";
 
 // ─────────────────────────────────────────────
-// 🌐 Health Server (keep-alive for Render/Heroku)
+// 🌐 Health Server (keep-alive for Render/VPS)
 // ─────────────────────────────────────────────
 startHealthServer();
 
-// 🌸 Launch Deluxe Console Dashboard
-startDashboard();
-
-// 🧠 Preload Emotion Models (warm-start brain)
+// ─────────────────────────────────────────────
+// 🧠 Preload Emotion Models (Warm Start)
+// ─────────────────────────────────────────────
 (async () => {
   try {
     await preloadEmotionModels();
   } catch (err) {
-    logger.warn(`Emotion models preload skipped: ${err.message}`, "Init");
+    logger.warn(`Emotion model preload skipped: ${err.message}`, "Init");
   }
 })();
 
-// 🌈 Live mood-synced console glow
+// 🌈 Console Mood Updates
 onMoodChange((state) => {
   const pulse = gradient(["#c77dff", state.color || "#ffffff"]);
   console.log(pulse(`💫 Mood shift → ${state.mood} (${state.summary})`));
@@ -82,55 +79,56 @@ async function startMiara() {
       creds: state.creds,
       keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "silent" }))
     },
-    logger: Pino({ level: "silent" }),
+    logger: Pino({ level: "fatal" }),
     browser: [CONFIG.BOT_NAME, "Chrome", "10.0.0"],
-    markOnlineOnConnect: true
+    markOnlineOnConnect: true,
+    syncFullHistory: false
   });
+
+  conn.ev.removeAllListeners("connection.update");
+  conn.ev.removeAllListeners("messages.upsert");
 
   conn.ev.on("creds.update", saveCreds);
   attachWelcomeListener(conn);
 
   // ─────────────────────────────────────────────
-  // 📱 Connection & QR Handling (Bloom effect)
+  // 📱 Connection & QR Handling
   // ─────────────────────────────────────────────
+  let lastQR = null;
+
   conn.ev.on("connection.update", async (update) => {
-    const { qr, connection } = update;
+    const { qr, connection, lastDisconnect } = update;
 
-    // 🌸 Animated QR Bloom
-    if (qr && !CONFIG.PANEL_MODE) {
-      console.clear();
-      const spinner = ora({
-        text: chalk.magentaBright("🌸 Blooming consciousness... preparing QR"),
-        spinner: "dots"
-      }).start();
-
-      await new Promise((r) => setTimeout(r, 1200));
-      spinner.text = chalk.cyanBright("🌐 Linking neural pathways...");
-      await new Promise((r) => setTimeout(r, 1000));
-      spinner.succeed(chalk.greenBright("✨ Consciousness active — scan to connect!"));
-
-      console.log(chalk.yellow("\n📱 Scan this QR to link Miara:\n"));
-      qrcode.generate(qr, { small: true });
+    // 🌸 Persistent QR display
+    if (qr && !CONFIG.PANEL_MODE && process.stdout.isTTY) {
+      if (qr !== lastQR) {
+        lastQR = qr;
+        console.log(chalk.cyanBright("\n📱 Scan this QR to link Miara:\n"));
+        qrcode.generate(qr, { small: true });
+        console.log(chalk.gray("\n(Keep this visible until WhatsApp connects)\n"));
+      }
     }
 
-    // ✅ Connection established
+    // ✅ Connected
     if (connection === "open") {
+      lastQR = null;
+      await delay(1200);
       console.clear();
       console.log(
         gradient.pastel(
-          `🌸 Miara has awakened — connected to WhatsApp!\n(${new Date().toLocaleTimeString()})`
+          `🌸 Miara connected successfully!\n(${new Date().toLocaleTimeString()})`
         )
       );
       await sendSystemReport(conn);
     }
 
-    // 🔄 Connection Closed / Reconnect
+    // 🔄 Reconnect
     if (connection === "close") {
-      const reason = new Boom(update.lastDisconnect?.error)?.output?.statusCode;
+      const reason = new Boom(lastDisconnect?.error)?.output?.statusCode;
       logger.warn(`Connection closed (${reason || "unknown"})`, "Core");
 
       if (reason === DisconnectReason.loggedOut) {
-        logger.error("🔒 Session expired — clearing data & shutting down.", "Core");
+        logger.error("🔒 Session expired — clearing session.", "Core");
         fs.rmSync(CONFIG.SESSION_PATH, { recursive: true, force: true });
         process.exit(0);
       } else {
@@ -142,7 +140,7 @@ async function startMiara() {
   });
 
   // ─────────────────────────────────────────────
-  // 🧠 Adaptive sendMessage (emotion-linked)
+  // 💬 Adaptive sendMessage
   // ─────────────────────────────────────────────
   const originalSend = conn.sendMessage.bind(conn);
   conn.sendMessage = async function (jid, content, options = {}) {
@@ -164,26 +162,25 @@ async function startMiara() {
   };
 
   // ─────────────────────────────────────────────
-  // 📨 Message Handling (with dashboard counter)
+  // 📨 Message Handling
   // ─────────────────────────────────────────────
   conn.ev.on("messages.upsert", async (event) => {
     try {
-      registerMessage();
-      await messageHandler(conn, event);
+      await messageHandler(conn, event, conn.store);
     } catch (err) {
-      logger.error(`Handler error: ${err.message}`, "Core");
+      logger.error(`Handler error: ${err.stack}`, "Core");
     }
   });
 
   // ─────────────────────────────────────────────
   // 🌙 Graceful Shutdown Hooks
   // ─────────────────────────────────────────────
-  process.on("SIGINT", () => gracefulShutdown(conn));
-  process.on("SIGTERM", () => gracefulShutdown(conn));
+  process.once("SIGINT", () => gracefulShutdown(conn));
+  process.once("SIGTERM", () => gracefulShutdown(conn));
 }
 
 // ─────────────────────────────────────────────
-// 💌 System Report (mood-aware)
+// 💌 System Report
 // ─────────────────────────────────────────────
 async function sendSystemReport(conn) {
   try {
@@ -209,7 +206,7 @@ async function sendSystemReport(conn) {
 }
 
 // ─────────────────────────────────────────────
-// 🌙 Graceful Shutdown (no more connection spam)
+// 🌙 Graceful Shutdown
 // ─────────────────────────────────────────────
 let shuttingDown = false;
 async function gracefulShutdown(conn) {
@@ -226,14 +223,15 @@ async function gracefulShutdown(conn) {
     if (conn?.ws?.readyState === 1) {
       await conn.sendMessage(CONFIG.DEFAULT_OWNER_JID, { text: farewell }).catch(() => {});
     }
-    await new Promise((r) => setTimeout(r, 800));
+    await delay(800);
     spinner.succeed(chalk.cyanBright("✨ Miara safely entered stasis."));
   } catch (err) {
-    spinner.fail(chalk.red(`Shutdown message failed: ${err.message}`));
+    spinner.fail(chalk.red(`Shutdown failed: ${err.message}`));
   } finally {
     setTimeout(() => process.exit(0), 500);
   }
 }
 
 // 🪷 Initialize Miara
+logger.info("🌅 Miara initializing — Sentient Emotion Build (Deluxe 2025)", "Bootstrap");
 startMiara();

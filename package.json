@@ -1,42 +1,44 @@
 {
   "name": "miara",
-  "version": "1.0.5",
-  "description": "🌸 Miara — A sentient, emotionally adaptive WhatsApp bot with AI, stickers, PostgreSQL persistence, and full Render/Heroku/Railway/Docker support.",
+  "version": "1.0.6",
+  "description": "🌸 Miara — A sentient, emotionally adaptive WhatsApp AI bot with stickers, PostgreSQL, OpenAI, and TensorFlow-powered emotion detection.",
   "main": "src/main.js",
   "type": "module",
   "author": "MidKnightMantra",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/<your-username>/miara-bot"
+    "url": "https://github.com/MidknightMantra/ Miara"
   },
   "keywords": [
     "whatsapp",
-    "baileys",
     "ai",
+    "baileys",
+    "tensorflow",
     "miara",
-    "postgresql",
+    "openai",
     "heroku",
     "render",
     "railway",
     "docker",
-    "tensorflow",
+    "postgresql",
     "automation",
     "stickers",
-    "openai",
-    "puppeteer"
+    "emotion",
+    "chatbot",
+    "nodejs"
   ],
   "scripts": {
     "start": "node src/main.js",
-    "dev": "nodemon --ignore session --ignore src/database src/main.js",
+    "dev": "nodemon --watch src --ignore session --ignore src/database src/main.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.js\"",
     "format:check": "prettier --check .",
     "test": "jest",
-    "clean": "rm -rf session sessions && echo '🌸 Cleared all Miara session data.'",
+    "clean": "rm -rf session sessions && echo '🌸 Miara session data cleared.'",
     "prepare": "npm run lint && echo '✨ Miara prepared for launch.'",
-    "postinstall": "echo '📦 Dependencies installed — ffmpeg/webp handled via ffmpeg-static.'"
+    "postinstall": "node scripts/postinstall-check.js || echo '📦 Dependencies installed — proceeding with default setup.'"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
@@ -68,7 +70,7 @@
     "qrcode-reader": "^1.0.4",
     "qrcode-terminal": "^0.12.0",
     "sharp": "^0.34.4",
-    "wa-sticker-formatter": "^4.4.4",
+    "wa-sticker-formatter": "^1.6.0",
     "webp-converter": "^2.3.3",
     "yargs": "^18.0.0"
   },
@@ -100,6 +102,9 @@
       "sessions/",
       "coverage/"
     ]
+  },
+  "optionalDependencies": {
+    "@tensorflow/tfjs": "^4.22.0"
   },
   "private": false
 }

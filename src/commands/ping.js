@@ -16,7 +16,7 @@ import https from "https";
 import { config } from "../config.js";
 import { getPlatform } from "../utils/helpers.js";
 
-// ⏱️ Helper: format uptime
+// ⏱️ Helper: format uptime nicely
 function clockString(ms) {
   const h = Math.floor(ms / 3600000);
   const m = Math.floor((ms % 3600000) / 60000);
@@ -24,76 +24,74 @@ function clockString(ms) {
   return [h, m, s].map((v) => v.toString().padStart(2, "0")).join(":");
 }
 
-// 🌐 Helper: simple speed test using HTTPS request size & duration
+// 🌐 Lightweight download speed check
 async function measureSpeed(url = "https://speed.hetzner.de/100MB.bin", sampleSizeMB = 3) {
   return new Promise((resolve) => {
-    const start = Date.now();
-    let downloaded = 0;
-    const req = https.get(url, (res) => {
-      res.on("data", (chunk) => {
-        downloaded += chunk.length;
-        if (downloaded >= sampleSizeMB * 1024 * 1024) req.destroy(); // stop early
+    try {
+      const start = Date.now();
+      let downloaded = 0;
+      const req = https.get(url, (res) => {
+        res.on("data", (chunk) => {
+          downloaded += chunk.length;
+          if (downloaded >= sampleSizeMB * 1024 * 1024) req.destroy(); // stop early
+        });
+        res.on("end", () => {
+          const durationSec = (Date.now() - start) / 1000;
+          const mbps = downloaded / (1024 * 1024) / durationSec;
+          resolve(mbps);
+        });
       });
-      res.on("end", () => {
-        const durationSec = (Date.now() - start) / 1000;
-        const mbps = downloaded / (1024 * 1024) / durationSec;
-        resolve(mbps);
-      });
-    });
-    req.on("error", () => resolve(0));
+      req.on("error", () => resolve(0));
+    } catch {
+      resolve(0);
+    }
   });
 }
 
 export default {
   name: "ping",
   aliases: ["speed", "net"],
-  description: "Check Miara’s speed, uptime, and network performance ⚡",
+  description: "Check Miara’s speed, uptime, and system performance ⚡",
   category: "utility",
   usage: ".ping",
 
   async execute(conn, m) {
+    const start = Date.now();
+    const from = m.from || m.key?.remoteJid || config.DEFAULT_OWNER_JID;
+
     try {
-      const start = Date.now();
-      const BOT_NAME = config.BOT_NAME || "Miara 🌸";
-      const OWNER_NAME = config.OWNER_NAME || "MidKnightMantra";
-      const TZ = config.TIMEZONE || "Africa/Nairobi";
+      // 🩹 Always guard message key usage
+      const safeKey = m.key && m.key.remoteJid ? m.key : null;
 
-      await conn.sendMessage(m.from, { react: { text: "🏃", key: m.key } });
-      await conn.sendMessage(m.from, { text: "🏃 Running network diagnostics..." }, { quoted: m });
+      await conn.sendMessage(from, { react: { text: "🏃", key: safeKey } });
+      await conn.sendMessage(from, { text: "🏃 Running network diagnostics..." }, { quoted: m });
 
-      // 🕒 Measure latency
+      // 🕒 Basic metrics
       const latency = Date.now() - start;
-      const now = moment().tz(TZ);
+      const now = moment().tz(config.TIMEZONE || "Africa/Nairobi");
       const uptime = clockString(process.uptime() * 1000);
 
-      // 🧠 Memory info
+      // 🧠 Memory
       const totalMem = os.totalmem() / (1024 * 1024);
       const freeMem = os.freemem() / (1024 * 1024);
       const usedMem = totalMem - freeMem;
       const memPercent = ((usedMem / totalMem) * 100).toFixed(1);
 
-      // ⚙️ CPU info
+      // ⚙️ CPU
       const cpus = os.cpus();
       const cpuModel = cpus[0]?.model || "Unknown CPU";
       const cpuCores = cpus.length;
       const loadAvg = os.loadavg()[0].toFixed(2);
-
-      // 💻 Platform
       const platform = getPlatform();
 
-      // 🌐 Network speeds (short benchmark)
-      await conn.sendMessage(
-        m.from,
-        { text: "📡 Testing network speed... (may take a few seconds)" },
-        { quoted: m }
-      );
-
+      // 🌐 Network
+      await conn.sendMessage(from, { text: "📡 Testing network speed..." }, { quoted: m });
       const downloadSpeed = await measureSpeed("https://speed.hetzner.de/10MB.bin", 3);
-      const uploadSpeed = downloadSpeed > 0 ? (downloadSpeed * 0.8).toFixed(2) : "0.00"; // simulate upload at 80% of DL
+      const uploadSpeed = downloadSpeed > 0 ? (downloadSpeed * 0.8).toFixed(2) : "0.00";
 
-      // 🩵 Format output
+      // 🩵 Build reply
       const replyMsg = `
-╭━━━⊰ *${BOT_NAME} DIAGNOSTICS* ⊱━━━╮
+╭━━━⊰ *${config.BOT_NAME || "Miara 🌸"} DIAGNOSTICS* ⊱━━━╮
 ┃ ⚡ *Latency:* ${latency}ms
 ┃ ⏱️ *Uptime:* ${uptime}
 ┃ 💻 *Platform:* ${platform}
@@ -105,20 +103,28 @@ export default {
 ┃
 ┃ 📅 *Date:* ${now.format("dddd, MMMM Do YYYY")}
 ┃ 🕐 *Time:* ${now.format("HH:mm:ss")}
-┃ 👑 *Owner:* ${OWNER_NAME}
+┃ 👑 *Owner:* ${config.OWNER_NAME || "MidKnightMantra"}
 ╰━━━━━━━━━━━━━━━━━━━━━━━╯
 
 💫 *Status:* Online, responsive, and steady.
 🌸 *Quote:* “Still breathing. Still dreaming. Still Miara.”
       `.trim();
 
-      await conn.sendMessage(m.from, { text: replyMsg }, { quoted: m });
-      await conn.sendMessage(m.from, { react: { text: "💫", key: m.key } });
+      await conn.sendMessage(from, { text: replyMsg }, { quoted: m });
+      await conn.sendMessage(from, { react: { text: "💫", key: safeKey } });
 
       console.log(`✅ Ping benchmark complete: ${latency}ms | DL ${downloadSpeed.toFixed(2)} MB/s`);
     } catch (err) {
       console.error("❌ Ping Error:", err);
-      await conn.sendMessage(m.from, { text: `⚠️ Ping failed: ${err.message}` }, { quoted: m });
+      try {
+        await conn.sendMessage(
+          from,
+          { text: `⚠️ Ping failed — Miara stumbled: ${err.message}` },
+          { quoted: m }
+        );
+      } catch {
+        console.error("Ping recovery send failed.");
+      }
     }
   }
 };
