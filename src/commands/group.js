@@ -1,10 +1,11 @@
 /**
- * 🌺 Miara Command: Group Utility Suite — “Garden of Harmony v2” (2025)
- * -----------------------------------------------------------
+ * 🌺 Miara Command: Group Utility Suite — “Garden of Harmony v2.5” (2025)
+ * ------------------------------------------------------------------------
  * Commands:
  *   .groupinfo          → Display elegant group info
  *   .welcome on/off     → Toggle welcome messages
  *   .setwelcome <text>  → Set a custom welcome message
+ * 🌸 Auto-welcome system: Greets new members automatically when enabled.
  *
  * Author: MidKnightMantra 🌸
  * Enhanced by GPT-5
@@ -15,14 +16,14 @@ import fs from "fs";
 import path from "path";
 import CONFIG from "../config.js";
 
-// 🌸 Persistent Settings Path
+// ─────────────────────────────────────────────
+// 🌸 Persistent Settings Storage
+// ─────────────────────────────────────────────
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "group_settings.json");
 
-// Ensure directory exists
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 
-// Safe read/write utilities
 const readSettings = () => {
   try {
     if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, "{}");
@@ -32,8 +33,13 @@ const readSettings = () => {
     return {};
   }
 };
-const writeSettings = (data) => fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 
+const writeSettings = (data) =>
+  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+
+// ─────────────────────────────────────────────
+// 🌺 Core Command Handler
+// ─────────────────────────────────────────────
 export default {
   name: "group",
   aliases: ["groupinfo", "welcome", "setwelcome"],
@@ -44,11 +50,9 @@ export default {
   async execute(conn, m, args) {
     try {
       if (!m.isGroup) {
-        await conn.sendMessage(
-          m.chat,
-          { text: "🌷 This command only works in group chats." },
-          { quoted: m }
-        );
+        await conn.sendMessage(m.chat, {
+          text: "🌷 This command only works in group chats."
+        });
         return;
       }
 
@@ -58,67 +62,51 @@ export default {
       const command = (args[0] || "info").toLowerCase();
       const settings = readSettings();
 
-      // 🌸 Check admin privileges
       const senderIsAdmin =
         admins.some((a) => a.id === m.sender) ||
         CONFIG.OWNER_NUMBER.some((num) => m.sender.includes(num));
 
-      // Initialize settings if missing
+      // Ensure default config exists for group
       if (!settings[m.chat]) {
-        settings[m.chat] = {
-          welcome: false,
-          customWelcome: ""
-        };
+        settings[m.chat] = { welcome: false, customWelcome: "" };
         writeSettings(settings);
       }
 
       // 💫 .welcome on/off
       if (command === "welcome") {
         if (!senderIsAdmin) {
-          await conn.sendMessage(
-            m.chat,
-            {
-              text: "🕊️ Only *group admins* or Miara’s Curator can change welcome settings."
-            },
-            { quoted: m }
-          );
+          await conn.sendMessage(m.chat, {
+            text: "🕊️ Only *group admins* or Miara’s Curator can change welcome settings."
+          });
           return;
         }
 
         const toggle = args[1]?.toLowerCase();
         if (!toggle) {
-          await conn.sendMessage(
-            m.chat,
-            { text: "🪷 Usage: `.welcome on` or `.welcome off`" },
-            { quoted: m }
-          );
+          await conn.sendMessage(m.chat, {
+            text: "🪷 Usage: `.welcome on` or `.welcome off`"
+          });
           return;
         }
 
         if (["on", "enable", "yes"].includes(toggle)) {
           settings[m.chat].welcome = true;
           writeSettings(settings);
-          await conn.sendMessage(
-            m.chat,
-            { text: "🌼 Welcome messages have been *activated!* 💫" },
-            { quoted: m }
-          );
+          await conn.sendMessage(m.chat, {
+            text: "🌼 Welcome messages have been *activated!* 💫"
+          });
           await conn.sendMessage(m.chat, { react: { text: "🌸", key: m.key } });
         } else if (["off", "disable", "no"].includes(toggle)) {
           settings[m.chat].welcome = false;
           writeSettings(settings);
-          await conn.sendMessage(
-            m.chat,
-            { text: "🌙 Welcome messages have been *deactivated.* 🌷" },
-            { quoted: m }
-          );
+          await conn.sendMessage(m.chat, {
+            text: "🌙 Welcome messages have been *deactivated.* 🌷"
+          });
           await conn.sendMessage(m.chat, { react: { text: "💫", key: m.key } });
         } else {
-          await conn.sendMessage(
-            m.chat,
-            { text: "🪷 Usage: `.welcome on` or `.welcome off`" },
-            { quoted: m }
-          );
+          await conn.sendMessage(m.chat, {
+            text: "🪷 Usage: `.welcome on` or `.welcome off`"
+          });
         }
         return;
       }
@@ -126,43 +114,32 @@ export default {
       // 🪷 .setwelcome <text>
       if (command === "setwelcome") {
         if (!senderIsAdmin) {
-          await conn.sendMessage(
-            m.chat,
-            {
-              text: "🚫 Only *group admins* or the Curator can set custom welcome messages."
-            },
-            { quoted: m }
-          );
+          await conn.sendMessage(m.chat, {
+            text: "🚫 Only *group admins* or the Curator can set custom welcome messages."
+          });
           return;
         }
 
         const text = args.slice(1).join(" ");
         if (!text) {
-          await conn.sendMessage(
-            m.chat,
-            {
-              text: "📝 Usage: `.setwelcome <message>`\n\nExample:\n`.setwelcome Welcome @user to our family 🌸`"
-            },
-            { quoted: m }
-          );
+          await conn.sendMessage(m.chat, {
+            text:
+              "📝 Usage: `.setwelcome <message>`\n\nExample:\n`.setwelcome Welcome @user to our family 🌸`"
+          });
           return;
         }
 
         settings[m.chat].customWelcome = text;
         writeSettings(settings);
 
-        await conn.sendMessage(
-          m.chat,
-          {
-            text: `✨ Custom welcome message updated!\n\n🪷 *New Message:*\n${text}`
-          },
-          { quoted: m }
-        );
+        await conn.sendMessage(m.chat, {
+          text: `✨ Custom welcome message updated!\n\n🪷 *New Message:*\n${text}`
+        });
         await conn.sendMessage(m.chat, { react: { text: "🌟", key: m.key } });
         return;
       }
 
-      // 🌸 Default: Group Info
+      // 🌸 Default: .groupinfo
       const welcomeStatus = settings[m.chat].welcome ? "🟢 Enabled" : "🔴 Disabled";
       const customWelcome =
         settings[m.chat].customWelcome ||
@@ -201,15 +178,48 @@ ${metadata.desc ? `\n📜 *Description:*\n${metadata.desc}` : ""}
         },
         { quoted: m }
       );
-
       await conn.sendMessage(m.chat, { react: { text: "🌺", key: m.key } });
     } catch (err) {
       console.error("❌ Group utility error:", err);
-      await conn.sendMessage(
-        m.chat,
-        { text: "💔 Miara encountered a cosmic glitch while accessing group data." },
-        { quoted: m }
-      );
+      await conn.sendMessage(m.chat, {
+        text: "💔 Miara encountered a cosmic glitch while accessing group data."
+      });
     }
   }
 };
+
+// ─────────────────────────────────────────────
+// 🌼 Event Listener: Auto Welcome Handler
+// ─────────────────────────────────────────────
+export async function onGroupParticipantsUpdate(conn, update) {
+  try {
+    const settings = readSettings();
+    const groupId = update.id;
+
+    if (!settings[groupId]?.welcome) return;
+
+    const metadata = await conn.groupMetadata(groupId);
+    const groupName = metadata.subject;
+    const customText =
+      settings[groupId].customWelcome ||
+      "🌸 *Welcome @user!* May your petals bloom brightly among us.";
+
+    for (const participant of update.participants) {
+      if (update.action === "add") {
+        const mentionText = customText.replace(/@user/g, `@${participant.split("@")[0]}`);
+        let pfp = "https://i.ibb.co/GHQzjqj/default-user.jpg";
+        try {
+          pfp = await conn.profilePictureUrl(participant, "image");
+        } catch {}
+
+        await conn.sendMessage(groupId, {
+          image: { url: pfp },
+          caption: `${mentionText}\n\n🪷 *Group:* ${groupName}`,
+          mentions: [participant]
+        });
+      }
+    }
+  } catch (err) {
+    console.warn("⚠️ Welcome handler error:", err.message);
+  }
+}

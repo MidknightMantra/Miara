@@ -1,7 +1,7 @@
 /**
- * 🌸 Miara Helpers (2025)
- * Centralized utility collection for Miara Framework.
- * ----------------------------------------------------
+ * 🌸 Miara Helpers (2025 Deluxe Edition – Baileys 7.x Compatible)
+ * ---------------------------------------------------------------
+ * Core utilities for Miara Framework — stable, modern & resilient.
  * by MidKnightMantra × GPT-5
  */
 
@@ -12,7 +12,7 @@ import https from "https";
 import http from "http";
 import os from "os";
 import PhoneNumber from "awesome-phonenumber";
-import * as fileType from "file-type";
+import { fileTypeFromBuffer } from "file-type";
 import { logger } from "./logger.js";
 
 // 🌐 Config constants
@@ -27,28 +27,39 @@ const DEFAULT_FILE_EXTENSION = "bin";
 const DEBUG_HELPERS = process.env.DEBUG_HELPERS === "true";
 
 // ──────────────────────────────
-// 🧠 Simplify Baileys Message
+// 🧠 Simplify Baileys Message (7.x safe)
 // ──────────────────────────────
 export function smsg(conn, m) {
   try {
-    const M = m.messages?.[0] || m;
+    const M = m.messages?.[0] || m; // upsert or proto event
+    if (!M?.message) return null;
+
     const { key, pushName } = M;
     const { id: msgId, remoteJid, participant } = key || {};
-    const messageContent = M.message || {};
-    const messageType = Object.keys(messageContent)[0];
-    const content = messageContent[messageType] || {};
+    const msg = M.message || {};
+    const messageType = Object.keys(msg)[0];
+    const content = msg[messageType] || {};
     const contextInfo = content.contextInfo || {};
-    const quotedMessage = contextInfo.quotedMessage;
+    const quotedMessage =
+      contextInfo?.quotedMessage ||
+      msg.extendedTextMessage?.contextInfo?.quotedMessage ||
+      null;
 
     const sender = participant || remoteJid;
-    const text = messageContent.conversation || content.caption || content.text || "";
+    const text =
+      msg.conversation ||
+      content.caption ||
+      content.text ||
+      msg.extendedTextMessage?.text ||
+      "";
 
     if (DEBUG_HELPERS)
-      logger.debug(`Simplified message from ${sender || "unknown"}: "${text.slice(0, 40)}"`);
+      safeLog("debug", `Simplified message from ${sender || "unknown"}: "${text.slice(0, 40)}"`);
 
     return {
       key,
       id: msgId,
+      chat: remoteJid,
       from: remoteJid,
       sender,
       isGroup: remoteJid?.endsWith("@g.us") || false,
@@ -59,19 +70,8 @@ export function smsg(conn, m) {
       message: M
     };
   } catch (e) {
-    logger.warn(`Error simplifying message object: ${e.message}`, "smsg");
-    return {
-      key: {},
-      id: "",
-      from: "",
-      sender: "",
-      isGroup: false,
-      pushName: "",
-      text: "",
-      mime: "",
-      quoted: null,
-      message: m
-    };
+    safeLog("warn", `Error simplifying message object: ${e.message}`, "smsg");
+    return null;
   }
 }
 
@@ -99,23 +99,26 @@ export async function getBuffer(url, options = {}) {
         timeout,
         headers: {
           "User-Agent": AXIOS_USER_AGENT,
-          "Accept": "application/pdf,video/*,image/*,audio/*,application/octet-stream,*/*",
-          "Referer": "https://google.com/"
+          Accept:
+            "application/pdf,video/*,image/*,audio/*,application/octet-stream,*/*",
+          Referer: "https://google.com/"
         },
         httpsAgent: agent,
         httpAgent: agent,
+        transitional: { forcedJSONParsing: false, silentJSONParsing: false },
+        decompress: true,
         validateStatus: (status) => status >= 200 && status < 400
       });
 
       if (response.status >= 200 && response.status < 300) {
-        if (DEBUG_HELPERS) logger.debug(`Fetched buffer from ${url}`);
+        if (DEBUG_HELPERS) safeLog("debug", `Fetched buffer from ${url}`);
         return Buffer.from(response.data);
       }
-      throw new Error(`HTTP Error ${response.status} ${response.statusText}`);
+      throw new Error(`HTTP ${response.status} ${response.statusText}`);
     } catch (err) {
-      logger.warn(`Fetch attempt ${attempt} failed for ${url}: ${err.message}`);
+      safeLog("warn", `Fetch attempt ${attempt} failed for ${url}: ${err.message}`);
       if (attempt > FETCH_MAX_RETRIES) {
-        logger.error(`All fetch attempts failed for ${url}`);
+        safeLog("error", `All fetch attempts failed for ${url}`);
         throw err;
       }
       await sleep(FETCH_RETRY_DELAY);
@@ -124,14 +127,27 @@ export async function getBuffer(url, options = {}) {
 }
 
 // ──────────────────────────────
-// 📂 File Type Detector
+// 📂 File Type Detector (robust)
 // ──────────────────────────────
 export async function detectFileType(buf) {
   try {
-    const type = await fileType.fromBuffer(buf);
+    if (!Buffer.isBuffer(buf) || !buf.length) {
+      throw new Error("Invalid or empty buffer");
+    }
+
+    let type = await fileTypeFromBuffer(buf);
+
+    // Fallback heuristics for unknown signatures
+    if (!type) {
+      const header = buf.slice(0, 12).toString("hex");
+      if (header.startsWith("474946")) type = { mime: "image/gif", ext: "gif" };
+      else if (header.includes("66747970")) type = { mime: "video/mp4", ext: "mp4" };
+      else if (header.startsWith("89504e47")) type = { mime: "image/png", ext: "png" };
+    }
+
     return type || { mime: DEFAULT_MIME_TYPE, ext: DEFAULT_FILE_EXTENSION };
   } catch (e) {
-    logger.error(`File type detection failed: ${e.message}`);
+    safeLog("error", `File type detection failed: ${e.message}`, "detectFileType");
     return { mime: DEFAULT_MIME_TYPE, ext: DEFAULT_FILE_EXTENSION };
   }
 }
@@ -173,7 +189,7 @@ export async function ensureDir(dir) {
   try {
     await fs.mkdir(dir, { recursive: true });
   } catch (e) {
-    logger.error(`Failed to ensure directory ${dir}: ${e.message}`);
+    safeLog("error", `Failed to ensure directory ${dir}: ${e.message}`);
   }
 }
 
@@ -200,6 +216,8 @@ export function getPlatform() {
       return "🐧 Linux";
     case "darwin":
       return "🍎 macOS";
+    case "android":
+      return "📱 Android";
     default:
       return platform.toUpperCase();
   }
@@ -211,12 +229,12 @@ export function getPlatform() {
 export async function safeReact(conn, m, emoji) {
   try {
     if (m?.key?.remoteJid && m?.key?.id) {
-      await conn.sendMessage(m.chat, { react: { text: emoji, key: m.key } });
+      await conn.sendMessage(m.key.remoteJid, { react: { text: emoji, key: m.key } });
     } else {
-      logger.debug(`Skipped reaction (invalid key): ${emoji}`);
+      safeLog("debug", `Skipped reaction (invalid key): ${emoji}`);
     }
   } catch (err) {
-    logger.warn(`safeReact error: ${err.message}`);
+    safeLog("warn", `safeReact error: ${err.message}`);
   }
 }
 
@@ -225,5 +243,17 @@ export function safeQuoted(m) {
     return m?.message && m?.key?.remoteJid ? { quoted: m.message } : {};
   } catch {
     return {};
+  }
+}
+
+// ──────────────────────────────
+// 🪶 Safe Logger Wrapper
+// ──────────────────────────────
+function safeLog(level, message) {
+  try {
+    if (logger && typeof logger[level] === "function") logger[level](message);
+    else console.log(`[${level.toUpperCase()}] ${message}`);
+  } catch {
+    console.log(`[${level.toUpperCase()}] ${message}`);
   }
 }

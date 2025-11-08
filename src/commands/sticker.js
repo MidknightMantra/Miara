@@ -1,18 +1,17 @@
 /**
- * 🌸 Miara — Smart Sticker Command (2025 Edition)
- * ------------------------------------------------
- * Converts images, GIFs, or short videos into stylish WhatsApp stickers
- * using Miara’s Artistic EXIF Engine.
+ * 🌸 Miara — Smart Sticker Command (Baileys 7 Ready, 2025 Edition)
+ * -----------------------------------------------------------------
+ * Converts images, GIFs, or short videos into Miara-style WhatsApp stickers,
+ * preserving EXIF metadata for packname and author.
  *
  * by MidKnightMantra × GPT-5
  */
 
 import fs from "fs";
-import path from "path";
 import { downloadMediaMessage } from "@whiskeysockets/baileys";
 import { config } from "../config.js";
 import { autoToWebp } from "../lib/exifEngine.js";
-import { detectFileType } from "../utils/helpers.js";
+import { detectFileType, safeReact, safeQuoted } from "../utils/helpers.js";
 import { logger } from "../utils/logger.js";
 
 export default {
@@ -23,50 +22,73 @@ export default {
   usage: ".sticker (reply to image/video)",
 
   async execute(conn, m) {
-    const { from } = m;
-    const quoted = m.quoted || m.message?.extendedTextMessage?.contextInfo?.quotedMessage;
-    const mediaMsg =
-      quoted?.imageMessage ||
-      quoted?.videoMessage ||
-      m.message?.imageMessage ||
-      m.message?.videoMessage;
-
-    if (!mediaMsg) {
-      await conn.sendMessage(from, {
-        text: "📸 Reply to an *image*, *GIF*, or *short video* with `.sticker` to create a sticker."
-      });
-      return;
-    }
+    const chat = m.key.remoteJid;
 
     try {
-      await conn.sendMessage(from, { react: { text: "⏳", key: m.key } });
+      const q =
+        m.quoted ||
+        (m.message?.extendedTextMessage?.contextInfo?.quotedMessage
+          ? m.message.extendedTextMessage.contextInfo.quotedMessage
+          : null);
+
+      const targetMsg =
+        q?.imageMessage ||
+        q?.videoMessage ||
+        m.message?.imageMessage ||
+        m.message?.videoMessage;
+
+      if (!targetMsg) {
+        await conn.sendMessage(
+          chat,
+          {
+            text:
+              "📸 Reply to an *image*, *GIF*, or *short video* with `.sticker` to create a sticker."
+          },
+          safeQuoted(m)
+        );
+        return;
+      }
+
+      await safeReact(conn, m, "⏳");
       logger.info("Sticker conversion started.", "Sticker");
 
-      // download media
-      const buffer = await downloadMediaMessage(m, "buffer", {}, { logger });
-      if (!buffer) throw new Error("Failed to download media buffer.");
+      // 🧩 Step 1: Download buffer from the correct message source
+      const buffer = await downloadMediaMessage(
+        { message: targetMsg },
+        "buffer",
+        {},
+        { logger }
+      );
 
-      // detect type
+      if (!buffer || !buffer.length) throw new Error("Failed to download media.");
+
+      // 🧠 Step 2: Detect file type
       const type = await detectFileType(buffer);
-      const mime = type.mime || mediaMsg.mimetype || "application/octet-stream";
+      const mime = type?.mime || targetMsg.mimetype || "application/octet-stream";
 
-      // convert to WebP
+      // 🪄 Step 3: Convert to WebP with EXIF metadata
       const stickerBuffer = await autoToWebp(buffer, mime, {
-        packname: config.STICKER_PACK_NAME,
-        author: config.STICKER_AUTHOR
+        packname: config.STICKER_PACK_NAME || "Miara Stickers 🌸",
+        author: config.STICKER_AUTHOR || "MidKnightMantra"
       });
 
-      // send sticker
-      await conn.sendMessage(from, { sticker: stickerBuffer }, { quoted: m });
-      await conn.sendMessage(from, { react: { text: "🌸", key: m.key } });
+      if (!stickerBuffer) throw new Error("Sticker conversion failed.");
+
+      // 💫 Step 4: Send sticker
+      await conn.sendMessage(chat, { sticker: stickerBuffer }, safeQuoted(m));
+      await safeReact(conn, m, "🌸");
 
       logger.info("Sticker successfully created and sent.", "Sticker");
     } catch (err) {
       logger.error(`Sticker creation failed: ${err.message}`, false, "Sticker");
-      await conn.sendMessage(from, {
-        text: `⚠️ Failed to create sticker.\nReason: ${err.message}`
-      });
-      await conn.sendMessage(from, { react: { text: "❌", key: m.key } });
+
+      await conn.sendMessage(
+        m.key.remoteJid,
+        { text: `⚠️ Failed to create sticker.\nReason: ${err.message}` },
+        safeQuoted(m)
+      );
+
+      await safeReact(conn, m, "❌");
     }
   }
 };

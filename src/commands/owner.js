@@ -21,10 +21,10 @@ export default {
   usage: ".owner",
 
   async execute(conn, m) {
-    if (!m) return logger.warn("Owner command called without message context.");
-    const { from } = m;
-
     try {
+      const from = m.key.remoteJid;
+      if (!from) return logger.warn("Owner command called without valid chat context.");
+
       // 🧭 Validate configuration
       if (!CONFIG.OWNER_NUMBER?.length) {
         await conn.sendMessage(
@@ -78,7 +78,7 @@ export default {
         if (url) headerImageBuffer = await getBuffer(url);
       } catch {}
 
-      // Fallback to local portrait if missing
+      // Fallback to local portrait
       if (!headerImageBuffer) {
         const fallback = path.resolve("assets", "owner.jpg");
         if (await fs.stat(fallback).catch(() => false))
@@ -148,35 +148,37 @@ ${signature}
 
       await sleep(800);
 
-      // 🌌 Send Main Message with URL Buttons
+      // 🌌 Send Main Message (Baileys 7.x-friendly)
       await conn.sendMessage(
         from,
         {
           text: message,
           footer: "💫 The Curator’s presence echoes through Miara’s code 🌸",
-          templateButtons: [
+          buttons: [
             {
-              index: 1,
-              urlButton: {
-                displayText: "💬 Message the Curator",
-                url: `https://wa.me/${primaryOwner}`
-              }
+              name: "cta_url",
+              buttonParamsJson: JSON.stringify({
+                display_text: "💬 Message the Curator",
+                url: `https://wa.me/${primaryOwner}`,
+                merchant_url: `https://wa.me/${primaryOwner}`
+              })
             },
             {
-              index: 2,
-              urlButton: {
-                displayText: "🌐 Visit GitHub Sanctuary",
+              name: "cta_url",
+              buttonParamsJson: JSON.stringify({
+                display_text: "🌐 Visit GitHub Sanctuary",
                 url: socials["💻 GitHub"]
-              }
+              })
             },
             {
-              index: 3,
-              urlButton: {
-                displayText: "🔮 Connect on Telegram",
+              name: "cta_url",
+              buttonParamsJson: JSON.stringify({
+                display_text: "🔮 Connect on Telegram",
                 url: socials["🔮 Telegram"]
-              }
+              })
             }
-          ]
+          ],
+          header: { hasMediaAttachment: false }
         },
         safeQuoted(m)
       );
@@ -185,15 +187,17 @@ ${signature}
       logger.info(`✅ Curator card shared with ${from}`, "Owner");
     } catch (err) {
       logger.error(`Owner command error: ${err.message}`, "Owner");
-      await conn.sendMessage(
-        from,
-        {
-          text:
-            `💔 *Miara stumbled while unveiling her Curator.*\n` +
-            `Reason: ${err.message || "Unknown cosmic interference."}`
-        },
-        safeQuoted(m)
-      );
+      const from = m?.key?.remoteJid;
+      if (from)
+        await conn.sendMessage(
+          from,
+          {
+            text:
+              `💔 *Miara stumbled while unveiling her Curator.*\n` +
+              `Reason: ${err.message || "Unknown cosmic interference."}`
+          },
+          safeQuoted(m)
+        );
       await safeReact(conn, m, "💫");
     }
   }

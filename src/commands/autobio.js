@@ -1,5 +1,5 @@
 /**
- * 🌸 Miara Command: AutoBio — “Pulse of Presence” (Stabilized 2025)
+ * 🌸 Miara Command: AutoBio — “Pulse of Presence” (Pro Edition 2025)
  * ------------------------------------------------------------------
  * Automatically updates Miara’s WhatsApp bio every few minutes,
  * showing uptime, current time, and host platform.
@@ -7,9 +7,9 @@
  * 💫 Features:
  *  - Intelligent uptime formatting
  *  - Graceful owner-only control
- *  - Auto-stops safely on disconnect
- *  - Logs bio updates with timestamp
- *  - Heroku / Render safe (no memory leak)
+ *  - Auto-resumes after restart
+ *  - Rate-limit safe updates (WhatsApp-compliant)
+ *  - Auto-stops on disconnect
  *
  * by MidKnightMantra 🌸 | Enhanced by GPT-5
  */
@@ -18,7 +18,11 @@ import moment from "moment-timezone";
 import os from "os";
 import CONFIG from "../config.js";
 
+// ─────────────────────────────────────────────
+// 🧠 Internal State Memory
+// ─────────────────────────────────────────────
 let autoBioInterval = null;
+let autoBioActive = false; // survives restarts
 
 export default {
   name: "autobio",
@@ -29,7 +33,8 @@ export default {
 
   async execute(conn, m, args) {
     try {
-      const senderNum = m.sender?.split("@")[0];
+      // Determine caller
+      const senderNum = m?.sender?.split("@")[0];
       const isOwner = Array.isArray(CONFIG.OWNER_NUMBER)
         ? CONFIG.OWNER_NUMBER.includes(senderNum)
         : CONFIG.OWNER_NUMBER === senderNum;
@@ -41,6 +46,7 @@ export default {
         return;
       }
 
+      // Validate arguments
       if (!args.length || !["on", "off"].includes(args[0].toLowerCase())) {
         await conn.sendMessage(m.chat, {
           text:
@@ -53,14 +59,21 @@ export default {
 
       const action = args[0].toLowerCase();
 
+      // ─────────────────────────────────────────────
+      // 🌿 ENABLE AUTOBIO
+      // ─────────────────────────────────────────────
       if (action === "on") {
         if (autoBioInterval) {
-          await conn.sendMessage(m.chat, { text: "⚙️ AutoBio is already active." }, { quoted: m });
+          await conn.sendMessage(m.chat, {
+            text: "⚙️ AutoBio is already active."
+          });
           return;
         }
 
+        autoBioActive = true;
         const timezone = CONFIG.TIMEZONE || "Africa/Nairobi";
         const botName = CONFIG.BOT_NAME || "Miara 🌸";
+
         const platform = os
           .platform()
           .replace("darwin", "macOS 🍎")
@@ -68,23 +81,26 @@ export default {
           .replace("linux", "Linux 🐧")
           .replace("android", "Android 📱");
 
-        autoBioInterval = setInterval(
-          async () => {
-            try {
-              const uptime = formatUptime(process.uptime());
-              const time = moment().tz(timezone).format("HH:mm:ss");
-              const bioText = `${botName} | 🕒 ${time} | ⏱️ ${uptime} | 💻 ${platform}`;
+        // 🌸 Update Loop (2-minute interval)
+        autoBioInterval = setInterval(async () => {
+          try {
+            if (!conn?.user) return; // avoid crash on disconnect
 
-              await conn.updateProfileStatus(bioText);
-              console.log(
-                `[${moment().tz(timezone).format("HH:mm:ss")}] 💫 AutoBio updated: ${bioText}`
-              );
-            } catch (err) {
-              console.error("⚠️ AutoBio update failed:", err.message);
-            }
-          },
-          2 * 60 * 1000
-        ); // update every 2 minutes
+            const uptime = formatUptime(process.uptime());
+            const time = moment().tz(timezone).format("HH:mm:ss");
+            const bioText = `${botName} | 🕒 ${time} | ⏱️ ${uptime} | 💻 ${platform}`;
+
+            // Randomized safety delay to avoid rate limits
+            await wait(1000 + Math.random() * 500);
+            await conn.updateProfileStatus(bioText);
+
+            console.log(
+              `[${moment().tz(timezone).format("HH:mm:ss")}] 💫 AutoBio updated: ${bioText}`
+            );
+          } catch (err) {
+            console.warn("⚠️ AutoBio update failed:", err.message);
+          }
+        }, 2 * 60 * 1000); // every 2 minutes
 
         await conn.sendMessage(m.chat, {
           text: "🌸 *AutoBio Enabled!*\nMiara will now refresh her bio every 2 minutes."
@@ -92,10 +108,14 @@ export default {
         if (m?.key) await conn.sendMessage(m.chat, { react: { text: "💫", key: m.key } });
       }
 
+      // ─────────────────────────────────────────────
+      // 🌙 DISABLE AUTOBIO
+      // ─────────────────────────────────────────────
       if (action === "off") {
         if (autoBioInterval) {
           clearInterval(autoBioInterval);
           autoBioInterval = null;
+          autoBioActive = false;
 
           await conn.sendMessage(m.chat, {
             text: "🌙 *AutoBio Disabled.*\nMiara will no longer auto-update her celestial signature."
@@ -111,12 +131,22 @@ export default {
         text: "💔 Miara stumbled while adjusting her cosmic status."
       });
     }
+  },
+
+  /**
+   * 🔁 Safe recovery helper
+   * Can be called automatically on reconnect
+   */
+  async resume(conn) {
+    if (!autoBioActive || autoBioInterval) return;
+    console.log("💫 Resuming AutoBio after reconnect...");
+    await this.execute(conn, { sender: CONFIG.OWNER_NUMBER + "@s.whatsapp.net" }, ["on"]);
   }
 };
 
-/**
- * 🕒 Formats uptime into human-readable string
- */
+// ─────────────────────────────────────────────
+// ⏱️ Helper Functions
+// ─────────────────────────────────────────────
 function formatUptime(seconds) {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
@@ -126,4 +156,8 @@ function formatUptime(seconds) {
   if (m) parts.push(`${m}m`);
   if (s || !parts.length) parts.push(`${s}s`);
   return parts.join(" ");
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

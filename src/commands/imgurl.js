@@ -1,8 +1,15 @@
 /**
  * 🪞 Miara Command: Image to URL — “Mirror of the Web” (2025)
  * ------------------------------------------------------------
- * Uploads an image or sticker to Telegra.ph and returns a public URL.
- * by MidKnightMantra 🌸
+ * Uploads an image or sticker to Telegra.ph (or fallback mirrors)
+ * and returns a public URL.
+ *
+ * 💫 Features:
+ * - Supports images & stickers (jpg, png, webp)
+ * - Graceful Telegra.ph fallback to File.io and 0x0.st
+ * - Temporary file cleanup and polite reactions
+ *
+ * by MidKnightMantra 🌸 | Refined by GPT-5
  */
 
 import axios from "axios";
@@ -19,25 +26,25 @@ export default {
   usage: ".imgurl (attach or reply to an image/sticker)",
 
   async execute(conn, m) {
-    const from = m.from;
+    const from = m.chat || m.from;
     const key = m.key;
 
     try {
-      // 🌸 Step 1: Aesthetic reaction
+      // 🌸 Step 1: Initial Reaction
       await conn.sendMessage(from, { react: { text: "📸", key } });
 
-      // 🧩 Step 2: Find valid image or sticker
-      const target =
+      // 🧩 Step 2: Locate media (image/sticker or reply)
+      const msg =
         m.message?.imageMessage ||
         m.message?.stickerMessage ||
         m.quoted?.message?.imageMessage ||
         m.quoted?.message?.stickerMessage
-          ? m.message?.imageMessage
+          ? m.message?.imageMessage || m.message?.stickerMessage
             ? m
             : m.quoted
           : null;
 
-      if (!target) {
+      if (!msg) {
         await conn.sendMessage(
           from,
           {
@@ -48,70 +55,105 @@ export default {
         return;
       }
 
-      // 🧠 Step 3: Download media
+      // 🧠 Step 3: Download the media
       await conn.sendMessage(from, { react: { text: "⏳", key } });
-      const buffer = await downloadMediaMessage(target, "buffer", {}, { logger: console });
 
-      if (!buffer || buffer.length === 0)
-        throw new Error("Empty buffer — could not download image.");
+      const buffer = await downloadMediaMessage(msg, "buffer", {}, { logger: console });
+      if (!buffer?.length) throw new Error("Empty buffer — failed to fetch image data.");
 
-      // 💾 Step 4: Save temp file safely
+      // 💾 Step 4: Temporary file
       const tempDir = path.join(process.cwd(), "temp");
       await fs.promises.mkdir(tempDir, { recursive: true });
-      const tempFile = path.join(tempDir, `${Date.now()}_miara.jpg`);
+
+      const ext = msg.message?.imageMessage ? "jpg" : "webp";
+      const tempFile = path.join(tempDir, `${Date.now()}_miara.${ext}`);
       await fs.promises.writeFile(tempFile, buffer);
 
-      // 🌐 Step 5: Upload to Telegra.ph
-      const formData = new FormData();
-      formData.append("file", fs.createReadStream(tempFile));
+      // 🌐 Step 5: Attempt upload
+      const uploaded = await uploadWithFallback(tempFile);
+      if (!uploaded) throw new Error("Upload failed — no valid mirror responded.");
 
-      const res = await axios.post("https://telegra.ph/upload", formData, {
-        headers: formData.getHeaders(),
-        timeout: 20000
-      });
-
-      // ✨ Step 6: Parse upload result
-      const uploaded = res.data?.[0]?.src;
-      if (!uploaded) throw new Error("Invalid Telegra.ph response.");
-
-      const finalUrl = `https://telegra.ph${uploaded}`;
-
-      // 🌸 Step 7: Respond beautifully
       const replyText = `
 🪞 *Miara’s Mirror of the Web*  
 ━━━━━━━━━━━━━━━━━━━  
 ✨ *Upload Complete!*  
 📸 *Public URL:*  
-${finalUrl}
+${uploaded}
 
-💫 Your image now lives in the cloud — gracefully.  
-🌸 _Whispered through Telegra.ph_
+💫 Your image now lives among the stars.  
+🌸 _Whispered through the cosmic mirrors._
       `.trim();
 
-      await conn.sendMessage(from, { text: replyText }, { quoted: m.message });
+      await conn.sendMessage(from, { text: replyText }, { quoted: m });
       await conn.sendMessage(from, { react: { text: "🌸", key } });
 
-      // 🧹 Step 8: Cleanup
+      // 🧹 Step 6: Cleanup
       try {
         await fs.promises.unlink(tempFile);
       } catch (e) {
         console.warn("Cleanup skipped:", e.message);
       }
 
-      console.log(`✅ Uploaded image → ${finalUrl}`);
+      console.log(`✅ Uploaded successfully → ${uploaded}`);
     } catch (err) {
       console.error("❌ Image Upload Error:", err.message);
+
       const errorMsg = `
 💔 *Upload Failed!*  
 ━━━━━━━━━━━━━━━  
 ⚠️ ${err.message || "An unknown issue occurred."}  
-Please try again with a valid image.
+Please try again with a valid image or sticker.
 
-🌸 Miara will always try again — patiently.
+🌸 Miara remains patient and ready to reflect again.
       `.trim();
 
-      await conn.sendMessage(from, { text: errorMsg }, { quoted: m.message });
-      await conn.sendMessage(from, { react: { text: "💫", key: m.key } });
+      await conn.sendMessage(from, { text: errorMsg }, { quoted: m });
+      await conn.sendMessage(from, { react: { text: "💫", key } });
     }
   }
 };
+
+// ─────────────────────────────────────────────
+// 🪷 Helper: Multi-host upload with graceful fallback
+// ─────────────────────────────────────────────
+async function uploadWithFallback(filePath) {
+  try {
+    // 1️⃣ Try Telegra.ph
+    const formData = new FormData();
+    formData.append("file", fs.createReadStream(filePath));
+    const res = await axios.post("https://telegra.ph/upload", formData, {
+      headers: formData.getHeaders(),
+      timeout: 20000
+    });
+    const src = res.data?.[0]?.src;
+    if (src) return `https://telegra.ph${src}`;
+  } catch (e) {
+    console.warn("⚠️ Telegra.ph failed:", e.message);
+  }
+
+  try {
+    // 2️⃣ Try File.io
+    const formData = new FormData();
+    formData.append("file", fs.createReadStream(filePath));
+    const res = await axios.post("https://file.io", formData, {
+      headers: formData.getHeaders(),
+      timeout: 20000
+    });
+    if (res.data?.link) return res.data.link;
+  } catch (e) {
+    console.warn("⚠️ File.io failed:", e.message);
+  }
+
+  try {
+    // 3️⃣ Try 0x0.st
+    const res = await axios.post("https://0x0.st", fs.createReadStream(filePath), {
+      headers: { "Content-Type": "application/octet-stream" },
+      timeout: 20000
+    });
+    if (res.data?.startsWith("http")) return res.data.trim();
+  } catch (e) {
+    console.warn("⚠️ 0x0.st failed:", e.message);
+  }
+
+  return null;
+}

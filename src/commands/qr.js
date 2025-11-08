@@ -1,12 +1,13 @@
 /**
- * 🌌 Miara Command: QR — Celestial Encoder
- * -----------------------------------------
+ * 🌌 Miara Command: QR — Celestial Encoder (Baileys 7-Ready)
+ * -----------------------------------------------------------
  * Transmutes any text or link into a glowing digital sigil (QR Code).
  * by MidKnightMantra 🌸 — “Every code carries a whisper of its creator.”
  */
 
 import QRCode from "qrcode";
 import { config } from "../config.js";
+import { safeQuoted, safeReact } from "../utils/helpers.js";
 
 export default {
   name: "qr",
@@ -16,26 +17,33 @@ export default {
   usage: ".qr <text_or_url>",
 
   async execute(conn, m, args) {
-    const { from } = m;
-    const qrData = args.join(" ").trim();
-
-    // 🧩 Input validation
-    if (!qrData) {
-      await conn.sendMessage(from, {
-        text: "🌙 Please share text or a link to encode.\nExample:\n.qr https://miara.ai\n.qr Miara awakens 🌸"
-      });
-      return;
-    }
-
-    // 💫 Determine the kind of content
-    const isUrl = /^https?:\/\//i.test(qrData);
-    const typeEmoji = isUrl ? "🌐" : qrData.length > 30 ? "📜" : "💠";
-    const title = isUrl ? "Celestial Link Portal" : "Encoded Sigil";
-
     try {
+      const chat = m.key.remoteJid;
+      const qrData = args.join(" ").trim();
+
+      // 🧩 Validate input
+      if (!qrData) {
+        await conn.sendMessage(
+          chat,
+          {
+            text:
+              "🌙 Please share text or a link to encode.\n\n" +
+              "Example:\n.qr https://miara.ai\n.qr Miara awakens 🌸"
+          },
+          safeQuoted(m)
+        );
+        return;
+      }
+
+      // 🌸 Identify content
+      const isUrl = /^https?:\/\//i.test(qrData);
+      const typeEmoji = isUrl ? "🌐" : qrData.length > 30 ? "📜" : "💠";
+      const title = isUrl ? "Celestial Link Portal" : "Encoded Sigil";
+
+      await safeReact(conn, m, "✨");
       console.log(`✨ Generating QR code for: ${qrData}`);
 
-      // 🎨 Generate QR code (violet aesthetic)
+      // 🎨 Generate QR buffer
       const qrBuffer = await QRCode.toBuffer(qrData, {
         width: 400,
         margin: 2,
@@ -45,7 +53,7 @@ export default {
         }
       });
 
-      // 🌸 Caption design
+      // 🌸 Caption
       const caption = `
 ${typeEmoji} *${title}*
 ──────────────────────
@@ -54,18 +62,18 @@ ${typeEmoji} *${title}*
 🌠 *Timestamp:* ${new Date().toLocaleString()}
       `.trim();
 
-      // ✉️ Send the QR code image
-      await conn.sendMessage(from, {
-        image: qrBuffer,
-        caption
-      });
+      // ✉️ Send QR image safely
+      await conn.sendMessage(
+        chat,
+        {
+          image: qrBuffer,
+          caption
+        },
+        safeQuoted(m)
+      );
 
-      // React (if message key exists)
-      if (m?.key) {
-        await conn.sendMessage(from, { react: { text: "💫", key: m.key } });
-      }
-
-      console.log(`✅ QR code sent successfully to ${from}`);
+      await safeReact(conn, m, "💫");
+      console.log(`✅ QR code sent successfully to ${chat}`);
     } catch (err) {
       console.error("❌ QR generation error:", err);
       const errorText = `
@@ -75,10 +83,10 @@ ${typeEmoji} *${title}*
 💭 Hint: Try simpler text or shorter URLs.
       `.trim();
 
-      await conn.sendMessage(from, { text: errorText });
-
-      if (m?.key) {
-        await conn.sendMessage(from, { react: { text: "💔", key: m.key } });
+      const chat = m?.key?.remoteJid;
+      if (chat) {
+        await conn.sendMessage(chat, { text: errorText }, safeQuoted(m));
+        await safeReact(conn, m, "💔");
       }
     }
   }

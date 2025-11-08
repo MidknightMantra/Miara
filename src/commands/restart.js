@@ -1,14 +1,14 @@
 /**
- * 🕊️ Miara Command: Restart — Phoenix Protocol
- * --------------------------------------------
+ * 🕊️ Miara Command: Restart — Phoenix Protocol (Baileys 7 Ready)
+ * --------------------------------------------------------------
  * Gracefully restarts Miara within managed environments
  * (PM2, Docker, systemd, etc.) — self-resurrection sequence.
  *
- * 🌸 by MidKnightMantra | 2025
+ * 🌸 by MidKnightMantra | Refined by GPT-5
  */
 
 import { config } from "../config.js";
-import { sleep } from "../utils/helpers.js";
+import { sleep, safeQuoted, safeReact } from "../utils/helpers.js";
 import moment from "moment-timezone";
 import os from "os";
 import process from "process";
@@ -22,15 +22,19 @@ export default {
   usage: ".restart",
 
   async execute(conn, m) {
+    const chat = m.key.remoteJid;
     const senderNum = m.sender.split("@")[0];
+
     const isOwner = Array.isArray(config.OWNER_NUMBER)
       ? config.OWNER_NUMBER.includes(senderNum)
       : config.OWNER_NUMBER === senderNum;
 
     if (!isOwner) {
-      await conn.sendMessage(m.from, {
-        text: "🚫 Only the Celestial Curator may trigger Miara’s rebirth 🌠"
-      });
+      await conn.sendMessage(
+        chat,
+        { text: "🚫 Only the Celestial Curator may trigger Miara’s rebirth 🌠" },
+        safeQuoted(m)
+      );
       return;
     }
 
@@ -42,7 +46,8 @@ export default {
       .platform()
       .replace("linux", "🐧 Linux Realm")
       .replace("darwin", "🍏 macOS Halo")
-      .replace("win32", "🪟 Windows Gate");
+      .replace("win32", "🪟 Windows Gate")
+      .toUpperCase();
 
     const rebootMsg = `
 🕊️ *${BOT_NAME} — Phoenix Rebirth Protocol*
@@ -55,24 +60,21 @@ export default {
 🌙 “Death is not the end. It’s just another heartbeat in the stars.”
     `.trim();
 
-    // Send the message
-    await conn.sendMessage(m.from, { text: rebootMsg }, { quoted: m.message });
-
-    if (m?.key) {
-      await conn.sendMessage(m.from, { react: { text: "🔥", key: m.key } });
-    }
+    // 🩵 Send farewell message
+    await conn.sendMessage(chat, { text: rebootMsg }, safeQuoted(m));
+    await safeReact(conn, m, "🔥");
 
     console.log(chalk.magentaBright("🌌 Miara Phoenix Protocol engaged..."));
     console.log(chalk.cyan("⚙️ Preparing cosmic reset..."));
 
-    // Give WhatsApp time to deliver messages before shutdown
-    await sleep(2500);
+    // Allow time for WhatsApp message delivery
+    await sleep(3000);
 
-    // Log shutdown info
+    // Log shutdown
     console.log(chalk.yellow(`💫 ${BOT_NAME} shutting down for rebirth.`));
     console.log(chalk.gray("System will auto-restart if managed by PM2/Docker."));
 
-    // Signal PM2 or other process managers
+    // Notify process manager (PM2, systemd)
     if (process.send) {
       process.send("restart");
     }

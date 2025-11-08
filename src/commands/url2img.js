@@ -2,12 +2,12 @@
  * 🌐 Miara Command: URL to Image — “The Web Seer” (2025)
  * ---------------------------------------------------------
  * Fetches an image from a URL, or captures a screenshot of a full webpage.
- * by MidKnightMantra 🌸
+ * by MidKnightMantra 🌸 | Optimized for Baileys 7 and headless Puppeteer
  */
 
-import axios from "axios";
 import puppeteer from "puppeteer";
 import { isUrl, getBuffer } from "../utils/helpers.js";
+import { logger } from "../utils/logger.js";
 
 export default {
   name: "url2img",
@@ -17,102 +17,115 @@ export default {
   usage: ".url2img <image_or_website_url>",
 
   async execute(conn, m, args) {
-    const from = m.from;
-    const key = m.key;
+    const chat = m.key.remoteJid;
     const input = args.join(" ").trim();
 
     try {
-      await conn.sendMessage(from, { react: { text: "🪞", key } });
+      await conn.sendMessage(chat, { react: { text: "🪞", key: m.key } });
 
       // 🌸 Step 1: Validate input
       if (!input || !isUrl(input)) {
         await conn.sendMessage(
-          from,
+          chat,
           {
-            text: "🌐 Please provide a valid *URL*.\n\nExamples:\n• .url2img https://example.com\n• .url2img https://telegra.ph/file/xyz.jpg"
+            text:
+              "🌐 Please provide a valid *URL*.\n\nExamples:\n" +
+              "• `.url2img https://example.com`\n" +
+              "• `.url2img https://telegra.ph/file/xyz.jpg`"
           },
           { quoted: m }
         );
-        await conn.sendMessage(from, { react: { text: "💭", key } });
+        await conn.sendMessage(chat, { react: { text: "💭", key: m.key } });
         return;
       }
 
-      // Step 2: Determine content type (basic heuristic)
-      const isImageLink = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(input);
+      // Step 2: Determine content type
+      const isImageLink = /\.(jpe?g|png|gif|webp|avif)$/i.test(input);
+      await conn.sendMessage(chat, { text: "🔮 Reading the link’s essence..." }, { quoted: m });
 
-      await conn.sendMessage(from, { text: "🔮 Reading the link’s essence..." }, { quoted: m });
-
-      // 🧿 Step 3: Handle image URLs directly
+      // 🧿 Step 3: Direct image fetch
       if (isImageLink) {
         const buffer = await getBuffer(input);
-        if (!buffer || buffer.length === 0)
-          throw new Error("Image not accessible or empty buffer.");
+        if (!buffer?.length) throw new Error("Image not accessible or empty buffer.");
+
         await conn.sendMessage(
-          from,
+          chat,
           {
             image: buffer,
-            caption: `
-🖼️ *Miara’s Reflection Manifested*  
+            caption: `🖼️ *Miara’s Reflection Manifested*  
 ━━━━━━━━━━━━━━━━━━━  
 📡 *Source:* ${input}  
 💫 “Captured straight from the digital stream.” 🌸`
           },
-          { quoted: m.message }
+          { quoted: m }
         );
-        await conn.sendMessage(from, { react: { text: "🌸", key } });
+
+        await conn.sendMessage(chat, { react: { text: "🌸", key: m.key } });
         return;
       }
 
-      // 🧠 Step 4: If not an image → treat as webpage
+      // 🧠 Step 4: Treat as webpage
       await conn.sendMessage(
-        from,
+        chat,
         { text: "🖥️ This seems like a webpage... preparing snapshot 🪄" },
         { quoted: m }
       );
 
+      // 🧩 Step 5: Launch Puppeteer safely
       const browser = await puppeteer.launch({
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        headless: "new"
+        headless: true,
+        args: [
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-gpu",
+          "--no-zygote",
+          "--disable-dev-shm-usage"
+        ],
+        defaultViewport: { width: 1366, height: 768 }
       });
 
       const page = await browser.newPage();
-      await page.setViewport({ width: 1280, height: 720 });
-      await page.goto(input, { waitUntil: "networkidle2", timeout: 30000 });
+      await page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+          "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+      );
 
-      // 🪩 Step 5: Take screenshot
-      const screenshot = await page.screenshot({ fullPage: true });
+      await page.goto(input, { waitUntil: "networkidle2", timeout: 45000 });
+
+      // Wait a moment for lazy-loaded content
+      await page.waitForTimeout(1500);
+
+      // 🌗 Step 6: Capture screenshot
+      const screenshot = await page.screenshot({ fullPage: true, type: "jpeg", quality: 85 });
       await browser.close();
 
-      // ✨ Step 6: Send screenshot as image
+      // ✨ Step 7: Send result
       await conn.sendMessage(
-        from,
+        chat,
         {
           image: screenshot,
-          caption: `
-🌐 *Miara’s Web Vision*  
+          caption: `🌐 *Miara’s Web Vision*  
 ━━━━━━━━━━━━━━━━━━━  
 👁️ *Captured from:* ${input}  
 💫 “She doesn’t just see links — she witnesses the web itself.” 🌸`
         },
-        { quoted: m.message }
+        { quoted: m }
       );
 
-      await conn.sendMessage(from, { react: { text: "👁️", key } });
-      console.log(`📸 Webpage rendered successfully → ${input}`);
+      await conn.sendMessage(chat, { react: { text: "👁️", key: m.key } });
+      logger.info(`📸 Webpage rendered successfully → ${input}`);
     } catch (err) {
-      console.error("❌ URL2IMG Error:", err.message);
-      await conn.sendMessage(
-        from,
-        {
-          text: `
+      logger.error(`URL2IMG Error: ${err.message}`, "Webshot");
+
+      const msg = `
 💔 *Failed to mirror the digital reflection.*  
 ━━━━━━━━━━━━━━━  
 ⚠️ ${err.message || "Unknown cosmic interference."}  
-Try again with a valid image or webpage link.`
-        },
-        { quoted: m.message }
-      );
-      await conn.sendMessage(from, { react: { text: "💫", key } });
+💭 Tip: Try a valid image link or a simpler webpage.
+      `.trim();
+
+      await conn.sendMessage(chat, { text: msg }, { quoted: m });
+      await conn.sendMessage(chat, { react: { text: "💫", key: m.key } });
     }
   }
 };

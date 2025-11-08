@@ -1,8 +1,8 @@
 /**
- * 🌸 Miara 🌸 — Artistic EXIF Engine (2025)
- * -------------------------------------------------------
+ * 🌸 Miara — Artistic EXIF Engine (2025 Stable)
+ * ---------------------------------------------
  * Converts images & motion media into EXIF-embedded WebP stickers
- * with emotional captions and safe fallbacks.
+ * with optional artistic captions and emotional resonance.
  *
  * by MidKnightMantra × GPT-5
  */
@@ -14,19 +14,19 @@ import sharp from "sharp";
 import { promisify } from "util";
 import child_process from "child_process";
 import { createCanvas, loadImage } from "canvas";
-import { detectEmotion } from "./emotion.js";
 import { config } from "../config.js";
 import { logger } from "../utils/logger.js";
+import { detectEmotion } from "./emotion.js"; // optional, gracefully ignored if not found
 
 const exec = promisify(child_process.exec);
 
-// ────────────────────────────────
-// 🧠 Helper: Create EXIF metadata
-// ────────────────────────────────
+// ──────────────────────────────
+// 🧠 Create EXIF Buffer
+// ──────────────────────────────
 function createExifBuffer(metadata = {}) {
   const {
-    packname = config.STICKER_PACK_NAME || "Miara Pack",
-    author = config.STICKER_AUTHOR || "MidKnightMantra🌸"
+    packname = config.STICKER_PACK_NAME || "Miara Stickers 🌸",
+    author = config.STICKER_AUTHOR || "MidKnightMantra"
   } = metadata;
 
   const json = {
@@ -44,17 +44,12 @@ function createExifBuffer(metadata = {}) {
   const lenBuffer = Buffer.alloc(4);
   lenBuffer.writeUInt32LE(jsonBuffer.length, 0);
 
-  return Buffer.concat([
-    exifAttr,
-    lenBuffer,
-    jsonBuffer,
-    Buffer.from([0x00, 0x00])
-  ]);
+  return Buffer.concat([exifAttr, lenBuffer, jsonBuffer, Buffer.from([0x00, 0x00])]);
 }
 
-// ────────────────────────────────
-// 🧾 Write EXIF metadata via webpmux
-// ────────────────────────────────
+// ──────────────────────────────
+// 🪷 Embed EXIF via webpmux
+// ──────────────────────────────
 async function writeExif(webpBuffer, metadata = {}) {
   const tmp = os.tmpdir();
   const id = `miara_${Date.now()}`;
@@ -66,32 +61,22 @@ async function writeExif(webpBuffer, metadata = {}) {
     await fs.writeFile(input, webpBuffer);
     await fs.writeFile(exifFile, createExifBuffer(metadata));
 
-    await exec(`webpmux -set exif ${exifFile} ${input} -o ${output}`);
+    // Try to run webpmux safely (works in Termux, Linux, Render)
+    await exec(`webpmux -set exif "${exifFile}" "${input}" -o "${output}"`);
 
     const result = await fs.readFile(output);
-    await Promise.allSettled([
-      fs.unlink(input),
-      fs.unlink(exifFile),
-      fs.unlink(output)
-    ]);
+    await Promise.allSettled([fs.unlink(input), fs.unlink(exifFile), fs.unlink(output)]);
     return result;
   } catch (err) {
-    logger.warn(
-      `webpmux unavailable — returning plain WebP (${err.message})`,
-      "EXIF"
-    );
-    await Promise.allSettled([
-      fs.unlink(input),
-      fs.unlink(exifFile),
-      fs.unlink(output)
-    ]);
-    return webpBuffer;
+    logger.warn(`webpmux unavailable → returning plain WebP (${err.message})`, "EXIF");
+    await Promise.allSettled([fs.unlink(input), fs.unlink(exifFile), fs.unlink(output)]);
+    return webpBuffer; // fallback
   }
 }
 
-// ────────────────────────────────
+// ──────────────────────────────
 // 🎨 Artistic Caption Overlay
-// ────────────────────────────────
+// ──────────────────────────────
 async function addMiaraCaption(buffer) {
   try {
     const image = await loadImage(buffer);
@@ -100,11 +85,12 @@ async function addMiaraCaption(buffer) {
     ctx.drawImage(image, 0, 0, image.width, image.height);
 
     let caption = "✨ Miara Magic ✨";
+
     if (config.EMOTION_CAPTIONS) {
       try {
         const emotion = await detectEmotion(buffer);
         if (emotion) {
-          const emojis = {
+          const moods = {
             happy: "😂 Mood",
             surprised: "😲 Shocked",
             angry: "😡 Mad vibes",
@@ -113,7 +99,7 @@ async function addMiaraCaption(buffer) {
             fearful: "😱 Scared",
             neutral: "😎 Chill"
           };
-          caption = emojis[emotion] || caption;
+          caption = moods[emotion] || caption;
           logger.debug(`Emotion detected: ${emotion} → ${caption}`, "EXIF");
         }
       } catch (err) {
@@ -121,14 +107,13 @@ async function addMiaraCaption(buffer) {
       }
     }
 
-    // Gradient overlay
-    const gradient = ctx.createLinearGradient(0, image.height - 80, 0, image.height);
-    gradient.addColorStop(0, "rgba(0,0,0,0)");
-    gradient.addColorStop(1, "rgba(0,0,0,0.55)");
-    ctx.fillStyle = gradient;
+    // Gentle gradient fade for legibility
+    const grad = ctx.createLinearGradient(0, image.height - 80, 0, image.height);
+    grad.addColorStop(0, "rgba(0,0,0,0)");
+    grad.addColorStop(1, "rgba(0,0,0,0.55)");
+    ctx.fillStyle = grad;
     ctx.fillRect(0, image.height - 80, image.width, 80);
 
-    // Caption styling
     ctx.font = `bold ${Math.floor(image.height / 15)}px "Poppins", sans-serif`;
     ctx.textAlign = "center";
     ctx.fillStyle = "#fff";
@@ -143,27 +128,24 @@ async function addMiaraCaption(buffer) {
   }
 }
 
-// ────────────────────────────────
+// ──────────────────────────────
 // 🖼️ Image → WebP
-// ────────────────────────────────
+// ──────────────────────────────
 export async function imageToWebp(imageBuffer, metadata = {}, addCaption = true) {
   let processed = imageBuffer;
   if (addCaption) processed = await addMiaraCaption(imageBuffer);
 
   const webpBuffer = await sharp(processed)
-    .resize(512, 512, {
-      fit: "contain",
-      background: { r: 0, g: 0, b: 0, alpha: 0 }
-    })
+    .resize(512, 512, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .webp({ quality: 85 })
     .toBuffer();
 
   return await writeExif(webpBuffer, metadata);
 }
 
-// ────────────────────────────────
+// ──────────────────────────────
 // 🎞️ Video / GIF → Animated WebP
-// ────────────────────────────────
+// ──────────────────────────────
 export async function motionToWebp(buffer, metadata = {}) {
   const tmp = os.tmpdir();
   const id = `miara_${Date.now()}`;
@@ -173,6 +155,7 @@ export async function motionToWebp(buffer, metadata = {}) {
   try {
     await fs.writeFile(input, buffer);
 
+    // Determine video length, trim to ≤8s for WhatsApp
     let duration = 0;
     try {
       const { stdout } = await exec(
@@ -180,33 +163,27 @@ export async function motionToWebp(buffer, metadata = {}) {
       );
       duration = parseFloat(stdout.trim()) || 0;
     } catch {
-      /* ignore if ffprobe missing */
+      /* ffprobe optional */
     }
 
     const trim = Math.min(duration || 8, 8);
-
-    const cmd = [
+    const ffmpegCmd = [
       "ffmpeg",
       "-y",
       "-i",
       `"${input}"`,
       "-vf",
       `"scale=512:512:force_original_aspect_ratio=decrease,fps=15,format=rgba,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=0x00000000"`,
-      "-loop",
-      "0",
-      "-t",
-      trim.toFixed(2),
-      "-preset",
-      "picture",
+      "-loop", "0",
+      "-t", trim.toFixed(2),
+      "-preset", "picture",
       "-an",
-      "-vsync",
-      "0",
-      "-f",
-      "webp",
+      "-vsync", "0",
+      "-f", "webp",
       `"${output}"`
     ].join(" ");
 
-    await exec(cmd);
+    await exec(ffmpegCmd);
 
     const webpBuffer = await fs.readFile(output);
     await Promise.allSettled([fs.unlink(input), fs.unlink(output)]);
@@ -217,9 +194,9 @@ export async function motionToWebp(buffer, metadata = {}) {
   }
 }
 
-// ────────────────────────────────
-// 🪄 Universal Converter
-// ────────────────────────────────
+// ──────────────────────────────
+// 🔮 Auto-detect + Convert
+// ──────────────────────────────
 export async function autoToWebp(buffer, mime = "", metadata = {}) {
   try {
     const isGif = mime === "image/gif";
@@ -235,9 +212,9 @@ export async function autoToWebp(buffer, mime = "", metadata = {}) {
   }
 }
 
-// ────────────────────────────────
+// ──────────────────────────────
 // ✏️ Aliases
-// ────────────────────────────────
+// ──────────────────────────────
 export const videoToWebp = motionToWebp;
 export const gifToWebp = motionToWebp;
 export const writeExifImg = writeExif;
