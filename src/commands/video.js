@@ -2,7 +2,7 @@
  * 🎬 Miara Command: Video Downloader (Ephemeral Fix 2025)
  * ------------------------------------------------------
  * Downloads YouTube video → sends as WhatsApp document.
- */
+ *
 
 import yts from "yt-search";
 import fetch from "node-fetch";
@@ -103,3 +103,4 @@ export default {
     }
   }
 };
+*/

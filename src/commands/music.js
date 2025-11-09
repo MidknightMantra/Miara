@@ -3,7 +3,7 @@
  * ------------------------------------------------------
  * Downloads via yt-dlp and sends directly — now ensures
  * WhatsApp-compatible buffer & mimetype.
- */
+ *
 
 import yts from "yt-search";
 import fetch from "node-fetch";
@@ -113,3 +113,4 @@ export default {
     }
   }
 };
+*/

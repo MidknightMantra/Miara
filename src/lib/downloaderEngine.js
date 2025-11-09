@@ -8,7 +8,7 @@
  *  - Metadata extraction (title, duration, thumbnail)
  *  - Auto-clean temp files + large file cutoff
  *  - Self-healing, self-contained
- */
+ 
 
 import { spawn } from "child_process";
 import fs from "fs";
@@ -219,4 +219,4 @@ export async function downloadFromYouTube(url, type = "audio") {
   throw new Error(
     `All engines failed — yt-dlp, ytdl-core, piped/relay\nLast error: ${lastErr?.message}`
   );
-}
+} */
