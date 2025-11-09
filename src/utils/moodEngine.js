@@ -1,9 +1,9 @@
 /**
- * 🌸 Miara 🌸 — Deluxe Mood Engine (2025)
+ * 🌸 Miara 🌸 — Deluxe Mood Engine (2025, Stable)
  * by MidKnightMantra × GPT-5
  * -------------------------------------------------------
- * Emotional AI core with visual feedback.
- * Her moods now tint the console and whisper through the logs.
+ * Emotional AI core with graceful transitions, decay,
+ * and console mood tinting.
  */
 
 import chalk from "chalk";
@@ -13,9 +13,10 @@ import gradient from "gradient-string";
 let currentMood = "calm";
 let moodLevel = 50;
 let lastInteraction = Date.now();
-let listeners = [];
+let lastMoodChange = Date.now();
+const listeners = [];
 
-// 🌈 Mood spectrum and personality metadata
+// 🌈 Mood spectrum
 const moodStates = {
   calm: { tone: "🌿 serene", decay: 0.1, color: "#8ecae6" },
   curious: { tone: "🌀 inquisitive", decay: 0.2, color: "#ffd6a5" },
@@ -55,44 +56,56 @@ function pickWeighted(obj) {
 export function updateMood(context = "default") {
   const nextMood = pickWeighted(transitions[context] || transitions.default);
   const timeSinceLast = Date.now() - lastInteraction;
+  const timeSinceMoodChange = Date.now() - lastMoodChange;
 
+  // prevent thrashing
+  if (nextMood === currentMood || timeSinceMoodChange < 4000) {
+    lastInteraction = Date.now();
+    return;
+  }
+
+  // natural energy flow
   moodLevel += timeSinceLast > 60000 ? -5 : 5;
   moodLevel = Math.min(100, Math.max(0, moodLevel));
 
-  if (nextMood !== currentMood && Math.random() < 0.7) {
-    const from = chalk.hex(moodStates[currentMood]?.color || "#aaa")(currentMood);
-    const to = chalk.hex(moodStates[nextMood]?.color || "#fff")(nextMood);
-    const pulse = gradient([moodStates[currentMood]?.color || "#ccc", moodStates[nextMood]?.color || "#fff"]);
-    console.log(pulse(`🌸 Mood drift: ${from} → ${to}`));
+  const from = chalk.hex(moodStates[currentMood]?.color || "#aaa")(currentMood);
+  const to = chalk.hex(moodStates[nextMood]?.color || "#fff")(nextMood);
+  const pulse = gradient([
+    moodStates[currentMood]?.color || "#ccc",
+    moodStates[nextMood]?.color || "#fff"
+  ]);
 
-    currentMood = nextMood;
-    broadcastMood();
-  }
+  console.log(pulse(`🌸 Mood drift → ${from} → ${to}`));
 
+  currentMood = nextMood;
+  lastMoodChange = Date.now();
   lastInteraction = Date.now();
+
+  broadcastMood();
 }
 
-// 🧘 Current mood getter
+// 🧘 Get current mood
 export function getMood() {
   decayMoodOverTime();
   return currentMood;
 }
 
-// 🪞 Summary string
+// 🪞 Summary string for logs or UI
 export function getMoodSummary() {
   decayMoodOverTime();
   const tone = moodStates[currentMood]?.tone || currentMood;
-  const energy = moodLevel > 70 ? "energized" : moodLevel < 40 ? "soft" : "balanced";
+  const energy =
+    moodLevel > 70 ? "energized" : moodLevel < 40 ? "soft" : "balanced";
   const since = Math.floor((Date.now() - lastInteraction) / 1000);
   return `${tone}, ${energy} — last shift ${since}s ago`;
 }
 
-// ⏳ Gradual decay toward calmness
+// ⏳ Gradual return to calmness
 function decayMoodOverTime() {
   const elapsed = (Date.now() - lastInteraction) / 1000;
   const decayRate = moodStates[currentMood]?.decay || 0.2;
   const decayAmount = elapsed * decayRate;
-  if (decayAmount > 15 && currentMood !== "calm") {
+  if (decayAmount > 20 && currentMood !== "calm") {
     console.log(chalk.gray("🌙 Miara’s mood softened back to calm."));
     currentMood = "calm";
     moodLevel = Math.max(40, moodLevel - 10);
@@ -105,22 +118,22 @@ function decayMoodOverTime() {
  */
 export function getTypingDelay(base = 800) {
   const mood = getMood();
-  const multiplier =
-    {
-      calm: 1.3,
-      radiant: 0.8,
-      playful: 0.9,
-      focused: 1.0,
-      friendly: 1.1,
-      witty: 0.95,
-      tired: 1.5,
-      empathetic: 1.2
-    }[mood] || 1.0;
-  const randomFactor = 0.8 + Math.random() * 0.4;
-  return base * multiplier * randomFactor;
+  const speedCurve = {
+    calm: 1.3,
+    radiant: 0.85,
+    playful: 0.9,
+    focused: 1.0,
+    friendly: 1.1,
+    witty: 0.95,
+    tired: 1.5,
+    empathetic: 1.2
+  };
+  const multiplier = speedCurve[mood] || 1.0;
+  const noise = 0.85 + Math.random() * 0.35;
+  return Math.round(base * multiplier * noise);
 }
 
-// ❤️ React to text input
+// ❤️ React to text
 export function reactToInput(text = "") {
   const lower = text.toLowerCase();
   if (lower.includes("thank") || lower.includes("love")) return updateMood("compliment");
@@ -131,7 +144,7 @@ export function reactToInput(text = "") {
   return updateMood("default");
 }
 
-// 🧠 Snapshot for external APIs
+// 🧠 Snapshot for dashboards or logs
 export function getMoodState() {
   return {
     mood: currentMood,
@@ -142,18 +155,18 @@ export function getMoodState() {
   };
 }
 
-// 🔔 Event-style subscription system
+// 🔔 Event-style subscriptions
 export function onMoodChange(listener) {
   listeners.push(listener);
 }
 
 function broadcastMood() {
   const state = getMoodState();
-  listeners.forEach((fn) => {
+  for (const fn of listeners) {
     try {
       fn(state);
     } catch {}
-  });
+  }
 }
 
 // 🌸 Exports

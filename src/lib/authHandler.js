@@ -1,53 +1,76 @@
 /**
- * 🌸 Miara 🌸 — Auth Handler (Deluxe 2025, Stable Edition)
- * ---------------------------------------------------------
- * Handles persistent authentication state for Baileys.
- * - Auto-recovers from corruption
- * - Timestamped JSON backups
- * - Retains only recent backups
- * - Compatible with Render, VPS, and Docker
- *
+ * 🌸 Miara 🌸 — Deluxe Auth Handler (2025, Stable + Atomic Safe)
  * by MidKnightMantra × GPT-5
+ * ------------------------------------------------------------
+ * Fault-tolerant Baileys authentication manager with:
+ * - Auto corruption recovery
+ * - Timestamped rotating backups
+ * - Atomic save operations
+ * - Optional AES encryption
+ * - Render/VPS-safe filesystem handling
  */
 
 import fs from "fs/promises";
 import path from "path";
+import crypto from "crypto";
 import { initAuthCreds, BufferJSON } from "@whiskeysockets/baileys";
 import { logger } from "../utils/logger.js";
 
 const BACKUP_PREFIX = "creds-backup-";
 const BACKUP_SUFFIX = ".json";
 const DEFAULT_RETENTION_DAYS = 7;
+const AUTH_KEY = process.env.AUTH_ENCRYPT_KEY || null;
 
 // ─────────────────────────────────────────────
-// 🔧 Utility Helpers
+// 🌿 Helpers
 // ─────────────────────────────────────────────
-async function fileExists(filePath) {
+async function fileExists(p) {
   try {
-    await fs.access(filePath);
+    await fs.access(p);
     return true;
   } catch {
     return false;
   }
 }
 
-async function ensureDir(dirPath) {
-  await fs.mkdir(dirPath, { recursive: true });
+async function ensureDir(p) {
+  await fs.mkdir(p, { recursive: true });
 }
 
-async function safeReadJSON(filePath, reviver = null) {
+function encrypt(text) {
+  if (!AUTH_KEY) return text;
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv(
+    "aes-256-cbc",
+    crypto.createHash("sha256").update(AUTH_KEY).digest(),
+    iv
+  );
+  const encrypted = Buffer.concat([cipher.update(text, "utf8"), cipher.final()]);
+  return JSON.stringify({ iv: iv.toString("hex"), data: encrypted.toString("hex") });
+}
+
+function decrypt(text) {
+  if (!AUTH_KEY) return text;
   try {
-    if (!(await fileExists(filePath))) return {};
-    const data = await fs.readFile(filePath, "utf8");
-    return JSON.parse(data, reviver);
-  } catch (err) {
-    logger.warn(`⚠️ Corrupt JSON detected at ${filePath}: ${err.message}`, "Auth");
-    return tryRestoreFromBackup(filePath);
+    const { iv, data } = JSON.parse(text);
+    const decipher = crypto.createDecipheriv(
+      "aes-256-cbc",
+      crypto.createHash("sha256").update(AUTH_KEY).digest(),
+      Buffer.from(iv, "hex")
+    );
+    const decrypted = Buffer.concat([
+      decipher.update(Buffer.from(data, "hex")),
+      decipher.final()
+    ]);
+    return decrypted.toString("utf8");
+  } catch {
+    logger.warn("⚠️ Auth decryption failed, falling back to plain JSON.", "Auth");
+    return text;
   }
 }
 
 // ─────────────────────────────────────────────
-// 🩹 Backup Restoration
+// 🩹 Backup Recovery
 // ─────────────────────────────────────────────
 async function tryRestoreFromBackup(mainFilePath) {
   const dir = path.dirname(mainFilePath);
@@ -57,48 +80,45 @@ async function tryRestoreFromBackup(mainFilePath) {
     .map((f) => path.join(dir, f));
 
   if (!backups.length) {
-    logger.error("❌ No valid backup found; starting clean session.", "Auth");
+    logger.warn("⚠️ No valid backup found; starting fresh session.", "Auth");
     await fs.rm(mainFilePath, { force: true });
-    return {};
+    return { creds: {}, recovered: false };
   }
 
   const sorted = await Promise.all(
-    backups.map(async (file) => ({
-      file,
-      mtime: (await fs.stat(file)).mtimeMs
-    }))
+    backups.map(async (f) => ({ f, mtime: (await fs.stat(f)).mtimeMs }))
   );
   sorted.sort((a, b) => b.mtime - a.mtime);
 
-  for (const { file } of sorted) {
+  for (const { f } of sorted) {
     try {
-      const content = await fs.readFile(file, "utf8");
+      const content = decrypt(await fs.readFile(f, "utf8"));
       const parsed = JSON.parse(content, BufferJSON.reviver);
-      await fs.copyFile(file, mainFilePath);
-      logger.info(`✅ Restored from backup: ${path.basename(file)}`, "Auth");
-      return parsed;
+      await fs.copyFile(f, mainFilePath);
+      logger.info(`✅ Restored credentials from backup: ${path.basename(f)}`, "Auth");
+      return { creds: parsed, recovered: true };
     } catch (err) {
-      logger.warn(`⚠️ Failed to load backup ${file}: ${err.message}`, "Auth");
+      logger.warn(`⚠️ Failed to load backup ${f}: ${err.message}`, "Auth");
     }
   }
 
-  logger.error("❌ All backups invalid; initializing fresh credentials.", "Auth");
+  logger.error("❌ All backups invalid; resetting session.", "Auth");
   await fs.rm(mainFilePath, { force: true });
-  return {};
+  return { creds: {}, recovered: false };
 }
 
 // ─────────────────────────────────────────────
 // 🧹 Backup Cleanup
 // ─────────────────────────────────────────────
 async function cleanOldBackups(dir, days = DEFAULT_RETENTION_DAYS) {
+  const cutoff = Date.now() - days * 86_400_000;
   try {
-    const cutoff = Date.now() - days * 86_400_000;
     const files = await fs.readdir(dir);
     for (const file of files) {
       if (!file.startsWith(BACKUP_PREFIX)) continue;
       const full = path.join(dir, file);
-      const stat = await fs.stat(full);
-      if (stat.mtimeMs < cutoff) {
+      const { mtimeMs } = await fs.stat(full);
+      if (mtimeMs < cutoff) {
         await fs.unlink(full);
         logger.debug(`🗑️ Removed old backup: ${file}`, "Auth");
       }
@@ -109,7 +129,7 @@ async function cleanOldBackups(dir, days = DEFAULT_RETENTION_DAYS) {
 }
 
 // ─────────────────────────────────────────────
-// 🔑 MultiFile Auth State (Main Export)
+// 🔑 MultiFile Auth State
 // ─────────────────────────────────────────────
 export async function useMultiFileAuthState(folderPath) {
   if (!folderPath) throw new Error("Auth folder path is required.");
@@ -119,16 +139,39 @@ export async function useMultiFileAuthState(folderPath) {
   const keysDir = path.join(folderPath, "keys");
   await ensureDir(keysDir);
 
-  // Load creds or new init
-  const creds = await safeReadJSON(credsPath, BufferJSON.reviver);
+  // Load creds with recovery fallback
+  let credsData = {};
+  let recovered = false;
+
+  try {
+    if (await fileExists(credsPath)) {
+      const raw = decrypt(await fs.readFile(credsPath, "utf8"));
+      credsData = JSON.parse(raw, BufferJSON.reviver);
+    } else {
+      credsData = {};
+    }
+  } catch (err) {
+    logger.warn(`⚠️ Corrupt creds detected: ${err.message}`, "Auth");
+    const recovery = await tryRestoreFromBackup(credsPath);
+    credsData = recovery.creds;
+    recovered = recovery.recovered;
+  }
+
   const state = {
-    creds: Object.keys(creds).length ? creds : initAuthCreds(),
+    creds: Object.keys(credsData).length ? credsData : initAuthCreds(),
     keys: {
       async get(type, ids) {
         const result = {};
         for (const id of ids) {
           const file = path.join(keysDir, `${type}-${id}.json`);
-          result[id] = await safeReadJSON(file, BufferJSON.reviver);
+          try {
+            if (await fileExists(file)) {
+              const content = decrypt(await fs.readFile(file, "utf8"));
+              result[id] = JSON.parse(content, BufferJSON.reviver);
+            }
+          } catch (err) {
+            logger.warn(`Key read failed ${file}: ${err.message}`, "Auth");
+          }
         }
         return result;
       },
@@ -137,10 +180,13 @@ export async function useMultiFileAuthState(folderPath) {
           for (const [id, value] of Object.entries(records)) {
             const file = path.join(keysDir, `${type}-${id}.json`);
             await ensureDir(path.dirname(file));
+            const tempFile = `${file}.tmp`;
             try {
-              await fs.writeFile(file, JSON.stringify(value, BufferJSON.replacer, 2));
+              const content = encrypt(JSON.stringify(value, BufferJSON.replacer, 2));
+              await fs.writeFile(tempFile, content);
+              await fs.rename(tempFile, file);
             } catch (err) {
-              logger.error(`Failed to write key ${type}-${id}: ${err.message}`, "Auth");
+              logger.error(`Key write failed for ${file}: ${err.message}`, "Auth");
             }
           }
         }
@@ -149,25 +195,36 @@ export async function useMultiFileAuthState(folderPath) {
   };
 
   // ───────────────────────────────
-  // 💾 Save Creds + Backup Routine
+  // 💾 Atomic saveCreds()
   // ───────────────────────────────
+  let lastSave = 0;
   async function saveCreds() {
-    try {
-      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const backupFile = path.join(folderPath, `${BACKUP_PREFIX}${timestamp}${BACKUP_SUFFIX}`);
+    const now = Date.now();
+    if (now - lastSave < 5000) return; // throttle
+    lastSave = now;
 
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const backupFile = path.join(folderPath, `${BACKUP_PREFIX}${timestamp}${BACKUP_SUFFIX}`);
+
+    try {
       if (await fileExists(credsPath)) {
         await fs.copyFile(credsPath, backupFile);
         logger.debug(`💾 Backup created: ${path.basename(backupFile)}`, "Auth");
       }
 
-      await fs.writeFile(credsPath, JSON.stringify(state.creds, BufferJSON.replacer, 2));
-      logger.info("✅ Credentials saved successfully.", "Auth");
-      await cleanOldBackups(folderPath, DEFAULT_RETENTION_DAYS);
+      const tempFile = `${credsPath}.tmp`;
+      const content = encrypt(JSON.stringify(state.creds, BufferJSON.replacer, 2));
+      await fs.writeFile(tempFile, content);
+      await fs.rename(tempFile, credsPath);
+
+      logger.info("✅ Credentials saved safely.", "Auth");
+      await cleanOldBackups(folderPath);
     } catch (err) {
-      logger.error(`❌ Critical saveCreds error: ${err.message}`, "Auth");
+      logger.error(`❌ saveCreds() failed: ${err.message}`, "Auth");
     }
   }
+
+  if (recovered) logger.info("🩹 Recovered session from backup successfully.", "Auth");
 
   return { state, saveCreds };
 }

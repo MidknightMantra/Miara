@@ -1,8 +1,10 @@
 /**
- * 🌸 Miara 🌸 Mood Responses (2025)
- * by MidKnightMantra
+ * 🌸 Miara 🌸 Mood Responses (Deluxe Stable 2025)
+ * by MidKnightMantra × GPT-5
  * --------------------------------------------------
- * Adapts raw text into a tone consistent with Miara’s current mood and context.
+ * Translates Miara’s raw responses into emotionally
+ * congruent language that matches her current mood
+ * and situational context.
  */
 
 import { getMood } from "./moodEngine.js";
@@ -10,13 +12,22 @@ import { getMood } from "./moodEngine.js";
 const DEBUG_EMOTION = process.env.DEBUG_EMOTION === "true";
 
 /**
- * 🎭 Adapt a string to match Miara’s emotional state and conversational context.
+ * 🎭 Adapt a string to match Miara’s emotional tone.
  */
 export function adaptResponse(rawText = "", context = "general", forcedMood = null) {
-  const mood = forcedMood || getMood();
+  if (!rawText || typeof rawText !== "string") return "";
+
+  let mood = "calm";
+  try {
+    mood = forcedMood || getMood?.() || "calm";
+  } catch {
+    mood = "calm";
+  }
+
   let prefix = "";
   let suffix = "";
 
+  // 🌙 Base mood behavior
   switch (mood) {
     case "calm":
       prefix = "🌿 ";
@@ -42,7 +53,7 @@ export function adaptResponse(rawText = "", context = "general", forcedMood = nu
       suffix = pick(["🌟 inspired!", "🔥 feeling bright!"]);
       break;
     case "empathetic":
-      prefix = "🌧 ";
+      prefix = "🤍 ";
       suffix = pick(["💧 take it easy.", "🤍 I understand."]);
       break;
     case "focused":
@@ -55,7 +66,7 @@ export function adaptResponse(rawText = "", context = "general", forcedMood = nu
       suffix = pick(["😌 softly now.", "💤", "🍃"]);
       break;
     case "moody":
-      prefix = "🌫 ";
+      prefix = "🌫️ ";
       suffix = pick(["...", "🌌"]);
       break;
     default:
@@ -63,11 +74,11 @@ export function adaptResponse(rawText = "", context = "general", forcedMood = nu
       suffix = "";
   }
 
-  // 🎚 Contextual adjustments
+  // 🎚 Contextual overlays — override mood tone if needed
   switch (context) {
     case "error":
-      suffix = " ⚠️ but it’s okay.";
       prefix = "🚧 ";
+      suffix = " ⚠️ but it’s okay.";
       break;
     case "help":
       prefix = "📖 ";
@@ -83,14 +94,25 @@ export function adaptResponse(rawText = "", context = "general", forcedMood = nu
       prefix = "💐 ";
       suffix = pick(["🌸 thank you!", "🤍 that means a lot.", "😊"]);
       break;
+    case "farewell":
+      prefix = "🌙 ";
+      suffix = pick(["🌌 until next time.", "💫 rest well.", "🍃"]);
+      break;
+    case "question":
+      prefix = "❓ ";
+      suffix = pick(["🤔", "🌀 curious...", "💭"]);
+      break;
+    case "affirmation":
+      prefix = "✅ ";
+      suffix = pick(["🌸 absolutely!", "💫 without doubt.", "✨"]);
+      break;
     default:
       break;
   }
 
+  // 🧠 Compose and tidy output
   let composed = `${prefix}${rawText.trim()}${ensureSuffixSpacing(rawText, suffix)}`;
-
-  // Remove redundant punctuation and tidy up
-  composed = composed.replace(/\s{2,}/g, " ").replace(/([?.!]){2,}/g, "$1");
+  composed = tidy(composed);
 
   if (DEBUG_EMOTION) {
     console.log(`[Tone Adaptation] Mood: ${mood} | Context: ${context} → ${composed}`);
@@ -99,28 +121,36 @@ export function adaptResponse(rawText = "", context = "general", forcedMood = nu
   return composed.trim();
 }
 
-/**
- * 🌈 Pick a random element from an array.
- */
+/* ────────────────────────────────
+ * 🎨 Utility Helpers
+ * ──────────────────────────────── */
+
 function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-/**
- * 🧩 Decide if a suffix should be appended based on how text ends.
- */
 function ensureSuffixSpacing(text, suffix) {
   if (!suffix) return "";
   const trimmed = text.trim();
   if (!trimmed) return suffix;
-  const last = trimmed.slice(-1);
-  const skip = ["!", "?", ".", "…", "❤️", "💞", "🌸"].some((e) => trimmed.endsWith(e));
-  if (skip) return ""; // message already has emotion
-  return ` ${suffix}`;
+  const skip = ["!", "?", ".", "…", "❤️", "💞", "🌸", "🤍", "✨", "🌟"].some((e) =>
+    trimmed.endsWith(e)
+  );
+  return skip ? "" : ` ${suffix}`;
+}
+
+function tidy(text) {
+  return text
+    .replace(/\s{2,}/g, " ")
+    .replace(/([.!?]){2,}/g, "$1")
+    .replace(/\s+([.,!?])/g, "$1")
+    .replace(/([!?])\./g, "$1")
+    .trim();
 }
 
 /**
- * 🌺 Optional style descriptors for external use (e.g., dashboard or UI themes)
+ * 🌺 Exported mood style descriptors
+ * (for dashboards, UI themes, or visualization)
  */
 export const responseStyles = {
   calm: ["soft", "reflective", "minimal"],

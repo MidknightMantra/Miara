@@ -1,110 +1,133 @@
 /**
- * 🌸 Miara 🌸 — Session Repair Utility (2025)
- * by MidKnightMantra
+ * 🌸 Miara 🌸 — Deluxe Session Repair Utility (2025)
+ * by MidKnightMantra × GPT-5
  * ------------------------------------------------------------
- * Automatically heals corrupted or stale Signal sessions
- * caused by JSON parse errors, Bad MAC, or Buffer mismatches.
+ * Heals corrupted or stale Signal sessions gracefully.
+ * Safe, async, and visually integrated with Miara’s color style.
  */
 
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
+import chalk from "chalk";
+import gradient from "gradient-string";
 import { BufferJSON } from "@whiskeysockets/baileys";
 
 const MAIN_SESSION = "./session";
 const MULTI_SESSIONS = "./sessions";
 const BACKUP_ROOT = "./session_backups";
+const CORRUPT_QUARANTINE = "./session_corrupt";
 
 export async function repairSession(silent = false) {
   const log = (...msg) => !silent && console.log(...msg);
+  const pulse = gradient(["#b197fc", "#c77dff", "#ff8fab"]);
 
-  log("🔧 Running Miara session integrity check...");
+  log(pulse("🔧 Miara Session Integrity Check Initiated..."));
 
   const allTargets = [];
 
-  // Collect main session
-  if (fs.existsSync(MAIN_SESSION)) allTargets.push(MAIN_SESSION);
+  if (await exists(MAIN_SESSION)) allTargets.push(MAIN_SESSION);
 
-  // Collect multi-session directories (Miara~User folders)
-  if (fs.existsSync(MULTI_SESSIONS)) {
-    const subs = fs
-      .readdirSync(MULTI_SESSIONS)
+  if (await exists(MULTI_SESSIONS)) {
+    const subs = (await fs.readdir(MULTI_SESSIONS))
       .filter((f) => f.startsWith("Miara~"))
       .map((f) => path.join(MULTI_SESSIONS, f));
     allTargets.push(...subs);
   }
 
-  if (allTargets.length === 0) {
-    log("ℹ️ No session folders found — skipping repair.");
+  if (!allTargets.length) {
+    log(chalk.gray("ℹ️ No session directories found — nothing to heal."));
     return;
   }
 
+  await fs.mkdir(BACKUP_ROOT, { recursive: true });
+  await fs.mkdir(CORRUPT_QUARANTINE, { recursive: true });
+
   let repairedCount = 0,
     deletedCount = 0,
-    skippedCount = 0;
-
-  fs.mkdirSync(BACKUP_ROOT, { recursive: true });
+    skippedCount = 0,
+    quarantined = 0;
 
   for (const sessionDir of allTargets) {
-    const files = fs.readdirSync(sessionDir);
+    const files = await fs.readdir(sessionDir);
     const sessionName = path.basename(sessionDir);
-    log(`🔍 Checking session: ${sessionName} (${files.length} files)`);
+    log(chalk.cyanBright(`\n🔍 Checking ${sessionName} (${files.length} files)`));
 
     const backupDir = path.join(BACKUP_ROOT, `${sessionName}_${Date.now()}`);
-    fs.mkdirSync(backupDir, { recursive: true });
+    await fs.mkdir(backupDir, { recursive: true });
 
     for (const file of files) {
       const filePath = path.join(sessionDir, file);
 
       try {
-        const stats = fs.statSync(filePath);
+        const stats = await fs.stat(filePath);
         const modifiedMinutes = (Date.now() - stats.mtimeMs) / 60000;
-
-        // Skip fresh files (less than 2 minutes old)
         if (modifiedMinutes < 2) {
           skippedCount++;
           continue;
         }
 
-        const content = fs.readFileSync(filePath, "utf8");
+        const content = await fs.readFile(filePath, "utf8");
         const backupPath = path.join(backupDir, file);
-        fs.copyFileSync(filePath, backupPath);
+        await fs.copyFile(filePath, backupPath);
 
-        // Try reviving with BufferJSON
         const revived = JSON.parse(content, BufferJSON.reviver);
+        const normalized = JSON.stringify(revived, BufferJSON.replacer, 2);
 
-        // Re-save only if structure changes
-        if (content !== JSON.stringify(revived, BufferJSON.replacer, 2)) {
-          fs.writeFileSync(filePath, JSON.stringify(revived, BufferJSON.replacer, 2));
+        if (content !== normalized) {
+          await fs.writeFile(filePath, normalized);
           repairedCount++;
-          log(`✅ Repaired: ${sessionName}/${file}`);
+          log(chalk.green(`✅ Repaired: ${sessionName}/${file}`));
         }
       } catch (err) {
-        log(`⚠️ Corrupted session file: ${sessionName}/${file} — ${err.message}`);
+        log(chalk.yellow(`⚠️ Corrupted: ${sessionName}/${file} — ${err.message}`));
         try {
-          fs.unlinkSync(filePath);
+          const quarantinePath = path.join(
+            CORRUPT_QUARANTINE,
+            `${sessionName}_${file}_${Date.now()}`
+          );
+          await fs.copyFile(filePath, quarantinePath);
+          await fs.unlink(filePath);
+          quarantined++;
           deletedCount++;
-          log(`🗑️ Deleted broken file: ${sessionName}/${file}`);
+          log(chalk.redBright(`🗑️ Moved broken file to quarantine: ${file}`));
         } catch (deleteErr) {
-          console.error(`❌ Failed to delete ${file}: ${deleteErr.message}`);
+          log(chalk.red(`❌ Could not quarantine ${file}: ${deleteErr.message}`));
         }
       }
     }
   }
 
-  log(`\n✨ Session repair complete!`);
+  log(pulse("\n✨ Session Repair Complete!"));
   log(
-    `🩹 Fixed: ${repairedCount} | 🧹 Deleted: ${deletedCount} | ⏳ Skipped (recent): ${skippedCount}`
+    chalk.whiteBright(
+      `🩹 Fixed: ${repairedCount} | 🧹 Deleted: ${deletedCount} | 📦 Quarantined: ${quarantined} | ⏳ Skipped: ${skippedCount}`
+    )
   );
 
-  return { repairedCount, deletedCount, skippedCount };
+  return {
+    repairedCount,
+    deletedCount,
+    skippedCount,
+    quarantined,
+    sessionsChecked: allTargets.length
+  };
+}
+
+async function exists(p) {
+  try {
+    await fs.access(p);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /**
- * 🛠 Scheduled or panel-friendly trigger
- * Can be called automatically on startup or from a cron task.
+ * 🛠 CLI entry
+ * Can be run manually or triggered automatically on startup.
  */
 if (import.meta.url === `file://${process.argv[1]}`) {
   repairSession(false)
-    .then(() => console.log("✅ Repair process finished."))
-    .catch((err) => console.error("❌ Repair failed:", err.message));
+    .then(() => console.log(chalk.green("✅ Miara session repair finished successfully.")))
+    .catch((err) => console.error(chalk.red("❌ Session repair failed:"), err.message));
 }

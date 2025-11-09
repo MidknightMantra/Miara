@@ -1,14 +1,13 @@
 /**
- * 🌸 Miara Bot — Sentient Emotion Build (Deluxe 2025, Self-Healing + AutoView)
- * by MidKnightMantra ✨ × GPT-5
+ * 🌸 Miara Lite Deluxe 2025 — Sentient Core (Reimagined)
+ * Author: MidKnightMantra × GPT-5
  * ---------------------------------------------------------------
- * Emotionally adaptive, self-repairing, and socially alive.
- * Features:
- *  - Clean terminal mode (no dashboards)
- *  - Mood-synced gradient console feedback
- *  - Auto ffmpeg/yt-dlp recovery on startup
- *  - Graceful reconnects and safe shutdowns
- *  - Auto-view WhatsApp statuses + react with emoji 👁️
+ * Lightweight • Reliable • Elegant
+ *  - Auto-check ffmpeg / yt-dlp
+ *  - Smooth QR login
+ *  - Graceful reconnect + shutdown
+ *  - Modular command loader (handler.js)
+ *  - Gradient console presence
  */
 
 import makeWASocket, {
@@ -30,56 +29,44 @@ import dotenv from "dotenv";
 import CONFIG from "./config.js";
 import { logger } from "./utils/logger.js";
 import { messageHandler } from "./handler.js";
-import { simulateHumanBehavior } from "./utils/behavior.js";
-import { applyPersonalityTone } from "./utils/personalityTone.js";
-import {
-  getMood,
-  updateMood,
-  getTypingDelay,
-  getMoodSummary,
-  onMoodChange
-} from "./utils/moodEngine.js";
-import attachWelcomeListener from "./listeners/welcome.js";
-import { preloadEmotionModels } from "./lib/emotion.js";
-import { startHealthServer } from "./server/health.js";
 import { verifyAndHealBinaries } from "./startup/checkBinaries.js";
-import { handleStatusUpdate } from "./commands/autoview.js"; // 👁️ NEW — status watcher
 
 dotenv.config();
 
 // ─────────────────────────────────────────────
-// 🌐 Health server (Render / Railway / Heroku)
+// 🌅 Boot Banner
 // ─────────────────────────────────────────────
-startHealthServer();
+console.clear();
+console.log(
+  gradient.pastel.multiline(`
+╭────────────────────────────────────────────╮
+│           🌸 Miara Lite Deluxe 2025         │
+│     Elegant • Resilient • Emotionally Calm  │
+╰────────────────────────────────────────────╯
+`)
+);
 
 // ─────────────────────────────────────────────
-// 🧠 Preload Emotion Models + Self-Healing Check
+// 🧩 Verify system binaries
 // ─────────────────────────────────────────────
 (async () => {
   try {
-    await verifyAndHealBinaries(); // ensure ffmpeg + yt-dlp ready
-    await preloadEmotionModels();
-    logger.info("🧩 Core systems initialized (AI + binaries)", "Init");
+    await verifyAndHealBinaries();
+    logger.info("✅ System binaries ready (ffmpeg / yt-dlp)", "Init");
   } catch (err) {
-    logger.warn(`Startup checks skipped: ${err.message}`, "Init");
+    logger.warn(`⚠️ Binary check skipped: ${err.message}`, "Init");
   }
 })();
 
-// 🌈 Live Mood Updates
-onMoodChange((state) => {
-  const pulse = gradient(["#c77dff", state.color || "#ffffff"]);
-  console.log(pulse(`💫 Mood shift → ${state.mood} (${state.summary})`));
-});
-
 // ─────────────────────────────────────────────
-// 🚀 Initialize Miara Instance
+// 🚀 Start Miara Instance
 // ─────────────────────────────────────────────
 async function startMiara() {
-  logger.info("🌸 Awakening Miara’s consciousness...", "Core");
+  logger.info("🌸 Awakening Miara Lite consciousness...", "Core");
 
   const { state, saveCreds } = await useMultiFileAuthState(CONFIG.SESSION_PATH);
   const { version } = await fetchLatestBaileysVersion();
-  logger.info(`📡 Using Baileys protocol v${version.join(".")}`, "Core");
+  logger.info(`📡 Using Baileys v${version.join(".")}`, "Core");
 
   const conn = makeWASocket({
     version,
@@ -93,21 +80,17 @@ async function startMiara() {
     syncFullHistory: false
   });
 
-  conn.ev.removeAllListeners("connection.update");
-  conn.ev.removeAllListeners("messages.upsert");
-
   conn.ev.on("creds.update", saveCreds);
-  attachWelcomeListener(conn);
 
   // ─────────────────────────────────────────────
-  // 📱 Connection & QR
+  // 📱 Connection / QR Handling
   // ─────────────────────────────────────────────
   let lastQR = null;
 
   conn.ev.on("connection.update", async (update) => {
     const { qr, connection, lastDisconnect } = update;
 
-    if (qr && !CONFIG.PANEL_MODE && process.stdout.isTTY) {
+    if (qr && process.stdout.isTTY) {
       if (qr !== lastQR) {
         lastQR = qr;
         console.log(chalk.cyanBright("\n📱 Scan this QR to link Miara:\n"));
@@ -118,14 +101,10 @@ async function startMiara() {
 
     if (connection === "open") {
       lastQR = null;
-      await delay(1200);
       console.clear();
       console.log(
-        gradient.pastel(
-          `🌸 Miara connected successfully!\n(${new Date().toLocaleTimeString()})`
-        )
+        gradient.pastel(`🌸 Miara Lite connected successfully (${new Date().toLocaleTimeString()})`)
       );
-      await sendSystemReport(conn);
     }
 
     if (connection === "close") {
@@ -145,38 +124,11 @@ async function startMiara() {
   });
 
   // ─────────────────────────────────────────────
-  // 💬 Adaptive sendMessage with mood tones
-  // ─────────────────────────────────────────────
-  const originalSend = conn.sendMessage.bind(conn);
-  conn.sendMessage = async function (jid, content, options = {}) {
-    try {
-      const preview =
-        content?.text ||
-        content?.caption ||
-        (content?.image ? "📷 [Image]" : content?.video ? "🎞️ [Video]" : "");
-      updateMood(content?.text ? "chat" : "command");
-      await simulateHumanBehavior(conn, jid, getTypingDelay(), preview);
-
-      const mood = getMood();
-      if (content?.text) content.text = applyPersonalityTone(content.text, mood);
-      return await originalSend(jid, content, options);
-    } catch (err) {
-      updateMood("error");
-      logger.error(`sendMessage error: ${err.message}`, "Core");
-    }
-  };
-
-  // ─────────────────────────────────────────────
-  // 📨 Message Handling + AutoView Status
+  // 💬 Message Handling
   // ─────────────────────────────────────────────
   conn.ev.on("messages.upsert", async (event) => {
     try {
       await messageHandler(conn, event, conn.store);
-
-      // 👁️ Auto-view + react on status updates
-      const messages = event.messages || [];
-      const isStatus = messages.some((msg) => msg.key.remoteJid === "status@broadcast");
-      if (isStatus) await handleStatusUpdate(conn, messages);
     } catch (err) {
       logger.error(`Handler error: ${err.stack}`, "Core");
     }
@@ -190,33 +142,7 @@ async function startMiara() {
 }
 
 // ─────────────────────────────────────────────
-// 💌 Owner System Report
-// ─────────────────────────────────────────────
-async function sendSystemReport(conn) {
-  try {
-    const uptime = Math.floor(process.uptime());
-    const moodSummary = getMoodSummary();
-    const jid = CONFIG.DEFAULT_OWNER_JID;
-
-    const report = `
-╔═══════════════════════════════╗
-║ 🌸 *${CONFIG.BOT_NAME} System Report* 🌸
-╠═══════════════════════════════╣
-║ 🕒 Uptime: ${uptime}s
-║ 💭 Mood: ${moodSummary}
-║ 🪷 Mode: ${CONFIG.MODE}
-║ 💫 Env: ${CONFIG.HOST_ENV || "unknown"}
-╚═══════════════════════════════╝
-`;
-    await conn.sendMessage(jid, { text: report });
-    logger.info("💌 System report sent to owner.", "Core");
-  } catch (err) {
-    logger.warn(`Failed to send system report: ${err.message}`, "Core");
-  }
-}
-
-// ─────────────────────────────────────────────
-// 🌙 Graceful Shutdown
+// 🌙 Graceful Shutdown Procedure
 // ─────────────────────────────────────────────
 let shuttingDown = false;
 async function gracefulShutdown(conn) {
@@ -229,9 +155,10 @@ async function gracefulShutdown(conn) {
   }).start();
 
   try {
-    const farewell = applyPersonalityTone("🌙 Miara retreats to the stars...", getMood());
     if (conn?.ws?.readyState === 1) {
-      await conn.sendMessage(CONFIG.DEFAULT_OWNER_JID, { text: farewell }).catch(() => {});
+      await conn.sendMessage(CONFIG.DEFAULT_OWNER_JID, {
+        text: "🌙 Miara Lite is powering down gracefully."
+      });
     }
     await delay(800);
     spinner.succeed(chalk.cyanBright("✨ Miara safely entered stasis."));
@@ -242,6 +169,6 @@ async function gracefulShutdown(conn) {
   }
 }
 
-// 🪷 Initialize Miara
-logger.info("🌅 Miara initializing — Sentient Emotion Build (Deluxe 2025)", "Bootstrap");
+// 🪷 Initialize
+logger.info("🌅 Miara 2025 initializing...", "Bootstrap");
 startMiara();

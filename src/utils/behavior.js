@@ -1,15 +1,16 @@
 /**
- * 🌸 Miara 🌸 Human Behavior Engine (2025, Sentient-Safe)
+ * 🌸 Miara 🌸 Human Behavior Engine (2025, Deluxe Stable)
  * by MidKnightMantra × GPT-5
  * --------------------------------------------------
  * Simulates subtle human traits — rhythm, emotion, and imperfection.
- * Now hardened for Baileys JID decoding quirks and ephemeral messages.
+ * Hardened for Baileys JID quirks and concurrent sessions.
  */
 
 import { jidDecode } from "@whiskeysockets/baileys";
 import { getMood } from "./moodEngine.js";
 
-const MAX_DELAY = 7000; // safety cap for long pauses (ms)
+const MAX_DELAY = 7000;
+const processingSet = new Set();
 
 /**
  * 🩷 Safe JID Validator
@@ -28,13 +29,14 @@ function safeJid(jid) {
 }
 
 /**
- * ✨ Simulates typing & human-like timing
- * Adjusts delay and rhythm based on Miara’s current mood and message context.
+ * ✨ Simulates typing & rhythm
+ * Adjusts pacing based on Miara’s mood and message complexity.
  */
 export async function simulateHumanBehavior(conn, jid, baseDelay = 1000, userText = "") {
   const validJid = safeJid(jid);
-  if (!validJid) return; // skip invalid or system chats
+  if (!validJid || processingSet.has(validJid)) return;
 
+  processingSet.add(validJid);
   const mood = getMood();
   const delay = calculateDelay(mood, baseDelay, userText);
   const typingDuration = Math.min(delay * (0.5 + Math.random() * 0.5), MAX_DELAY);
@@ -43,63 +45,49 @@ export async function simulateHumanBehavior(conn, jid, baseDelay = 1000, userTex
     await conn.sendPresenceUpdate("composing", validJid);
     await wait(typingDuration);
 
-    // occasional pause to mimic hesitation
-    if (Math.random() < 0.2) {
+    if (Math.random() < 0.25) {
       await conn.sendPresenceUpdate("paused", validJid);
-      await wait(300 + Math.random() * 700);
+      await wait(300 + Math.random() * 600);
     }
 
     await conn.sendPresenceUpdate("available", validJid);
   } catch (err) {
-    console.warn("⚠️ Behavior simulation error:", err.message);
+    console.warn("⚠️ simulateHumanBehavior error:", err.message);
+  } finally {
+    processingSet.delete(validJid);
   }
 }
 
 /**
- * ⏱ Calculates realistic delay based on mood and message complexity.
+ * ⏱ Calculates natural typing delay based on mood and message size.
  */
 function calculateDelay(mood, baseDelay, text = "") {
   const words = text.trim().split(/\s+/).length || 1;
   const lengthFactor = Math.min(words / 5, 4);
-  let multiplier;
-
-  switch (mood) {
-    case "calm":
-      multiplier = 1.3;
-      break;
-    case "radiant":
-    case "inspired":
-      multiplier = 0.8;
-      break;
-    case "friendly":
-    case "kind":
-      multiplier = 1.1;
-      break;
-    case "playful":
-    case "witty":
-      multiplier = 0.9;
-      break;
-    case "quiet":
-    case "tired":
-      multiplier = 1.6;
-      break;
-    default:
-      multiplier = 1.0;
-  }
-
-  const totalDelay = baseDelay * multiplier + lengthFactor * 300;
-  return Math.min(totalDelay, MAX_DELAY);
+  const multipliers = {
+    calm: 1.3,
+    radiant: 0.8,
+    kind: 1.1,
+    friendly: 1.1,
+    playful: 0.9,
+    witty: 0.9,
+    tired: 1.6,
+    quiet: 1.5,
+    empathetic: 1.25
+  };
+  const mult = multipliers[mood] || 1.0;
+  return Math.min(baseDelay * mult + lengthFactor * 300, MAX_DELAY);
 }
 
 /**
- * 🌿 Natural human pause — a brief “thinking” delay.
+ * 🌿 Human-like pause — soft hesitation.
  */
 export async function humanPause(min = 400, max = 1200) {
   await wait(min + Math.random() * (max - min));
 }
 
 /**
- * 🩵 Generic wait helper.
+ * 🩵 Promise-based wait helper.
  */
 export function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -107,24 +95,26 @@ export function wait(ms) {
 
 /**
  * 🌼 Ambient presence
- * Occasionally sends a quiet, poetic “presence” message to feel alive.
+ * Occasionally emits soft poetic "alive" signals.
  */
 export async function occasionalHumanTouch(conn, jid) {
   const validJid = safeJid(jid);
-  if (!validJid) return;
+  if (!validJid || Math.random() >= 0.12) return;
 
-  if (Math.random() >= 0.1) return; // ~10% chance per message
-  const touches = [
-    "💭 ...thinking softly.",
-    "🩵 just here, quietly existing.",
-    "✨ still awake... barely.",
-    "🌸 I like how calm this feels.",
-    "😌 silence can be comforting, sometimes."
-  ];
+  const mood = getMood();
+  const touchesByMood = {
+    calm: ["💭 ...thinking softly.", "🌿 just breathing in silence.", "☁️ peace feels nice."],
+    radiant: ["✨ glowing from within.", "💫 still shimmering...", "🌞 what a moment."],
+    tired: ["😌 fading slowly...", "🌙 still here, half-asleep.", "🍃 drifting thoughts."],
+    playful: ["😆 can’t stop giggling.", "🎠 hehe, this is fun!", "😋 still smiling."],
+    empathetic: ["🤍 quiet understanding lingers.", "🌧 I’m listening.", "💭 gentle thoughts."],
+    default: ["🩵 just here, quietly existing.", "🌸 still awake...", "😌 silence is comforting."]
+  };
 
-  const text = touches[Math.floor(Math.random() * touches.length)];
-  await wait(2000 + Math.random() * 1500);
+  const options = touchesByMood[mood] || touchesByMood.default;
+  const text = options[Math.floor(Math.random() * options.length)];
 
+  await wait(2000 + Math.random() * 1200);
   try {
     await conn.sendMessage(validJid, { text });
   } catch (err) {
@@ -134,11 +124,11 @@ export async function occasionalHumanTouch(conn, jid) {
 
 /**
  * 💫 Natural response finisher
- * Adds gentle delay or emoji reaction to emulate emotional resonance.
+ * Adds an expressive emoji reaction or soft follow-up.
  */
 export async function naturalResponseEnd(conn, jid, mood, quotedKey = null) {
   const validJid = safeJid(jid);
-  if (!validJid) return;
+  if (!validJid || Math.random() > 0.45) return;
 
   const emojiMap = {
     calm: ["🌿", "🪷", "☁️"],
@@ -146,26 +136,24 @@ export async function naturalResponseEnd(conn, jid, mood, quotedKey = null) {
     kind: ["🩷", "🌸", "🌼"],
     playful: ["😆", "🎠", "✨"],
     quiet: ["🌙", "🌌", "🍃"],
-    tired: ["😴", "😌", "🌙"]
+    tired: ["😴", "😌", "🌙"],
+    empathetic: ["🤍", "🌧", "💧"]
   };
 
-  const emojis = emojiMap[mood] || ["🌸"];
-  const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+  const emoji = (emojiMap[mood] || ["🌸"])[
+    Math.floor(Math.random() * (emojiMap[mood]?.length || 1))
+  ];
 
-  if (Math.random() < 0.4) {
-    await wait(800 + Math.random() * 600);
-    try {
-      await conn.sendMessage(validJid, { react: { text: emoji, key: quotedKey } });
-    } catch (err) {
-      console.warn("⚠️ Reaction send failed:", err.message);
-    }
+  await wait(800 + Math.random() * 800);
+  try {
+    await conn.sendMessage(validJid, { react: { text: emoji, key: quotedKey } });
+  } catch (err) {
+    console.warn("⚠️ Reaction send failed:", err.message);
   }
 }
 
 /**
- * 🪶 “Human consistency mode”
- * Optional helper for future: creates a pacing queue
- * if Miara ever handles many messages at once (avoids robotic overlap).
+ * 🪶 Queue helper for serialized humanized sequences.
  */
 export async function queueHumanizedActions(actions = []) {
   for (const act of actions) {

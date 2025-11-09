@@ -1,9 +1,9 @@
 /**
- * 🌸 Miara 🌸 Personality Tone Engine (2025)
- * by MidKnightMantra
+ * 🌸 Miara 🌸 Personality Tone Engine (2025, Optimized)
+ * by MidKnightMantra × GPT-5
  * ------------------------------------------------------------
- * Applies emotional texture to Miara’s language — giving her
- * words cadence, warmth, and playfulness without breaking semantics.
+ * Gives Miara emotional cadence — gentle warmth, wit, and charm
+ * without heavy computation or semantic drift.
  */
 
 import { getMood } from "./moodEngine.js";
@@ -11,14 +11,23 @@ import { getMood } from "./moodEngine.js";
 const DEBUG_TONE = process.env.DEBUG_TONE === "true";
 const MUTE_EMOJIS = process.env.MUTE_EMOJIS === "true";
 
-let lastTone = null; // For blending between messages
+let lastTone = null;
 
 /**
- * 💬 Applies Miara’s personal tone to outgoing messages.
- * Lightweight and non-destructive — adjusts flow, adds warmth, or softens phrasing.
+ * 💬 Apply Miara’s personal tone to text.
+ * Adjusts energy, softness, and emotion based on current mood.
  */
 export function applyPersonalityTone(text = "", moodOverride = null) {
-  const mood = moodOverride || getMood();
+  if (!text || typeof text !== "string") return "";
+
+  // Graceful fallback if moodEngine isn’t active
+  let mood = "calm";
+  try {
+    mood = moodOverride || getMood?.() || "calm";
+  } catch {
+    mood = "calm";
+  }
+
   const tone = blendTone(mood);
 
   const toneAdjustments = {
@@ -30,18 +39,17 @@ export function applyPersonalityTone(text = "", moodOverride = null) {
     empathetic: (t) => addTone("🤍", gentleTone(t)),
     tired: (t) => addTone("🌙", softenText(t), "..."),
     quiet: (t) => addTone("🍃", softenText(t), "."),
-    focused: (t) => addTone("💡", clarifyText(t)),
-    moody: (t) => addTone("🌫", softenText(t), "...")
+    focused: (t) => addTone("💡", clarifyText(t), "🔍"),
+    moody: (t) => addTone("🌫️", softenText(t), "...")
   };
 
   const transform = toneAdjustments[tone] || ((t) => addTone("🌸", t));
-  const result = transform(text);
+  const result = tidyPunctuation(transform(text));
 
-  if (DEBUG_TONE) {
-    console.log(`[Tone Engine] Mood: ${tone} | Result: "${result}"`);
-  }
+  if (DEBUG_TONE)
+    console.log(`[Tone Engine] Mood: ${tone} | Output: "${result}"`);
 
-  return tidyPunctuation(result);
+  return result;
 }
 
 /* ────────────────────────────────
@@ -53,13 +61,14 @@ function softenText(text) {
     .replace(/!+/g, ".")
     .replace(/\?+/g, "?")
     .replace(/\b(okay|sure)\b/gi, "alright")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
 function enhanceEnergy(text) {
   if (MUTE_EMOJIS) return `${text.trim()}!`;
-  const exclamations = ["✨", "🌟", "💫", "🔥"];
-  return `${text.trim()} ${pick(exclamations)}`;
+  const marks = ["✨", "🌟", "💫", "🔥", "🌈"];
+  return `${text.trim()} ${pick(marks)}`;
 }
 
 function gentleTone(text) {
@@ -67,9 +76,8 @@ function gentleTone(text) {
 }
 
 function addPlayfulness(text) {
-  const fillers = ["hehe~", "teehee!", "just saying~", "funny huh?"];
-  const filler = pick(fillers);
-  return `${text.trim()} ${filler}`;
+  const fillers = ["hehe~", "teehee!", "just saying~", "funny huh?", "😋"];
+  return `${text.trim()} ${pick(fillers)}`;
 }
 
 function clarifyText(text) {
@@ -80,7 +88,8 @@ function addWit(text) {
   const remarks = [
     `${text.trim()} — clever, right?`,
     `Hmm... ${text.trim()}, but with flair.`,
-    `${text.trim()} 😉`
+    `${text.trim()} 😉`,
+    `You saw that coming, didn’t you?`
   ];
   return pick(remarks);
 }
@@ -94,6 +103,7 @@ function tidyPunctuation(text) {
   return text
     .replace(/\s{2,}/g, " ")
     .replace(/([.!?]){2,}/g, "$1")
+    .replace(/\s+([.,!?])/g, "$1")
     .trim();
 }
 
@@ -102,7 +112,8 @@ function pick(arr) {
 }
 
 /**
- * 🎚 Blend tones to avoid abrupt mood jumps
+ * 🎚 Blends tones gently between messages
+ * (prevents emotional whiplash)
  */
 function blendTone(current) {
   if (!lastTone) {
@@ -116,9 +127,4 @@ function blendTone(current) {
   return lastTone;
 }
 
-/**
- * ✨ Default export
- */
-export default {
-  applyPersonalityTone
-};
+export default { applyPersonalityTone };
