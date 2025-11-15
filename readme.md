@@ -42,7 +42,7 @@
 <!-- WhatsApp Channel Call to Action -->
 <p align="center">
   <a href="https://www.whatsapp.com/channel/0029VaZuGSxEawdxZK9CzM0Y" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/Follow%20My%20WhatsApp%20Channel-25d366?style=for-the-badge&logo=whatsapp&logoColor=white" width="340" height="50" alt="Follow my WhatsApp Channel!"/>
+    <img src="https://raw.githubusercontent.com/shizothetechie/database/main/icon/WhatsApp.png" width="20%"  alt="Follow my WhatsApp Channel!"/>
   </a>
   <br>
   <b>🔥 Join my WhatsApp Channel for instant updates, exclusive tips, and bot news!</b>
