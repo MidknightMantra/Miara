@@ -5,7 +5,7 @@
   "description": "Best WhatsApp bot developed by Ibrahim Adams",
   "keywords": ["bot", "node", "baileys", "whatsapp"],
   "logo": "https://files.catbox.moe/2kcb4s.jpeg",
-  "repository": "https://github.com/ekitale/maths-project",
+  "repository": "https://github.com/MidknightMantra/Miara",
   "success_url": "/",
   "stack": "heroku-24",
   "env": {
@@ -56,7 +56,7 @@
     },
     "BOT_URL": {
       "description": "Image or video url for your bot menu",
-      "value": "https://url.bwmxmd.online/Adams.zwu780jq.jpg,https://url.bwmxmd.online/Adams.dlmegzh8.mp4",
+      "value": "https://i.postimg.cc/fy37LcSt/Shawrie.jpg,https://i.postimg.cc/1z1zYvWm/tobias_rademacher_wn_F27F85ZKw_unsplash.jpg",
       "required": false
     },
     "PUBLIC_MODE": {

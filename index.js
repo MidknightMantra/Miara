@@ -1,7 +1,7 @@
 
 const axios = require('axios');
 const cheerio = require('cheerio');
-const adams = require("./config");
+const midknight = require("./config");
 
 async function fetchINDEXUrl() {
   try {

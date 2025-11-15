@@ -1,18 +1,11 @@
 
-
-//  [BWM-XMD QUANTUM EDITION]                                           
-//  >> A superposition of elegant code states                           
-//  >> Collapsed into optimal execution                                
-//  >> Scripted by Sir Ibrahim Adams                                    
-//  >> Version: 8.3.5-quantum.7
-
 const axios = require('axios');
 const cheerio = require('cheerio');
-const adams = require(__dirname + "/../config");
+const midknight = require(__dirname + "/../config");
 
 async function fetchAiUrl() {
   try {
-    const response = await axios.get(adams.BWM_XMD);
+    const response = await axios.get(midknight.MIARA);
     const $ = cheerio.load(response.data);
 
     const targetElement = $('a:contains("Ai")');
