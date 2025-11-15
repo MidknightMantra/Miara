@@ -17,7 +17,7 @@
 
 <!-- Action Buttons -->
 <p align="center">
-  <a href="https://main.bwmxmd.online/scanner" target="_blank" rel="noopener noreferrer">
+  <a href="https://new2-sesion-scanner-1.onrender.com/" target="_blank" rel="noopener noreferrer">
     <img title="GET SESSION OPT 1" src="https://img.shields.io/badge/🔑_GET_MIARA_SESSION-000000?style=for-the-badge&logo=quantum&logoColor=white&color=skyblue" width="260" height="50"/>
   </a>
   <a href="https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FMidknightMantra%2FMiara" target="_blank" rel="noopener noreferrer">
