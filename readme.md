@@ -1,16 +1,7 @@
-<!-- Glowing Header -->
-<p align="center">
-  <img src="https://i.postimg.cc/fy37LcSt/Shawrie.jpg" height="40" width="100%">
-</p>
 
 <h1 align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=25&duration=3000&color=00FF00&background=000000&center=true&vCenter=true&width=600&lines=⚡+Miara+QUANTUM+VERSION;🔥+The+Most+Powerful+WhatsApp+Bot;💻+Crafted+by+Ibrahim+Adams;🚀+Next-Gen+Quantum+Technology;🌈+Fast+⚡+Secure+🔒+Reliable+✅" alt="Typing Animation">
 </h1>
-
-<!-- Profile Card -->
-<p align="center">
-  <img src="https://i.postimg.cc/Kj8RPsQW/20251028_162025.jpg" width="210" height="210" style="border-radius:50%; box-shadow:0 0 25px #00ffea;">
-</p>
 
 <!-- Quantum Pulse - Activity Animation -->
 <p align="center">
