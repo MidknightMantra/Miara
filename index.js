@@ -5,7 +5,7 @@ const adams = require("./config");
 
 async function fetchINDEXUrl() {
   try {
-    const response = await axios.get(adams.BWM_XMD);
+    const response = await axios.get(midknight.MIARA);
     const $ = cheerio.load(response.data);
 
     const targetElement = $('a:contains("INDEX")');

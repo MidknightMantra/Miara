@@ -1,7 +1,7 @@
 
 {
-  "name": "Bwmxmd",
-  "version": "2.1.0",
+  "name": "miara",
+  "version": "1.1.1",
   "description": "Advanced WhatsApp bot using Baileys",
   "main": "index.js",
   "type": "commonjs",
@@ -20,12 +20,13 @@
   "keywords": [
     "bot",
     "Baileys",
-    "bmwxmd",
+    "mantra",
     "quantum",
     "whatsapp-bot",
-    "Ibrahim-Adams"
+    "MidknightMantra",
+    "miara"
   ],
-  "author": "Ibrahim Adams",
+  "author": "MidknightMantra",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",        

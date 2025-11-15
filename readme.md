@@ -51,45 +51,24 @@
 <!-- Repo Alive Statistics & Video Animation -->
 <h2 align="center">📊 Repo Alive Statistics</h2>
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=Bwmxmd254&label=Profile+Views&color=0e75b6&style=for-the-badge" alt="Profile views"/>
-  <img src="https://img.shields.io/github/followers/Bwmxmd254?label=Followers&style=for-the-badge" alt="GitHub Followers"/>
-  <img src="https://img.shields.io/github/stars/Bwmxmd254?label=GitHub+Stars&style=for-the-badge" alt="GitHub Stars"/>
+  <img src="https://komarev.com/ghpvc/?username=MidknightMantra&label=Profile+Views&color=0e75b6&style=for-the-badge" alt="Profile views"/>
+  <img src="https://img.shields.io/github/followers/MidknightMantra?label=Followers&style=for-the-badge" alt="GitHub Followers"/>
+  <img src="https://img.shields.io/github/stars/MidknightMantra?label=GitHub+Stars&style=for-the-badge" alt="GitHub Stars"/>
 </p>
 
 <!-- iPhone/Android Info -->
 <p align="center">
   <img src="https://img.shields.io/badge/Best%20Experience-iPhone%20vs%20Android-000000?style=for-the-badge&logo=apple&logoColor=white&color=gray" width="320" height="40"/>
   <br>
-  <b>
-    <span style="color:#00ffea;">Tip for iPhone users:</span>  
-    If any button says "Download" instead of opening, try long-pressing and choose "Open in New Tab".  
-    Android users: All buttons should open instantly!
-  </b>
-</p>
-
-<!-- More Button -->
-<p align="center">
-  <a href="https://bwmxmd.online" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/For%20more%2C%20Tap%20Here-00ffaa?style=for-the-badge&logo=internet-explorer&logoColor=white&color=ffa500" width="340" height="50" alt="For more tap here"/>
-  </a>
 </p>
 
 <!-- Animated Status Bar -->
 <p align="center">
-  <img src="https://i.postimg.cc/1z1zYvWm/tobias_rademacher_wn_F27F85ZKw_unsplash.jpg" height="25">
+  <img src="https://i.postimg.cc/1z1zYvWm/tobias_rademacher_wn_F27F85ZKw_unsplash.jpg" height="50">
   <br>
-  <span style="font-size:1.2em; color:#00ffea;">Status: <b>Online & Miara-Ready 🚀</b></span>
-</p>
-
-<!-- Alive Footer Animation -->
-<p align="center">
-  <img src="https://i.postimg.cc/fy37LcSt/Shawrie.jpg" height="40" width="100%">
+  <span style="font-size:1.2em; color:#00ffea;">Status: <b>Online & Miara-Ready-to-serve 🚀</b></span>
 </p>
 
 <h3 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=20&duration=3000&color=FFFFFF&background=000000&center=true&vCenter=true&width=600&lines=💎+Miara+Quantum+Edition+by+Ibrahim+Adams;⚡+The+Future+of+WhatsApp+Bots+is+Here" alt="Footer Animation">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=20&duration=3000&color=FFFFFF&background=000000&center=true&vCenter=true&width=600&lines=💎+Miara+by+MidknightMantra;⚡" alt="Footer Animation">
 </h3>
-
-<p align="center">
-  <img src="https://i.postimg.cc/1z1zYvWm/tobias_rademacher_wn_F27F85ZKw_unsplash.jpg" height="40" width="100%">
-</p>
