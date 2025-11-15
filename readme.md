@@ -41,7 +41,7 @@
 
 <!-- WhatsApp Channel Call to Action -->
 <p align="center">
-  <a href="https://www.whatsapp.com/channel/0029VaZuGSxEawdxZK9CzM0Y" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.whatsapp.com/channel/0029Vb74Dlf4CrfoqpAEBC2T" target="_blank" rel="noopener noreferrer">
     <img src="https://raw.githubusercontent.com/shizothetechie/database/main/icon/WhatsApp.png" width="20%"  alt="Follow my WhatsApp Channel!"/>
   </a>
   <br>
